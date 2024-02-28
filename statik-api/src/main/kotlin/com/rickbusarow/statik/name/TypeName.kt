@@ -17,11 +17,13 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.PackageName.Companion.asPackageName
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import modulecheck.utils.lazy.unsafeLazy
-import modulecheck.utils.pluralString
+import com.rickbusarow.statik.name.SimpleName.Companion.asString
+import com.rickbusarow.statik.stdlib.letIf
+import com.rickbusarow.statik.stdlib.pluralString
+import com.rickbusarow.statik.utils.lazy.unsafeLazy
 
 /** either a [ClassName] or a [TypeParameter] */
-sealed interface TypeName : Name, HasSimpleNames {
+sealed interface TypeName : McName, HasSimpleNames {
   /** */
   val nullable: Boolean
 
@@ -48,17 +50,21 @@ data class ClassName(
   override val nullable: Boolean
 ) : TypeName, NameWithPackageName {
 
+  override val asString: String by unsafeLazy {
+    packageName.appendAsString(simpleNames)
+      .letIf(nullable) { it.plus("?") }
+  }
+
   /** ex: `com.example.MyGenericType<out T: SomeType>` */
   val asStringWithTypeParameters: String by unsafeLazy {
-    if (typeArguments.isEmpty()) {
-      asString
-    } else {
-      asString.plus(
+    asString.letIf(typeArguments.isNotEmpty()) {
+      it.plus(
         typeArguments.joinToString(
           separator = ", ",
           prefix = "<",
-          postfix = ">"
-        ) { it.asString }
+          postfix = ">",
+          transform = TypeName::asString
+        )
       )
     }
   }

@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.internal
 
-import com.rickbusarow.statik.AndroidRDeclaredName
+import com.rickbusarow.statik.name.AndroidRDeclaredName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 interface AndroidRNameProvider {

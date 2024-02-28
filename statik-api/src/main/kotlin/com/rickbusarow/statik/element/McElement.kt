@@ -15,16 +15,16 @@
 
 package com.rickbusarow.statik.element
 
-import com.rickbusarow.statik.DeclaredName
 import com.rickbusarow.statik.RawAnvilAnnotatedType
-import com.rickbusarow.statik.ReferenceName
 import com.rickbusarow.statik.element.McFile.McJavaFile
 import com.rickbusarow.statik.element.McFile.McKtFile
 import com.rickbusarow.statik.element.McType.McConcreteType
 import com.rickbusarow.statik.element.McType.McConcreteType.McKtConcreteType
 import com.rickbusarow.statik.element.McType.McTypeParameter
+import com.rickbusarow.statik.name.DeclaredName
 import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.HasSimpleNames
+import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource

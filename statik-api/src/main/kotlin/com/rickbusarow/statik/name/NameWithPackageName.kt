@@ -17,9 +17,9 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
 import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
-import modulecheck.utils.asList
-import modulecheck.utils.lazy.unsafeLazy
-import modulecheck.utils.singletonList
+import com.rickbusarow.statik.stdlib.asList
+import com.rickbusarow.statik.stdlib.singletonList
+import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
@@ -57,6 +57,8 @@ internal data class NameWithPackageNameImpl(
   init {
     checkSimpleNames()
   }
+
+  override val asString: String by unsafeLazy { packageName.appendAsString(simpleNames) }
 
   override val segments: List<String> by unsafeLazy { asString.split('.') }
 }

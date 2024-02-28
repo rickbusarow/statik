@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.utils.lazy
 
-import com.rickbusarow.statik.utils.flatMapToSet
+import com.rickbusarow.statik.stdlib.flatMapToSet
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource.Priority
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource.Priority.MEDIUM

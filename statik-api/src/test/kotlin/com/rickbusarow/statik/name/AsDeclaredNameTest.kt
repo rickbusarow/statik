@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.PackageName.Companion.asPackageName
-import com.rickbusarow.statik.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
+import com.rickbusarow.statik.name.PackageName.Companion.asPackageName
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import io.kotest.matchers.shouldBe
 import org.jetbrains.kotlin.name.FqName
 import org.junit.jupiter.api.Nested
@@ -35,7 +35,7 @@ internal class AsDeclaredNameTest {
       val packageName = "com.test".asPackageName()
       val simpleNames = listOf("Outer".asSimpleName(), "Inner".asSimpleName())
 
-      val asString = packageName.append(simpleNames.map { it.name })
+      val asString = packageName.append(simpleNames)
 
       FqName(asString).asDeclaredName(packageName) shouldBe DeclaredName.agnostic(
         packageName = packageName,
@@ -49,7 +49,7 @@ internal class AsDeclaredNameTest {
       val packageName = "com.test".asPackageName()
       val simpleNames = listOf("Subject".asSimpleName())
 
-      val asString = packageName.append(simpleNames.map { it.name })
+      val asString = packageName.append(simpleNames)
 
       FqName(asString).asDeclaredName(packageName) shouldBe DeclaredName.agnostic(
         packageName = packageName,
@@ -63,7 +63,7 @@ internal class AsDeclaredNameTest {
       val packageName = "com.test".asPackageName()
       val simpleNames = listOf("Subject".asSimpleName())
 
-      val asString = packageName.append(simpleNames.map { it.name })
+      val asString = packageName.append(simpleNames)
 
       FqName(asString).asDeclaredName(packageName, KOTLIN) shouldBe DeclaredName.kotlin(
         packageName = packageName,
@@ -77,7 +77,7 @@ internal class AsDeclaredNameTest {
       val packageName = "com.test".asPackageName()
       val simpleNames = listOf("Subject".asSimpleName())
 
-      val asString = packageName.append(simpleNames.map { it.name })
+      val asString = packageName.append(simpleNames)
 
       FqName(asString).asDeclaredName(packageName, JAVA) shouldBe DeclaredName.java(
         packageName = packageName,
@@ -91,7 +91,7 @@ internal class AsDeclaredNameTest {
       val packageName = "com.test".asPackageName()
       val simpleNames = listOf("Subject".asSimpleName())
 
-      val asString = packageName.append(simpleNames.map { it.name })
+      val asString = packageName.append(simpleNames)
 
       FqName(asString).asDeclaredName(packageName, JAVA, KOTLIN) shouldBe DeclaredName.agnostic(
         packageName = packageName,

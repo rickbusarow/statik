@@ -15,9 +15,10 @@
 
 package com.rickbusarow.statik.name
 
+import com.rickbusarow.statik.name.AndroidRName.AndroidResourceName
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.name.SimpleName.Companion.asString
-import modulecheck.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import java.io.File
 import kotlin.io.path.name
 

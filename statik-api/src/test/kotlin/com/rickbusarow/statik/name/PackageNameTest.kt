@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.PackageName.DEFAULT
+import com.rickbusarow.statik.forAllBlocking
+import com.rickbusarow.statik.name.PackageName.DEFAULT
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.stringPattern
-import modulecheck.testing.forAllBlocking
 import org.junit.jupiter.api.Test
 
 internal class PackageNameTest {

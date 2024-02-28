@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.HasSimpleNames.Companion.checkSimpleNames
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.name.PackageName
+import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import java.util.Locale
 
@@ -57,8 +57,8 @@ sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
     ): AndroidDataBindingDeclaredName {
       return AndroidDataBindingDeclaredName(
         UnqualifiedAndroidResourceReferenceName(
-          name = sourceLayoutDeclaration.name,
-          language = CompatibleLanguage.XML
+          name = sourceLayoutDeclaration.asString,
+          language = XML
         ),
         packageName
       )
@@ -94,8 +94,8 @@ class QualifiedAndroidResourceDeclaredName(
 
   override val simpleNames: List<SimpleName> by unsafeLazy { sourceResource.simpleNames }
 
-  override val name: String by unsafeLazy {
-    "${sourceR.name}.${sourceResource.prefix.name}.${sourceResource.identifier.name}"
+  override val asString: String by unsafeLazy {
+    "${sourceR.asString}.${sourceResource.prefix.asString}.${sourceResource.identifier.asString}"
   }
 
   override val sources: Set<ReferenceName> = setOf(sourceR, sourceResource)
@@ -105,7 +105,7 @@ class QualifiedAndroidResourceDeclaredName(
   }
 
   override fun asReferenceName(language: CompatibleLanguage): ReferenceName {
-    return QualifiedAndroidResourceReferenceName(name, language)
+    return QualifiedAndroidResourceReferenceName(asString, language)
   }
 }
 
@@ -117,7 +117,7 @@ class AndroidDataBindingDeclaredName(
 
   override val simpleNames: List<SimpleName> by unsafeLazy {
 
-    val simpleBindingName = sourceLayout.identifier.name
+    val simpleBindingName = sourceLayout.identifier.asString
       .split("_")
       .joinToString("") { fragment ->
         fragment.replaceFirstChar {
@@ -145,6 +145,6 @@ class AndroidDataBindingDeclaredName(
   }
 
   override fun asReferenceName(language: CompatibleLanguage): ReferenceName {
-    return AndroidDataBindingReferenceName(name, language)
+    return AndroidDataBindingReferenceName(asString, language)
   }
 }

@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.McName.CompatibleLanguage.XML
-import com.rickbusarow.statik.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.SimpleName.Companion.asString
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.SimpleName.Companion.asString
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import java.io.File
 import kotlin.io.path.name
@@ -36,8 +36,8 @@ class UnqualifiedAndroidResource private constructor(
   override val simpleNames: List<SimpleName> by unsafeLazy {
     listOf("R".asSimpleName(), prefix, identifier)
   }
-  override val segments: List<String> by unsafeLazy { simpleNames.map { it.name } }
-  override val name: String by unsafeLazy { simpleNames.asString() }
+  override val segments: List<String> by unsafeLazy { simpleNames.map { it.asString } }
+  override val asString: String by unsafeLazy { simpleNames.asString() }
 
   /**
    * @return the fully qualified name of a generated Android
@@ -49,7 +49,7 @@ class UnqualifiedAndroidResource private constructor(
   ): QualifiedAndroidResourceDeclaredName {
     return AndroidResourceDeclaredName.qualifiedAndroidResource(
       sourceR = AndroidRReferenceName(androidRDeclaration.packageName, XML),
-      sourceResource = UnqualifiedAndroidResourceReferenceName(this.name, XML)
+      sourceResource = UnqualifiedAndroidResourceReferenceName(this.asString, XML)
     )
   }
 
@@ -59,7 +59,7 @@ class UnqualifiedAndroidResource private constructor(
     when (other) {
       is ReferenceName -> {
 
-        if (name != other.name) return false
+        if (asString != other.asString) return false
       }
 
       is UnqualifiedAndroidResource -> {
@@ -73,9 +73,9 @@ class UnqualifiedAndroidResource private constructor(
     return true
   }
 
-  override fun hashCode(): Int = name.hashCode()
+  override fun hashCode(): Int = asString.hashCode()
 
-  override fun toString(): String = "(${this::class.java.simpleName}) `$name`"
+  override fun toString(): String = "(${this::class.java.simpleName}) `$asString`"
 
   companion object {
     private val XML_REGEX = """"?@\+?(.*)\/(.*)"?""".toRegex()

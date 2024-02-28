@@ -13,15 +13,16 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.stdlib.trimSegments
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
-import com.rickbusarow.statik.utils.trimSegments
 
 /** Marker which indicates that [references] exist. Typically implemented by "file" types */
 interface HasReferences {
@@ -33,12 +34,12 @@ interface HasReferences {
 /** Represents a name -- fully qualified or not -- which references a declaration somewhere else */
 sealed class ReferenceName(name: String) : McName, ResolvableMcName {
 
-  final override val name: String by unsafeLazy { name.trimSegments(".") }
+  final override val asString: String by unsafeLazy { name.trimSegments(".") }
 
   /** The [language][CompatibleLanguage] of the file making this reference */
   abstract val language: CompatibleLanguage
 
-  override val segments: List<String> by unsafeLazy { this.name.split('.') }
+  override val segments: List<String> by unsafeLazy { this.asString.split('.') }
 
   /** This reference is from a Java source file */
   fun isJava(): Boolean = language == JAVA
@@ -56,13 +57,13 @@ sealed class ReferenceName(name: String) : McName, ResolvableMcName {
     when (other) {
       is ReferenceName -> {
 
-        if (name != other.name) return false
+        if (asString != other.asString) return false
         if (language != other.language) return false
       }
 
       is QualifiedDeclaredName -> {
 
-        if (name != other.name) return false
+        if (asString != other.asString) return false
         if (!other.languages.contains(language)) return false
       }
 
@@ -71,11 +72,11 @@ sealed class ReferenceName(name: String) : McName, ResolvableMcName {
     return true
   }
 
-  final override fun hashCode(): Int = name.hashCode()
+  final override fun hashCode(): Int = asString.hashCode()
 
   override fun toString(): String {
     @Suppress("UnsafeCallOnNullableType")
-    return "${this::class.simpleName!!}(name='$name'  language=$language)"
+    return "${this::class.simpleName!!}(name='$asString'  language=$language)"
   }
 
   companion object {
@@ -98,6 +99,6 @@ private class DefaultReferenceName(
 ) : ReferenceName(name), McName {
 
   override val simpleName by unsafeLazy {
-    name.split('.').last()
+    name.split('.').last().asSimpleName()
   }
 }

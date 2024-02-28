@@ -22,6 +22,10 @@ import com.rickbusarow.statik.element.McProperty
 import com.rickbusarow.statik.element.McType.McConcreteType
 import com.rickbusarow.statik.element.McType.McConcreteType.McKtConcreteType
 import com.rickbusarow.statik.element.McType.McTypeParameter
+import com.rickbusarow.statik.name.DeclaredName
+import com.rickbusarow.statik.name.HasPackageName
+import com.rickbusarow.statik.name.HasSimpleNames
+import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource
@@ -70,7 +74,7 @@ sealed interface McKtElement : McElement {
 
   override val psi: KtElement
 
-  override val containingFile: McFile.McKtFile
+  override val containingFile: McKtFile
     get() = when (this) {
 
       is McElementWithParent<*> -> (parent as McKtElement).containingFile

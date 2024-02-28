@@ -15,7 +15,8 @@
 
 package com.rickbusarow.statik.name
 
-import modulecheck.utils.regex
+import com.rickbusarow.statik.stdlib.joinToStringDot
+import com.rickbusarow.statik.stdlib.regex
 
 /**
  * A name which is not fully qualified, like `Foo` in `com.example.Foo`
@@ -23,7 +24,7 @@ import modulecheck.utils.regex
  * @property asString the string value of this name
  */
 @JvmInline
-value class SimpleName(override val asString: String) : Name {
+value class SimpleName(override val asString: String) : McName {
 
   init {
     require(asString.matches(SIMPLE_NAME_REGEX)) {
@@ -35,8 +36,8 @@ value class SimpleName(override val asString: String) : Name {
   override val simpleName: SimpleName
     get() = this
 
-  override val simpleNameString: String
-    get() = asString
+  override val segments: List<String>
+    get() = listOf(asString)
 
   companion object {
 
@@ -77,8 +78,8 @@ value class SimpleName(override val asString: String) : Name {
       append("$")
     }
 
-    /** shorthand for `joinToString(".") { it.name.trim() }` */
-    fun List<SimpleName>.asString(): String = joinToString(".") { it.asString.trim() }
+    /** shorthand for `joinToStringDot { it.name.trim() }` */
+    fun Iterable<SimpleName>.asString(): String = joinToStringDot { it.asString.trim() }
 
     /** wraps this String in a [SimpleName] */
     fun String.asSimpleName(): SimpleName = SimpleName(this)

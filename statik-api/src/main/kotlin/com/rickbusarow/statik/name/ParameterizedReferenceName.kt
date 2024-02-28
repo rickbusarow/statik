@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.utils.mapToSet
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.stdlib.mapToSet
 
 /**
  * Represents a parameterized reference name within a specific language.
@@ -49,14 +49,14 @@ class ParameterizedReferenceName private constructor(
     @Suppress("MagicNumber")
     check(languages.size == 1) {
       "All languages for type parameters and the raw type must match:\n" +
-        typeParams.joinToString { "${it.language.toString().padStart(10)}  --  ${it.name}" }
+        typeParams.joinToString { "${it.language.toString().padStart(10)}  --  ${it.asString}" }
     }
   }
 
   override val segments: List<String>
     get() = rawTypeName.segments
 
-  override val simpleName: String
+  override val simpleName: SimpleName
     get() = rawTypeName.simpleName
 
   /**
@@ -72,9 +72,9 @@ class ParameterizedReferenceName private constructor(
   ) : this(
     name = typeParams.joinToString(
       separator = ", ",
-      prefix = "${rawTypeName.name}<",
+      prefix = "${rawTypeName.asString}<",
       postfix = ">",
-      transform = { it.name }
+      transform = { it.asString }
     ),
     language = rawTypeName.language,
     rawTypeName = rawTypeName,

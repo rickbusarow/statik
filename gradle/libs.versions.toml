@@ -7,6 +7,7 @@ poko = "0.15.2"
 benManes-versions = "0.51.0"
 buildconfig = "5.3.5"
 buildParameters = "1.4.3"
+cashapp-turbine = "1.0.0"
 dependencyAnalysis = "1.29.0"
 detekt = "1.23.5"
 diffplug-spotless = "6.25.0"
@@ -35,6 +36,7 @@ rickBusarow-ktrules = "1.3.1"
 rickBusarow-mahout = "0.1.0-SNAPSHOT"
 rickBusarow-moduleCheck = "0.12.5"
 rickBusarow-statik = "0.1.0"
+semVer = "1.3.0"
 square-kotlinPoet = "1.16.0"
 square-moshi = "1.15.1"
 square-okio = "3.7.0"
@@ -155,6 +157,8 @@ rickBusarow-mahout-gradle-plugin  = { module = "com.rickbusarow.mahout:mahout-gr
 rickBusarow-moduleCheck-gradle-plugin = { module = "com.rickbusarow.modulecheck:plugin", version.ref = "rickBusarow-moduleCheck" }
 rickBusarow-statik-api = { module = "com.rickbusarow.statik:statik-api", version.ref = "rickBusarow-statik" }
 
+semVer = { module = "net.swiftzer.semver:semver", version.ref = "semVer" }
+
 square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
 
 square-moshi = { module = "com.squareup.moshi:moshi", version.ref = "square-moshi" }
@@ -165,6 +169,6 @@ square-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square
 square-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem-jvm", version.ref = "square-okio" }
 square-okio-jvm = { module = "com.squareup.okio:okio-jvm", version.ref = "square-okio" }
 
-square-turbine = "app.cash.turbine:turbine:1.0.0"
+cashapp-turbine = {module =  "app.cash.turbine:turbine", version.ref = "cashapp-turbine" }
 
 vanniktech-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech-publish" }

@@ -13,17 +13,16 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.HasSimpleNames.Companion.checkSimpleNames
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.McName.CompatibleLanguage.XML
-import com.rickbusarow.statik.ReferenceName.Companion.asReferenceName
-import com.rickbusarow.statik.SimpleName.Companion.asString
-import com.rickbusarow.statik.SimpleName.Companion.stripPackageNameFromFqName
-import com.rickbusarow.statik.name.HasPackageName
+import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.ReferenceName.Companion.asReferenceName
+import com.rickbusarow.statik.name.SimpleName.Companion.asString
+import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
 import com.rickbusarow.statik.stdlib.singletonList
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import org.jetbrains.kotlin.name.FqName
@@ -93,10 +92,11 @@ sealed class QualifiedDeclaredName :
   HasSimpleNames,
   ResolvableMcName {
 
-  override val name: String
-    get() = packageName.append(simpleNames.asString())
+  override val asString: String by unsafeLazy {
+    packageName.appendAsString(simpleNames)
+  }
 
-  override val segments: List<String> by unsafeLazy { name.split('.') }
+  override val segments: List<String> by unsafeLazy { asString.split('.') }
 
   /**
    * `true` if a declaration is top-level in a file, otherwise `false`
@@ -105,7 +105,7 @@ sealed class QualifiedDeclaredName :
   val isTopLevel: Boolean by unsafeLazy { simpleNames.size == 1 }
 
   open fun asReferenceName(language: CompatibleLanguage): ReferenceName {
-    return name.asReferenceName(language)
+    return asString.asReferenceName(language)
   }
 
   final override fun equals(other: Any?): Boolean {
@@ -114,13 +114,13 @@ sealed class QualifiedDeclaredName :
     when (other) {
       is ReferenceName -> {
 
-        if (name != other.name) return false
+        if (asString != other.asString) return false
         if (!languages.contains(other.language)) return false
       }
 
       is QualifiedDeclaredName -> {
 
-        if (name != other.name) return false
+        if (asString != other.asString) return false
         if (languages != other.languages) return false
       }
 
@@ -129,10 +129,10 @@ sealed class QualifiedDeclaredName :
     return true
   }
 
-  final override fun hashCode(): Int = name.hashCode()
+  final override fun hashCode(): Int = asString.hashCode()
 
   final override fun toString(): String =
-    "(${this::class.java.simpleName}) `$name`  language=$languages"
+    "(${this::class.java.simpleName}) `$asString`  language=$languages"
 }
 
 internal class QualifiedDeclaredNameImpl(

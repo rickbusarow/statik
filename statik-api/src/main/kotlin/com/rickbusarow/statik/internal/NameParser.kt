@@ -15,12 +15,12 @@
 
 package com.rickbusarow.statik.internal
 
-import com.rickbusarow.statik.McName
-import com.rickbusarow.statik.PackageName
-import com.rickbusarow.statik.QualifiedDeclaredName
-import com.rickbusarow.statik.ReferenceName
 import com.rickbusarow.statik.internal.NameParser.NameParserPacket
 import com.rickbusarow.statik.internal.ParsingInterceptor.Chain
+import com.rickbusarow.statik.name.McName
+import com.rickbusarow.statik.name.PackageName
+import com.rickbusarow.statik.name.QualifiedDeclaredName
+import com.rickbusarow.statik.name.ReferenceName
 
 fun interface NameParser {
   suspend fun parse(packet: NameParserPacket): NameParserPacket
@@ -53,21 +53,21 @@ fun interface NameParser {
   ) {
     override fun toString(): String {
       return """NameParserPacket(
-        |packageName='${packageName.name}',
+        |  packageName='${packageName.asString}',
         |
-        |imports=$imports,
+        |  imports=$imports,
         |
-        |wildcardImports=$wildcardImports,
+        |  wildcardImports=$wildcardImports,
         |
-        |aliasedImports=$aliasedImports,
+        |  aliasedImports=$aliasedImports,
         |
-        |resolved=$resolved,
+        |  resolved=$resolved,
         |
-        |unresolved=$unresolved,
+        |  unresolved=$unresolved,
         |
-        |mustBeApi=$mustBeApi,
+        |  mustBeApi=$mustBeApi,
         |
-        |apiReferences=$apiReferenceNames
+        |  apiReferences=$apiReferenceNames
         |
         |)
       """.trimMargin()

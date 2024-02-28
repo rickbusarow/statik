@@ -1,27 +1,9 @@
 [
   {
-    "gradlePath": ":kase",
-    "group": "com.rickbusarow.kase",
-    "artifactId": "kase",
-    "description": "Hermetic test environments and test factories",
-    "packaging": "jar",
-    "javaVersion": "1.8",
-    "publicationName": "maven"
-  },
-  {
-    "gradlePath": ":kase-gradle",
-    "group": "com.rickbusarow.kase",
-    "artifactId": "kase-gradle",
-    "description": "Test environments that create Gradle projects for testing Gradle plugins.",
-    "packaging": "jar",
-    "javaVersion": "1.8",
-    "publicationName": "maven"
-  },
-  {
-    "gradlePath": ":kase-gradle-dsl",
-    "group": "com.rickbusarow.kase",
-    "artifactId": "kase-gradle-dsl",
-    "description": "A DSL for generating Gradle DSL files.",
+    "gradlePath": ":statik-api",
+    "group": "com.rickbusarow.statik",
+    "artifactId": "statik-api",
+    "description": "Base types for the Statik AST",
     "packaging": "jar",
     "javaVersion": "1.8",
     "publicationName": "maven"

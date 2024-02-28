@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import org.junit.jupiter.api.Test
 
 class DeclaredNameTest : BaseMcNameTest() {
@@ -87,10 +87,10 @@ class DeclaredNameTest : BaseMcNameTest() {
       }
       .shuffled()
       // Android R names will be duplicated, so clean those up
-      .distinctBy { it.name to it::class }
+      .distinctBy { it.asString to it::class }
 
     val prettySorted = instances.sorted()
-      .joinToString("\n") { "${it::class.java.simpleName.padStart(28)} ${it.name}" }
+      .joinToString("\n") { "${it::class.java.simpleName.padStart(28)} ${it.asString}" }
 
     prettySorted shouldBe """
          AndroidRDeclaredName a.R

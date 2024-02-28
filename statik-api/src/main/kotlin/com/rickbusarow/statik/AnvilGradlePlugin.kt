@@ -15,6 +15,8 @@
 
 package com.rickbusarow.statik
 
+import com.rickbusarow.statik.name.QualifiedDeclaredName
+import com.rickbusarow.statik.name.ReferenceName
 import net.swiftzer.semver.SemVer
 import org.jetbrains.kotlin.name.FqName
 
