@@ -32,6 +32,7 @@ dependencies {
   api(libs.junit.jupiter.api)
 
   implementation(libs.kotlin.compiler)
+  implementation(libs.kotlin.reflect)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.semVer)
 
@@ -44,7 +45,7 @@ dependencies {
   testImplementation(libs.kotest.assertions.shared)
   testImplementation(libs.kotest.common)
   testImplementation(libs.kotest.property.jvm)
+  testImplementation(libs.kotlin.reflect)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.rickBusarow.kase)
-  testImplementation(libs.kotlin.reflect)
 }

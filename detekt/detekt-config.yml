@@ -7,12 +7,29 @@ build:
   # style: 1
   # comments: 1
 
+# These values aren't technically part of the Detekt config,
+# but the anchors (`&______`) define the common values used elsewhere.
+# The property name (`______:`) can be anything.
+# https://yaml.org/spec/1.2-old/spec.html#id2785586
+anchors:
+  gradleFiles: &gradleFiles
+    - "**/*.gradle.kts"
+  settingsGeneratorFolders: &settingsGeneratorFolders
+    - "**/mahout-settings-generator/**"
+  settingsGeneratorFoldersAndGradleFiles:
+    &settingsGeneratorFoldersAndGradleFiles
+    - "**/*.gradle.kts"
+    - "**/mahout-settings-generator/**"
+  testFolders: &testFolders
+    - "**/test/**"
+    - "**/gradleTest/**"
+
 config:
   validation: true
   warningsAsErrors: false
   checkExhaustiveness: true
   # when writing own rules with new properties, exclude the property path e.g.: 'my_rule_set,.*>.*>[my_property]'
-  excludes: ""
+  excludes: anchors
 
 processors:
   active: true
@@ -52,8 +69,7 @@ output-reports:
 
 comments:
   active: true
-  excludes:
-    - "**/build-logic/**"
+  excludes: *settingsGeneratorFoldersAndGradleFiles
   AbsentOrWrongFileLicense:
     active: true
     licenseTemplateFile: "license.template"
@@ -69,33 +85,15 @@ comments:
     endOfSentenceFormat: '([.?!][ \t\n\r\f<])|([.?!:]$)'
   KDocReferencesNonPublicProperty:
     active: false
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
   OutdatedDocumentation:
     active: true
     matchTypeParameters: false
     matchDeclarationsOrder: true
     allowParamOnConstructorProperties: false
   UndocumentedPublicClass:
-    active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    active: false
+    excludes: *testFolders
     searchInNestedClass: true
     searchInInnerClass: true
     searchInInnerObject: true
@@ -105,33 +103,15 @@ comments:
       - "dagger.Binds"
       - "dagger.Module"
   UndocumentedPublicFunction:
-    active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    active: false
+    excludes: *testFolders
     searchProtectedFunction: false
     ignoreAnnotated:
       - "dagger.Binds"
       - "dagger.Module"
   UndocumentedPublicProperty:
-    active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    active: false
+    excludes: *testFolders
     searchProtectedProperty: false
     ignoreAnnotated:
       - "dagger.Binds"
@@ -173,14 +153,7 @@ complexity:
   LargeClass:
     active: true
     threshold: 600
-    excludes:
-      - "**/test/**"
-      - "**/androidTest/**"
-      - "**/commonTest/**"
-      - "**/jvmTest/**"
-      - "**/jsTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
+    excludes: *testFolders
   LongMethod:
     active: false
     threshold: 60
@@ -214,32 +187,14 @@ complexity:
     active: false
   StringLiteralDuplication:
     active: false
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     threshold: 3
     ignoreAnnotation: true
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: "$^"
   TooManyFunctions:
     active: false
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     thresholdInFiles: 13
     thresholdInClasses: 13
     thresholdInInterfaces: 13
@@ -316,16 +271,7 @@ exceptions:
       - "toString"
   InstanceOfCheckForException:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
   NotImplementedDeclaration:
     active: false
   ObjectExtendsThrowable:
@@ -351,16 +297,7 @@ exceptions:
     active: false
   ThrowingExceptionsWithoutMessageOrCause:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     exceptions:
       - "ArrayIndexOutOfBoundsException"
       - "Exception"
@@ -375,16 +312,7 @@ exceptions:
     active: true
   TooGenericExceptionCaught:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     exceptionNames:
       - "ArrayIndexOutOfBoundsException"
       - "Error"
@@ -411,14 +339,7 @@ naming:
   ClassNaming:
     active: true
     classPattern: "[A-Z][a-zA-Z0-9]*"
-    excludes:
-      - "**/test/**"
-      - "**/androidTest/**"
-      - "**/commonTest/**"
-      - "**/jvmTest/**"
-      - "**/jsTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
+    excludes: *testFolders
   ConstructorParameterNaming:
     active: true
     parameterPattern: "[a-z][A-Za-z0-9]*"
@@ -438,16 +359,7 @@ naming:
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     functionPattern: "[a-zA-Z][a-zA-Z0-9]*|`.*`"
     excludeClassPattern: "$^"
   FunctionParameterNaming:
@@ -494,14 +406,7 @@ naming:
     active: true
     variablePattern: "[a-z][A-Za-z0-9]*"
     privateVariablePattern: "(_)?[a-z][A-Za-z0-9]*"
-    excludes:
-      - "**/test/**"
-      - "**/androidTest/**"
-      - "**/commonTest/**"
-      - "**/jvmTest/**"
-      - "**/jsTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
+    excludes: *testFolders
     excludeClassPattern: "$^"
 
 performance:
@@ -513,28 +418,10 @@ performance:
     threshold: 3
   ForEachOnRange:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
   SpreadOperator:
     active: false
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
   UnnecessaryPartOfBinaryExpression:
     active: false
   UnnecessaryTemporaryInstantiation:
@@ -609,16 +496,7 @@ potential-bugs:
     active: true
   LateinitUsage:
     active: false
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     ignoreOnClassesPattern: ""
   MapGetWithNotNullAssertionOperator:
     active: true
@@ -645,16 +523,7 @@ potential-bugs:
     active: true
   UnsafeCallOnNullableType:
     active: true
-    excludes:
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
   UnsafeCast:
     active: true
   UnusedUnaryOperator:
@@ -750,7 +619,7 @@ style:
       - "groovy.xml.XmlParser"
       - "org.gradle.api.internal.*"
     forbiddenPatterns: ""
-    excludes: ["**/build-logic/**", "**/com/rickbusarow/kgx/internal/**"]
+    excludes: []
   ForbiddenMethodCall:
     active: false
     methods:
@@ -775,17 +644,7 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes:
-      - "**/*.kts"
-      - "**/androidInstrumentedTest/**"
-      - "**/androidTest/**"
-      - "**/androidUnitTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     ignoreNumbers:
       - "-1"
       - "0"
@@ -809,14 +668,7 @@ style:
   MaxLineLength:
     active: true
     maxLineLength: 120
-    excludes:
-      - "**/androidTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
@@ -970,29 +822,13 @@ style:
     ignoreLateinitVar: false
   WildcardImport:
     active: true
-    excludes:
-      - "**/androidTest/**"
-      - "**/commonTest/**"
-      - "**/integrationTest/**"
-      - "**/iosTest/**"
-      - "**/jsTest/**"
-      - "**/jvmTest/**"
-      - "**/test/**"
+    excludes: *testFolders
     excludeImports:
       - "java.util.*"
 
 libraries:
   active: true
-  excludes:
-    - "**/androidTest/**"
-    - "**/build-logic/**"
-    - "**/commonTest/**"
-    - "**/integrationTest/**"
-    - "**/iosTest/**"
-    - "**/jsTest/**"
-    - "**/jvmTest/**"
-    - "**/kase-overload-generator/**"
-    - "**/test/**"
+  excludes: *testFolders
   ForbiddenPublicDataClass:
     active: true
     ignorePackages:

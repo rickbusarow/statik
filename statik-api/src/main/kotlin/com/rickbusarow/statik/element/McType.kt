@@ -23,78 +23,129 @@ import com.rickbusarow.statik.element.McType.McConcreteType.McJavaType
 import com.rickbusarow.statik.element.McType.McConcreteType.McKtType
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-sealed interface McType : McElementWithParent<McElement>, McAnnotated, McHasTypeParameters {
+sealed interface McType<out PARENT : McElement> :
+  McElementWithParent<PARENT>,
+  McHasTypeParameters<PARENT>,
+  McAnnotated {
 
   /**
    * In a concrete type, this represents super-classes and interfaces.
    *
    * In a generic type, supers are the upper bound(s).
    */
-  val superTypes: LazySet<McType>
+  val superTypes: LazySet<McType<*>>
 
   /** Represents a class, interface, object, or companion object */
-  sealed interface McConcreteType : McType, Declared {
+  sealed interface McConcreteType<out PARENT : McElement> :
+    McType<PARENT>,
+    McElementWithParent<PARENT>,
+    Declared<PARENT> {
 
     override val containingFile: McFile
 
-    val innerTypes: LazySet<McConcreteType>
-    val innerTypesRecursive: LazySet<McType>
-    val properties: LazySet<McProperty>
-    val functions: LazySet<McFunction>
+    val innerTypes: LazySet<McConcreteType<*>>
+    val innerTypesRecursive: LazySet<McType<*>>
+    val properties: LazySet<McProperty<*>>
+    val functions: LazySet<McFunction<*>>
 
-    interface McJavaType : McType, McJavaElement {
-      override val parent: McJavaElement
+    interface McJavaType<out PARENT : McJavaElement> :
+      McType<PARENT>,
+      McJavaElementWithParent<PARENT> {
+      override val parent: PARENT
     }
 
-    interface McKtType : McType, McKtElement {
-      override val parent: McKtElement
+    interface McKtType<out PARENT : McKtElement> :
+      McType<PARENT>,
+      McKtElementWithParent<PARENT> {
+      override val parent: PARENT
     }
 
-    sealed interface McJavaConcreteType : McConcreteType, McJavaType, McJavaElement {
-      override val innerTypes: LazySet<McJavaConcreteType>
-      override val innerTypesRecursive: LazySet<McJavaConcreteType>
+    sealed interface McJavaConcreteType<out PARENT : McJavaElement> :
+      McConcreteType<PARENT>,
+      McJavaType<PARENT>,
+      McJavaElementWithParent<PARENT> {
+
+      override val innerTypes: LazySet<McJavaConcreteType<*>>
+      override val innerTypesRecursive: LazySet<McJavaConcreteType<*>>
 
       override val containingFile: McJavaFile
 
-      interface McJavaInterface : McJavaConcreteType, Declared
-      interface McJavaClass : McJavaConcreteType, Declared {
+      interface McJavaInterface<out PARENT : McJavaElement> :
+        McJavaConcreteType<PARENT>,
+        Declared<PARENT>
 
-        val constructors: LazySet<McFunction.McJavaFunction>
+      interface McJavaClass<out PARENT : McJavaElement> :
+        McJavaConcreteType<PARENT>,
+        Declared<PARENT> {
+
+        val constructors: LazySet<McFunction.McJavaFunction<*>>
       }
     }
 
-    interface McKtConcreteType :
-      McKtType,
-      McConcreteType,
-      McKtDeclaredElement,
-      McKtElement {
-      override val parent: McKtElement
-      override val innerTypes: LazySet<McKtConcreteType>
-      override val innerTypesRecursive: LazySet<McKtConcreteType>
+    interface McKtConcreteType<out PARENT : McKtElement> :
+      McKtType<PARENT>,
+      McConcreteType<PARENT>,
+      McKtDeclaredElement<PARENT>,
+      McKtElementWithParent<PARENT> {
+
+      override val innerTypes: LazySet<McKtConcreteType<*>>
+      override val innerTypesRecursive: LazySet<McKtConcreteType<*>>
 
       override val containingFile: McKtFile
-      override val properties: LazySet<McKtProperty>
-      override val functions: LazySet<McKtFunction>
+      override val properties: LazySet<McKtProperty<*>>
+      override val functions: LazySet<McKtFunction<*>>
 
-      interface McKtAnnotationClass : McKtConcreteType, McKtElement, Declared
-      interface McKtClass : McKtConcreteType, McKtElement, Declared {
+      interface McKtAnnotationClass<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
 
-        val primaryConstructor: McKtFunction?
+      interface McKtClass<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT> {
+
+        val primaryConstructor: McKtFunction<*>?
 
         /** All constructors, including the primary if it exists */
-        val constructors: LazySet<McKtFunction>
+        val constructors: LazySet<McKtFunction<*>>
       }
 
-      interface McKtCompanionObject : McKtConcreteType, McKtElement, Declared
-      interface McKtTypeAlias : McKtConcreteType, McKtElement, Declared
-      interface McKtEnum : McKtConcreteType, McKtElement, Declared
-      interface McKtInterface : McKtConcreteType, McKtElement, Declared
-      interface McKtObject : McKtConcreteType, McKtElement, Declared
+      interface McKtCompanionObject<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
+
+      interface McKtTypeAlias<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
+
+      interface McKtEnum<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
+
+      interface McKtInterface<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
+
+      interface McKtObject<out PARENT : McKtElement> :
+        McKtConcreteType<PARENT>,
+        McKtElementWithParent<PARENT>,
+        Declared<PARENT>
     }
   }
 
   /** Represents a generic type used as a parameter, like `<T>` or `<R: Any>`. */
-  interface McTypeParameter : McType
-  interface McJavaTypeParameter : McTypeParameter, McJavaType
-  interface McKtTypeParameter : McTypeParameter, McKtType
+  interface McTypeParameter<out PARENT : McElement> : McType<PARENT> {
+    interface McJavaTypeParameter<out PARENT : McJavaElement> :
+      McTypeParameter<PARENT>,
+      McJavaType<PARENT>
+
+    interface McKtTypeParameter<out PARENT : McKtElement> :
+      McTypeParameter<PARENT>,
+      McKtType<PARENT>
+  }
 }

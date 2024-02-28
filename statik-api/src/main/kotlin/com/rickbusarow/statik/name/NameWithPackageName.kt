@@ -20,6 +20,7 @@ import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqNa
 import com.rickbusarow.statik.stdlib.asList
 import com.rickbusarow.statik.stdlib.singletonList
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
@@ -50,7 +51,8 @@ sealed interface NameWithPackageName :
   }
 }
 
-internal data class NameWithPackageNameImpl(
+@Poko
+internal class NameWithPackageNameImpl(
   override val packageName: PackageName,
   override val simpleNames: List<SimpleName>
 ) : NameWithPackageName {

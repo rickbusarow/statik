@@ -17,10 +17,10 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.PackageName.Companion.asPackageName
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.name.SimpleName.Companion.asString
 import com.rickbusarow.statik.stdlib.letIf
 import com.rickbusarow.statik.stdlib.pluralString
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import dev.drewhamilton.poko.Poko
 
 /** either a [ClassName] or a [TypeParameter] */
 sealed interface TypeName : McName, HasSimpleNames {
@@ -43,7 +43,8 @@ sealed interface TypeName : McName, HasSimpleNames {
  * @property typeArguments The list of type arguments of the class.
  * @property nullable Indicates if the class name is nullable.
  */
-data class ClassName(
+@Poko
+class ClassName(
   override val packageName: PackageName,
   override val simpleNames: List<SimpleName>,
   val typeArguments: List<TypeName>,
@@ -81,6 +82,18 @@ data class ClassName(
     nullable = nullable
   )
 
+  fun copy(
+    packageName: PackageName = this.packageName,
+    simpleNames: List<SimpleName> = this.simpleNames,
+    typeArguments: List<TypeName> = this.typeArguments,
+    nullable: Boolean = this.nullable
+  ): ClassName = ClassName(
+    packageName = packageName,
+    simpleNames = simpleNames,
+    typeArguments = typeArguments,
+    nullable = nullable
+  )
+
   /** @return a new instance of [ClassName] with nullability set to true. */
   override fun makeNullable(): TypeName = copy(nullable = true)
 
@@ -108,7 +121,8 @@ data class ClassName(
  * @property nullable `<T?>` vs `<T>`
  * @property variance The variance of the type parameter, can be either `IN`, `OUT`, or `null`.
  */
-data class TypeParameter(
+@Poko
+class TypeParameter(
   override val simpleName: SimpleName,
   val bounds: List<TypeName>,
   override val nullable: Boolean,
@@ -129,6 +143,18 @@ data class TypeParameter(
     name: SimpleName,
     vararg bounds: TypeName
   ) : this(simpleName = name, bounds = bounds.toList(), nullable = false, variance = null)
+
+  fun copy(
+    simpleName: SimpleName = this.simpleName,
+    bounds: List<TypeName> = this.bounds,
+    nullable: Boolean = this.nullable,
+    variance: Variance? = this.variance
+  ): TypeParameter = TypeParameter(
+    simpleName = simpleName,
+    bounds = bounds,
+    nullable = nullable,
+    variance = variance
+  )
 
   /** @return a new instance of [TypeParameter] with nullability set to true. */
   override fun makeNullable(): TypeName = copy(nullable = true)

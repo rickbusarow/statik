@@ -109,7 +109,6 @@ fun PackageName.appendAsString(vararg simpleNames: String): String {
 }
 
 /**
- * @param name the full name of this package
  * @see McName
  * @throws IllegalArgumentException if the [asString] parameter is empty or blank
  */

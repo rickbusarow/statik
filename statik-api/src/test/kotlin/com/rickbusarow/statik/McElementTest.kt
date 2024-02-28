@@ -15,19 +15,27 @@
 
 package com.rickbusarow.statik
 
+import com.rickbusarow.kase.asTests
+import com.rickbusarow.statik.element.McElement
+import com.rickbusarow.statik.element.McElementWithParent
+import com.rickbusarow.statik.element.McFile
+import com.rickbusarow.statik.element.McJavaElement
+import com.rickbusarow.statik.element.McKtDeclaredElement
+import com.rickbusarow.statik.element.McKtElement
 import io.kotest.assertions.asClue
-import io.kotest.inspectors.forAll
 import io.kotest.matchers.reflection.shouldBeOfType
 import io.kotest.matchers.reflection.shouldBeSubtypeOf
 import io.kotest.matchers.reflection.shouldHaveMemberProperty
 import io.kotest.matchers.reflection.shouldNotHaveMemberProperty
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.DynamicNode
+import org.junit.jupiter.api.TestFactory
+import java.util.stream.Stream
 import kotlin.reflect.full.isSubclassOf
 
 class McElementTest {
 
-  @Test
-  fun `every McElement type except files should have a 'parent' property`() {
+  @TestFactory
+  fun `every McElement type except files should have a 'parent' property`(): Stream<out DynamicNode> {
 
     // The language-specific element types are technically subclasses,
     // but also can't have parents.
@@ -37,9 +45,12 @@ class McElementTest {
       McKtDeclaredElement::class
     )
 
-    McElement::class.sealedSubclassesRecursive()
+    return McElement::class.sealedSubclassesRecursive()
       .filterNot { it in excluded }
-      .forAll { sub ->
+      .asTests({ sub ->
+        val packageName = sub.java.`package`.name
+        sub.qualifiedName.toString().removePrefix("$packageName.")
+      }) { sub ->
 
         when {
           sub.isSubclassOf(McFile::class) -> {
