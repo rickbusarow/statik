@@ -165,4 +165,6 @@ square-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square
 square-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem-jvm", version.ref = "square-okio" }
 square-okio-jvm = { module = "com.squareup.okio:okio-jvm", version.ref = "square-okio" }
 
+square-turbine = "app.cash.turbine:turbine:1.0.0"
+
 vanniktech-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech-publish" }

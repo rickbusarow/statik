@@ -31,13 +31,17 @@ dependencies {
 
   api(libs.junit.jupiter.api)
 
+  testImplementation(libs.kotlinx.coroutines.test)
   implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlin.compiler)
 
   testImplementation(libs.junit.jupiter)
+  testImplementation(libs.rickBusarow.kase)
   testImplementation(libs.junit.jupiter.engine)
   testImplementation(libs.junit4)
   testImplementation(libs.kotest.assertions.api)
   testImplementation(libs.kotest.assertions.core.jvm)
   testImplementation(libs.kotest.assertions.shared)
   testImplementation(libs.kotest.common)
+  testImplementation(libs.square.turbine)
 }
