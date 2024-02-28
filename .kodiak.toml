@@ -18,6 +18,8 @@ priority_merge_label = "priority"
 # will not do anything if a matching label is applied
 blocking_labels = ["DO NOT MERGE"]
 method = "rebase"
+# https://kodiakhq.com/docs/config-reference#mergenotify_on_conflict
+notify_on_conflict = false
 
 [merge.automerge_dependencies]
 # auto merge all PRs opened by "renovate" that are "minor" or "patch" version upgrades. "major" version upgrades will be ignored.
