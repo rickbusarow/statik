@@ -6,40 +6,26 @@ on:
     branches:
       - main
 
-env:
-  gradleArgs: "-Dorg.gradle.jvmargs=-Xmx10g -Dfile.encoding=UTF-8 -XX:+UseParallelGC"
-
 jobs:
   publish-snapshot:
-    runs-on: macos-latest
+    runs-on: macos-14
     if: github.event.repository.fork == false
     timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
-        with:
-          distribution: "zulu"
-          java-version: "11"
 
-      # break the publishing builds down a little into smaller steps
-      # because gradle-build-action's caching is all-or-nothing.  If the full publish task
-      # takes too long and times out, no cache is retained.
-
-      - name: Compile Kotlin
-        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+      - name: Check
+        uses: rickbusarow/actions/gradle-task@v1
         with:
-          arguments: compileKotlin "${{ env.gradleArgs }}"
-
-      - name: Dokka & DokkaJavadoc
-        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
-        with:
-          arguments: dokkaJavadoc "${{ env.gradleArgs }}"
+          task: check
+          write-cache-key: main-build-artifacts
+          restore-cache-key: main-build-artifacts
 
       - name: Publish Snapshots
-        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        uses: rickbusarow/actions/gradle-task@v1
         with:
-          arguments: publish "${{ env.gradleArgs }}"
+          task: publish
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}

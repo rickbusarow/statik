@@ -45,12 +45,15 @@ captures/
 .idea/libraries
 
 # keep .idea sub-directories
-!/.idea/codeStyles/
-!/.idea/copyright/
-!/.idea/runConfigurations/
-!/.idea/inspectionProfiles/
+.idea/codeStyles/
+.idea/copyright/
+.idea/runConfigurations/
+.idea/inspectionProfiles/
 !.idea/detekt.xml
 !.idea/ktlint-plugin.xml
+!.idea/runConfigurations/all_tests.xml
+!.idea/runConfigurations/clean.xml
+!.idea/runConfigurations/integration_tests.xml
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
