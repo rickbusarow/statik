@@ -17,26 +17,32 @@ package com.rickbusarow.statik
 
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
+import dev.drewhamilton.poko.Poko
 import net.swiftzer.semver.SemVer
 import org.jetbrains.kotlin.name.FqName
 
-data class AnvilGradlePlugin(
+@Poko
+class AnvilGradlePlugin(
   val version: SemVer,
   val generateDaggerFactories: Boolean
 )
 
-data class AnvilAnnotatedType(
+@Poko
+class AnvilAnnotatedType(
   val contributedTypeDeclaration: QualifiedDeclaredName,
   val contributedScope: AnvilScopeName
 )
 
-data class RawAnvilAnnotatedType(
+@Poko
+class RawAnvilAnnotatedType(
   val declaredName: QualifiedDeclaredName,
   val anvilScopeNameEntry: AnvilScopeNameEntry
 )
 
-data class AnvilScopeName(val fqName: FqName) {
+@Poko
+class AnvilScopeName(val fqName: FqName) {
   override fun toString(): String = fqName.asString()
 }
 
-data class AnvilScopeNameEntry(val name: ReferenceName)
+@Poko
+class AnvilScopeNameEntry(val name: ReferenceName)

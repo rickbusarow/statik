@@ -23,8 +23,11 @@ import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
+import dev.drewhamilton.poko.Poko
+import kotlinx.coroutines.coroutineScope
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.resolve.BindingContext
 import java.io.File
 
 /** Creates an [McElement] */
@@ -82,7 +85,7 @@ class McElementContext<T>(
    * A deferred binding context obtained from the [KotlinEnvironment].
    * This context is used to resolve bindings in the system.
    */
-  val bindingContextDeferred = lazyDeferred {
+  val bindingContextDeferred: LazyDeferred<BindingContext> = lazyDeferred {
     kotlinEnvironmentDeferred.await()
       .bindingContextDeferred.await()
   }
@@ -94,7 +97,9 @@ class McElementContext<T>(
    * @return The declared name of the symbol, or null if the symbol does not have a declared name.
    */
   suspend fun declaredNameOrNull(symbol: T): QualifiedDeclaredName? {
-    TODO()
+    coroutineScope {
+      TODO("not yet implemented $symbol")
+    }
   }
 
   /**
@@ -152,7 +157,8 @@ fun interface NameParser2 {
    * @property stdLibNameOrNull A function that returns a `QualifiedDeclaredName` if the
    *   receiver name is part of the stdlib of this `referenceLanguage`, otherwise null.
    */
-  data class NameParser2Packet(
+  @Poko
+  class NameParser2Packet(
     val file: McFile,
     val toResolve: ReferenceName,
     val referenceLanguage: CompatibleLanguage,

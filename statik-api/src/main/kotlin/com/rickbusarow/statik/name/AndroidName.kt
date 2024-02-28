@@ -58,7 +58,7 @@ class AndroidRName(
 
   override val simpleNames: List<SimpleName> by lazy { listOf("R".asSimpleName()) }
 
-  override val asString by unsafeLazy {
+  override val asString: String by unsafeLazy {
     packageName.append(simpleNames.asString())
   }
 

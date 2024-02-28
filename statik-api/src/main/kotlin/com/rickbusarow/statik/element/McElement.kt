@@ -28,6 +28,7 @@ import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource
+import dev.drewhamilton.poko.Poko
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
@@ -36,7 +37,8 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
 /** An element that has been declared, it can be a class, function, variable, etc. */
-interface Declared :
+interface Declared<out PARENT : McElement> :
+  McElementWithParent<PARENT>,
   HasPackageName,
   HasSimpleNames {
   /** The name of this declared element. */
@@ -46,13 +48,21 @@ interface Declared :
   val isApi: Boolean get() = false
 }
 
+/** Represents a declared Kotlin element in the source code. */
+sealed interface McKtDeclaredElement<out PARENT : McKtElement> :
+  McKtElementWithParent<PARENT>,
+  Declared<PARENT>
+
 /**
  * Base interface for all code elements parsed from source
  * files. This includes classes, functions, variables, etc.
  */
 sealed interface McElement {
 
-  /** The PSI element representing the physical code element in the source code. */
+  /**
+   * The PSI element representing the physical code element in the source code.
+
+   */
   val psi: PsiElement
 
   /** The file that contains this element. */
@@ -75,26 +85,33 @@ sealed interface McKtElement : McElement {
 
   override val containingFile: McKtFile
     get() = when (this) {
-
-      is McElementWithParent<*> -> (parent as McKtElement).containingFile
-
+      is McKtElementWithParent<*> -> parent.containingFile
       is McKtFile -> this
-
-      else -> throw IllegalArgumentException(
-
-        "How did you call `containingFile` without being `McElementWithParent` or `McKtFile`?"
-
-      )
     }
 }
 
-/** Represents a declared Kotlin element in the source code. */
-sealed interface McKtDeclaredElement : McKtElement, Declared
+/** Represents an element with a parent element. */
+sealed interface McKtElementWithParent<out PARENT : McKtElement> :
+  McKtElement,
+  McElementWithParent<PARENT> {
+
+  /** The parent element */
+  override val parent: PARENT
+}
 
 /** Represents an element with a parent element. */
-sealed interface McElementWithParent<E : McElement> : McElement {
+sealed interface McJavaElementWithParent<out PARENT : McJavaElement> :
+  McJavaElement,
+  McElementWithParent<PARENT> {
+
   /** The parent element */
-  val parent: E
+  override val parent: PARENT
+}
+
+/** Represents an element with a parent element. */
+sealed interface McElementWithParent<out PARENT : McElement> : McElement {
+  /** The parent element */
+  val parent: PARENT
 }
 
 /**
@@ -115,44 +132,33 @@ fun McElementWithParent<*>.parents(): Sequence<McElement> {
 interface McAnnotated {
 
   /** The annotations of this element. */
-  val annotations: LazySet<McAnnotation>
+  val annotations: LazySet<McAnnotation<*>>
 }
 
 /** Represents an element with type parameters. */
-interface McHasTypeParameters {
+interface McHasTypeParameters<out PARENT : McElement> : McElementWithParent<PARENT> {
 
   /** The type parameters of this element. */
-  val typeParameters: LazySet<McTypeParameter>
+  val typeParameters: LazySet<McTypeParameter<*>>
 }
 
 /** Represents an annotation. */
-interface McAnnotation : McElement, McElementWithParent<McElement> {
+interface McAnnotation<out PARENT : McElement> : McElementWithParent<PARENT> {
 
   /** The reference name of this annotation. */
   val referenceName: LazyDeferred<ReferenceName?>
 
-  interface McKtAnnotation :
-
-    McKtElement,
-
-    McElementWithParent<McElement>,
-
-    McAnnotation {
-
-    override val parent: McKtElement
-  }
+  interface McKtAnnotation<out PARENT : McKtElement> :
+    McKtElementWithParent<PARENT>,
+    McAnnotation<PARENT>
 }
 
 /** Represents an argument of an annotation. */
-interface McAnnotationArgument : McElement, McElementWithParent<McElement> {
+interface McAnnotationArgument<out PARENT : McElement> : McElementWithParent<PARENT> {
 
-  interface McKtAnnotationArgument :
-    McKtElement,
-    McElementWithParent<McElement>,
-    McAnnotationArgument {
-
-    override val parent: McKtElement
-  }
+  interface McKtAnnotationArgument<out PARENT : McKtElement> :
+    McKtElementWithParent<PARENT>,
+    McAnnotationArgument<PARENT>
 
   /** The type of this argument. */
   val type: LazyDeferred<ReferenceName?>
@@ -179,10 +185,10 @@ sealed interface McFile : McElement, HasPackageName {
   val declarations: List<DataSource<DeclaredName>>
 
   /** The declared types in this file. */
-  val declaredTypes: LazySet<McConcreteType>
+  val declaredTypes: LazySet<McConcreteType<*>>
 
   /** The declared types and inner types in this file. */
-  val declaredTypesAndInnerTypes: LazySet<McConcreteType>
+  val declaredTypesAndInnerTypes: LazySet<McConcreteType<*>>
 
   /** Represents a single Kotlin file. */
   interface McKtFile :
@@ -192,15 +198,15 @@ sealed interface McFile : McElement, HasPackageName {
 
     override val psi: KtFile
 
-    override val declaredTypes: LazySet<McKtConcreteType>
+    override val declaredTypes: LazySet<McKtConcreteType<*>>
 
-    override val declaredTypesAndInnerTypes: LazySet<McKtConcreteType>
+    override val declaredTypesAndInnerTypes: LazySet<McKtConcreteType<*>>
 
     /** The top level functions in this file. */
-    val topLevelFunctions: LazySet<McFunction>
+    val topLevelFunctions: LazySet<McFunction<*>>
 
     /** The top level properties in this file. */
-    val topLevelProperties: LazySet<McProperty>
+    val topLevelProperties: LazySet<McProperty<*>>
 
     /** The import aliases in this file. */
     val importAliases: Map<String, ReferenceName>
@@ -217,7 +223,8 @@ sealed interface McFile : McElement, HasPackageName {
      * @property mergeArguments The set of merge arguments derived from Anvil annotations.
      * @property contributeArguments The set of contribute arguments derived from Anvil annotations.
      */
-    data class ScopeArgumentParseResult(
+    @Poko
+    class ScopeArgumentParseResult(
       val mergeArguments: Set<RawAnvilAnnotatedType>,
       val contributeArguments: Set<RawAnvilAnnotatedType>
     )

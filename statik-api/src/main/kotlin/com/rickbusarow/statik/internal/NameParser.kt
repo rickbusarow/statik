@@ -21,6 +21,7 @@ import com.rickbusarow.statik.name.McName
 import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
+import dev.drewhamilton.poko.Poko
 
 fun interface NameParser {
   suspend fun parse(packet: NameParserPacket): NameParserPacket
@@ -38,7 +39,8 @@ fun interface NameParser {
    * @property stdLibNameOrNull returns a [ReferenceName] if the receiver
    *   name is part of the stdlib of this [referenceLanguage], otherwise null
    */
-  data class NameParserPacket(
+  @Poko
+  class NameParserPacket(
     val packageName: PackageName,
     val imports: Set<String>,
     val wildcardImports: Set<String>,
@@ -51,6 +53,31 @@ fun interface NameParser {
     val referenceLanguage: McName.CompatibleLanguage,
     val stdLibNameOrNull: String.() -> QualifiedDeclaredName?
   ) {
+
+    fun copy(
+      packageName: PackageName = this.packageName,
+      imports: Set<String> = this.imports,
+      wildcardImports: Set<String> = this.wildcardImports,
+      aliasedImports: Map<String, ReferenceName> = this.aliasedImports,
+      resolved: Set<ReferenceName> = this.resolved,
+      unresolved: Set<String> = this.unresolved,
+      mustBeApi: Set<String> = this.mustBeApi,
+      apiReferenceNames: Set<ReferenceName> = this.apiReferenceNames,
+      referenceLanguage: McName.CompatibleLanguage = this.referenceLanguage,
+      stdLibNameOrNull: String.() -> QualifiedDeclaredName? = this.stdLibNameOrNull
+    ): NameParserPacket = NameParserPacket(
+      packageName = packageName,
+      imports = imports,
+      wildcardImports = wildcardImports,
+      aliasedImports = aliasedImports,
+      resolved = resolved,
+      unresolved = unresolved,
+      mustBeApi = mustBeApi,
+      apiReferenceNames = apiReferenceNames,
+      referenceLanguage = referenceLanguage,
+      stdLibNameOrNull = stdLibNameOrNull
+    )
+
     override fun toString(): String {
       return """NameParserPacket(
         |  packageName='${packageName.asString}',

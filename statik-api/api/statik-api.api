@@ -1,9 +1,5 @@
 public final class com/rickbusarow/statik/AnvilAnnotatedType {
 	public fun <init> (Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeName;)V
-	public final fun component1 ()Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
-	public final fun component2 ()Lcom/rickbusarow/statik/AnvilScopeName;
-	public final fun copy (Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeName;)Lcom/rickbusarow/statik/AnvilAnnotatedType;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/AnvilAnnotatedType;Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeName;ILjava/lang/Object;)Lcom/rickbusarow/statik/AnvilAnnotatedType;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getContributedScope ()Lcom/rickbusarow/statik/AnvilScopeName;
 	public final fun getContributedTypeDeclaration ()Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
@@ -13,10 +9,6 @@ public final class com/rickbusarow/statik/AnvilAnnotatedType {
 
 public final class com/rickbusarow/statik/AnvilGradlePlugin {
 	public fun <init> (Lnet/swiftzer/semver/SemVer;Z)V
-	public final fun component1 ()Lnet/swiftzer/semver/SemVer;
-	public final fun component2 ()Z
-	public final fun copy (Lnet/swiftzer/semver/SemVer;Z)Lcom/rickbusarow/statik/AnvilGradlePlugin;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/AnvilGradlePlugin;Lnet/swiftzer/semver/SemVer;ZILjava/lang/Object;)Lcom/rickbusarow/statik/AnvilGradlePlugin;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getGenerateDaggerFactories ()Z
 	public final fun getVersion ()Lnet/swiftzer/semver/SemVer;
@@ -26,9 +18,6 @@ public final class com/rickbusarow/statik/AnvilGradlePlugin {
 
 public final class com/rickbusarow/statik/AnvilScopeName {
 	public fun <init> (Lorg/jetbrains/kotlin/name/FqName;)V
-	public final fun component1 ()Lorg/jetbrains/kotlin/name/FqName;
-	public final fun copy (Lorg/jetbrains/kotlin/name/FqName;)Lcom/rickbusarow/statik/AnvilScopeName;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/AnvilScopeName;Lorg/jetbrains/kotlin/name/FqName;ILjava/lang/Object;)Lcom/rickbusarow/statik/AnvilScopeName;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getFqName ()Lorg/jetbrains/kotlin/name/FqName;
 	public fun hashCode ()I
@@ -37,208 +26,14 @@ public final class com/rickbusarow/statik/AnvilScopeName {
 
 public final class com/rickbusarow/statik/AnvilScopeNameEntry {
 	public fun <init> (Lcom/rickbusarow/statik/name/ReferenceName;)V
-	public final fun component1 ()Lcom/rickbusarow/statik/name/ReferenceName;
-	public final fun copy (Lcom/rickbusarow/statik/name/ReferenceName;)Lcom/rickbusarow/statik/AnvilScopeNameEntry;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/AnvilScopeNameEntry;Lcom/rickbusarow/statik/name/ReferenceName;ILjava/lang/Object;)Lcom/rickbusarow/statik/AnvilScopeNameEntry;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getName ()Lcom/rickbusarow/statik/name/ReferenceName;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/Declared : com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames {
-	public abstract fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
-	public abstract fun isApi ()Z
-}
-
-public final class com/rickbusarow/statik/Declared$DefaultImpls {
-	public static fun getSegments (Lcom/rickbusarow/statik/Declared;)Ljava/util/List;
-	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/Declared;)Ljava/lang/String;
-	public static fun isApi (Lcom/rickbusarow/statik/Declared;)Z
-}
-
-public final class com/rickbusarow/statik/ElementKt {
-	public static final fun parents (Lcom/rickbusarow/statik/McElementWithParent;)Lkotlin/sequences/Sequence;
-}
-
-public abstract interface class com/rickbusarow/statik/JavaFile : com/rickbusarow/statik/JvmFile {
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiJavaFile;
-}
-
-public abstract interface class com/rickbusarow/statik/JvmFile : com/rickbusarow/statik/name/HasReferences {
-	public abstract fun getApiReferences ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public abstract fun getDeclarations ()Ljava/util/Set;
-	public abstract fun getFile ()Ljava/io/File;
-	public abstract fun getImportsLazy ()Lkotlin/Lazy;
-	public abstract fun getName ()Ljava/lang/String;
-	public abstract fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiFile;
-}
-
-public abstract interface class com/rickbusarow/statik/KotlinFile : com/rickbusarow/statik/JvmFile {
-	public abstract fun getAnvilScopeArguments (Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFile;
-}
-
-public final class com/rickbusarow/statik/KotlinFile$ScopeArgumentParseResult {
-	public fun <init> (Ljava/util/Set;Ljava/util/Set;)V
-	public final fun component1 ()Ljava/util/Set;
-	public final fun component2 ()Ljava/util/Set;
-	public final fun copy (Ljava/util/Set;Ljava/util/Set;)Lcom/rickbusarow/statik/KotlinFile$ScopeArgumentParseResult;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/KotlinFile$ScopeArgumentParseResult;Ljava/util/Set;Ljava/util/Set;ILjava/lang/Object;)Lcom/rickbusarow/statik/KotlinFile$ScopeArgumentParseResult;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getContributeArguments ()Ljava/util/Set;
-	public final fun getMergeArguments ()Ljava/util/Set;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public abstract interface class com/rickbusarow/statik/McAnnotated {
-	public abstract fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public abstract interface class com/rickbusarow/statik/McAnnotation : com/rickbusarow/statik/McElement, com/rickbusarow/statik/McElementWithParent {
-	public abstract fun getReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-}
-
-public final class com/rickbusarow/statik/McAnnotation$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McAnnotation;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McAnnotation$McKtAnnotation : com/rickbusarow/statik/McAnnotation, com/rickbusarow/statik/McElementWithParent, com/rickbusarow/statik/McKtElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/McKtElement;
-}
-
-public final class com/rickbusarow/statik/McAnnotation$McKtAnnotation$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McAnnotation$McKtAnnotation;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/McAnnotation$McKtAnnotation;)Lcom/rickbusarow/statik/McFile$McKtFile;
-}
-
-public abstract interface class com/rickbusarow/statik/McAnnotationArgument : com/rickbusarow/statik/McElement, com/rickbusarow/statik/McElementWithParent {
-	public abstract fun getType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public abstract fun getValue ()Ljava/lang/Object;
-}
-
-public final class com/rickbusarow/statik/McAnnotationArgument$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McAnnotationArgument;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McAnnotationArgument$McKtAnnotationArgument : com/rickbusarow/statik/McAnnotationArgument, com/rickbusarow/statik/McElementWithParent, com/rickbusarow/statik/McKtElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/McKtElement;
-}
-
-public final class com/rickbusarow/statik/McAnnotationArgument$McKtAnnotationArgument$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McAnnotationArgument$McKtAnnotationArgument;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/McAnnotationArgument$McKtAnnotationArgument;)Lcom/rickbusarow/statik/McFile$McKtFile;
-}
-
-public abstract interface class com/rickbusarow/statik/McElement {
-	public abstract fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/McFile;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-}
-
-public final class com/rickbusarow/statik/McElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McElement;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McElementWithParent : com/rickbusarow/statik/McElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/McElement;
-}
-
-public final class com/rickbusarow/statik/McElementWithParent$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McElementWithParent;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McFile : com/rickbusarow/statik/McElement, com/rickbusarow/statik/name/HasPackageName {
-	public abstract fun getApiReferences ()Ljava/util/List;
-	public abstract fun getDeclarations ()Ljava/util/List;
-	public abstract fun getDeclaredTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getDeclaredTypesAndInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getFile ()Ljava/io/File;
-	public abstract fun getImports ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
-	public abstract fun getReferences ()Ljava/util/List;
-	public abstract fun getWildcardImports ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
-}
-
-public final class com/rickbusarow/statik/McFile$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McFile;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McFile$McJavaFile : com/rickbusarow/statik/McFile, com/rickbusarow/statik/McJavaElement {
-}
-
-public final class com/rickbusarow/statik/McFile$McJavaFile$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McFile$McJavaFile;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McFile$McKtFile : com/rickbusarow/statik/McAnnotated, com/rickbusarow/statik/McFile, com/rickbusarow/statik/McKtElement {
-	public abstract fun getAnvilScopeArguments (Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun getDeclaredTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getDeclaredTypesAndInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getImportAliases ()Ljava/util/Map;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFile;
-	public abstract fun getTopLevelFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getTopLevelProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public final class com/rickbusarow/statik/McFile$McKtFile$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McFile$McKtFile;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/McFile$McKtFile;)Lcom/rickbusarow/statik/McFile$McKtFile;
-}
-
-public final class com/rickbusarow/statik/McFile$McKtFile$ScopeArgumentParseResult {
-	public fun <init> (Ljava/util/Set;Ljava/util/Set;)V
-	public final fun component1 ()Ljava/util/Set;
-	public final fun component2 ()Ljava/util/Set;
-	public final fun copy (Ljava/util/Set;Ljava/util/Set;)Lcom/rickbusarow/statik/McFile$McKtFile$ScopeArgumentParseResult;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/McFile$McKtFile$ScopeArgumentParseResult;Ljava/util/Set;Ljava/util/Set;ILjava/lang/Object;)Lcom/rickbusarow/statik/McFile$McKtFile$ScopeArgumentParseResult;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getContributeArguments ()Ljava/util/Set;
-	public final fun getMergeArguments ()Ljava/util/Set;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public abstract interface class com/rickbusarow/statik/McHasTypeParameters {
-	public abstract fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public abstract interface class com/rickbusarow/statik/McJavaElement : com/rickbusarow/statik/McElement {
-	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/McFile$McJavaFile;
-}
-
-public final class com/rickbusarow/statik/McJavaElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McJavaElement;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/McKtDeclaredElement : com/rickbusarow/statik/Declared, com/rickbusarow/statik/McKtElement {
-}
-
-public final class com/rickbusarow/statik/McKtDeclaredElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McKtDeclaredElement;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/McKtDeclaredElement;)Lcom/rickbusarow/statik/McFile$McKtFile;
-	public static fun getSegments (Lcom/rickbusarow/statik/McKtDeclaredElement;)Ljava/util/List;
-	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/McKtDeclaredElement;)Ljava/lang/String;
-	public static fun isApi (Lcom/rickbusarow/statik/McKtDeclaredElement;)Z
-}
-
-public abstract interface class com/rickbusarow/statik/McKtElement : com/rickbusarow/statik/McElement {
-	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/McFile$McKtFile;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-}
-
-public final class com/rickbusarow/statik/McKtElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/McKtElement;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/McKtElement;)Lcom/rickbusarow/statik/McFile$McKtFile;
-}
-
 public final class com/rickbusarow/statik/RawAnvilAnnotatedType {
 	public fun <init> (Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeNameEntry;)V
-	public final fun component1 ()Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
-	public final fun component2 ()Lcom/rickbusarow/statik/AnvilScopeNameEntry;
-	public final fun copy (Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeNameEntry;)Lcom/rickbusarow/statik/RawAnvilAnnotatedType;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/RawAnvilAnnotatedType;Lcom/rickbusarow/statik/name/QualifiedDeclaredName;Lcom/rickbusarow/statik/AnvilScopeNameEntry;ILjava/lang/Object;)Lcom/rickbusarow/statik/RawAnvilAnnotatedType;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAnvilScopeNameEntry ()Lcom/rickbusarow/statik/AnvilScopeNameEntry;
 	public final fun getDeclaredName ()Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
@@ -271,12 +66,13 @@ public abstract interface class com/rickbusarow/statik/compiler/McPsiFileFactory
 	public abstract fun create (Lcom/rickbusarow/statik/compiler/KotlinEnvironment;)Lcom/rickbusarow/statik/compiler/McPsiFileFactory;
 }
 
-public abstract interface class com/rickbusarow/statik/element/Declared : com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames {
+public abstract interface class com/rickbusarow/statik/element/Declared : com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames {
 	public abstract fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public abstract fun isApi ()Z
 }
 
 public final class com/rickbusarow/statik/element/Declared$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/Declared;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/Declared;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/Declared;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/Declared;)Z
@@ -294,11 +90,39 @@ public abstract interface class com/rickbusarow/statik/element/HasVisibility {
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/McVisibility;
 }
 
+public abstract interface class com/rickbusarow/statik/element/JavaFile : com/rickbusarow/statik/element/JvmFile {
+	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiJavaFile;
+}
+
+public abstract interface class com/rickbusarow/statik/element/JvmFile : com/rickbusarow/statik/name/HasReferences {
+	public abstract fun getApiReferences ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+	public abstract fun getDeclarations ()Ljava/util/Set;
+	public abstract fun getFile ()Ljava/io/File;
+	public abstract fun getImportsLazy ()Lkotlin/Lazy;
+	public abstract fun getName ()Ljava/lang/String;
+	public abstract fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
+	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiFile;
+}
+
+public abstract interface class com/rickbusarow/statik/element/KotlinFile : com/rickbusarow/statik/element/JvmFile {
+	public abstract fun getAnvilScopeArguments (Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFile;
+}
+
+public final class com/rickbusarow/statik/element/KotlinFile$ScopeArgumentParseResult {
+	public fun <init> (Ljava/util/Set;Ljava/util/Set;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContributeArguments ()Ljava/util/Set;
+	public final fun getMergeArguments ()Ljava/util/Set;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface class com/rickbusarow/statik/element/McAnnotated {
 	public abstract fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McAnnotation : com/rickbusarow/statik/element/McElement, com/rickbusarow/statik/element/McElementWithParent {
+public abstract interface class com/rickbusarow/statik/element/McAnnotation : com/rickbusarow/statik/element/McElementWithParent {
 	public abstract fun getReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
@@ -306,8 +130,7 @@ public final class com/rickbusarow/statik/element/McAnnotation$DefaultImpls {
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McAnnotation;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McAnnotation$McKtAnnotation : com/rickbusarow/statik/element/McAnnotation, com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/element/McKtElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
+public abstract interface class com/rickbusarow/statik/element/McAnnotation$McKtAnnotation : com/rickbusarow/statik/element/McAnnotation, com/rickbusarow/statik/element/McKtElementWithParent {
 }
 
 public final class com/rickbusarow/statik/element/McAnnotation$McKtAnnotation$DefaultImpls {
@@ -315,7 +138,7 @@ public final class com/rickbusarow/statik/element/McAnnotation$McKtAnnotation$De
 	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McAnnotation$McKtAnnotation;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McAnnotationArgument : com/rickbusarow/statik/element/McElement, com/rickbusarow/statik/element/McElementWithParent {
+public abstract interface class com/rickbusarow/statik/element/McAnnotationArgument : com/rickbusarow/statik/element/McElementWithParent {
 	public abstract fun getType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun getValue ()Ljava/lang/Object;
 }
@@ -324,8 +147,7 @@ public final class com/rickbusarow/statik/element/McAnnotationArgument$DefaultIm
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McAnnotationArgument;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McAnnotationArgument$McKtAnnotationArgument : com/rickbusarow/statik/element/McAnnotationArgument, com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/element/McKtElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
+public abstract interface class com/rickbusarow/statik/element/McAnnotationArgument$McKtAnnotationArgument : com/rickbusarow/statik/element/McAnnotationArgument, com/rickbusarow/statik/element/McKtElementWithParent {
 }
 
 public final class com/rickbusarow/statik/element/McAnnotationArgument$McKtAnnotationArgument$DefaultImpls {
@@ -341,7 +163,6 @@ public final class com/rickbusarow/statik/element/McCallable$DefaultImpls {
 }
 
 public abstract interface class com/rickbusarow/statik/element/McCallable$McJavaCallable : com/rickbusarow/statik/element/McCallable, com/rickbusarow/statik/element/McJavaElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McJavaElement;
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/McVisibility$McJavaVisibility;
 }
 
@@ -349,8 +170,7 @@ public final class com/rickbusarow/statik/element/McCallable$McJavaCallable$Defa
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McCallable$McJavaCallable;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McCallable$McKtCallable : com/rickbusarow/statik/element/McCallable, com/rickbusarow/statik/element/McKtElement {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
+public abstract interface class com/rickbusarow/statik/element/McCallable$McKtCallable : com/rickbusarow/statik/element/McCallable, com/rickbusarow/statik/element/McKtElementWithParent {
 	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/McVisibility$McKtVisibility;
 }
@@ -399,34 +219,6 @@ public final class com/rickbusarow/statik/element/McElementWithParent$DefaultImp
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McElementWithParent;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McExtensionElement : com/rickbusarow/statik/element/McCallable$McKtCallable, com/rickbusarow/statik/element/McKtElement {
-	public abstract fun getReceiver ()Lcom/rickbusarow/statik/element/McType;
-}
-
-public final class com/rickbusarow/statik/element/McExtensionElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/McExtensionElement;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McExtensionElement;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
-}
-
-public abstract interface class com/rickbusarow/statik/element/McExtensionElement$McKtExtensionFunction : com/rickbusarow/statik/element/McExtensionElement, com/rickbusarow/statik/element/McFunction$McKtFunction {
-}
-
-public final class com/rickbusarow/statik/element/McExtensionElement$McKtExtensionFunction$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionFunction;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionFunction;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
-}
-
-public abstract interface class com/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty : com/rickbusarow/statik/element/McExtensionElement, com/rickbusarow/statik/element/McProperty$McKtProperty {
-}
-
-public final class com/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
-	public static fun getSegments (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty;)Ljava/util/List;
-	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty;)Ljava/lang/String;
-	public static fun isApi (Lcom/rickbusarow/statik/element/McExtensionElement$McKtExtensionProperty;)Z
-}
-
 public abstract interface class com/rickbusarow/statik/element/McFile : com/rickbusarow/statik/element/McElement, com/rickbusarow/statik/name/HasPackageName {
 	public abstract fun getApiReferences ()Ljava/util/List;
 	public abstract fun getDeclarations ()Ljava/util/List;
@@ -466,10 +258,6 @@ public final class com/rickbusarow/statik/element/McFile$McKtFile$DefaultImpls {
 
 public final class com/rickbusarow/statik/element/McFile$McKtFile$ScopeArgumentParseResult {
 	public fun <init> (Ljava/util/Set;Ljava/util/Set;)V
-	public final fun component1 ()Ljava/util/Set;
-	public final fun component2 ()Ljava/util/Set;
-	public final fun copy (Ljava/util/Set;Ljava/util/Set;)Lcom/rickbusarow/statik/element/McFile$McKtFile$ScopeArgumentParseResult;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/element/McFile$McKtFile$ScopeArgumentParseResult;Ljava/util/Set;Ljava/util/Set;ILjava/lang/Object;)Lcom/rickbusarow/statik/element/McFile$McKtFile$ScopeArgumentParseResult;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getContributeArguments ()Ljava/util/Set;
 	public final fun getMergeArguments ()Ljava/util/Set;
@@ -481,7 +269,6 @@ public abstract interface class com/rickbusarow/statik/element/McFunction : com/
 	public abstract fun getParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public abstract fun getTypeParamters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
 public final class com/rickbusarow/statik/element/McFunction$DefaultImpls {
@@ -489,7 +276,6 @@ public final class com/rickbusarow/statik/element/McFunction$DefaultImpls {
 }
 
 public abstract interface class com/rickbusarow/statik/element/McFunction$McJavaFunction : com/rickbusarow/statik/element/McCallable$McJavaCallable, com/rickbusarow/statik/element/McFunction {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McJavaElement;
 }
 
 public final class com/rickbusarow/statik/element/McFunction$McJavaFunction$DefaultImpls {
@@ -498,11 +284,9 @@ public final class com/rickbusarow/statik/element/McFunction$McJavaFunction$Defa
 
 public abstract interface class com/rickbusarow/statik/element/McFunction$McKtFunction : com/rickbusarow/statik/element/McCallable$McKtCallable, com/rickbusarow/statik/element/McFunction {
 	public abstract fun getParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public abstract fun getTypeParamters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
 public final class com/rickbusarow/statik/element/McFunction$McKtFunction$DefaultImpls {
@@ -510,8 +294,12 @@ public final class com/rickbusarow/statik/element/McFunction$McKtFunction$Defaul
 	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McFunction$McKtFunction;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McHasTypeParameters {
+public abstract interface class com/rickbusarow/statik/element/McHasTypeParameters : com/rickbusarow/statik/element/McElementWithParent {
 	public abstract fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
+public final class com/rickbusarow/statik/element/McHasTypeParameters$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McHasTypeParameters;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public abstract interface class com/rickbusarow/statik/element/McJavaElement : com/rickbusarow/statik/element/McElement {
@@ -522,7 +310,15 @@ public final class com/rickbusarow/statik/element/McJavaElement$DefaultImpls {
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McJavaElement;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McKtDeclaredElement : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement {
+public abstract interface class com/rickbusarow/statik/element/McJavaElementWithParent : com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/element/McJavaElement {
+	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McJavaElement;
+}
+
+public final class com/rickbusarow/statik/element/McJavaElementWithParent$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McJavaElementWithParent;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McKtDeclaredElement : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent {
 }
 
 public final class com/rickbusarow/statik/element/McKtDeclaredElement$DefaultImpls {
@@ -543,6 +339,43 @@ public final class com/rickbusarow/statik/element/McKtElement$DefaultImpls {
 	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McKtElement;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
+public abstract interface class com/rickbusarow/statik/element/McKtElementWithParent : com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/element/McKtElement {
+	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
+}
+
+public final class com/rickbusarow/statik/element/McKtElementWithParent$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McKtElementWithParent;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McKtElementWithParent;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McKtExtensionElement : com/rickbusarow/statik/element/McCallable$McKtCallable, com/rickbusarow/statik/element/McKtElement {
+	public abstract fun getReceiver ()Lcom/rickbusarow/statik/element/McType;
+}
+
+public final class com/rickbusarow/statik/element/McKtExtensionElement$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McKtExtensionElement;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McKtExtensionElement;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionFunction : com/rickbusarow/statik/element/McFunction$McKtFunction, com/rickbusarow/statik/element/McKtExtensionElement {
+}
+
+public final class com/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionFunction$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionFunction;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionFunction;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty : com/rickbusarow/statik/element/McKtExtensionElement, com/rickbusarow/statik/element/McProperty$McKtProperty {
+}
+
+public final class com/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
+	public static fun getSegments (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty;)Ljava/util/List;
+	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty;)Ljava/lang/String;
+	public static fun isApi (Lcom/rickbusarow/statik/element/McKtExtensionElement$McKtExtensionProperty;)Z
+}
+
 public abstract interface class com/rickbusarow/statik/element/McParameter : com/rickbusarow/statik/element/McCallable, com/rickbusarow/statik/element/McElement {
 	public abstract fun getIndex ()I
 }
@@ -552,7 +385,6 @@ public final class com/rickbusarow/statik/element/McParameter$DefaultImpls {
 }
 
 public abstract interface class com/rickbusarow/statik/element/McParameter$McJavaParameter : com/rickbusarow/statik/element/McCallable$McJavaCallable, com/rickbusarow/statik/element/McParameter {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McJavaElement;
 }
 
 public final class com/rickbusarow/statik/element/McParameter$McJavaParameter$DefaultImpls {
@@ -560,7 +392,6 @@ public final class com/rickbusarow/statik/element/McParameter$McJavaParameter$De
 }
 
 public abstract interface class com/rickbusarow/statik/element/McParameter$McKtParameter : com/rickbusarow/statik/element/McCallable$McKtCallable, com/rickbusarow/statik/element/McParameter {
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
 }
 
 public final class com/rickbusarow/statik/element/McParameter$McKtParameter$DefaultImpls {
@@ -568,7 +399,7 @@ public final class com/rickbusarow/statik/element/McParameter$McKtParameter$Defa
 	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McParameter$McKtParameter;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McProperty : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McCallable, com/rickbusarow/statik/element/McElement {
+public abstract interface class com/rickbusarow/statik/element/McProperty : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McCallable {
 	public abstract fun getTypeReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun isMutable ()Z
 }
@@ -656,7 +487,7 @@ public final class com/rickbusarow/statik/element/McType$DefaultImpls {
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McType;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McElementWithParent, com/rickbusarow/statik/element/McType {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/McFile;
 	public abstract fun getFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
@@ -671,7 +502,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$DefaultI
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McJavaConcreteType : com/rickbusarow/statik/element/McJavaElement, com/rickbusarow/statik/element/McType$McConcreteType, com/rickbusarow/statik/element/McType$McConcreteType$McJavaType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McJavaConcreteType : com/rickbusarow/statik/element/McJavaElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType, com/rickbusarow/statik/element/McType$McConcreteType$McJavaType {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/McFile$McJavaFile;
 	public abstract fun getInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getInnerTypesRecursive ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
@@ -705,7 +536,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McJavaCo
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McJavaConcreteType$McJavaInterface;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McJavaType : com/rickbusarow/statik/element/McJavaElement, com/rickbusarow/statik/element/McType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McJavaType : com/rickbusarow/statik/element/McJavaElementWithParent, com/rickbusarow/statik/element/McType {
 	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McJavaElement;
 }
 
@@ -713,12 +544,11 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McJavaTy
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McConcreteType$McJavaType;)Lkotlinx/coroutines/flow/Flow;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType : com/rickbusarow/statik/element/McKtDeclaredElement, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType, com/rickbusarow/statik/element/McType$McConcreteType$McKtType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType : com/rickbusarow/statik/element/McKtDeclaredElement, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType, com/rickbusarow/statik/element/McType$McConcreteType$McKtType {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/McFile$McKtFile;
 	public abstract fun getFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getInnerTypesRecursive ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
@@ -729,7 +559,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtAnnotationClass : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtAnnotationClass : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtAnnotationClass$DefaultImpls {
@@ -739,7 +569,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtAnnotationClass;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtClass : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtClass : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 	public abstract fun getConstructors ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getPrimaryConstructor ()Lcom/rickbusarow/statik/element/McFunction$McKtFunction;
 }
@@ -751,7 +581,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtClass;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtCompanionObject : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtCompanionObject : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtCompanionObject$DefaultImpls {
@@ -761,7 +591,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtCompanionObject;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtEnum : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtEnum : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtEnum$DefaultImpls {
@@ -771,7 +601,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtEnum;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtInterface : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtInterface : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtInterface$DefaultImpls {
@@ -781,7 +611,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtInterface;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtObject : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtObject : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtObject$DefaultImpls {
@@ -791,7 +621,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtObject;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtTypeAlias : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtTypeAlias : com/rickbusarow/statik/element/Declared, com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtTypeAlias$DefaultImpls {
@@ -801,7 +631,7 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtConc
 	public static fun isApi (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtConcreteType$McKtTypeAlias;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtType : com/rickbusarow/statik/element/McKtElement, com/rickbusarow/statik/element/McType {
+public abstract interface class com/rickbusarow/statik/element/McType$McConcreteType$McKtType : com/rickbusarow/statik/element/McKtElementWithParent, com/rickbusarow/statik/element/McType {
 	public abstract fun getParent ()Lcom/rickbusarow/statik/element/McKtElement;
 }
 
@@ -810,26 +640,26 @@ public final class com/rickbusarow/statik/element/McType$McConcreteType$McKtType
 	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McType$McConcreteType$McKtType;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
-public abstract interface class com/rickbusarow/statik/element/McType$McJavaTypeParameter : com/rickbusarow/statik/element/McType$McConcreteType$McJavaType, com/rickbusarow/statik/element/McType$McTypeParameter {
-}
-
-public final class com/rickbusarow/statik/element/McType$McJavaTypeParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McJavaTypeParameter;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/element/McType$McKtTypeParameter : com/rickbusarow/statik/element/McType$McConcreteType$McKtType, com/rickbusarow/statik/element/McType$McTypeParameter {
-}
-
-public final class com/rickbusarow/statik/element/McType$McKtTypeParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McKtTypeParameter;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McType$McKtTypeParameter;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
-}
-
 public abstract interface class com/rickbusarow/statik/element/McType$McTypeParameter : com/rickbusarow/statik/element/McType {
 }
 
 public final class com/rickbusarow/statik/element/McType$McTypeParameter$DefaultImpls {
 	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McTypeParameter;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McType$McTypeParameter$McJavaTypeParameter : com/rickbusarow/statik/element/McType$McConcreteType$McJavaType, com/rickbusarow/statik/element/McType$McTypeParameter {
+}
+
+public final class com/rickbusarow/statik/element/McType$McTypeParameter$McJavaTypeParameter$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McTypeParameter$McJavaTypeParameter;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public abstract interface class com/rickbusarow/statik/element/McType$McTypeParameter$McKtTypeParameter : com/rickbusarow/statik/element/McType$McConcreteType$McKtType, com/rickbusarow/statik/element/McType$McTypeParameter {
+}
+
+public final class com/rickbusarow/statik/element/McType$McTypeParameter$McKtTypeParameter$DefaultImpls {
+	public static fun getChildren (Lcom/rickbusarow/statik/element/McType$McTypeParameter$McKtTypeParameter;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getContainingFile (Lcom/rickbusarow/statik/element/McType$McTypeParameter$McKtTypeParameter;)Lcom/rickbusarow/statik/element/McFile$McKtFile;
 }
 
 public abstract interface class com/rickbusarow/statik/element/McVisibility {
@@ -867,12 +697,6 @@ public abstract interface class com/rickbusarow/statik/element/NameParser2 {
 
 public final class com/rickbusarow/statik/element/NameParser2$NameParser2Packet {
 	public fun <init> (Lcom/rickbusarow/statik/element/McFile;Lcom/rickbusarow/statik/name/ReferenceName;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;)V
-	public final fun component1 ()Lcom/rickbusarow/statik/element/McFile;
-	public final fun component2 ()Lcom/rickbusarow/statik/name/ReferenceName;
-	public final fun component3 ()Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;
-	public final fun component4 ()Lkotlin/jvm/functions/Function1;
-	public final fun copy (Lcom/rickbusarow/statik/element/McFile;Lcom/rickbusarow/statik/name/ReferenceName;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/element/NameParser2$NameParser2Packet;
-	public static synthetic fun copy$default (Lcom/rickbusarow/statik/element/NameParser2$NameParser2Packet;Lcom/rickbusarow/statik/element/McFile;Lcom/rickbusarow/statik/name/ReferenceName;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/rickbusarow/statik/element/NameParser2$NameParser2Packet;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getFile ()Lcom/rickbusarow/statik/element/McFile;
 	public final fun getReferenceLanguage ()Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;
@@ -930,16 +754,6 @@ public abstract interface class com/rickbusarow/statik/internal/NameParser {
 
 public final class com/rickbusarow/statik/internal/NameParser$NameParserPacket {
 	public fun <init> (Lcom/rickbusarow/statik/name/PackageName;Ljava/util/Set;Ljava/util/Set;Ljava/util/Map;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;)V
-	public final fun component1 ()Lcom/rickbusarow/statik/name/PackageName;
-	public final fun component10 ()Lkotlin/jvm/functions/Function1;
-	public final fun component2 ()Ljava/util/Set;
-	public final fun component3 ()Ljava/util/Set;
-	public final fun component4 ()Ljava/util/Map;
-	public final fun component5 ()Ljava/util/Set;
-	public final fun component6 ()Ljava/util/Set;
-	public final fun component7 ()Ljava/util/Set;
-	public final fun component8 ()Ljava/util/Set;
-	public final fun component9 ()Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;
 	public final fun copy (Lcom/rickbusarow/statik/name/PackageName;Ljava/util/Set;Ljava/util/Set;Ljava/util/Map;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/internal/NameParser$NameParserPacket;
 	public static synthetic fun copy$default (Lcom/rickbusarow/statik/internal/NameParser$NameParserPacket;Lcom/rickbusarow/statik/name/PackageName;Ljava/util/Set;Ljava/util/Set;Ljava/util/Map;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lcom/rickbusarow/statik/name/McName$CompatibleLanguage;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/rickbusarow/statik/internal/NameParser$NameParserPacket;
 	public fun equals (Ljava/lang/Object;)Z
@@ -1167,10 +981,6 @@ public final class com/rickbusarow/statik/name/ClassName : com/rickbusarow/stati
 	public fun append-DyUeMRA (Ljava/lang/String;)Ljava/lang/String;
 	public fun compareTo (Lcom/rickbusarow/statik/name/McName;)I
 	public synthetic fun compareTo (Ljava/lang/Object;)I
-	public final fun component1 ()Lcom/rickbusarow/statik/name/PackageName;
-	public final fun component2 ()Ljava/util/List;
-	public final fun component3 ()Ljava/util/List;
-	public final fun component4 ()Z
 	public final fun copy (Lcom/rickbusarow/statik/name/PackageName;Ljava/util/List;Ljava/util/List;Z)Lcom/rickbusarow/statik/name/ClassName;
 	public static synthetic fun copy$default (Lcom/rickbusarow/statik/name/ClassName;Lcom/rickbusarow/statik/name/PackageName;Ljava/util/List;Ljava/util/List;ZILjava/lang/Object;)Lcom/rickbusarow/statik/name/ClassName;
 	public fun endsWith (Lcom/rickbusarow/statik/name/McName;)Z
@@ -1326,6 +1136,10 @@ public final class com/rickbusarow/statik/name/McName$DefaultImpls {
 	public static fun isBlank (Lcom/rickbusarow/statik/name/McName;)Z
 	public static fun isEmpty (Lcom/rickbusarow/statik/name/McName;)Z
 	public static fun startsWith (Lcom/rickbusarow/statik/name/McName;Lcom/rickbusarow/statik/name/McName;)Z
+}
+
+public final class com/rickbusarow/statik/name/McNameKt {
+	public static final fun appendSimpleNames (Lcom/rickbusarow/statik/name/McName;Ljava/lang/Iterable;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/name/NameWithPackageName : com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames, com/rickbusarow/statik/name/ResolvableName {
@@ -1643,10 +1457,6 @@ public final class com/rickbusarow/statik/name/TypeParameter : com/rickbusarow/s
 	public fun append-DyUeMRA (Ljava/lang/String;)Ljava/lang/String;
 	public fun compareTo (Lcom/rickbusarow/statik/name/McName;)I
 	public synthetic fun compareTo (Ljava/lang/Object;)I
-	public final fun component1-i5e9x4A ()Ljava/lang/String;
-	public final fun component2 ()Ljava/util/List;
-	public final fun component3 ()Z
-	public final fun component4 ()Lcom/rickbusarow/statik/name/TypeParameter$Variance;
 	public final fun copy-AtCJoYI (Ljava/lang/String;Ljava/util/List;ZLcom/rickbusarow/statik/name/TypeParameter$Variance;)Lcom/rickbusarow/statik/name/TypeParameter;
 	public static synthetic fun copy-AtCJoYI$default (Lcom/rickbusarow/statik/name/TypeParameter;Ljava/lang/String;Ljava/util/List;ZLcom/rickbusarow/statik/name/TypeParameter$Variance;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/TypeParameter;
 	public fun endsWith (Lcom/rickbusarow/statik/name/McName;)Z

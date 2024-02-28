@@ -13,13 +13,15 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.element
 
+import com.rickbusarow.statik.RawAnvilAnnotatedType
 import com.rickbusarow.statik.name.HasReferences
 import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
+import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.com.intellij.psi.PsiFile
 import org.jetbrains.kotlin.com.intellij.psi.PsiJavaFile
 import org.jetbrains.kotlin.psi.KtFile
@@ -54,7 +56,8 @@ interface KotlinFile : JvmFile {
     mergeAnnotations: List<ReferenceName>
   ): ScopeArgumentParseResult
 
-  data class ScopeArgumentParseResult(
+  @Poko
+  class ScopeArgumentParseResult(
     val mergeArguments: Set<RawAnvilAnnotatedType>,
     val contributeArguments: Set<RawAnvilAnnotatedType>
   )
