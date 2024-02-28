@@ -15,6 +15,10 @@
 
 package com.rickbusarow.statik
 
+import com.rickbusarow.statik.name.HasReferences
+import com.rickbusarow.statik.name.PackageName
+import com.rickbusarow.statik.name.QualifiedDeclaredName
+import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import org.jetbrains.kotlin.com.intellij.psi.PsiFile
 import org.jetbrains.kotlin.com.intellij.psi.PsiJavaFile

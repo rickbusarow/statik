@@ -13,14 +13,16 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
+import com.rickbusarow.statik.forAllBlocking
+import com.rickbusarow.statik.name.SimpleName.Companion.SIMPLE_NAME_REGEX
 import io.kotest.assertions.throwables.shouldNotThrow
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.stringPattern
-import modulecheck.testing.forAllBlocking
 import org.junit.jupiter.api.Test
 
 internal class SimpleNameTest {
@@ -28,7 +30,7 @@ internal class SimpleNameTest {
   @Test
   fun `any valid name string just becomes wrapped by the class`() {
 
-    Arb.stringPattern("""^([a-zA-Z_$][a-zA-Z\d_$]*)|(`.*`)$""")
+    Arb.stringPattern(SIMPLE_NAME_REGEX.pattern)
       .forAllBlocking { name ->
 
         shouldNotThrow<Throwable> {
@@ -43,7 +45,7 @@ internal class SimpleNameTest {
     val name = "`a name with whitespaces is allowed if wrapped in backticks`"
 
     shouldNotThrow<Throwable> {
-      SimpleName(name).name shouldBe name
+      SimpleName(name).asString shouldBe name
     }
   }
 
@@ -55,7 +57,7 @@ internal class SimpleNameTest {
 
         shouldThrowWithMessage<IllegalArgumentException>(
           "SimpleName names must be valid Java identifier " +
-            "without a dot qualifier or whitespace.  This name was: `$name`"
+            "without a dot qualifier.  This name was: `$name`"
         ) {
           SimpleName(name)
         }
@@ -70,7 +72,7 @@ internal class SimpleNameTest {
 
         shouldThrowWithMessage<IllegalArgumentException>(
           "SimpleName names must be valid Java identifier " +
-            "without a dot qualifier or whitespace.  This name was: `$name`"
+            "without a dot qualifier.  This name was: `$name`"
         ) {
           SimpleName(name)
         }
@@ -80,12 +82,12 @@ internal class SimpleNameTest {
   @Test
   fun `an empty name throws exception with message`() {
 
-    shouldThrowWithMessage<IllegalArgumentException>(
-      "SimpleName names must be valid Java identifier " +
-        "without a dot qualifier or whitespace.  This name was: ``"
-    ) {
+    val t = shouldThrow<IllegalArgumentException> {
       SimpleName("")
     }
+
+    t.message shouldBe "SimpleName names must be valid Java identifier " +
+      "without a dot qualifier.  This name was: ``"
   }
 
   @Test
@@ -96,7 +98,7 @@ internal class SimpleNameTest {
 
         shouldThrowWithMessage<IllegalArgumentException>(
           "SimpleName names must be valid Java identifier " +
-            "without a dot qualifier or whitespace.  This name was: `$name`"
+            "without a dot qualifier.  This name was: `$name`"
         ) {
           SimpleName(name)
         }

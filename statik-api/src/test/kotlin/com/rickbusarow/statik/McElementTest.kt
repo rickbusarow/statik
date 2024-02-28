@@ -21,13 +21,10 @@ import io.kotest.matchers.reflection.shouldBeOfType
 import io.kotest.matchers.reflection.shouldBeSubtypeOf
 import io.kotest.matchers.reflection.shouldHaveMemberProperty
 import io.kotest.matchers.reflection.shouldNotHaveMemberProperty
-import modulecheck.testing.BaseTest
-import modulecheck.testing.TestEnvironment
-import modulecheck.testing.sealedSubclassesRecursive
 import org.junit.jupiter.api.Test
 import kotlin.reflect.full.isSubclassOf
 
-class McElementTest : BaseTest<TestEnvironment>() {
+class McElementTest {
 
   @Test
   fun `every McElement type except files should have a 'parent' property`() {

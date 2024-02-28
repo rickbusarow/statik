@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 
 /** Any reference to an Android resource */
@@ -67,9 +67,11 @@ class UnqualifiedAndroidResourceReferenceName(
     listOf("R".asSimpleName(), prefix, identifier)
   }
 
+  override val segments: List<String> by unsafeLazy { simpleNames.map { it.asString } }
+
   override fun equals(other: Any?): Boolean {
     if (other is UnqualifiedAndroidResource) {
-      return name == other.name
+      return asString == other.asString
     }
 
     return super.equals(other)

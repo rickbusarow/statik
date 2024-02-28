@@ -15,7 +15,6 @@
 
 package com.rickbusarow.statik.element
 
-import com.rickbusarow.statik.ReferenceName
 import com.rickbusarow.statik.element.McCallable.McJavaCallable
 import com.rickbusarow.statik.element.McCallable.McKtCallable
 import com.rickbusarow.statik.element.McFunction.McKtFunction
@@ -25,6 +24,7 @@ import com.rickbusarow.statik.element.McType.McKtTypeParameter
 import com.rickbusarow.statik.element.McType.McTypeParameter
 import com.rickbusarow.statik.element.McVisibility.McJavaVisibility
 import com.rickbusarow.statik.element.McVisibility.McKtVisibility
+import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.TypeName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet

@@ -16,6 +16,8 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.SimpleName.Companion.asString
+import com.rickbusarow.statik.utils.lazy.unsafeLazy
 
 /**
  * - fully qualified generated resources like `com.example.R.string.app_name`
@@ -23,7 +25,7 @@ import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
  * - unqualified resources which can be consumed in downstream projects, like `R.string.app_name`
  * - R names, like `com.example.R`
  */
-sealed interface AndroidName : Name, HasSimpleNames {
+sealed interface AndroidName : McName, HasSimpleNames {
 
   companion object {
     /** @return example: `com.example.app.R` */
@@ -55,16 +57,20 @@ class AndroidRName(
 ) : NameWithPackageName, AndroidName {
 
   override val simpleNames: List<SimpleName> by lazy { listOf("R".asSimpleName()) }
-}
 
-/**
- * Models fully qualified names like `com.example.R.string.app_name`
- * or unqualified ones like `string.app_name`.
- */
-sealed interface AndroidResourceName : AndroidName, Name, HasSimpleNames {
-  /** example: 'string' in `R.string.app_name` */
-  val prefix: SimpleName
+  override val asString by unsafeLazy {
+    packageName.append(simpleNames.asString())
+  }
 
-  /** example: 'app_name' in `R.string.app_name` */
-  val identifier: SimpleName
+  /**
+   * Models fully qualified names like `com.example.R.string.app_name`
+   * or unqualified ones like `string.app_name`.
+   */
+  sealed interface AndroidResourceName : AndroidName, McName, HasSimpleNames {
+    /** example: 'string' in `R.string.app_name` */
+    val prefix: SimpleName
+
+    /** example: 'app_name' in `R.string.app_name` */
+    val identifier: SimpleName
+  }
 }

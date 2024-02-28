@@ -22,7 +22,6 @@ import com.rickbusarow.statik.element.McProperty.McKtProperty
 import com.rickbusarow.statik.element.McType.McConcreteType.McJavaType
 import com.rickbusarow.statik.element.McType.McConcreteType.McKtType
 import com.rickbusarow.statik.utils.lazy.LazySet
-import modulecheck.utils.lazy.LazySet
 
 sealed interface McType : McElementWithParent<McElement>, McAnnotated, McHasTypeParameters {
 
@@ -80,10 +79,10 @@ sealed interface McType : McElementWithParent<McElement>, McAnnotated, McHasType
       interface McKtAnnotationClass : McKtConcreteType, McKtElement, Declared
       interface McKtClass : McKtConcreteType, McKtElement, Declared {
 
-        val primaryConstructor: McFunction.McKtFunction?
+        val primaryConstructor: McKtFunction?
 
         /** All constructors, including the primary if it exists */
-        val constructors: LazySet<McFunction.McKtFunction>
+        val constructors: LazySet<McKtFunction>
       }
 
       interface McKtCompanionObject : McKtConcreteType, McKtElement, Declared

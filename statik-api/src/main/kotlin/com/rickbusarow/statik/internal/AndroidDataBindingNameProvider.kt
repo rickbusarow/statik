@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.internal
 
-import com.rickbusarow.statik.AndroidDataBindingDeclaredName
+import com.rickbusarow.statik.name.AndroidDataBindingDeclaredName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 fun interface AndroidDataBindingNameProvider {

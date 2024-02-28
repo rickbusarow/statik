@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
 import com.rickbusarow.kase.asTests
-import com.rickbusarow.statik.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

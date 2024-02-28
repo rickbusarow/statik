@@ -15,7 +15,8 @@
 
 package com.rickbusarow.statik.name
 
-import modulecheck.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.name.AndroidRName.AndroidResourceName
+import com.rickbusarow.statik.utils.lazy.unsafeLazy
 
 /**
  * example: `com.example.R.string.app_name`
@@ -33,6 +34,11 @@ class AndroidResourceNameWithRName(
   override val simpleNames: List<SimpleName> by unsafeLazy {
     androidRName.simpleNames + resourceName.simpleNames
   }
+
+  override val asString: String by unsafeLazy {
+    "${androidRName.asString}.${resourceName.asString}"
+  }
+
   override val prefix: SimpleName get() = resourceName.prefix
   override val identifier: SimpleName get() = resourceName.identifier
 }

@@ -15,6 +15,7 @@
 
 package com.rickbusarow.statik.name
 
+import com.rickbusarow.statik.name.AndroidRName.AndroidResourceName
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.stdlib.capitalize
@@ -38,6 +39,10 @@ class AndroidDataBindingName(
       "databinding".asSimpleName(),
       simpleBindingName
     )
+  }
+
+  override val asString: String by unsafeLazy {
+    packageName.appendAsString(simpleNames)
   }
 
   init {

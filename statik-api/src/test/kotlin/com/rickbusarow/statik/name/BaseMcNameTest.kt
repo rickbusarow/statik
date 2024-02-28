@@ -13,16 +13,17 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik
+package com.rickbusarow.statik.name
 
 import com.rickbusarow.kase.DefaultTestEnvironment.Factory
 import com.rickbusarow.kase.HasTestEnvironmentFactory
 import com.rickbusarow.kase.Kase1
 import com.rickbusarow.kase.kases
-import com.rickbusarow.statik.McName.CompatibleLanguage
-import com.rickbusarow.statik.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.TrimmedAsserts
+import com.rickbusarow.statik.name.McName.CompatibleLanguage
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
+import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
 import com.rickbusarow.statik.stdlib.letIf
 
 @Suppress("UnnecessaryAbstractClass")

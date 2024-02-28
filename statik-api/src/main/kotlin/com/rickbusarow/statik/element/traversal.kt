@@ -15,12 +15,12 @@
 
 package com.rickbusarow.statik.element
 
+import com.rickbusarow.statik.utils.coroutines.distinct
+import com.rickbusarow.statik.utils.coroutines.plus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
-import modulecheck.utils.coroutines.distinct
-import modulecheck.utils.coroutines.plus
 
 fun McElement.childrenRecursive(): Flow<McElement> {
   return flowOf(this)

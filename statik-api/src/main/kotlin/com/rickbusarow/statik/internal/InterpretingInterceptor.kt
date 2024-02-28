@@ -15,10 +15,9 @@
 
 package com.rickbusarow.statik.internal
 
-import com.rickbusarow.statik.ReferenceName
-import com.rickbusarow.statik.append
 import com.rickbusarow.statik.internal.NameParser.NameParserPacket
 import com.rickbusarow.statik.internal.ParsingInterceptor.Chain
+import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.stdlib.mapToSet
 
 class InterpretingInterceptor : ParsingInterceptor {
