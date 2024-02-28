@@ -1,0 +1,279 @@
+name: CI
+
+on:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+env:
+  macosGradleArgs: "-Dorg.gradle.jvmargs=-Xmx10g -Dfile.encoding=UTF-8 -XX:+UseParallelGC"
+  ubuntuGradleArgs: "-Dorg.gradle.jvmargs=-Xmx5g -Dfile.encoding=UTF-8 -XX:+UseParallelGC"
+  windowsGradleArgs: "-Dorg.gradle.jvmargs=-Xmx4g -Dfile.encoding=UTF-8 -XX:+UseParallelGC"
+
+jobs:
+  cancel-previous-runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@85880fa0301c86cca9da44039ee3bb12d3bedbfa # 0.12.1
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out with token (used by forks)
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        if: github.event.pull_request.head.repo.full_name != github.repository
+
+      - name: check out with PAT (used by main repo)
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
+        with:
+          distribution: "zulu"
+          java-version: "11"
+
+      # If the versions matrix was just updated, commit and push those changes.
+      - name: commit dependency-guard baseline changes (used by main repo)
+        if: github.actor == 'renovate[bot]'
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
+        with:
+          commit_message: update versions matrix in yaml
+          commit_options: "--no-verify --signoff"
+
+      - name: dependency-guard check (used by everyone but Renovate)
+        if: github.actor != 'renovate[bot]'
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: dependencyGuard --refresh-dependencies
+          cache-read-only: false
+
+      - name: dependency-guard baseline (used by Renovate)
+        if: github.actor == 'renovate[bot]'
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: dependencyGuardBaseline --refresh-dependencies
+          cache-read-only: false
+
+      # If dependency-guard generated changes, commit and push those changes.
+      - name: commit dependency-guard baseline changes (used by main repo)
+        if: github.actor == 'renovate[bot]'
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
+        with:
+          commit_message: update dependency-guard baseline
+          commit_options: "--no-verify --signoff"
+
+      - name: artifacts check
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: artifactsCheck
+          cache-read-only: false
+
+      - name: KtLint format (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: ktlintFormat
+          cache-read-only: false
+
+      # If KtLint generated changes, commit and push those changes.
+      - name: commit changes (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
+        with:
+          commit_message: Apply KtLint format
+          commit_options: "--no-verify --signoff"
+
+      - name: KtLint check (used by forks)
+        if: github.event.pull_request.head.repo.full_name != github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: ktlintCheck
+          cache-read-only: false
+
+      - name: Doks update (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: doks
+          cache-read-only: false
+
+      # If Doks generated changes, commit and push those changes.
+      - name: commit changes (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
+        with:
+          commit_message: Apply Doks updates
+          commit_options: "--no-verify --signoff"
+
+      - name: Doks check (used by forks)
+        if: github.event.pull_request.head.repo.full_name != github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: doksCheck
+          cache-read-only: false
+
+      - name: ModuleCheck with auto-correct (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: moduleCheckAuto
+          cache-read-only: false
+
+      # If KtLint generated changes, commit and push those changes.
+      - name: commit changes (used by main repo)
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5
+        with:
+          commit_message: Apply ModuleCheck fixes
+          commit_options: "--no-verify --signoff"
+
+      - name: ModuleCheck check (used by forks)
+        if: github.event.pull_request.head.repo.full_name != github.repository
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: moduleCheck
+          cache-read-only: false
+
+      - name: detekt
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: detektAll
+          cache-read-only: false
+
+      - name: merge detekt SARIF reports
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        if: failure()
+        with:
+          arguments: detektReportMerge
+          cache-read-only: false
+
+      - name: Upload SARIF to Github using the upload-sarif action
+        uses: github/codeql-action/upload-sarif@e8893c57a1f3a2b659b6b55564fdfdbbd2982911 # v3
+        if: failure()
+        with:
+          sarif_file: build/reports/detekt/merged.sarif
+
+  tests-macos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check out with token
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
+        with:
+          distribution: "zulu"
+          java-version: "11"
+
+      - name: all tests
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: test "${{ env.ubuntuGradleArgs }}"
+          cache-read-only: false
+
+      - name: Archive test results
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
+        if: failure()
+        with:
+          name: test-results-ubuntu
+          path: ./**/build/reports/tests/test
+
+      - name: Unit test results
+        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4
+        if: failure()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_paths: "**/build/**/TEST-*.xml"
+          check_name: Unit Test Results - ubuntu
+
+  integration-tests-macos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check out with token
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
+        with:
+          distribution: "zulu"
+          java-version: "11"
+
+      - name: all integration tests
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: test "${{ env.ubuntuGradleArgs }}"
+          cache-read-only: false
+
+      - name: Archive test results
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
+        if: failure()
+        with:
+          name: test-results-ubuntu
+          path: ./**/build/reports/tests/integrationTest
+
+      - name: Unit test results
+        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4
+        if: failure()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_paths: "**/build/**/TEST-*.xml"
+          check_name: Unit Test Results - ubuntu
+
+  tests-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: check out with token
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4
+        with:
+          distribution: "zulu"
+          java-version: "11"
+
+      - name: all tests
+        uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3
+        with:
+          arguments: test "${{ env.windowsGradleArgs }}"
+          cache-read-only: false
+
+      - name: Archive test results
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
+        if: failure()
+        with:
+          name: test-results-windows
+          path: ./**/build/reports/tests/
+
+      - name: Unit test results
+        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4
+        if: failure()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          report_paths: "**/build/**/TEST-*.xml"
+          check_name: Unit Test Results - Windows
+
+  all-green:
+    if: always()
+    runs-on: ubuntu-latest
+    needs:
+      - integration-tests-macos
+      - static-analysis
+      - tests-macos
+      - tests-windows
+
+    steps:
+      - name: require that all other jobs have passed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}

@@ -1,0 +1,36 @@
+# see https://github.com/actions/labeler
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+      - any-glob-to-any-file: "**/*.mdx"
+
+website:
+  - changed-files:
+      - any-glob-to-any-file: "website/**"
+
+build:
+  - changed-files:
+      - any-glob-to-any-file: "build-logic/**"
+      - any-glob-to-any-file: "gradle/**"
+      - any-glob-to-any-file: "**/gradle.properties"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: "gradle/libs.versions.toml"
+
+classpath-change:
+  - changed-files:
+      - any-glob-to-any-file: "**/dependencies/*Classpath.txt"
+
+artifacts-change:
+  - changed-files:
+      - any-glob-to-any-file: "artifacts.json"
+
+api-change:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.api"
