@@ -59,10 +59,7 @@ sealed interface McKtDeclaredElement<out PARENT : McKtElement> :
  */
 sealed interface McElement {
 
-  /**
-   * The PSI element representing the physical code element in the source code.
-
-   */
+  /** The PSI element representing the physical code element in the source code. */
   val psi: PsiElement
 
   /** The file that contains this element. */
