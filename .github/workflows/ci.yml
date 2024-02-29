@@ -35,7 +35,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: ktlint
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: ktlintFormat
@@ -56,7 +56,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: spotless
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: spotlessApply
@@ -77,7 +77,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: dependency-guard
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: dependencyGuardBaseline
@@ -98,7 +98,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: curator
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: curatorDump
@@ -119,7 +119,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: moduleCheck
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: moduleCheckAuto
@@ -140,7 +140,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: doks
-        uses: rickbusarow/actions/gradle-task-with-commit@v1
+        uses: rickbusarow/actions/gradle-task-with-commit@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           personal-access-token: ${{ steps.app-token.outputs.token }}
           fix-task: doks
@@ -154,7 +154,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: check version is snapshot
-        uses: rickbusarow/actions/gradle-task@v1
+        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           task: checkVersionIsSnapshot
 
@@ -166,14 +166,14 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: detektAll
-        uses: rickbusarow/actions/gradle-task@v1
+        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           task: detektAll
           restore-cache-key: main-build-artifacts
 
       - name: merge detekt SARIF reports
         if: success() || failure()
-        uses: rickbusarow/actions/gradle-task@v1
+        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           task: detektReportMerge
 
@@ -191,7 +191,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: all tests
-        uses: rickbusarow/actions/gradle-task@v1
+        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           task: test
           write-cache-key: main-build-artifacts
@@ -228,7 +228,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: all tests
-        uses: rickbusarow/actions/gradle-task@v1
+        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
           task: test
           write-cache-key: main-build-artifacts
