@@ -70,8 +70,8 @@ NEXT_VERSION=$(awk '/.*\(unreleased)/ { print $2}' CHANGELOG.md | sed 's/\"//g')
 
 function parseVersion() {
 
-  # Parse the 'VERSION_NAME' version from gradle.properties
-  VERSION_NAME=$(awk -F ' *= *' '$1=="VERSION_NAME"{print $2; exit}' $GRADLE_PROPERTIES | sed 's/\"//g')
+  # Parse the 'version' version from gradle.properties
+  version=$(awk -F ' *= *' '$1=="version"{print $2; exit}' $GRADLE_PROPERTIES | sed 's/\"//g')
 }
 
 function syncDocs() {
@@ -79,7 +79,7 @@ function syncDocs() {
   # Add `@since ____` tags to any new KDoc
   progress "Add \@since ____\ tags to any new KDoc"
   ./gradlew ktlintFormat
-  maybeCommit "add @since tags to new KDoc for $VERSION_NAME"
+  maybeCommit "add @since tags to new KDoc for $version"
 
   # format docs
   progress "format docs"
@@ -89,7 +89,7 @@ function syncDocs() {
   # update the version references in docs before versioning them
   progress "Update docs versions"
   ./gradlew doks
-  maybeCommit "update version references in docs to $VERSION_NAME"
+  maybeCommit "update version references in docs to $version"
 }
 
 # update all versions/docs for the release version
@@ -102,7 +102,7 @@ progress "generate and copy Dokka api docs"
 ./gradlew dokkaHtmlMultiModule syncDokkaToArchive
 
 # add the new version of Dokka archive to git and commit those files as their own commit.
-maybeCommit "add Dokka docs for ${VERSION_NAME} to the dokka-archive"
+maybeCommit "add Dokka docs for ${version} to the dokka-archive"
 
 # One last chance to catch any bugs
 progress "run the check task"
@@ -111,18 +111,18 @@ progress "run the check task"
 progress "Publish Maven release"
 ./gradlew publish --no-configuration-cache
 
-# Create the "Releasing ______" commit and a new tag for the current `VERSION_NAME`
+# Create the "Releasing ______" commit and a new tag for the current `version`
 progress "commit the release and tag"
-git commit --allow-empty -am "Releasing ${VERSION_NAME}"
-git tag "${VERSION_NAME}"
+git commit --allow-empty -am "Releasing ${version}"
+git tag "${version}"
 git push --tags
 
 progress "create the release on GitHub"
 ./gradlew githubRelease
 
 progress "update the dev version to ${NEXT_VERSION}"
-OLD="VERSION_NAME=${VERSION_NAME}"
-NEW="VERSION_NAME=${NEXT_VERSION}"
+OLD="version=${version}"
+NEW="version=${NEXT_VERSION}"
 # Write the new -SNAPSHOT version to the properties file
 perl -pi -e "s/$OLD/$NEW/" $GRADLE_PROPERTIES
 git commit -am "update dev version to ${NEXT_VERSION}"
