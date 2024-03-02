@@ -36,9 +36,7 @@ sealed class ReferenceName(name: String) : McName, ResolvableMcName {
 
   final override val asString: String by unsafeLazy { name.trimSegments(".") }
 
-  /**
-   * The [language][CompatibleLanguage] of the file making this reference
-   */
+  /** The [language][CompatibleLanguage] of the file making this reference */
   abstract val language: CompatibleLanguage
 
   override val segments: List<String> by unsafeLazy { this.asString.split('.') }
