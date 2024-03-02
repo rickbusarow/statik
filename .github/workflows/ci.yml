@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -49,7 +49,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -112,7 +112,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -133,7 +133,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         with:
           app-id: ${{ secrets.PR_BOT_APP_ID }}
@@ -205,7 +205,7 @@ jobs:
           path: ./**/build/reports/tests/
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         if: failure()
         with:
@@ -242,7 +242,7 @@ jobs:
           path: ./**/build/reports/tests/
 
       - name: Create GitHub App Token
-        uses: actions/create-github-app-token@e8e39f73bb84fdf315a015fa3104f314c0a258b4 # v1
+        uses: actions/create-github-app-token@f2acddfb5195534d487896a656232b016a682f3c # v1
         id: app-token
         if: failure()
         with:
