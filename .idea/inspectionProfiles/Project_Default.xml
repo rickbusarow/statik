@@ -8,6 +8,9 @@
     <inspection_tool class="FunctionName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <scope name="Tests" level="WEAK WARNING" enabled="false" />
     </inspection_tool>
+    <inspection_tool class="JavaIoSerializableObjectMustHaveReadResolve" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Tests" level="WARNING" enabled="false" />
+    </inspection_tool>
     <inspection_tool class="MemberVisibilityCanBePrivate" enabled="true" level="INFO" enabled_by_default="true">
       <scope name="Tests" level="INFO" enabled="false" />
     </inspection_tool>

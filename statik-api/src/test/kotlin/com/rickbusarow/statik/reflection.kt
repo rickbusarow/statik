@@ -15,11 +15,29 @@
 
 package com.rickbusarow.statik
 
+import io.github.classgraph.ClassGraph
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.isAccessible
+
+@PublishedApi
+internal val classgraph by lazy {
+  ClassGraph()
+    .enableAllInfo()
+    .scan()
+}
+
+inline fun <reified T : Any> KClass<T>.subclassesRecursive(): Sequence<KClass<out T>> {
+
+  return classgraph.getClassInfo(java.name).subclasses
+    .asSequence()
+    .map {
+      @Suppress("UNCHECKED_CAST")
+      it.loadClass().kotlin as KClass<out T>
+    }
+}
 
 /**
  * Returns the full tree of classes which implement a base sealed class/interface,

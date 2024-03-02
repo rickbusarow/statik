@@ -15,14 +15,19 @@
 
 package com.rickbusarow.statik.utils.lazy
 
+import com.rickbusarow.statik.InternalStatikApi
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
+@InternalStatikApi
+internal fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(mode = LazyThreadSafetyMode.NONE, initializer = initializer)
 
 /** just a var, but the initial value is lazy */
-fun <T> lazyVar(initializer: () -> T): ReadWriteProperty<Any?, T> = SynchronizedLazyVar(initializer)
+@InternalStatikApi
+internal fun <T> lazyVar(
+  initializer: () -> T
+): ReadWriteProperty<Any?, T> = SynchronizedLazyVar(initializer)
 
 private class SynchronizedLazyVar<T>(initializer: () -> T) : ReadWriteProperty<Any?, T> {
 

@@ -16,35 +16,36 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
-import com.rickbusarow.statik.name.McName.CompatibleLanguage
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
 import com.rickbusarow.statik.name.ReferenceName.Companion.asReferenceName
-import com.rickbusarow.statik.name.SimpleName.Companion.asString
 import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
-import com.rickbusarow.statik.stdlib.singletonList
+import com.rickbusarow.statik.name.StatikLanguage.JAVA
+import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
+import com.rickbusarow.statik.name.StatikLanguage.XML
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.singletonList
 import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
-sealed interface DeclaredName : McName, HasSimpleNames {
+public sealed interface DeclaredName : StatikName, HasSimpleNames {
 
   /**
    * The languages with which this declaration is compatible. For instance, a member
    * property will typically have a [KOTLIN] declaration using property access syntax,
    * but will also have a [JAVA]/[XML] declaration for setter and getter functions.
    */
-  val languages: Set<CompatibleLanguage> get() = setOf(KOTLIN, JAVA, XML)
+  public val languages: Set<StatikLanguage> get() = setOf(KOTLIN, JAVA, XML)
 
-  companion object {
+  public companion object {
 
     /**
      * Shorthand for creating a [QualifiedDeclaredName] which is only accessible from Kotlin files.
      *
-     * @see McName.CompatibleLanguage.KOTLIN
+     * @see StatikLanguage.KOTLIN
      */
-    fun kotlin(packageName: PackageName, simpleNames: Iterable<SimpleName>): QualifiedDeclaredName =
+    public fun kotlin(
+      packageName: PackageName,
+      simpleNames: Iterable<SimpleName>
+    ): QualifiedDeclaredName =
       QualifiedDeclaredNameImpl(
         packageName = packageName,
         simpleNames = simpleNames.toList(),
@@ -55,10 +56,13 @@ sealed interface DeclaredName : McName, HasSimpleNames {
      * Shorthand for creating a [QualifiedDeclaredName]
      * which is only accessible from Java or XML files.
      *
-     * @see McName.CompatibleLanguage.JAVA
-     * @see McName.CompatibleLanguage.XML
+     * @see StatikLanguage.JAVA
+     * @see StatikLanguage.XML
      */
-    fun java(packageName: PackageName, simpleNames: Iterable<SimpleName>): QualifiedDeclaredName =
+    public fun java(
+      packageName: PackageName,
+      simpleNames: Iterable<SimpleName>
+    ): QualifiedDeclaredName =
       QualifiedDeclaredNameImpl(
         packageName = packageName,
         simpleNames = simpleNames.toList(),
@@ -69,11 +73,11 @@ sealed interface DeclaredName : McName, HasSimpleNames {
      * Shorthand for creating a [QualifiedDeclaredName]
      * which is accessible from files in any language.
      *
-     * @see McName.CompatibleLanguage.JAVA
-     * @see McName.CompatibleLanguage.KOTLIN
-     * @see McName.CompatibleLanguage.XML
+     * @see StatikLanguage.JAVA
+     * @see StatikLanguage.KOTLIN
+     * @see StatikLanguage.XML
      */
-    fun agnostic(
+    public fun agnostic(
       packageName: PackageName,
       simpleNames: Iterable<SimpleName>
     ): QualifiedDeclaredName = QualifiedDeclaredNameImpl(
@@ -85,12 +89,12 @@ sealed interface DeclaredName : McName, HasSimpleNames {
 }
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
-sealed class QualifiedDeclaredName :
+public sealed class QualifiedDeclaredName :
   DeclaredName,
-  McName,
+  StatikName,
   HasPackageName,
   HasSimpleNames,
-  ResolvableMcName {
+  ResolvableStatikName {
 
   override val asString: String by unsafeLazy {
     packageName.appendAsString(simpleNames)
@@ -102,9 +106,9 @@ sealed class QualifiedDeclaredName :
    * `true` if a declaration is top-level in a file, otherwise `false`
    * such as if the declaration is a nested type or a member declaration
    */
-  val isTopLevel: Boolean by unsafeLazy { simpleNames.size == 1 }
+  public val isTopLevel: Boolean by unsafeLazy { simpleNames.size == 1 }
 
-  open fun asReferenceName(language: CompatibleLanguage): ReferenceName {
+  public open fun asReferenceName(language: StatikLanguage): ReferenceName {
     return asString.asReferenceName(language)
   }
 
@@ -138,7 +142,7 @@ sealed class QualifiedDeclaredName :
 internal class QualifiedDeclaredNameImpl(
   override val packageName: PackageName,
   override val simpleNames: List<SimpleName>,
-  override val languages: Set<CompatibleLanguage>
+  override val languages: Set<StatikLanguage>
 ) : QualifiedDeclaredName() {
   init {
     checkSimpleNames()
@@ -149,9 +153,9 @@ internal class QualifiedDeclaredNameImpl(
  * @return a [QualifiedDeclaredName], where the String after [packageName]
  *   is split and treated as the collection of [SimpleNames][SimpleName].
  */
-fun FqName.asDeclaredName(
+public fun FqName.asDeclaredName(
   packageName: PackageName,
-  vararg languages: CompatibleLanguage
+  vararg languages: StatikLanguage
 ): QualifiedDeclaredName {
   return asString().stripPackageNameFromFqName(packageName).asDeclaredName(packageName, *languages)
 }
@@ -160,9 +164,9 @@ fun FqName.asDeclaredName(
  * @return a [QualifiedDeclaredName] from the [packageName]
  *   argument, appending the receiver [SimpleNames][SimpleName]
  */
-fun Iterable<SimpleName>.asDeclaredName(
+public fun Iterable<SimpleName>.asDeclaredName(
   packageName: PackageName,
-  vararg languages: CompatibleLanguage
+  vararg languages: StatikLanguage
 ): QualifiedDeclaredName {
   return when {
     languages.isEmpty() -> DeclaredName.agnostic(packageName, this)
@@ -176,9 +180,9 @@ fun Iterable<SimpleName>.asDeclaredName(
  * @return a [QualifiedDeclaredName] from the [packageName]
  *   argument, appending the receiver [SimpleNames][SimpleName]
  */
-fun SimpleName.asDeclaredName(
+public fun SimpleName.asDeclaredName(
   packageName: PackageName,
-  vararg languages: CompatibleLanguage
+  vararg languages: StatikLanguage
 ): QualifiedDeclaredName {
   return singletonList().asDeclaredName(packageName, *languages)
 }

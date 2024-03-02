@@ -24,19 +24,30 @@ mahout {
       pomDescription = "Base types for the Statik AST"
     )
   }
+
   poko()
 }
 
-dependencies {
+kotlin {
+  compilerOptions {
+    optIn.add("com.rickbusarow.statik.InternalStatikApi")
+    explicitApi()
+  }
+}
 
+dependencies {
   api(libs.junit.jupiter.api)
+
+  api(project(":statik-logging"))
 
   implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.rickBusarow.dispatch.core)
   implementation(libs.semVer)
 
   testImplementation(libs.cashapp.turbine)
+  testImplementation(libs.classgraph)
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.junit.jupiter.engine)
   testImplementation(libs.junit4)

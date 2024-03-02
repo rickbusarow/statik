@@ -15,41 +15,40 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.name.McName.CompatibleLanguage
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.stdlib.trimSegments
+import com.rickbusarow.statik.name.StatikLanguage.JAVA
+import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
+import com.rickbusarow.statik.name.StatikLanguage.XML
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.trimSegments
 
-/** Marker which indicates that [references] exist. Typically implemented by "file" types */
-interface HasReferences {
+/** Trait interface for providing [ReferenceName]s. */
+public interface HasReferences {
 
   /** The references in this object, calculated lazily */
-  val references: LazySet<ReferenceName>
+  public val references: LazySet<ReferenceName>
 }
 
 /** Represents a name -- fully qualified or not -- which references a declaration somewhere else */
-sealed class ReferenceName(name: String) : McName, ResolvableMcName {
+public sealed class ReferenceName(name: String) : StatikName, ResolvableStatikName {
 
   final override val asString: String by unsafeLazy { name.trimSegments(".") }
 
-  /** The [language][CompatibleLanguage] of the file making this reference */
-  abstract val language: CompatibleLanguage
+  /** The [language][StatikLanguage] of the file making this reference */
+  public abstract val language: StatikLanguage
 
   override val segments: List<String> by unsafeLazy { this.asString.split('.') }
 
   /** This reference is from a Java source file */
-  fun isJava(): Boolean = language == JAVA
+  public fun isJava(): Boolean = language == JAVA
 
   /** This reference is from a Kotlin source file */
-  fun isKotlin(): Boolean = language == KOTLIN
+  public fun isKotlin(): Boolean = language == KOTLIN
 
   /** This reference is from an xml source file */
   @Suppress("GrazieInspection")
-  fun isXml(): Boolean = language == XML
+  public fun isXml(): Boolean = language == XML
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
@@ -79,24 +78,24 @@ sealed class ReferenceName(name: String) : McName, ResolvableMcName {
     return "${this::class.simpleName!!}(name='$asString'  language=$language)"
   }
 
-  companion object {
+  public companion object {
     /** @return a basic [ReferenceName] for this name and language. */
-    operator fun invoke(name: String, language: CompatibleLanguage): ReferenceName =
+    public operator fun invoke(name: String, language: StatikLanguage): ReferenceName =
       DefaultReferenceName(
         name = name,
         language = language
       )
 
     /** @return a basic [ReferenceName] for this name and language. */
-    fun String.asReferenceName(language: CompatibleLanguage): ReferenceName =
+    public fun String.asReferenceName(language: StatikLanguage): ReferenceName =
       ReferenceName(this, language)
   }
 }
 
 private class DefaultReferenceName(
   name: String,
-  override val language: CompatibleLanguage
-) : ReferenceName(name), McName {
+  override val language: StatikLanguage
+) : ReferenceName(name), StatikName {
 
   override val simpleName by unsafeLazy {
     name.split('.').last().asSimpleName()

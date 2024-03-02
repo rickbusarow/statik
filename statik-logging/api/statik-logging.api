@@ -1,0 +1,127 @@
+public final class com/rickbusarow/statik/logging/PrintLogger : com/rickbusarow/statik/logging/StatikLogger {
+	public fun <init> ()V
+	public fun failure (Ljava/lang/String;)V
+	public fun info (Ljava/lang/String;)V
+	public fun printReport (Lcom/rickbusarow/statik/logging/Report;)V
+	public fun success (Ljava/lang/String;)V
+	public fun warning (Ljava/lang/String;)V
+}
+
+public final class com/rickbusarow/statik/logging/Report {
+	public static final field Companion Lcom/rickbusarow/statik/logging/Report$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEntries ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun joinToString ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/logging/Report$Companion {
+	public final fun build (Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/logging/Report;
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportBuilder {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun failure (Ljava/lang/String;)V
+	public final fun info (Ljava/lang/String;)V
+	public final fun success (Ljava/lang/String;)V
+	public final fun warning (Ljava/lang/String;)V
+}
+
+public abstract interface class com/rickbusarow/statik/logging/Report$ReportEntry {
+	public abstract fun getMessage ()Ljava/lang/String;
+	public abstract fun printToStdOut ()V
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportEntry$DefaultImpls {
+	public static fun printToStdOut (Lcom/rickbusarow/statik/logging/Report$ReportEntry;)V
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportEntry$Failure : com/rickbusarow/statik/logging/Report$ReportEntry {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/rickbusarow/statik/logging/Report$ReportEntry$Failure;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun printToStdOut ()V
+	public static fun printToStdOut-impl (Ljava/lang/String;)V
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportEntry$Info : com/rickbusarow/statik/logging/Report$ReportEntry {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/rickbusarow/statik/logging/Report$ReportEntry$Info;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun printToStdOut ()V
+	public static fun printToStdOut-impl (Ljava/lang/String;)V
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportEntry$Success : com/rickbusarow/statik/logging/Report$ReportEntry {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/rickbusarow/statik/logging/Report$ReportEntry$Success;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun printToStdOut ()V
+	public static fun printToStdOut-impl (Ljava/lang/String;)V
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/logging/Report$ReportEntry$Warning : com/rickbusarow/statik/logging/Report$ReportEntry {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/rickbusarow/statik/logging/Report$ReportEntry$Warning;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public fun getMessage ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun printToStdOut ()V
+	public static fun printToStdOut-impl (Ljava/lang/String;)V
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/logging/ReportingLogger : com/rickbusarow/statik/logging/StatikLogger {
+	public fun <init> ()V
+	public fun <init> (Z)V
+	public synthetic fun <init> (ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public final fun collectReport ()Lcom/rickbusarow/statik/logging/Report;
+	public fun failure (Ljava/lang/String;)V
+	public fun info (Ljava/lang/String;)V
+	public fun printReport (Lcom/rickbusarow/statik/logging/Report;)V
+	public fun success (Ljava/lang/String;)V
+	public fun warning (Ljava/lang/String;)V
+}
+
+public abstract interface class com/rickbusarow/statik/logging/StatikLogger {
+	public abstract fun failure (Ljava/lang/String;)V
+	public abstract fun info (Ljava/lang/String;)V
+	public abstract fun printReport (Lcom/rickbusarow/statik/logging/Report;)V
+	public abstract fun success (Ljava/lang/String;)V
+	public abstract fun warning (Ljava/lang/String;)V
+}
+

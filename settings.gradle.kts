@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+rootProject.name = "statik"
+
 pluginManagement {
   repositories {
     maven {
@@ -66,8 +68,7 @@ gradleEnterprise {
   }
 }
 
-rootProject.name = "statik"
-
 include(
-  ":statik-api"
+  ":statik-api",
+  ":statik-logging"
 )

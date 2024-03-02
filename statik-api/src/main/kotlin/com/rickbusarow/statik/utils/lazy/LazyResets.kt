@@ -17,20 +17,28 @@
 
 package com.rickbusarow.statik.utils.lazy
 
+import com.rickbusarow.statik.InternalStatikApi
 import kotlinx.coroutines.DisposableHandle
 import org.jetbrains.kotlin.com.intellij.openapi.Disposable
 
-interface LazyResets<out T : Any> : Lazy<T>, Resets
+@InternalStatikApi
+public interface LazyResets<out T : Any> : Lazy<T>, Resets
 
-interface Resets {
-  fun reset()
+@InternalStatikApi
+public interface Resets {
+  public fun reset()
 }
 
-inline fun <reified T : Any> ResetManager.lazyResets(
+@InternalStatikApi
+internal inline fun <reified T : Any> ResetManager.lazyResets(
   noinline valueFactory: () -> T
 ): LazyResets<T> = LazyResets(this, valueFactory)
 
-fun <T : Any> LazyResets(resetManager: ResetManager, valueFactory: () -> T): LazyResets<T> =
+@InternalStatikApi
+internal fun <T : Any> LazyResets(
+  resetManager: ResetManager,
+  valueFactory: () -> T
+): LazyResets<T> =
   LazyResetsImpl(resetManager, valueFactory)
 
 internal class LazyResetsImpl<out T : Any>(
@@ -55,27 +63,28 @@ internal class LazyResetsImpl<out T : Any>(
   }
 }
 
-interface ResetManager : Resets, Disposable {
-  fun register(delegate: Resets)
+@InternalStatikApi
+public interface ResetManager : Resets, Disposable {
+  public fun register(delegate: Resets)
 
   override fun dispose()
 
   override fun reset()
-  fun child(childDelegates: MutableCollection<Resets> = mutableListOf()): ResetManager
+  public fun child(childDelegates: MutableCollection<Resets> = mutableListOf()): ResetManager
 
-  companion object {
-    operator fun invoke(): ResetManager = RealResetManager()
+  public companion object {
+    public operator fun invoke(): ResetManager = ResetManagerImpl()
   }
 }
 
-object EmptyResetManager : ResetManager {
+public object EmptyResetManager : ResetManager {
   override fun register(delegate: Resets): Unit = Unit
   override fun dispose(): Unit = Unit
   override fun reset(): Unit = Unit
   override fun child(childDelegates: MutableCollection<Resets>): EmptyResetManager = this
 }
 
-class RealResetManager(
+public class ResetManagerImpl(
   private val delegates: MutableCollection<Resets> = mutableListOf()
 ) : DisposableHandle, ResetManager {
 
@@ -88,6 +97,7 @@ class RealResetManager(
   override fun dispose() {
     reset()
   }
+
   override fun reset() {
     synchronized(delegates) {
       delegates.forEach { it.reset() }
@@ -95,8 +105,8 @@ class RealResetManager(
     }
   }
 
-  override fun child(childDelegates: MutableCollection<Resets>): RealResetManager {
-    return RealResetManager(childDelegates)
+  override fun child(childDelegates: MutableCollection<Resets>): ResetManagerImpl {
+    return ResetManagerImpl(childDelegates)
       .also { child -> register(child) }
   }
 }

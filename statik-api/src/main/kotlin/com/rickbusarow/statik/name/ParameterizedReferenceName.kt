@@ -15,8 +15,7 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.name.McName.CompatibleLanguage
-import com.rickbusarow.statik.stdlib.mapToSet
+import com.rickbusarow.statik.utils.stdlib.mapToSet
 
 /**
  * Represents a parameterized reference name within a specific language.
@@ -35,11 +34,11 @@ import com.rickbusarow.statik.stdlib.mapToSet
  * @property rawTypeName The raw [ReferenceName] without any type parameters.
  * @property typeParams A list of [ReferenceName]s that are the type parameters for the raw type.
  */
-class ParameterizedReferenceName private constructor(
+public class ParameterizedReferenceName private constructor(
   name: String,
-  override val language: CompatibleLanguage,
-  val rawTypeName: ReferenceName,
-  val typeParams: List<ReferenceName>
+  override val language: StatikLanguage,
+  public val rawTypeName: ReferenceName,
+  public val typeParams: List<ReferenceName>
 ) : ReferenceName(name) {
 
   init {
@@ -66,7 +65,7 @@ class ParameterizedReferenceName private constructor(
    * @param rawTypeName The raw type name.
    * @param typeParams The type parameters.
    */
-  constructor(
+  public constructor(
     rawTypeName: ReferenceName,
     typeParams: List<ReferenceName>
   ) : this(
@@ -81,7 +80,7 @@ class ParameterizedReferenceName private constructor(
     typeParams = typeParams
   )
 
-  companion object {
+  public companion object {
 
     /**
      * Extension function that generates a [ParameterizedReferenceName] using the receiver
@@ -91,7 +90,9 @@ class ParameterizedReferenceName private constructor(
      * @receiver The raw type name.
      * @return The constructed [ParameterizedReferenceName].
      */
-    fun ReferenceName.parameterizedBy(typeParams: List<ReferenceName>): ParameterizedReferenceName =
+    public fun ReferenceName.parameterizedBy(
+      typeParams: List<ReferenceName>
+    ): ParameterizedReferenceName =
       ParameterizedReferenceName(
         rawTypeName = this,
         typeParams = typeParams
@@ -106,7 +107,7 @@ class ParameterizedReferenceName private constructor(
      * @receiver The raw type name.
      * @return The constructed [ParameterizedReferenceName].
      */
-    fun ReferenceName.parameterizedBy(
+    public fun ReferenceName.parameterizedBy(
       vararg typeParams: ReferenceName
     ): ParameterizedReferenceName = parameterizedBy(typeParams.toList())
   }

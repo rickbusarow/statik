@@ -17,14 +17,14 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
 import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
-import com.rickbusarow.statik.stdlib.asList
-import com.rickbusarow.statik.stdlib.singletonList
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.asList
+import com.rickbusarow.statik.utils.stdlib.singletonList
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
-sealed interface NameWithPackageName :
+public sealed interface NameWithPackageName :
   HasPackageName,
   HasSimpleNames,
   ResolvableName {
@@ -39,12 +39,12 @@ sealed interface NameWithPackageName :
    * `true` if a declaration is top-level in a file, otherwise `false`
    * such as if the declaration is a nested type or a member declaration
    */
-  val isTopLevel: Boolean
+  public val isTopLevel: Boolean
     get() = simpleNames.size == 1
 
-  companion object {
+  public companion object {
     /** */
-    operator fun invoke(
+    public operator fun invoke(
       packageName: PackageName,
       simpleNames: List<SimpleName>
     ): NameWithPackageName = NameWithPackageNameImpl(packageName, simpleNames)
@@ -69,7 +69,7 @@ internal class NameWithPackageNameImpl(
  * @return a [NameWithPackageName], where the String after [packageName]
  *   is split and treated as the collection of [SimpleNames][SimpleName].
  */
-fun FqName.asNameWithPackageName(packageName: PackageName): NameWithPackageName = asString()
+public fun FqName.asNameWithPackageName(packageName: PackageName): NameWithPackageName = asString()
   .stripPackageNameFromFqName(packageName)
   .asNameWithPackageName(packageName)
 
@@ -77,7 +77,9 @@ fun FqName.asNameWithPackageName(packageName: PackageName): NameWithPackageName 
  * @return a [NameWithPackageName] from the [packageName]
  *   argument, appending the receiver [SimpleNames][SimpleName]
  */
-fun Iterable<SimpleName>.asNameWithPackageName(packageName: PackageName): NameWithPackageName {
+public fun Iterable<SimpleName>.asNameWithPackageName(
+  packageName: PackageName
+): NameWithPackageName {
   return NameWithPackageNameImpl(packageName, this.asList())
 }
 
@@ -85,6 +87,6 @@ fun Iterable<SimpleName>.asNameWithPackageName(packageName: PackageName): NameWi
  * @return a [NameWithPackageName] from the [packageName]
  *   argument, appending the receiver [SimpleNames][SimpleName]
  */
-fun SimpleName.asNameWithPackageName(packageName: PackageName): NameWithPackageName {
+public fun SimpleName.asNameWithPackageName(packageName: PackageName): NameWithPackageName {
   return singletonList().asNameWithPackageName(packageName)
 }

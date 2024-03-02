@@ -15,6 +15,7 @@
 
 package com.rickbusarow.statik.utils.lazy
 
+import com.rickbusarow.statik.InternalStatikApi
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
@@ -32,9 +33,10 @@ import kotlinx.coroutines.sync.withLock
  * suspend fun getExpensive() = expensive.await()
  * ```
  */
-interface LazyDeferred<out T> {
-  val isCompleted: Boolean
-  suspend fun await(): T
+@InternalStatikApi
+public interface LazyDeferred<out T> {
+  public val isCompleted: Boolean
+  public suspend fun await(): T
 
   /**
    * Immediately returns the deferred value **if already completed**.
@@ -43,7 +45,7 @@ interface LazyDeferred<out T> {
    *
    * @throws [IllegalStateException] if this deferred value has not [completed][isCompleted] yet.
    */
-  fun getCompleted(): T
+  public fun getCompleted(): T
 }
 
 /**
@@ -58,7 +60,8 @@ interface LazyDeferred<out T> {
  * suspend fun getExpensive() = expensive.await()
  * ```
  */
-fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
+@InternalStatikApi
+internal fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
 
   return LazyDeferredImpl(
     action = action,
@@ -66,9 +69,16 @@ fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
   )
 }
 
-fun <T> (suspend () -> T).asLazyDeferred(): LazyDeferred<T> = lazyDeferred(this)
+@InternalStatikApi
+internal fun <T, R> LazyDeferred<T>.map(transform: suspend (T) -> R): LazyDeferred<R> {
+  return lazyDeferred { transform(await()) }
+}
 
-suspend fun <T> Collection<LazyDeferred<T>>.awaitAll(): List<T> {
+@InternalStatikApi
+internal fun <T> (suspend () -> T).asLazyDeferred(): LazyDeferred<T> = lazyDeferred(this)
+
+@InternalStatikApi
+public suspend fun <T> Collection<LazyDeferred<T>>.awaitAll(): List<T> {
   return if (isEmpty()) {
     emptyList()
   } else {

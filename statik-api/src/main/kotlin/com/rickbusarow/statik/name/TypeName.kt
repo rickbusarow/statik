@@ -17,21 +17,21 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.PackageName.Companion.asPackageName
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.stdlib.letIf
-import com.rickbusarow.statik.stdlib.pluralString
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.letIf
+import com.rickbusarow.statik.utils.stdlib.pluralString
 import dev.drewhamilton.poko.Poko
 
 /** either a [ClassName] or a [TypeParameter] */
-sealed interface TypeName : McName, HasSimpleNames {
+public sealed interface TypeName : StatikName, HasSimpleNames {
   /** */
-  val nullable: Boolean
+  public val nullable: Boolean
 
   /** @return a new instance of [TypeName] with nullability set to true. */
-  fun makeNullable(): TypeName
+  public fun makeNullable(): TypeName
 
   /** @return a new instance of [TypeName] with nullability set to false. */
-  fun makeNotNullable(): TypeName
+  public fun makeNotNullable(): TypeName
 }
 
 /**
@@ -44,10 +44,10 @@ sealed interface TypeName : McName, HasSimpleNames {
  * @property nullable Indicates if the class name is nullable.
  */
 @Poko
-class ClassName(
+public class ClassName(
   override val packageName: PackageName,
   override val simpleNames: List<SimpleName>,
-  val typeArguments: List<TypeName>,
+  public val typeArguments: List<TypeName>,
   override val nullable: Boolean
 ) : TypeName, NameWithPackageName {
 
@@ -57,7 +57,7 @@ class ClassName(
   }
 
   /** ex: `com.example.MyGenericType<out T: SomeType>` */
-  val asStringWithTypeParameters: String by unsafeLazy {
+  public val asStringWithTypeParameters: String by unsafeLazy {
     asString.letIf(typeArguments.isNotEmpty()) {
       it.plus(
         typeArguments.joinToString(
@@ -70,7 +70,7 @@ class ClassName(
     }
   }
 
-  constructor(
+  public constructor(
     packageName: String,
     vararg simpleNames: String,
     typeArguments: List<TypeName> = emptyList(),
@@ -82,7 +82,7 @@ class ClassName(
     nullable = nullable
   )
 
-  fun copy(
+  public fun copy(
     packageName: PackageName = this.packageName,
     simpleNames: List<SimpleName> = this.simpleNames,
     typeArguments: List<TypeName> = this.typeArguments,
@@ -104,7 +104,7 @@ class ClassName(
    * @param typeArguments The type arguments to parameterize the class name with.
    * @return a new instance of [ClassName] with the provided type arguments.
    */
-  fun parameterizedBy(vararg typeArguments: TypeName): ClassName =
+  public fun parameterizedBy(vararg typeArguments: TypeName): ClassName =
     copy(typeArguments = typeArguments.toList())
 }
 
@@ -122,11 +122,11 @@ class ClassName(
  * @property variance The variance of the type parameter, can be either `IN`, `OUT`, or `null`.
  */
 @Poko
-class TypeParameter(
+public class TypeParameter(
   override val simpleName: SimpleName,
-  val bounds: List<TypeName>,
+  public val bounds: List<TypeName>,
   override val nullable: Boolean,
-  val variance: Variance?
+  public val variance: Variance?
 ) : TypeName {
 
   override val segments: List<String> get() = listOf(simpleName.asString)
@@ -139,12 +139,12 @@ class TypeParameter(
     )
   }
 
-  constructor(
+  public constructor(
     name: SimpleName,
     vararg bounds: TypeName
   ) : this(simpleName = name, bounds = bounds.toList(), nullable = false, variance = null)
 
-  fun copy(
+  public fun copy(
     simpleName: SimpleName = this.simpleName,
     bounds: List<TypeName> = this.bounds,
     nullable: Boolean = this.nullable,
@@ -163,7 +163,7 @@ class TypeParameter(
   override fun makeNotNullable(): TypeName = copy(nullable = false)
 
   /** Represents the variance of a type parameter in the Kotlin language. */
-  enum class Variance {
+  public enum class Variance {
     OUT,
     IN
   }

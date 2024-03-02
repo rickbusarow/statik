@@ -15,12 +15,11 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.name.McName.CompatibleLanguage
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 
 /** Any reference to an Android resource */
-sealed class AndroidResourceReferenceName(name: String) : ReferenceName(name)
+public sealed class AndroidResourceReferenceName(name: String) : ReferenceName(name)
 
 /**
  * example: `com.example.R`
@@ -28,10 +27,10 @@ sealed class AndroidResourceReferenceName(name: String) : ReferenceName(name)
  * @property packageName the package of this reference (which is just the full string, minus `.R`)
  * @property language the language making this reference
  */
-class AndroidRReferenceName(
-  val packageName: PackageName,
-  override val language: CompatibleLanguage
-) : AndroidResourceReferenceName(packageName.append("R"))
+public class AndroidRReferenceName(
+  override val packageName: PackageName,
+  override val language: StatikLanguage
+) : AndroidResourceReferenceName(packageName.append("R")), HasPackageName
 
 /**
  * example: `R.string.app_name`
@@ -41,9 +40,9 @@ class AndroidRReferenceName(
  */
 // hashcode behavior is intentionally handled by super
 @Suppress("EqualsWithHashCodeExist", "EqualsOrHashCode")
-class UnqualifiedAndroidResourceReferenceName(
+public class UnqualifiedAndroidResourceReferenceName(
   name: String,
-  override val language: CompatibleLanguage
+  override val language: StatikLanguage
 ) : AndroidResourceReferenceName(name),
   HasSimpleNames {
 
@@ -58,10 +57,10 @@ class UnqualifiedAndroidResourceReferenceName(
   }
 
   /** example: 'string' in `R.string.app_name` */
-  val prefix: SimpleName by unsafeLazy { split[1].asSimpleName() }
+  public val prefix: SimpleName by unsafeLazy { split[1].asSimpleName() }
 
   /** example: 'app_name' in `R.string.app_name` */
-  val identifier: SimpleName by unsafeLazy { split[2].asSimpleName() }
+  public val identifier: SimpleName by unsafeLazy { split[2].asSimpleName() }
 
   override val simpleNames: List<SimpleName> by unsafeLazy {
     listOf("R".asSimpleName(), prefix, identifier)
@@ -70,7 +69,7 @@ class UnqualifiedAndroidResourceReferenceName(
   override val segments: List<String> by unsafeLazy { simpleNames.map { it.asString } }
 
   override fun equals(other: Any?): Boolean {
-    if (other is UnqualifiedAndroidResource) {
+    if (other is UnqualifiedAndroidResourceName) {
       return asString == other.asString
     }
 
@@ -84,9 +83,9 @@ class UnqualifiedAndroidResourceReferenceName(
  * @param name `com.example.databinding.FragmentViewBinding`
  * @property language the language making this reference
  */
-class AndroidDataBindingReferenceName(
+public class AndroidDataBindingReferenceName(
   name: String,
-  override val language: CompatibleLanguage
+  override val language: StatikLanguage
 ) : AndroidResourceReferenceName(name)
 
 /**
@@ -95,7 +94,7 @@ class AndroidDataBindingReferenceName(
  * @param name `com.example.R.string.app_name`
  * @property language the language making this reference
  */
-class QualifiedAndroidResourceReferenceName(
+public class QualifiedAndroidResourceReferenceName(
   name: String,
-  override val language: CompatibleLanguage
+  override val language: StatikLanguage
 ) : AndroidResourceReferenceName(name)

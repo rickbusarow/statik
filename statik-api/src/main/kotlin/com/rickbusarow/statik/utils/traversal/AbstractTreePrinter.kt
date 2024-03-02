@@ -15,8 +15,9 @@
 
 package com.rickbusarow.statik.utils.traversal
 
-import com.rickbusarow.statik.stdlib.mapLines
-import com.rickbusarow.statik.stdlib.noAnsi
+import com.rickbusarow.statik.InternalStatikApi
+import com.rickbusarow.statik.utils.stdlib.mapLines
+import com.rickbusarow.statik.utils.stdlib.noAnsi
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.Color.Companion.colorized
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.SIMPLE
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.TYPE
@@ -27,7 +28,8 @@ import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.TYPE
  * @param whitespaceChar the character to use for replacing
  *   whitespaces in the node text when printing. Default is ' '.
  */
-abstract class AbstractTreePrinter<T : Any>(
+@InternalStatikApi
+public abstract class AbstractTreePrinter<T : Any>(
   private val whitespaceChar: Char = ' '
 ) {
   private val elementSimpleNameMap = mutableMapOf<T, String>()
@@ -36,26 +38,26 @@ abstract class AbstractTreePrinter<T : Any>(
   private var currentColorIndex = 0
 
   /** Returns the simple class name of an object of type [T]. */
-  abstract fun T.simpleClassName(): String
+  public abstract fun T.simpleClassName(): String
 
   /** Returns the parent of an object of type [T]. */
-  abstract fun T.parent(): T?
+  public abstract fun T.parent(): T?
 
   /** Returns the type name of an object of type [T]. */
-  abstract fun T.typeName(): String
+  public abstract fun T.typeName(): String
 
   /** Returns the text representation of an object of type [T]. */
-  abstract fun T.text(): String
+  public abstract fun T.text(): String
 
   /** Returns the children of an object of type [T] as a [Sequence]. */
-  abstract fun T.children(): Sequence<T>
+  public abstract fun T.children(): Sequence<T>
 
   /**
    * Prints the tree structure of an object of type [T] to the console.
    *
    * @param [rootNode] the root node of the tree.
    */
-  fun printTreeString(rootNode: T) {
+  public fun printTreeString(rootNode: T) {
     println(treeString(rootNode))
   }
 
@@ -65,7 +67,7 @@ abstract class AbstractTreePrinter<T : Any>(
    * @param [rootNode] the root node of the tree.
    * @return the tree structure as a string.
    */
-  fun treeString(rootNode: T): String {
+  public fun treeString(rootNode: T): String {
     return buildTreeString(rootNode, 0)
   }
 

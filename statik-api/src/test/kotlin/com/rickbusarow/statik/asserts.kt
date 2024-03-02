@@ -15,6 +15,7 @@
 
 package com.rickbusarow.statik
 
+import com.rickbusarow.statik.testing.trimmedAssert
 import io.kotest.assertions.asClue
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.fail

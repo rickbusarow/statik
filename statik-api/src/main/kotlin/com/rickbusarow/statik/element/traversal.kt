@@ -17,21 +17,19 @@ package com.rickbusarow.statik.element
 
 import com.rickbusarow.statik.utils.coroutines.distinct
 import com.rickbusarow.statik.utils.coroutines.plus
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
 
-fun McElement.childrenRecursive(): Flow<McElement> {
+@OptIn(ExperimentalCoroutinesApi::class)
+public fun StatikElement.childrenRecursive(): Flow<StatikElement> {
   return flowOf(this)
-    .plus(
-      children.flatMapConcat { child ->
-        child.childrenRecursive()
-      }
-    )
+    .plus(children.flatMapConcat(StatikElement::childrenRecursive))
     .distinct()
 }
 
-inline fun <reified E : McElement> McElement.childrenOfTypeRecursive(): Flow<E> {
+public inline fun <reified E : StatikElement> StatikElement.childrenOfTypeRecursive(): Flow<E> {
   return childrenRecursive().filterIsInstance()
 }

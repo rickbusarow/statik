@@ -7,5 +7,14 @@
     "packaging": "jar",
     "javaVersion": "1.8",
     "publicationName": "maven"
+  },
+  {
+    "gradlePath": ":statik-logging",
+    "group": "com.rickbusarow.statik",
+    "artifactId": "statik-logging",
+    "description": "Logging for Statik parsing",
+    "packaging": "jar",
+    "javaVersion": "1.8",
+    "publicationName": "maven"
   }
 ]

@@ -15,8 +15,19 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.stdlib.joinToStringDot
-import com.rickbusarow.statik.stdlib.regex
+import com.rickbusarow.statik.utils.stdlib.joinToStringDot
+import com.rickbusarow.statik.utils.stdlib.regex
+
+/**
+ * Trait interface for providing a split list of name segments.
+ *
+ * ex: 'com.example.Subject' has the segments ['com', 'example', 'Subject']
+ */
+public interface HasNameSegments {
+
+  /** ex: 'com.example.Subject' has the segments ['com', 'example', 'Subject'] */
+  public val segments: List<String>
+}
 
 /**
  * A name which is not fully qualified, like `Foo` in `com.example.Foo`
@@ -24,7 +35,7 @@ import com.rickbusarow.statik.stdlib.regex
  * @property asString the string value of this name
  */
 @JvmInline
-value class SimpleName(override val asString: String) : McName {
+public value class SimpleName(override val asString: String) : StatikName {
 
   init {
     require(asString.matches(SIMPLE_NAME_REGEX)) {
@@ -39,10 +50,10 @@ value class SimpleName(override val asString: String) : McName {
   override val segments: List<String>
     get() = listOf(asString)
 
-  companion object {
+  public companion object {
 
     /** matches simple type or member names */
-    val JAVA_IDENTIFIER_REGEX: Regex = regex {
+    public val JAVA_IDENTIFIER_REGEX: Regex = regex {
 
       appendWithoutInjection("(?:")
 
@@ -61,7 +72,7 @@ value class SimpleName(override val asString: String) : McName {
     }
 
     /** Basic validation for simple names. They must not include any periods. */
-    val SIMPLE_NAME_REGEX: Regex = regex {
+    public val SIMPLE_NAME_REGEX: Regex = regex {
 
       append("^")
 
@@ -79,10 +90,10 @@ value class SimpleName(override val asString: String) : McName {
     }
 
     /** shorthand for `joinToStringDot { it.name.trim() }` */
-    fun Iterable<SimpleName>.asString(): String = joinToStringDot { it.asString.trim() }
+    public fun Iterable<SimpleName>.asString(): String = joinToStringDot { it.asString.trim() }
 
     /** wraps this String in a [SimpleName] */
-    fun String.asSimpleName(): SimpleName = SimpleName(this)
+    public fun String.asSimpleName(): SimpleName = SimpleName(this)
 
     /**
      * Removes the prefix of [packageName]'s value and a subsequent period,
@@ -90,17 +101,17 @@ value class SimpleName(override val asString: String) : McName {
      *
      * example: `com.example.Outer.Inner` becomes `[Outer, Inner]`
      */
-    fun String.stripPackageNameFromFqName(packageName: PackageName): List<SimpleName> {
+    public fun String.stripPackageNameFromFqName(packageName: PackageName): List<SimpleName> {
       return removePrefix("${packageName.asString}.").split('.')
         .map { it.asSimpleName() }
     }
   }
 }
 
-/** Convenience interface for providing a [SimpleName]. */
-interface HasSimpleNames : HasNameSegments {
+/** Trait interface for providing a [SimpleName]. */
+public interface HasSimpleNames : HasNameSegments {
   /** The contained [SimpleNames][SimpleName] */
-  val simpleNames: List<SimpleName>
+  public val simpleNames: List<SimpleName>
 
   override val segments: List<String>
     get() = simpleNames.map { it.asString }
@@ -111,10 +122,10 @@ interface HasSimpleNames : HasNameSegments {
    * example: Given a full name of `com.example.Outer.Inner`, with
    * the [simpleNames] `[Outer, Inner]`, this value will be `Inner`.
    */
-  val simplestName: SimpleName
+  public val simplestName: SimpleName
     get() = simpleNames.last()
 
-  companion object {
+  public companion object {
 
     internal fun HasSimpleNames.checkSimpleNames() {
       check(simpleNames.isNotEmpty()) {
@@ -122,15 +133,4 @@ interface HasSimpleNames : HasNameSegments {
       }
     }
   }
-}
-
-/**
- * Convenience interface for providing a split list of name segments.
- *
- * ex: 'com.example.Subject' has the segments ['com', 'example', 'Subject']
- */
-interface HasNameSegments {
-
-  /** ex: 'com.example.Subject' has the segments ['com', 'example', 'Subject'] */
-  val segments: List<String>
 }

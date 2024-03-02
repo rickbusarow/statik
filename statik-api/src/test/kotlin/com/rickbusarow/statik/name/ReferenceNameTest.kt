@@ -16,15 +16,15 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.kase.asTests
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.JAVA
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.KOTLIN
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
+import com.rickbusarow.statik.name.StatikLanguage.JAVA
+import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
+import com.rickbusarow.statik.name.StatikLanguage.XML
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 
-class ReferenceNameTest : BaseMcNameTest() {
+class ReferenceNameTest : BaseStatikNameTest() {
 
   @Nested
   inner class `java reference` {
@@ -80,8 +80,8 @@ class ReferenceNameTest : BaseMcNameTest() {
 
     r shouldBe d
 
-    setOf<McName>(d).contains(r) shouldBe true
-    setOf<McName>(r).contains(d) shouldBe true
+    setOf<StatikName>(d).contains(r) shouldBe true
+    setOf<StatikName>(r).contains(d) shouldBe true
 
     d shouldBe r
   }

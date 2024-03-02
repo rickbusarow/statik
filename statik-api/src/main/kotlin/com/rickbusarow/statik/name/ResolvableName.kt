@@ -15,5 +15,5 @@
 
 package com.rickbusarow.statik.name
 
-/** An [McName] which has the potential to be resolved -- meaning any [NameWithPackageName] */
-sealed interface ResolvableName : McName
+/** An [StatikName] which has the potential to be resolved -- meaning any [NameWithPackageName] */
+public sealed interface ResolvableName : StatikName

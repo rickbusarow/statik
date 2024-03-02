@@ -17,9 +17,14 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.PackageName.DEFAULT
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.stdlib.joinToStringDot
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.joinToStringDot
 import dev.drewhamilton.poko.Poko
+
+/** Trait interface for providing a [PackageName]. */
+public interface HasPackageName {
+  public val packageName: PackageName
+}
 
 /**
  * Represents a package name.
@@ -27,10 +32,10 @@ import dev.drewhamilton.poko.Poko
  * Note that a java/kotlin file without a package declaration will have a `null` _declaration_, but
  * it still has a "default" package. Files with a default package should use [PackageName.DEFAULT].
  *
- * @see McName
+ * @see StatikName
  * @see DEFAULT
  */
-sealed interface PackageName : McName {
+public sealed interface PackageName : StatikName {
   /** the full name of this package */
   override val asString: String
 
@@ -38,10 +43,10 @@ sealed interface PackageName : McName {
    * Represents a [PackageName] when there isn't actually a package name, meaning that
    * top-level declarations in that file are at the root of source without qualifiers.
    *
-   * @see McName
+   * @see StatikName
    * @see DEFAULT
    */
-  object DEFAULT : PackageName {
+  public object DEFAULT : PackageName {
     private fun readResolve(): Any = DEFAULT
     override val asString: String = ""
     override val segments: List<String>
@@ -59,13 +64,13 @@ sealed interface PackageName : McName {
    * If the package name is not blank, this function will append
    * a period to the package name, then add the simple name.
    */
-  fun appendAsString(simpleNames: Iterable<SimpleName>): String {
+  public fun appendAsString(simpleNames: Iterable<SimpleName>): String {
     return "$asString.${simpleNames.joinToStringDot { it.asString }}"
   }
 
-  companion object {
+  public companion object {
     /** Shorthand for calling [PackageName.invoke] in-line. */
-    fun String?.asPackageName(): PackageName = PackageName(this)
+    public fun String?.asPackageName(): PackageName = PackageName(this)
 
     /**
      * Shorthand for calling [PackageName.invoke] in-line.
@@ -73,7 +78,7 @@ sealed interface PackageName : McName {
      * @return A `PackageName` wrapper around [nameOrNull]. If [nameOrNull]
      *   is null or blank, this will return [PackageName.DEFAULT].
      */
-    operator fun invoke(nameOrNull: String?): PackageName {
+    public operator fun invoke(nameOrNull: String?): PackageName {
       return when {
         nameOrNull.isNullOrBlank() -> DEFAULT
         else -> PackageNameImpl(nameOrNull)
@@ -91,7 +96,7 @@ sealed interface PackageName : McName {
  * If the package name is not blank, this function will append
  * a period to the package name, then add the simple name.
  */
-fun PackageName.appendAsString(simpleNames: Iterable<String>): String {
+public fun PackageName.appendAsString(simpleNames: Iterable<String>): String {
   return appendAsString(simpleNames.map { it.asSimpleName() })
 }
 
@@ -104,16 +109,16 @@ fun PackageName.appendAsString(simpleNames: Iterable<String>): String {
  * If the package name is not blank, this function will append
  * a period to the package name, then add the simple name.
  */
-fun PackageName.appendAsString(vararg simpleNames: String): String {
+public fun PackageName.appendAsString(vararg simpleNames: String): String {
   return appendAsString(simpleNames.toList())
 }
 
 /**
- * @see McName
+ * @see StatikName
  * @throws IllegalArgumentException if the [asString] parameter is empty or blank
  */
 @Poko
-class PackageNameImpl internal constructor(override val asString: String) : PackageName {
+public class PackageNameImpl internal constructor(override val asString: String) : PackageName {
   init {
     require(asString.isNotBlank()) {
       "A ${this.javaClass.canonicalName} must be a non-empty, non-blank String.  " +
@@ -126,9 +131,4 @@ class PackageNameImpl internal constructor(override val asString: String) : Pack
 
   override fun append(simpleNames: Iterable<String>): String =
     "$asString.${simpleNames.joinToStringDot()}"
-}
-
-/** Convenience interface for providing a [PackageName]. */
-interface HasPackageName {
-  val packageName: PackageName
 }

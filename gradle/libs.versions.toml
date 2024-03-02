@@ -5,9 +5,10 @@ google-ksp = "1.9.22-1.0.18"
 poko = "0.15.2"
 
 benManes-versions = "0.51.0"
-buildconfig = "5.3.5"
 buildParameters = "1.4.3"
+buildconfig = "5.3.5"
 cashapp-turbine = "1.0.0"
+classgraph = "4.8.165"
 dependencyAnalysis = "1.30.0"
 detekt = "1.23.5"
 diffplug-spotless = "6.25.0"
@@ -17,9 +18,9 @@ dropbox-dependencyGuard = "0.5.0"
 ec4j = "0.3.0"
 github-release = "2.5.2"
 integration-test = "1.4.5"
+jUnit-platform = "1.10.2"
 jUnit4 = "4.13.2"
 jUnit5 = "5.10.2"
-jUnit-platform = "1.10.2"
 johnrengelman-shadow = "8.1.1"
 kotest = "5.8.0"
 kotlinx-binaryCompatibility = "0.14.0"
@@ -28,12 +29,13 @@ ktlint-lib = "0.50.0"
 picnic = "0.7.0"
 prettier = "2.8.4"
 prettier-plugin-sh = "0.12.8"
+rickBusarow-dispatch = "1.0.0-beta10"
 rickBusarow-doks = "0.2.0"
 rickBusarow-kase = "0.10.0"
 rickBusarow-kgx = "0.1.12"
 rickBusarow-ktlint = "0.2.2"
 rickBusarow-ktrules = "1.3.1"
-rickBusarow-mahout = "0.1.0-20240302.015417-27" # pinned snapshot
+rickBusarow-mahout = "0.1.0-SNAPSHOT"
 rickBusarow-moduleCheck = "0.12.5"
 rickBusarow-statik = "0.1.0"
 semVer = "2.0.0"
@@ -44,7 +46,7 @@ vanniktech-publish = "0.27.0"
 
 [plugins]
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
-buildParameters = {id = "org.gradlex.build-parameters", version.ref = "buildParameters" }
+buildParameters = { id = "org.gradlex.build-parameters", version.ref = "buildParameters" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
 dokkatoo = { id = "dev.adamko.dokkatoo", version.ref = "dokkatoo" }
 dokkatoo-html = { id = "dev.adamko.dokkatoo-html", version.ref = "dokkatoo" }
@@ -68,6 +70,8 @@ breadmoirai-github-release = { module = "com.github.breadmoirai:github-release",
 buildconfig = { module = "com.github.gmazzo:gradle-buildconfig-plugin", version.ref = "buildconfig" }
 
 buildParameters = { module = "org.gradlex:build-parameters", version.ref = "buildParameters" }
+
+classgraph = { module = "io.github.classgraph:classgraph", version.ref = "classgraph" }
 
 dependency-analysis-gradle-plugin = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dependencyAnalysis" }
 
@@ -145,6 +149,16 @@ poko-annotations = { module = "dev.drewhamilton.poko:poko-annotations", version.
 poko-compiler = { module = "dev.drewhamilton.poko:poko-compiler-plugin", version.ref = "poko" }
 poko-gradle-plugin = { module = "dev.drewhamilton.poko:poko-gradle-plugin", version.ref = "poko" }
 
+rickBusarow-dispatch-core = { module = "com.rickbusarow.dispatch:dispatch-core", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-detekt = { module = "com.rickbusarow.dispatch:dispatch-detekt", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-espresso = { module = "com.rickbusarow.dispatch:dispatch-android-espresso", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-lifecycle = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-lifecycleExtensions = { module = "com.rickbusarow.dispatch:dispatch-android-lifecycle-extensions", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-test-core = { module = "com.rickbusarow.dispatch:dispatch-test", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-test-jUnit4 = { module = "com.rickbusarow.dispatch:dispatch-test-junit4", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-test-jUnit5 = { module = "com.rickbusarow.dispatch:dispatch-test-junit5", version.ref = "rickBusarow-dispatch" }
+rickBusarow-dispatch-viewModel = { module = "com.rickbusarow.dispatch:dispatch-android-viewmodel", version.ref = "rickBusarow-dispatch" }
+
 rickBusarow-doks = { module = "com.rickbusarow.doks:doks-gradle-plugin", version.ref = "rickBusarow-doks" }
 rickBusarow-kase = { module = "com.rickbusarow.kase:kase", version.ref = "rickBusarow-kase" }
 rickBusarow-kase-gradle = { module = "com.rickbusarow.kase:kase-gradle", version.ref = "rickBusarow-kase" }
@@ -153,7 +167,7 @@ rickBusarow-kgx = { module = "com.rickbusarow.kgx:kotlin-gradle-extensions", ver
 rickBusarow-kgx-names = { module = "com.rickbusarow.kgx:names", version.ref = "rickBusarow-kgx" }
 rickBusarow-ktlint = { module = "com.rickbusarow.ktlint:ktlint-gradle-plugin", version.ref = "rickBusarow-ktlint" }
 rickBusarow-ktrules = { module = "com.rickbusarow.ktrules:ktrules", version.ref = "rickBusarow-ktrules" }
-rickBusarow-mahout-gradle-plugin  = { module = "com.rickbusarow.mahout:mahout-gradle-plugin", version.ref = "rickBusarow-mahout" }
+rickBusarow-mahout-gradle-plugin = { module = "com.rickbusarow.mahout:mahout-gradle-plugin", version.ref = "rickBusarow-mahout" }
 rickBusarow-moduleCheck-gradle-plugin = { module = "com.rickbusarow.modulecheck:plugin", version.ref = "rickBusarow-moduleCheck" }
 rickBusarow-statik-api = { module = "com.rickbusarow.statik:statik-api", version.ref = "rickBusarow-statik" }
 
@@ -169,6 +183,6 @@ square-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square
 square-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem-jvm", version.ref = "square-okio" }
 square-okio-jvm = { module = "com.squareup.okio:okio-jvm", version.ref = "square-okio" }
 
-cashapp-turbine = {module =  "app.cash.turbine:turbine", version.ref = "cashapp-turbine" }
+cashapp-turbine = { module = "app.cash.turbine:turbine", version.ref = "cashapp-turbine" }
 
 vanniktech-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "vanniktech-publish" }

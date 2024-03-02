@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.utils.traversal
 
-import com.rickbusarow.statik.stdlib.noAnsi
+import com.rickbusarow.statik.utils.stdlib.noAnsi
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

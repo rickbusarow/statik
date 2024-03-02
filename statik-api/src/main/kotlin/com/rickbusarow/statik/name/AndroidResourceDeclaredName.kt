@@ -16,9 +16,8 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
-import com.rickbusarow.statik.name.McName.CompatibleLanguage
-import com.rickbusarow.statik.name.McName.CompatibleLanguage.XML
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.name.StatikLanguage.XML
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import java.util.Locale
 
@@ -28,14 +27,14 @@ import java.util.Locale
  * - unqualified resources which can be consumed in downstream projects, like `R.string.app_name`
  * - R declarations, like `com.example.R`
  */
-sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
+public sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
 
-  companion object {
+  public companion object {
     /** @return example: `com.example.app.R` */
-    fun r(packageName: PackageName): AndroidRDeclaredName = AndroidRDeclaredName(packageName)
+    public fun r(packageName: PackageName): AndroidRDeclaredName = AndroidRDeclaredName(packageName)
 
     /** @return `com.example.R.string.app_name` */
-    fun qualifiedAndroidResource(
+    public fun qualifiedAndroidResource(
       sourceR: AndroidRReferenceName,
       sourceResource: UnqualifiedAndroidResourceReferenceName
     ): QualifiedAndroidResourceDeclaredName {
@@ -43,7 +42,7 @@ sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
     }
 
     /** @return `com.example.databinding.FragmentListBinding` */
-    fun dataBinding(
+    public fun dataBinding(
       sourceLayout: UnqualifiedAndroidResourceReferenceName,
       packageName: PackageName
     ): AndroidDataBindingDeclaredName {
@@ -51,8 +50,8 @@ sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
     }
 
     /** @return `com.example.databinding.FragmentListBinding` */
-    fun dataBinding(
-      sourceLayoutDeclaration: UnqualifiedAndroidResource,
+    public fun dataBinding(
+      sourceLayoutDeclaration: UnqualifiedAndroidResourceName,
       packageName: PackageName
     ): AndroidDataBindingDeclaredName {
       return AndroidDataBindingDeclaredName(
@@ -67,13 +66,13 @@ sealed interface AndroidResourceDeclaredName : DeclaredName, HasSimpleNames {
 }
 
 /** example: `com.example.app.R` */
-class AndroidRDeclaredName(
+public class AndroidRDeclaredName(
   override val packageName: PackageName
 ) : QualifiedDeclaredName(), AndroidResourceDeclaredName {
 
   override val simpleNames: List<SimpleName> by lazy { listOf("R".asSimpleName()) }
 
-  override fun asReferenceName(language: CompatibleLanguage): ReferenceName {
+  override fun asReferenceName(language: StatikLanguage): ReferenceName {
     return AndroidRReferenceName(packageName, language)
   }
 }
@@ -85,9 +84,9 @@ class AndroidRDeclaredName(
  * @property sourceResource the resource declaration, like
  *   `_.string.app_name`, used when AGP generates this fully qualified resource
  */
-class QualifiedAndroidResourceDeclaredName(
-  val sourceR: AndroidRReferenceName,
-  val sourceResource: UnqualifiedAndroidResourceReferenceName
+public class QualifiedAndroidResourceDeclaredName(
+  public val sourceR: AndroidRReferenceName,
+  public val sourceResource: UnqualifiedAndroidResourceReferenceName
 ) : QualifiedDeclaredName(), AndroidResourceDeclaredName, Generated {
 
   override val packageName: PackageName by unsafeLazy { sourceR.packageName }
@@ -104,13 +103,13 @@ class QualifiedAndroidResourceDeclaredName(
     checkSimpleNames()
   }
 
-  override fun asReferenceName(language: CompatibleLanguage): ReferenceName {
+  override fun asReferenceName(language: StatikLanguage): ReferenceName {
     return QualifiedAndroidResourceReferenceName(asString, language)
   }
 }
 
 /** example: `com.example.databinding.FragmentListBinding` */
-class AndroidDataBindingDeclaredName(
+public class AndroidDataBindingDeclaredName(
   sourceLayout: UnqualifiedAndroidResourceReferenceName,
   override val packageName: PackageName
 ) : QualifiedDeclaredName(), AndroidResourceDeclaredName, Generated {
@@ -144,7 +143,7 @@ class AndroidDataBindingDeclaredName(
     checkSimpleNames()
   }
 
-  override fun asReferenceName(language: CompatibleLanguage): ReferenceName {
+  override fun asReferenceName(language: StatikLanguage): ReferenceName {
     return AndroidDataBindingReferenceName(asString, language)
   }
 }

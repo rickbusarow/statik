@@ -15,6 +15,7 @@
 
 package com.rickbusarow.statik.compiler
 
+import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import org.jetbrains.kotlin.analyzer.AnalysisResult
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
@@ -29,49 +30,50 @@ import java.io.File
  * Models everything needed in order to creat authentic
  * Psi files for [BindingContext]-backed type resolution.
  */
-interface KotlinEnvironment : HasAnalysisResult {
+@InternalStatikApi
+public interface KotlinEnvironment : HasAnalysisResult {
   /**
    * Used to create Psi files without necessarily performing compiler analysis first.
    * This is only useful for Kotlin files, as Java Psi files require analysis first.
    */
-  val lightPsiFactory: LazyDeferred<McPsiFileFactory>
+  public val lightPsiFactory: LazyDeferred<StatikPsiFileFactory>
 
   /**
    * Used to create Psi files with a guarantee that compiler analysis is done
    * first. This is required in order to use [java Psi files][PsiJavaFile],
    */
-  val heavyPsiFactory: LazyDeferred<McPsiFileFactory>
+  public val heavyPsiFactory: LazyDeferred<StatikPsiFileFactory>
 
   /**
    * wrapper around "core" settings like Kotlin version,
    * source files, and classpath files (external dependencies)
    */
-  val coreEnvironment: LazyDeferred<KotlinCoreEnvironment>
+  public val coreEnvironment: LazyDeferred<KotlinCoreEnvironment>
 
   /**
    * "core" settings like Kotlin version, source files, and classpath files (external dependencies)
    */
-  val compilerConfiguration: LazyDeferred<CompilerConfiguration>
+  public val compilerConfiguration: LazyDeferred<CompilerConfiguration>
 
   /**
-   * Returns the best [McPsiFileFactory] available without having to run compiler analysis.
+   * Returns the best [StatikPsiFileFactory] available without having to run compiler analysis.
    *
    * If analysis is completed, this will return [heavyPsiFactory].
    * Otherwise, it will return [lightPsiFactory].
    */
-  suspend fun bestAvailablePsiFactory(): McPsiFileFactory
+  public suspend fun bestAvailablePsiFactory(): StatikPsiFileFactory
 
   /**
    * Returns a cached [KtFile] if one has already been created, otherwise creates a new
    * one. Note that these files are usable before compiler analysis has been executed.
    */
-  suspend fun ktFile(file: File): KtFile
+  public suspend fun ktFile(file: File): KtFile
 
   /**
    * Returns a cached [PsiJavaFile] if one has already been created, otherwise creates
    * a new one. Note that Java Psi files require compiler analysis to execute first.
    */
-  suspend fun javaPsiFile(file: File): PsiJavaFile
+  public suspend fun javaPsiFile(file: File): PsiJavaFile
 }
 
 /**
@@ -79,21 +81,22 @@ interface KotlinEnvironment : HasAnalysisResult {
  * for a [KotlinEnvironment]. These are retrieved from an
  * [AnalysisResult][org.jetbrains.kotlin.analyzer.AnalysisResult].
  */
-interface HasAnalysisResult {
+@InternalStatikApi
+public interface HasAnalysisResult {
   /**
    * The result of file analysis. This object is very expensive to create, but it's created lazily.
    *
    * Holds the [bindingContextDeferred] and [moduleDescriptorDeferred]
    * used for last-resort type and reference resolution.
    */
-  val analysisResultDeferred: LazyDeferred<AnalysisResult>
+  public val analysisResultDeferred: LazyDeferred<AnalysisResult>
 
   /**
    * Used as the entry point for type resolution in Psi files.
    * Under the hood, it frequently delegates to this environment's
    * ModuleDescriptor or the descriptors from its dependency environments.
    */
-  val bindingContextDeferred: LazyDeferred<BindingContext>
+  public val bindingContextDeferred: LazyDeferred<BindingContext>
 
   /**
    * The real force behind type resolution. Prefer using [bindingContextDeferred]
@@ -108,5 +111,5 @@ interface HasAnalysisResult {
    * N.B. This has to be an -Impl instead of just the `ModuleDescriptor` interface
    * because `TopDownAnalyzerFacadeForJVM.createContainer(...)` requires the -Impl type.
    */
-  val moduleDescriptorDeferred: LazyDeferred<ModuleDescriptorImpl>
+  public val moduleDescriptorDeferred: LazyDeferred<ModuleDescriptorImpl>
 }

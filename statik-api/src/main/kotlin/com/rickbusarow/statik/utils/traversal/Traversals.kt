@@ -15,8 +15,11 @@
 
 package com.rickbusarow.statik.utils.traversal
 
+import com.rickbusarow.statik.InternalStatikApi
+
 /** Depth-first and breadth-first traversals of any tree */
-object Traversals {
+@InternalStatikApi
+public object Traversals {
 
   /**
    * Generates a depth-first traversal sequence for a given tree or graph structure.
@@ -25,7 +28,8 @@ object Traversals {
    * @param childrenFactory A lambda that returns the children of a given element.
    * @return A depth-first traversal sequence for the tree/graph.
    */
-  inline fun <T : Any> depthFirstTraversal(
+  @InternalStatikApi
+  public inline fun <T : Any> depthFirstTraversal(
     t: T,
     crossinline childrenFactory: T.() -> List<T>
   ): Sequence<T> {
@@ -52,7 +56,8 @@ object Traversals {
    * @param childrenFactory A lambda that returns the children of a given element.
    * @return A breadth-first traversal sequence for the tree/graph.
    */
-  inline fun <T : Any> breadthFirstTraversal(
+  @InternalStatikApi
+  public inline fun <T : Any> breadthFirstTraversal(
     t: T,
     crossinline childrenFactory: T.() -> List<T>
   ): Sequence<T> {

@@ -25,14 +25,14 @@ import com.rickbusarow.statik.utils.lazy.unsafeLazy
  * - unqualified resources which can be consumed in downstream projects, like `R.string.app_name`
  * - R names, like `com.example.R`
  */
-sealed interface AndroidName : McName, HasSimpleNames {
+public sealed interface AndroidName : StatikName, HasSimpleNames {
 
-  companion object {
+  public companion object {
     /** @return example: `com.example.app.R` */
-    fun r(packageName: PackageName): AndroidRName = AndroidRName(packageName)
+    public fun r(packageName: PackageName): AndroidRName = AndroidRName(packageName)
 
     /** @return `com.example.R.string.app_name` */
-    fun qualifiedAndroidResource(
+    public fun qualifiedAndroidResource(
       sourceR: AndroidRName,
       sourceResource: UnqualifiedAndroidResourceName
     ): AndroidResourceNameWithRName = AndroidResourceNameWithRName(
@@ -41,7 +41,7 @@ sealed interface AndroidName : McName, HasSimpleNames {
     )
 
     /** @return `com.example.databinding.FragmentListBinding` */
-    fun dataBinding(
+    public fun dataBinding(
       sourceLayout: UnqualifiedAndroidResourceName,
       packageName: PackageName
     ): AndroidDataBindingName = AndroidDataBindingName(
@@ -52,7 +52,7 @@ sealed interface AndroidName : McName, HasSimpleNames {
 }
 
 /** example: `com.example.app.R` */
-class AndroidRName(
+public class AndroidRName(
   override val packageName: PackageName
 ) : NameWithPackageName, AndroidName {
 
@@ -66,11 +66,11 @@ class AndroidRName(
    * Models fully qualified names like `com.example.R.string.app_name`
    * or unqualified ones like `string.app_name`.
    */
-  sealed interface AndroidResourceName : AndroidName, McName, HasSimpleNames {
+  public sealed interface AndroidResourceName : AndroidName, StatikName, HasSimpleNames {
     /** example: 'string' in `R.string.app_name` */
-    val prefix: SimpleName
+    public val prefix: SimpleName
 
     /** example: 'app_name' in `R.string.app_name` */
-    val identifier: SimpleName
+    public val identifier: SimpleName
   }
 }

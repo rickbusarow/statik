@@ -24,9 +24,9 @@ import com.rickbusarow.statik.utils.lazy.unsafeLazy
  * @property androidRName the R declaration used when AGP generates this fully qualified resource
  * @property resourceName the resource declaration, like `string.app_name`
  */
-class AndroidResourceNameWithRName(
-  val androidRName: AndroidRName,
-  val resourceName: UnqualifiedAndroidResourceName
+public class AndroidResourceNameWithRName(
+  public val androidRName: AndroidRName,
+  public val resourceName: UnqualifiedAndroidResourceName
 ) : NameWithPackageName, AndroidResourceName {
   override val packageName: PackageName
     get() = androidRName.packageName

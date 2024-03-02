@@ -15,16 +15,16 @@
 
 package com.rickbusarow.statik.stdlib
 
-import com.rickbusarow.statik.stdlib.CaseMatcher.CamelSnakeCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.KebabCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.LowerCamelCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.LowerFlatCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.ScreamingKebabCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.ScreamingSnakeCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.SnakeCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.TrainCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.UpperCamelCaseMatcher
-import com.rickbusarow.statik.stdlib.CaseMatcher.UpperFlatCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.CamelSnakeCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.KebabCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.LowerCamelCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.LowerFlatCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.ScreamingKebabCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.ScreamingSnakeCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.SnakeCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.TrainCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.UpperCamelCaseMatcher
+import com.rickbusarow.statik.utils.stdlib.CaseMatcher.UpperFlatCaseMatcher
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory

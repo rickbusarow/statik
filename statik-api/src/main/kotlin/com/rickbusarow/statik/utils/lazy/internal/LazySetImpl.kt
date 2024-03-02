@@ -15,7 +15,6 @@
 
 package com.rickbusarow.statik.utils.lazy.internal
 
-import com.rickbusarow.statik.stdlib.containsAny
 import com.rickbusarow.statik.utils.coroutines.any
 import com.rickbusarow.statik.utils.coroutines.distinct
 import com.rickbusarow.statik.utils.coroutines.flatMapSetConcat
@@ -23,6 +22,8 @@ import com.rickbusarow.statik.utils.coroutines.mapAsync
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.LazySet.DataSource
 import com.rickbusarow.statik.utils.lazy.LazySet.State
+import com.rickbusarow.statik.utils.stdlib.containsAny
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.AbstractFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
@@ -33,6 +34,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
 import java.util.concurrent.atomic.AtomicReference
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal class LazySetImpl<E>(
   cache: Set<E>,
   sources: List<DataSource<E>>

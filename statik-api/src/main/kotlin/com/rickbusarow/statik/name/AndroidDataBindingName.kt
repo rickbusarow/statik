@@ -18,11 +18,11 @@ package com.rickbusarow.statik.name
 import com.rickbusarow.statik.name.AndroidRName.AndroidResourceName
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
-import com.rickbusarow.statik.stdlib.capitalize
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import com.rickbusarow.statik.utils.stdlib.capitalize
 
 /** example: `com.example.databinding.FragmentListBinding` */
-class AndroidDataBindingName(
+public class AndroidDataBindingName(
   override val packageName: PackageName,
   sourceLayout: AndroidResourceName
 ) : NameWithPackageName, AndroidName {
