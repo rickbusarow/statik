@@ -5,7 +5,16 @@
     "artifactId": "statik-api",
     "description": "Base types for the Statik AST",
     "packaging": "jar",
-    "javaVersion": "1.8",
+    "javaVersion": "11",
+    "publicationName": "maven"
+  },
+  {
+    "gradlePath": ":statik-logging",
+    "group": "com.rickbusarow.statik",
+    "artifactId": "statik-logging",
+    "description": "Logging for Statik parsing",
+    "packaging": "jar",
+    "javaVersion": "11",
     "publicationName": "maven"
   },
   {

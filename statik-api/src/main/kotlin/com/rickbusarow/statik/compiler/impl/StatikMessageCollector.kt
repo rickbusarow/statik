@@ -34,8 +34,7 @@ internal class StatikMessageCollector(
   private val logLevel: LogLevel
 ) : MessageCollector {
 
-  private val totalMessages = mutableListOf<String>()
-  private val ignoredMessages = mutableListOf<String>()
+  private val messages = mutableListOf<Pair<CompilerMessageSeverity, String>>()
 
   /**
    * Logs a report message with its severity and source location.
@@ -52,19 +51,15 @@ internal class StatikMessageCollector(
 
     val rendered = messageRenderer.render(severity, message, location)
 
-    totalMessages.add(rendered)
+    messages.add(severity to rendered)
 
     when (logLevel) {
       LogLevel.ERRORS -> if (severity.isError) {
         logger.failure(rendered)
-      } else {
-        ignoredMessages.add(rendered)
       }
 
       LogLevel.WARNINGS_AS_ERRORS -> if (severity.isWarning || severity.isError) {
         logger.failure(rendered)
-      } else {
-        ignoredMessages.add(rendered)
       }
 
       LogLevel.VERBOSE -> if (severity.isWarning || severity.isError) {
@@ -77,8 +72,15 @@ internal class StatikMessageCollector(
 
   /** Clears the total and ignored messages count. */
   override fun clear() {
-    ignoredMessages.clear()
-    totalMessages.clear()
+    messages.clear()
+  }
+
+  val predicate = { level: CompilerMessageSeverity ->
+    if (logLevel == LogLevel.WARNINGS_AS_ERRORS) {
+      level.isError || level.isWarning
+    } else {
+      level.isError
+    }
   }
 
   /**
@@ -86,7 +88,7 @@ internal class StatikMessageCollector(
    *
    * @return Boolean value indicating if there were any errors.
    */
-  override fun hasErrors(): Boolean = totalMessages.isNotEmpty()
+  override fun hasErrors(): Boolean = messages.any { predicate(it.first) }
 
   /** Prints a warning message about the number of ignored issues, if there are any. */
   fun printIssuesIfAny() {
@@ -97,10 +99,11 @@ internal class StatikMessageCollector(
 
   fun renderAll(): String = buildString {
     if (hasErrors()) {
-      appendLine("Analysis completed with ${totalMessages.size} ignored issues.")
+      val filtered = messages.filter { predicate(it.first) }
+      appendLine("Analysis completed with ${filtered.size} ignored issues.")
 
-      for (msg in totalMessages) {
-        appendLine(msg)
+      for (msg in filtered) {
+        appendLine(msg.second)
       }
     }
   }
