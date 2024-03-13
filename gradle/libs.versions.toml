@@ -41,7 +41,7 @@ rickBusarow-statik = "0.1.0"
 semVer = "2.0.0"
 square-kotlinPoet = "1.16.0"
 square-moshi = "1.15.1"
-square-okio = "3.8.0"
+square-okio = "3.9.0"
 vanniktech-publish = "0.28.0"
 
 [plugins]
