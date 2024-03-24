@@ -20,7 +20,7 @@ jobs:
       - name: check out
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
-      - uses: gradle/wrapper-validation-action@699bb18358f12c5b78b37bb0111d3a0e2276e0e2 # v2
+      - uses: gradle/wrapper-validation-action@b231772637bb498f11fdbc86052b6e8a8dc9fc92 # v2
 
   binary-compatibility:
     runs-on: ubuntu-latest
@@ -201,7 +201,7 @@ jobs:
           task: detektReportMerge
 
       - name: Upload SARIF to Github using the upload-sarif action
-        uses: github/codeql-action/upload-sarif@3ab4101902695724f9365a384f86c1074d94e18c # v3
+        uses: github/codeql-action/upload-sarif@1b1aada464948af03b950897e5eb522f92603cc2 # v3
         if: success() || failure()
         with:
           sarif_file: build/reports/detekt/merged.sarif
@@ -236,7 +236,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Unit test results
-        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4
+        uses: mikepenz/action-junit-report@9379f0ccddcab154835d4e2487555ee79614fe95 # v4
         if: failure()
         with:
           github_token: ${{ steps.app-token.outputs.token }}
@@ -273,7 +273,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Unit test results
-        uses: mikepenz/action-junit-report@5f47764eec0e1c1f19f40c8e60a5ba47e47015c5 # v4
+        uses: mikepenz/action-junit-report@9379f0ccddcab154835d4e2487555ee79614fe95 # v4
         if: failure()
         with:
           github_token: ${{ steps.app-token.outputs.token }}
