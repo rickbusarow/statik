@@ -33,17 +33,17 @@ pull_request_rules:
         message: Automatically approving RBusarow pull request
         bot_account: rb-org-bot[bot]
 
-#   - name: Auto-approve bot PRs
-#     conditions:
-#       - check-success=all-checks
-#       - or:
-#         - author=rb-org-bot[bot]
-#         - author=dependabot[bot]
-#         - author=renovate[bot]
-#     actions:
-#       review:
-#         type: APPROVE
-#         message: Automatically approving bot pull request
+  #   - name: Auto-approve bot PRs
+  #     conditions:
+  #       - check-success=all-checks
+  #       - or:
+  #         - author=rb-org-bot[bot]
+  #         - author=dependabot[bot]
+  #         - author=renovate[bot]
+  #     actions:
+  #       review:
+  #         type: APPROVE
+  #         message: Automatically approving bot pull request
 
   - name: Rebase any PR with a 'rebase' label
     conditions:
