@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
+      - name: Set version for non-main branch
+        if: ${{ github.ref_name != 'main' && !startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          echo "ORG_GRADLE_PROJECT_version=${{ github.ref_name }}-SNAPSHOT" | sed 's/\//-/g' >> $GITHUB_ENV
+
       - name: Check
         uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
         with:
