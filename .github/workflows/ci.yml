@@ -280,7 +280,7 @@ jobs:
           report_paths: "**/build/**/TEST-*.xml"
           check_name: Unit Test Results - windows
 
-  all-green:
+  all-checks:
     if: always()
     runs-on: ubuntu-latest
     needs:
