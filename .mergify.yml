@@ -65,9 +65,9 @@ pull_request_rules:
       - and: *success_ci
       - and: *label_approved
     actions:
-      rebase:
-        autosquash: true
-        bot_account: *name_merge_bot
+      review:
+        type: APPROVE
+        message: Automatically approving due to 'approved' label
       label:
         remove:
           - *name_approved
