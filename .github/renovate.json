@@ -4,7 +4,7 @@
     "config:best-practices",
     "default:disableRateLimiting"
   ],
-  "rebaseWhen": "conflicted",
+  "rebaseWhen": "auto",
   "rebaseLabel": "rebase",
   "packageRules": [
     {
