@@ -22,89 +22,84 @@ import com.rickbusarow.statik.InternalStatikApi
  *
  * com.rickbusarow.statik .name*/
 @InternalStatikApi
-internal sealed class CaseMatcher(private val regex: Regex) {
+public sealed class CaseMatcher(private val regex: Regex) {
 
   /**
    * Represents matching for flat case, e.g. 'flatcase'
    *
    * Can be also referred as: lower flat case
-   *
-   * com.rickbusarow.statik .name*/
-  class LowerFlatCaseMatcher : CaseMatcher(Regex("[a-z\\d]+"))
+   */
+  @InternalStatikApi
+  public class LowerFlatCaseMatcher : CaseMatcher(Regex("[a-z\\d]+"))
 
-  /**
-   * Represents matching for upper flat case, e.g. 'UPPERFLATCASE'
-   *
-   * com.rickbusarow.statik .name*/
-  class UpperFlatCaseMatcher : CaseMatcher(Regex("[A-Z\\d]+"))
+  /** Represents matching for upper flat case, e.g. 'UPPERFLATCASE' */
+  @InternalStatikApi
+  public class UpperFlatCaseMatcher : CaseMatcher(Regex("[A-Z\\d]+"))
 
   /**
    * Represents matching for camel case, e.g. 'camelCase'
    *
    * Can be also referred as: lower camel case, dromedary case
-   *
-   * com.rickbusarow.statik .name*/
-  class LowerCamelCaseMatcher : CaseMatcher(Regex("""[a-z]+(?:[A-Z\d]+[a-z\d]+[A-Za-z\d]*)*"""))
+   */
+  @InternalStatikApi
+  public class LowerCamelCaseMatcher : CaseMatcher(
+    Regex("""[a-z]+(?:[A-Z\d]+[a-z\d]+[A-Za-z\d]*)*""")
+  )
 
   /**
    * Represents matching for upper camel case, e.g. 'UpperCamelCase'
    *
    * Can be also referred as: pascal case, studly case
-   *
-   * com.rickbusarow.statik .name*/
-  class UpperCamelCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:[A-Z]+[a-z\d]*)*"""))
+   */
+  @InternalStatikApi
+  public class UpperCamelCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:[A-Z]+[a-z\d]*)*"""))
 
   /**
    * Represents matching for snake case, e.g. 'snake_case'
    *
    * Can be also referred as: lower snake case, pothole case
-   *
-   * com.rickbusarow.statik .name*/
-  class SnakeCaseMatcher : CaseMatcher(Regex("""[a-z\d]+(?:_[a-z\d]+)*"""))
+   */
+  @InternalStatikApi
+  public class SnakeCaseMatcher : CaseMatcher(Regex("""[a-z\d]+(?:_[a-z\d]+)*"""))
 
   /**
    * Represents matching for screaming snake case, e.g. 'SCREAMING_SNAKE_CASE'
    *
    * Can be also referred as: upper snake case, macro case, constant case
-   *
-   * com.rickbusarow.statik .name*/
-  class ScreamingSnakeCaseMatcher : CaseMatcher(Regex("""[A-Z\d]+(?:_[A-Z\d]+)*"""))
+   */
+  @InternalStatikApi
+  public class ScreamingSnakeCaseMatcher : CaseMatcher(Regex("""[A-Z\d]+(?:_[A-Z\d]+)*"""))
 
-  /**
-   * Represents matching for camel snake case, e.g. 'Camel_Snake_Case'
-   *
-   * com.rickbusarow.statik .name*/
-  class CamelSnakeCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:_[A-Z]+[a-z\d]*)*"""))
+  /** Represents matching for camel snake case, e.g. 'Camel_Snake_Case' */
+  @InternalStatikApi
+  public class CamelSnakeCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:_[A-Z]+[a-z\d]*)*"""))
 
   /**
    * Represents matching for kebab case, e.g. 'kebab-case'
    *
    * Can be also referred as: lower kebab case, dash case, lisp case
-   *
-   * com.rickbusarow.statik .name*/
-  class KebabCaseMatcher : CaseMatcher(Regex("""[a-z\d]+(?:-[a-z\d]+)*"""))
+   */
+  @InternalStatikApi
+  public class KebabCaseMatcher : CaseMatcher(Regex("""[a-z\d]+(?:-[a-z\d]+)*"""))
 
   /**
    * Represents matching for screaming kebab case, e.g. 'SCREAMING-KEBAB-CASE'
    *
    * Can be also referred as: upper kebab case, cobol case
-   *
-   * com.rickbusarow.statik .name*/
-  class ScreamingKebabCaseMatcher : CaseMatcher(Regex("""[A-Z\d]+(?:-[A-Z\d]+)*"""))
+   */
+  @InternalStatikApi
+  public class ScreamingKebabCaseMatcher : CaseMatcher(Regex("""[A-Z\d]+(?:-[A-Z\d]+)*"""))
 
-  /**
-   * Represents matching for train case, e.g. 'Train-Case'
-   *
-   * com.rickbusarow.statik .name*/
-  class TrainCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:-[A-Z]+[a-z\d]*)*"""))
+  /** Represents matching for train case, e.g. 'Train-Case' */
+  @InternalStatikApi
+  public class TrainCaseMatcher : CaseMatcher(Regex("""[A-Z][a-z\d]+(?:-[A-Z]+[a-z\d]*)*"""))
 
-  /**
-   * Represents matching for custom regular expressions
-   *
-   * com.rickbusarow.statik .name*/
-  class CustomMatcher(regex: Regex) : CaseMatcher(regex)
+  /** Represents matching for custom regular expressions */
+  @InternalStatikApi
+  public class CustomMatcher(regex: Regex) : CaseMatcher(regex)
 
-  open fun matches(source: String?): Boolean {
+  @InternalStatikApi
+  public open fun matches(source: String?): Boolean {
     return source?.matches(regex) ?: false
   }
 

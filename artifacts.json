@@ -9,6 +9,24 @@
     "publicationName": "maven"
   },
   {
+    "gradlePath": ":statik-kotlin",
+    "group": "com.rickbusarow.statik",
+    "artifactId": "statik-kotlin",
+    "description": "Common Kotlin language types for the Statik AST",
+    "packaging": "jar",
+    "javaVersion": "11",
+    "publicationName": "maven"
+  },
+  {
+    "gradlePath": ":statik-kotlin-psi",
+    "group": "com.rickbusarow.statik",
+    "artifactId": "statik-kotlin-psi",
+    "description": "Kotlin language models backed by PSI elements",
+    "packaging": "jar",
+    "javaVersion": "11",
+    "publicationName": "maven"
+  },
+  {
     "gradlePath": ":statik-logging",
     "group": "com.rickbusarow.statik",
     "artifactId": "statik-logging",

@@ -28,7 +28,7 @@ import kotlin.contracts.contract
 @Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
 @Deprecated("no", ReplaceWith("(this as T)"))
 @InternalStatikApi
-internal inline fun <T> Any.cast(): T = this as T
+public inline fun <T> Any.cast(): T = this as T
 
 /**
  * Attempts to cast this instance to the specified type
@@ -44,7 +44,7 @@ internal inline fun <T> Any.cast(): T = this as T
  */
 @Deprecated("no", ReplaceWith("(this as? T)"))
 @InternalStatikApi
-internal inline fun <reified T : Any> Any?.safeAs(): T? = this as? T
+public inline fun <reified T : Any> Any?.safeAs(): T? = this as? T
 
 /**
  * shorthand for `requireNotNull(this)`
@@ -54,8 +54,7 @@ internal inline fun <reified T : Any> Any?.safeAs(): T? = this as? T
 @OptIn(ExperimentalContracts::class)
 @Suppress("NOTHING_TO_INLINE")
 @InternalStatikApi
-@PublishedApi
-internal inline fun <T : Any> T?.requireNotNull(): T {
+public inline fun <T : Any> T?.requireNotNull(): T {
   contract {
     returns() implies (this@requireNotNull != null)
   }
@@ -69,7 +68,7 @@ internal inline fun <T : Any> T?.requireNotNull(): T {
  */
 @OptIn(ExperimentalContracts::class)
 @InternalStatikApi
-internal inline fun <T : Any> T?.requireNotNull(lazyMessage: () -> Any): T {
+public inline fun <T : Any> T?.requireNotNull(lazyMessage: () -> Any): T {
   contract {
     returns() implies (this@requireNotNull != null)
   }
@@ -85,7 +84,7 @@ internal inline fun <T : Any> T?.requireNotNull(lazyMessage: () -> Any): T {
  * @throws IllegalStateException if the condition is not met.
  */
 @InternalStatikApi
-internal inline fun <T> T.require(condition: (T) -> Boolean, lazyMessage: (T) -> Any): T = apply {
+public inline fun <T> T.require(condition: (T) -> Boolean, lazyMessage: (T) -> Any): T = apply {
   check(condition(this)) { lazyMessage(this) }
 }
 
@@ -97,7 +96,7 @@ internal inline fun <T> T.require(condition: (T) -> Boolean, lazyMessage: (T) ->
  */
 @Suppress("NOTHING_TO_INLINE")
 @InternalStatikApi
-internal inline fun <T : Any> T?.checkNotNull(): T = checkNotNull(this)
+public inline fun <T : Any> T?.checkNotNull(): T = checkNotNull(this)
 
 /**
  * A functional version of [kotlin.checkNotNull]
@@ -107,7 +106,7 @@ internal inline fun <T : Any> T?.checkNotNull(): T = checkNotNull(this)
  * @throws IllegalStateException if this instance is `null`.
  */
 @InternalStatikApi
-internal inline fun <T : Any> T?.checkNotNull(
+public inline fun <T : Any> T?.checkNotNull(
   lazyMessage: () -> Any
 ): T = checkNotNull(this, lazyMessage)
 
@@ -120,6 +119,6 @@ internal inline fun <T : Any> T?.checkNotNull(
  * @throws IllegalStateException if the condition is not met.
  */
 @InternalStatikApi
-internal inline fun <T> T.check(condition: (T) -> Boolean, lazyMessage: (T) -> Any): T = apply {
+public inline fun <T> T.check(condition: (T) -> Boolean, lazyMessage: (T) -> Any): T = apply {
   check(condition(this)) { lazyMessage(this) }
 }

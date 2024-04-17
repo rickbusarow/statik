@@ -43,8 +43,8 @@ public interface LazySet<out E> : Flow<E>, LazySetComponent<E> {
   public fun snapshot(): State<E>
 
   /**
-   * A **Lazy** data source for a [LazySet], which performs some suspending
-   * operation [get] in order to incrementally add data to the `LazySet`.
+   * A **Lazy** data source for a [LazySet], which performs some
+   * suspending operation [get] to incrementally add data to the `LazySet`.
    */
   @InternalStatikApi
   public interface DataSource<out E> :
@@ -112,24 +112,24 @@ public suspend fun <T : B, E : B, B> LazySet<T>.containsAny(elements: Collection
 }
 
 @InternalStatikApi
-internal fun <E> Flow<E>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
+public fun <E> Flow<E>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
   dataSource(priority) { toSet() }
 
 @InternalStatikApi
-internal fun <E> LazyDeferred<Set<E>>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
+public fun <E> LazyDeferred<Set<E>>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
   dataSource(priority) { await() }
 
 @InternalStatikApi
-internal fun <E> Lazy<Set<E>>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
+public fun <E> Lazy<Set<E>>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
   dataSource(priority) { value }
 
 @InternalStatikApi
-internal fun <E> dataSourceOf(vararg elements: E, priority: Priority = MEDIUM): DataSource<E> =
+public fun <E> dataSourceOf(vararg elements: E, priority: Priority = MEDIUM): DataSource<E> =
   DataSourceImpl(priority, lazyDeferred { elements.toSet() })
 
 /** @return A DataSource<E> from this [priority] and [factory] */
 @InternalStatikApi
-internal fun <E> dataSource(
+public fun <E> dataSource(
   priority: Priority = MEDIUM,
   factory: LazyDeferred<Set<E>>
 ): DataSource<E> =
@@ -137,7 +137,7 @@ internal fun <E> dataSource(
 
 /** @return A DataSource<E> from this [priority] and [factory] */
 @InternalStatikApi
-internal fun <E> dataSource(
+public fun <E> dataSource(
   priority: Priority = MEDIUM,
   factory: suspend () -> Set<E>
 ): DataSource<E> {
@@ -145,15 +145,15 @@ internal fun <E> dataSource(
 }
 
 @InternalStatikApi
-internal fun <E> Collection<LazySetComponent<E>>.toLazySet(): LazySet<E> = lazySet(this)
+public fun <E> Collection<LazySetComponent<E>>.toLazySet(): LazySet<E> = lazySet(this)
 
 @InternalStatikApi
-internal fun <E> lazySet(vararg children: LazySetComponent<E>): LazySet<E> {
+public fun <E> lazySet(vararg children: LazySetComponent<E>): LazySet<E> {
   return lazySet(children.asList())
 }
 
 @InternalStatikApi
-internal fun <E> lazySet(
+public fun <E> lazySet(
   priority: Priority = MEDIUM,
   dataSource: suspend () -> Set<E>
 ): LazySet<E> {
@@ -162,17 +162,17 @@ internal fun <E> lazySet(
 
 @JvmName("lazySetSingle")
 @InternalStatikApi
-internal fun <E> lazySet(priority: Priority = MEDIUM, dataSource: suspend () -> E): LazySet<E> {
+public fun <E> lazySet(priority: Priority = MEDIUM, dataSource: suspend () -> E): LazySet<E> {
   return lazySet(dataSource(priority) { setOf(dataSource()) })
 }
 
 @InternalStatikApi
-internal fun <E> Flow<E>.toLazySet(priority: Priority = MEDIUM): LazySet<E> {
+public fun <E> Flow<E>.toLazySet(priority: Priority = MEDIUM): LazySet<E> {
   return lazySet(priority) { toSet() }
 }
 
 @InternalStatikApi
-internal fun <E> lazySet(children: Collection<LazySetComponent<E>>): LazySet<E> {
+public fun <E> lazySet(children: Collection<LazySetComponent<E>>): LazySet<E> {
   val (sets, dataSources) = children.partition { it is LazySet<*> }
   @Suppress("UNCHECKED_CAST")
   return createLazySet(
@@ -182,7 +182,7 @@ internal fun <E> lazySet(children: Collection<LazySetComponent<E>>): LazySet<E> 
 }
 
 @InternalStatikApi
-internal fun <E> emptyLazySet(): LazySet<E> {
+public fun <E> emptyLazySet(): LazySet<E> {
   return createLazySet(emptyList(), emptyList())
 }
 

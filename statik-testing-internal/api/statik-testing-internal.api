@@ -1,0 +1,191 @@
+public final class com/rickbusarow/statik/testing/internal/AssertsKt {
+	public static final fun replaceOrFail (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun replaceOrFail (Ljava/lang/String;Lkotlin/text/Regex;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun requireNotNullOrFail (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+	public static synthetic fun requireNotNullOrFail$default (Ljava/lang/Object;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract class com/rickbusarow/statik/testing/internal/BaseStatikNameTest : com/rickbusarow/kase/HasTestEnvironmentFactory, com/rickbusarow/statik/testing/internal/TrimmedAsserts {
+	public fun <init> ()V
+	public final fun allReferenceNames (Ljava/lang/String;ZLjava/util/List;)Ljava/util/List;
+	public static synthetic fun allReferenceNames$default (Lcom/rickbusarow/statik/testing/internal/BaseStatikNameTest;Ljava/lang/String;ZLjava/util/List;ILjava/lang/Object;)Ljava/util/List;
+	public fun getTestEnvironmentFactory ()Lcom/rickbusarow/kase/DefaultTestEnvironment$Factory;
+	public synthetic fun getTestEnvironmentFactory ()Lcom/rickbusarow/kase/TestEnvironmentFactory;
+	public fun shouldBe (Ljava/lang/Object;Ljava/lang/Object;)V
+	public fun shouldBe (Ljava/lang/String;Ljava/lang/String;)V
+	public fun shouldBe (Lkotlin/sequences/Sequence;Ljava/util/List;)V
+	public fun shouldBeNoTrimIndent (Ljava/lang/String;Ljava/lang/String;)V
+	public fun shouldHaveText (Ljava/io/File;Ljava/lang/String;)V
+	public fun test (Lcom/rickbusarow/kase/HasTestEnvironmentFactory;Ljava/lang/Object;Ljava/util/List;Lcom/rickbusarow/kase/files/TestLocation;Lkotlin/jvm/functions/Function2;)V
+	public fun test (Lcom/rickbusarow/kase/HasTestEnvironmentFactory;Ljava/util/List;Lcom/rickbusarow/kase/files/TestLocation;Lkotlin/jvm/functions/Function2;)V
+	public fun test (Lcom/rickbusarow/kase/NoParamTestEnvironmentFactory;Ljava/util/List;Lcom/rickbusarow/kase/files/TestLocation;Lkotlin/jvm/functions/Function2;)V
+	public fun test (Ljava/lang/Object;Lcom/rickbusarow/kase/TestEnvironmentFactory;Ljava/util/List;Lcom/rickbusarow/kase/files/TestLocation;Lkotlin/jvm/functions/Function2;)V
+	public fun trimmedShouldBe (Ljava/lang/Object;Ljava/lang/Object;[Lkotlin/reflect/KClass;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/ExtraSourceFile {
+	public static final field Companion Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile;
+	public static synthetic fun copy$default (Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Ljava/lang/String;
+	public final fun getRelativePath ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/testing/internal/ExtraSourceFile$Companion {
+}
+
+public final class com/rickbusarow/statik/testing/internal/ExtraSourceFileKt {
+	public static final fun from (Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile$Companion;[Ljava/lang/String;)Ljava/util/List;
+	public static final fun from (Lcom/rickbusarow/statik/testing/internal/ExtraSourceFile$Companion;[Lkotlin/Pair;)Ljava/util/List;
+	public static final fun kotlinPackageName (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/rickbusarow/statik/testing/internal/HostEnvironment {
+	public static final field INSTANCE Lcom/rickbusarow/statik/testing/internal/HostEnvironment;
+	public final fun findInClasspath (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/io/File;
+	public final fun findInClasspath (Lkotlin/text/Regex;)Ljava/io/File;
+	public static synthetic fun findInClasspath$default (Lcom/rickbusarow/statik/testing/internal/HostEnvironment;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ljava/io/File;
+	public final fun getAllInheritedKableProjects ()Ljava/util/List;
+	public final fun getAnvilAnnotations ()Ljava/io/File;
+	public final fun getAutoServiceAnnotations ()Ljava/io/File;
+	public final fun getClasspath ()Ljava/util/List;
+	public final fun getClikt ()Ljava/io/File;
+	public final fun getInheritedClasspath ()Ljava/util/List;
+	public final fun getJavaxInject ()Ljava/io/File;
+	public final fun getKotlinStdLibCommonJar ()Ljava/io/File;
+	public final fun getKotlinStdLibJar ()Ljava/io/File;
+	public final fun getKotlinStdLibJdkJar ()Ljava/io/File;
+	public final fun getKotlinxSerializationCoreJvm ()Ljava/io/File;
+	public final fun getOkioJvm ()Ljava/io/File;
+	public final fun getWireGrpcClient ()Ljava/io/File;
+	public final fun getWireRuntime ()Ljava/io/File;
+}
+
+public final class com/rickbusarow/statik/testing/internal/KotestKt {
+	public static final fun forAllBlocking (Lio/kotest/property/Gen;Lkotlin/jvm/functions/Function3;)V
+	public static final fun forAllBlockingExtension (Lio/kotest/property/Gen;Lkotlin/jvm/functions/Function3;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/ReflectionKt {
+	public static final fun enclosingCanonicalNames (Ljava/lang/Class;Z)Lkotlin/sequences/Sequence;
+	public static synthetic fun enclosingCanonicalNames$default (Ljava/lang/Class;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun enclosingClasses (Ljava/lang/Class;Z)Lkotlin/sequences/Sequence;
+	public static synthetic fun enclosingClasses$default (Ljava/lang/Class;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public static final fun firstNonSyntheticClass (Ljava/lang/Class;)Ljava/lang/Class;
+	public static final fun getClassgraph ()Lio/github/classgraph/ScanResult;
+}
+
+public abstract interface class com/rickbusarow/statik/testing/internal/StatikNameTest : com/rickbusarow/statik/testing/internal/TrimmedAsserts {
+	public abstract fun agnostic (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public abstract fun androidDataBinding (Ljava/lang/String;)Lcom/rickbusarow/statik/name/AndroidDataBindingReferenceName;
+	public abstract fun androidR (Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/AndroidRReferenceName;
+	public abstract fun asReferenceName (Ljava/lang/String;)Lcom/rickbusarow/statik/name/ReferenceName;
+	public abstract fun getDefaultLanguage ()Lcom/rickbusarow/statik/name/StatikLanguage;
+	public abstract fun java (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public abstract fun kotlin (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public abstract fun qualifiedAndroidResource (Ljava/lang/String;)Lcom/rickbusarow/statik/name/QualifiedAndroidResourceReferenceName;
+	public abstract fun shouldBe (Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;Ljava/util/Collection;)V
+	public abstract fun shouldBe (Lcom/rickbusarow/statik/utils/lazy/LazySet;Ljava/util/Collection;)V
+	public abstract fun shouldBe (Ljava/util/Collection;Ljava/util/Collection;)V
+	public abstract fun shouldBe (Ljava/util/List;Ljava/util/Collection;)V
+	public abstract fun unqualifiedAndroidResource (Ljava/lang/String;)Lcom/rickbusarow/statik/name/UnqualifiedAndroidResourceReferenceName;
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTest$DefaultImpls {
+	public static fun agnostic (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun agnostic$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static fun androidDataBinding (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;)Lcom/rickbusarow/statik/name/AndroidDataBindingReferenceName;
+	public static fun androidR (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/AndroidRReferenceName;
+	public static synthetic fun androidR$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/AndroidRReferenceName;
+	public static fun asReferenceName (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;)Lcom/rickbusarow/statik/name/ReferenceName;
+	public static fun java (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun java$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static fun kotlin (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun kotlin$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static fun qualifiedAndroidResource (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;)Lcom/rickbusarow/statik/name/QualifiedAndroidResourceReferenceName;
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;Ljava/util/Collection;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Lcom/rickbusarow/statik/utils/lazy/LazySet;Ljava/util/Collection;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/Object;Ljava/lang/Object;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Ljava/lang/String;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/util/Collection;Ljava/util/Collection;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/util/List;Ljava/util/Collection;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Lkotlin/sequences/Sequence;Ljava/util/List;)V
+	public static fun shouldBeNoTrimIndent (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;Ljava/lang/String;)V
+	public static fun shouldHaveText (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/io/File;Ljava/lang/String;)V
+	public static fun trimmedShouldBe (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/Object;Ljava/lang/Object;[Lkotlin/reflect/KClass;)V
+	public static fun unqualifiedAndroidResource (Lcom/rickbusarow/statik/testing/internal/StatikNameTest;Ljava/lang/String;)Lcom/rickbusarow/statik/name/UnqualifiedAndroidResourceReferenceName;
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder {
+	public fun <init> ()V
+	public final fun apiReferences (Lkotlin/jvm/functions/Function1;)V
+	public final fun declarations (Lkotlin/jvm/functions/Function1;)V
+	public final fun getApiReferenceNames ()Ljava/util/List;
+	public final fun getDeclarations ()Ljava/util/List;
+	public final fun getReferenceNames ()Ljava/util/List;
+	public final fun references (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$ApiReferenceBuilder : com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$ReferenceBuilder {
+	public fun <init> (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$DeclarationsBuilder {
+	public fun <init> (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder;)V
+	public final fun agnostic (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun agnostic$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$DeclarationsBuilder;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public final fun java (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun java$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$DeclarationsBuilder;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public final fun kotlin (Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+	public static synthetic fun kotlin$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$DeclarationsBuilder;Ljava/lang/String;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/QualifiedDeclaredName;
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$NormalReferenceBuilder : com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$ReferenceBuilder {
+	public fun <init> (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder;)V
+}
+
+public class com/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$ReferenceBuilder {
+	public fun <init> (Ljava/util/List;)V
+	public final fun androidDataBinding (Ljava/lang/String;)Lcom/rickbusarow/statik/name/AndroidDataBindingReferenceName;
+	public final fun androidR (Lcom/rickbusarow/statik/name/PackageName;)Lcom/rickbusarow/statik/name/AndroidRReferenceName;
+	public static synthetic fun androidR$default (Lcom/rickbusarow/statik/testing/internal/StatikNameTest$JvmFileBuilder$ReferenceBuilder;Lcom/rickbusarow/statik/name/PackageName;ILjava/lang/Object;)Lcom/rickbusarow/statik/name/AndroidRReferenceName;
+	public final fun java (Ljava/lang/String;)Lcom/rickbusarow/statik/name/ReferenceName;
+	public final fun kotlin (Ljava/lang/String;)Lcom/rickbusarow/statik/name/ReferenceName;
+	public final fun qualifiedAndroidResource (Ljava/lang/String;)Lcom/rickbusarow/statik/name/QualifiedAndroidResourceReferenceName;
+	public final fun unqualifiedAndroidResource (Ljava/lang/String;)Lcom/rickbusarow/statik/name/UnqualifiedAndroidResourceReferenceName;
+}
+
+public final class com/rickbusarow/statik/testing/internal/StatikNameTestKt {
+	public static final fun prettyPrint (Ljava/util/Collection;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/testing/internal/TrimmedAsserts {
+	public abstract fun shouldBe (Ljava/lang/Object;Ljava/lang/Object;)V
+	public abstract fun shouldBe (Ljava/lang/String;Ljava/lang/String;)V
+	public abstract fun shouldBe (Lkotlin/sequences/Sequence;Ljava/util/List;)V
+	public abstract fun shouldBeNoTrimIndent (Ljava/lang/String;Ljava/lang/String;)V
+	public abstract fun shouldHaveText (Ljava/io/File;Ljava/lang/String;)V
+	public abstract fun trimmedShouldBe (Ljava/lang/Object;Ljava/lang/Object;[Lkotlin/reflect/KClass;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/TrimmedAsserts$DefaultImpls {
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Ljava/lang/Object;Ljava/lang/Object;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Ljava/lang/String;Ljava/lang/String;)V
+	public static fun shouldBe (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Lkotlin/sequences/Sequence;Ljava/util/List;)V
+	public static fun shouldBeNoTrimIndent (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Ljava/lang/String;Ljava/lang/String;)V
+	public static fun shouldHaveText (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Ljava/io/File;Ljava/lang/String;)V
+	public static fun trimmedShouldBe (Lcom/rickbusarow/statik/testing/internal/TrimmedAsserts;Ljava/lang/Object;Ljava/lang/Object;[Lkotlin/reflect/KClass;)V
+}
+
+public final class com/rickbusarow/statik/testing/internal/TrimmedAssertsKt {
+	public static final fun getCoroutinesClasses ()Ljava/util/Set;
+	public static final fun trimmedAssert (Ljava/lang/Object;[Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun trimmedAssert ([Lkotlin/reflect/KClass;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+}
+

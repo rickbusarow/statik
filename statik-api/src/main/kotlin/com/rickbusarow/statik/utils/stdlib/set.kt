@@ -27,7 +27,7 @@ import com.rickbusarow.statik.InternalStatikApi
  * @return A set containing only the receiver item.
  */
 @InternalStatikApi
-internal fun <T> T.singletonSet(): Set<T> = setOf(this)
+public fun <T> T.singletonSet(): Set<T> = setOf(this)
 
 /**
  * Filters the receiver iterable and adds the matching elements to a set.
@@ -41,7 +41,7 @@ internal fun <T> T.singletonSet(): Set<T> = setOf(this)
  * @return A set containing elements from the receiver iterable that match the predicate.
  */
 @InternalStatikApi
-internal inline fun <T> Iterable<T>.filterToSet(
+public inline fun <T> Iterable<T>.filterToSet(
   destination: MutableSet<T> = mutableSetOf(),
   predicate: (T) -> Boolean
 ): Set<T> {
@@ -58,7 +58,7 @@ internal inline fun <T> Iterable<T>.filterToSet(
  * @return A set containing the transformed elements from the receiver collection.
  */
 @InternalStatikApi
-internal inline fun <C : Collection<T>, T, R> C.mapToSet(
+public inline fun <C : Collection<T>, T, R> C.mapToSet(
   destination: MutableSet<R> = mutableSetOf(),
   transform: (T) -> R
 ): Set<R> {
@@ -75,8 +75,7 @@ internal inline fun <C : Collection<T>, T, R> C.mapToSet(
  * @return A set containing the transformed elements from the receiver collection.
  */
 @InternalStatikApi
-@PublishedApi
-internal inline fun <T, R> Array<T>.mapToSet(
+public inline fun <T, R> Array<T>.mapToSet(
   destination: MutableSet<R> = mutableSetOf(),
   transform: (T) -> R
 ): Set<R> {
@@ -95,8 +94,7 @@ internal inline fun <T, R> Array<T>.mapToSet(
  * @return A set containing the flattened transformed elements from the receiver iterable.
  */
 @InternalStatikApi
-@PublishedApi
-internal inline fun <T, R> Iterable<T>.flatMapToSet(
+public inline fun <T, R> Iterable<T>.flatMapToSet(
   destination: MutableSet<R> = mutableSetOf(),
   transform: (T) -> Iterable<R>
 ): Set<R> {
@@ -115,8 +113,7 @@ internal inline fun <T, R> Iterable<T>.flatMapToSet(
  * @return A set containing the flattened transformed elements from the receiver iterable.
  */
 @InternalStatikApi
-@PublishedApi
-internal inline fun <T, R> Sequence<T>.flatMapToSet(
+public inline fun <T, R> Sequence<T>.flatMapToSet(
   destination: MutableSet<R> = mutableSetOf(),
   transform: (T) -> Iterable<R>
 ): Set<R> {

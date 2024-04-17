@@ -22,7 +22,7 @@ import kotlin.LazyThreadSafetyMode.NONE
 
 /** Replace Windows file separators with Unix ones, just for string comparison in tests */
 @InternalStatikApi
-internal fun String.alwaysUnixFileSeparators(): String = replace(File.separator, "/")
+public fun String.alwaysUnixFileSeparators(): String = replace(File.separator, "/")
 
 /**
  * Capitalizes the first character of this [String] using the specified [locale].
@@ -32,12 +32,12 @@ internal fun String.alwaysUnixFileSeparators(): String = replace(File.separator,
  * @return The string with the first character capitalized.
  */
 @InternalStatikApi
-internal fun String.capitalize(locale: Locale = Locale.US): String =
+public fun String.capitalize(locale: Locale = Locale.US): String =
   replaceFirstChar { it.uppercase(locale) }
 
 /** Replaces the deprecated Kotlin version, but hard-codes `Locale.US` */
 @InternalStatikApi
-internal fun String.capitalize(): String = replaceFirstChar {
+public fun String.capitalize(): String = replaceFirstChar {
   if (it.isLowerCase()) it.titlecase(Locale.US) else it.toString()
 }
 
@@ -51,7 +51,7 @@ internal fun String.capitalize(): String = replaceFirstChar {
  * @return The cleaned string after all the modifications have been applied.
  */
 @InternalStatikApi
-internal fun String.cleanOutput(workingDir: File): String {
+public fun String.cleanOutput(workingDir: File): String {
   return normaliseLineSeparators()
     .useRelativePaths(workingDir)
     .alwaysUnixFileSeparators()
@@ -70,12 +70,12 @@ internal fun String.cleanOutput(workingDir: File): String {
  * @return The string with the first character decapitalized.
  */
 @InternalStatikApi
-internal fun String.decapitalize(locale: Locale = Locale.US): String =
+public fun String.decapitalize(locale: Locale = Locale.US): String =
   replaceFirstChar { it.lowercase(locale) }
 
 /** Returns `true` if the string ends with any of the specified [suffixes]. */
 @InternalStatikApi
-internal fun String.endsWithAny(vararg suffixes: String, ignoreCase: Boolean = false): Boolean {
+public fun String.endsWithAny(vararg suffixes: String, ignoreCase: Boolean = false): Boolean {
   return suffixes.any { endsWith(it, ignoreCase) }
 }
 
@@ -86,7 +86,7 @@ internal fun String.endsWithAny(vararg suffixes: String, ignoreCase: Boolean = f
  * Doesn't preserve the original line endings.
  */
 @InternalStatikApi
-internal fun CharSequence.filterLines(predicate: (String) -> Boolean): String = lineSequence()
+public fun CharSequence.filterLines(predicate: (String) -> Boolean): String = lineSequence()
   .filter(predicate)
   .joinToString("\n")
 
@@ -100,7 +100,7 @@ internal fun CharSequence.filterLines(predicate: (String) -> Boolean): String = 
  * @return The minimum indentation of the string, or the absolute minimum if the minimum is less.
  */
 @InternalStatikApi
-internal fun String.findMinimumIndent(absoluteMinimum: String = "  "): String {
+public fun String.findMinimumIndent(absoluteMinimum: String = "  "): String {
 
   if (contains("\t")) return "\t"
 
@@ -274,7 +274,8 @@ internal fun <T> Sequence<T>.joinToStringIndexed(
  *
  * @return The string with adjusted indentation.
  */
-internal fun String.justifyToFirstLine(): String {
+@InternalStatikApi
+public fun String.justifyToFirstLine(): String {
   val targetIndent = lineSequence()
     .firstOrNull { it.isNotBlank() }
     ?.indentWidth()

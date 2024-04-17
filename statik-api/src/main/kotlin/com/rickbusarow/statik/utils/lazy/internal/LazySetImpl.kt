@@ -64,7 +64,7 @@ internal class LazySetImpl<E>(
     }
 
     // There can be a queue of DataSources lined up, but they may all be empty.
-    // In order to determine whether the set has any more elements, we have to iterate over that
+    // to determine whether the set has any more elements, we have to iterate over that
     // queue, unwrapping all those DataSources.  As soon as we reach any element, we know the set
     // isn't empty and we can return.
     var reachedElement = true

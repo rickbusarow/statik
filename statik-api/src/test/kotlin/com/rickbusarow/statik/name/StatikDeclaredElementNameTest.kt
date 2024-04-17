@@ -16,6 +16,7 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
+import com.rickbusarow.statik.testing.internal.BaseStatikNameTest
 import org.junit.jupiter.api.Test
 
 class StatikDeclaredElementNameTest : BaseStatikNameTest() {

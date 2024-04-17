@@ -20,37 +20,11 @@ import com.rickbusarow.statik.element.StatikFile
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.StatikLanguage
-import com.rickbusarow.statik.utils.lazy.LazyDeferred
-import com.rickbusarow.statik.utils.lazy.lazyDeferred
-import kotlinx.coroutines.coroutineScope
-import org.jetbrains.kotlin.resolve.BindingContext
 
-/**
- * Provides a context for parsing and resolving elements in a module check system. This
- * class is designed to work with any type `T` that represents a symbol in the system.
- *
- * @property nameParser The parser used to parse names in the system.
- * @property language The language that is compatible with the system.
- * @property kotlinEnvironmentDeferred A deferred [KotlinEnvironment]
- *   that provides a context for Kotlin language features.
- * @property stdLibNameOrNull A function that takes a [ReferenceName] and returns a
- *   [QualifiedDeclaredName] from the standard library, or null if no such name exists.
- */
-public class StatikElementContext<T>(
-  public val nameParser: NameParser,
-  public val language: StatikLanguage,
-  public val kotlinEnvironmentDeferred: LazyDeferred<KotlinEnvironment>,
+public interface StatikElementContext<T> {
+  public val nameParser: NameParser
+  public val language: StatikLanguage
   public val stdLibNameOrNull: ReferenceName.() -> QualifiedDeclaredName?
-) {
-
-  /**
-   * A deferred binding context obtained from the [KotlinEnvironment].
-   * This context is used to resolve bindings in the system.
-   */
-  public val bindingContextDeferred: LazyDeferred<BindingContext> = lazyDeferred {
-    kotlinEnvironmentDeferred.await()
-      .bindingContextDeferred.await()
-  }
 
   /**
    * Resolves the declared name of a symbol in the system. This method is not yet implemented.
@@ -58,11 +32,7 @@ public class StatikElementContext<T>(
    * @param symbol The symbol whose declared name is to be resolved.
    * @return The declared name of the symbol, or null if the symbol does not have a declared name.
    */
-  public suspend fun declaredNameOrNull(symbol: T): QualifiedDeclaredName? {
-    coroutineScope {
-      TODO("not yet implemented $symbol")
-    }
-  }
+  public suspend fun declaredNameOrNull(symbol: T): QualifiedDeclaredName?
 
   /**
    * Resolves a reference name in a given file. This method
@@ -75,14 +45,5 @@ public class StatikElementContext<T>(
   public suspend fun resolveReferenceNameOrNull(
     file: StatikFile,
     toResolve: ReferenceName
-  ): ReferenceName? {
-    return nameParser.parse(
-      NameParser.NameParserPacket(
-        file = file,
-        toResolve = toResolve,
-        referenceLanguage = language,
-        stdLibNameOrNull = stdLibNameOrNull
-      )
-    )
-  }
+  ): ReferenceName?
 }

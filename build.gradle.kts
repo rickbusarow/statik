@@ -49,3 +49,35 @@ subprojects.map {
   it.tasks.withType(KotlinCompile::class.java)
     .mustRunAfter(tasks.withType(DoksTask::class.java))
 }
+
+val foo by tasks.registering {
+  doLast {
+    rootDir.walkTopDown()
+      .filter { it.path.contains("src/test/kotlin") }
+      .filter { it.isFile }
+      .mapNotNull { file ->
+
+        val txt = file.readText()
+
+        val name = """(?<=class )\w+""".toRegex()
+          .find(txt)?.value
+          ?: return@mapNotNull null
+
+        file to name
+      }
+      .groupBy { it.second }
+      .map { (key, value) ->
+        key to value.map { it.first }.sorted()
+      }
+      .filter { it.second.size > 1 }
+      .sortedBy { it.first }
+      .forEach { (name, files) ->
+        println(
+          """
+          | -- $name
+          |${files .joinToString("\n") }
+          """.trimMargin()
+        )
+      }
+  }
+}

@@ -28,7 +28,7 @@ import com.rickbusarow.statik.InternalStatikApi
  * The operation is _intermediate_ and _stateless_.
  */
 @InternalStatikApi
-internal fun <E> Sequence<E>.plus(vararg elements: E): Sequence<E> {
+public fun <E> Sequence<E>.plus(vararg elements: E): Sequence<E> {
   return sequenceOf(this, elements.asSequence()).flatten()
 }
 
@@ -39,13 +39,13 @@ internal fun <E> Sequence<E>.plus(vararg elements: E): Sequence<E> {
  * preserve their order relative to each other after sorting.
  */
 @InternalStatikApi
-internal fun <T> Sequence<T>.sortedWith(vararg selectors: (T) -> Comparable<*>): Sequence<T> {
+public fun <T> Sequence<T>.sortedWith(vararg selectors: (T) -> Comparable<*>): Sequence<T> {
   return sortedWith(compareBy(*selectors))
 }
 
 /** Creates a sequence of those [elements] which are not null */
 @InternalStatikApi
-internal fun <T> sequenceOfNotNull(vararg elements: T?): Sequence<T> = sequence {
+public fun <T> sequenceOfNotNull(vararg elements: T?): Sequence<T> = sequence {
   elements.forEach { element ->
     if (element != null) yield(element)
   }

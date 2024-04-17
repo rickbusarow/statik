@@ -19,6 +19,7 @@ import com.rickbusarow.kase.asTests
 import com.rickbusarow.statik.name.StatikLanguage.JAVA
 import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
 import com.rickbusarow.statik.name.StatikLanguage.XML
+import com.rickbusarow.statik.testing.internal.BaseStatikNameTest
 import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

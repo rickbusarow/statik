@@ -19,12 +19,12 @@ import com.rickbusarow.statik.InternalStatikApi
 import kotlin.reflect.KClass
 
 @InternalStatikApi
-internal val KClass<*>.packageName: String
+public val KClass<*>.packageName: String
   get() = java.`package`.name
 
 /** ex: `[Outer, Mid, Inner]` for `com.example.Outer.Mid.Inner` */
 @InternalStatikApi
-internal val KClass<*>.simpleNames: List<String>
+public val KClass<*>.simpleNames: List<String>
   get() = generateSequence(java) { it.enclosingClass }
     .map { it.simpleName }
     .toList()
@@ -32,7 +32,7 @@ internal val KClass<*>.simpleNames: List<String>
 
 /** ex: `[Outer, Mid, Inner]` for `com.example.Outer.Mid.Inner` */
 @InternalStatikApi
-internal val Class<*>.simpleNames: List<String>
+public val Class<*>.simpleNames: List<String>
   get() = generateSequence(this) { it.enclosingClass }
     .map { it.simpleName }
     .toList()
@@ -40,10 +40,10 @@ internal val Class<*>.simpleNames: List<String>
 
 /** ex: `Outer.Mid.Inner` for `com.example.Outer.Mid.Inner` */
 @InternalStatikApi
-internal val KClass<*>.simpleNamesConcat: String
+public val KClass<*>.simpleNamesConcat: String
   get() = simpleNames.joinToStringDot()
 
 /** ex: `Outer.Mid.Inner` for `com.example.Outer.Mid.Inner` */
 @InternalStatikApi
-internal val Class<*>.simpleNamesConcat: String
+public val Class<*>.simpleNamesConcat: String
   get() = simpleNames.joinToStringDot()

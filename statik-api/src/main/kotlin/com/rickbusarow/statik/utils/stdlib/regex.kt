@@ -22,7 +22,7 @@ import kotlin.text.replace as matchResultReplace
 
 /** code golf for `replace(regex.toRegex(), replacement)` */
 @InternalStatikApi
-internal fun String.replaceRegex(
+public fun String.replaceRegex(
   @Language("regexp")
   regex: String,
   replacement: String
@@ -32,7 +32,7 @@ internal fun String.replaceRegex(
 )
 
 @InternalStatikApi
-internal inline fun String.replaceDestructured(
+public inline fun String.replaceDestructured(
   regex: Regex,
   crossinline transform: (group1: String) -> String
 ): String {
@@ -42,7 +42,7 @@ internal inline fun String.replaceDestructured(
 }
 
 @InternalStatikApi
-internal inline fun String.replaceDestructured(
+public inline fun String.replaceDestructured(
   regex: Regex,
   crossinline transform: (group1: String, group2: String) -> String
 ): String {
@@ -55,7 +55,7 @@ internal inline fun String.replaceDestructured(
 }
 
 @InternalStatikApi
-internal inline fun String.replaceDestructured(
+public inline fun String.replaceDestructured(
   regex: Regex,
   crossinline transform: (group1: String, group2: String, group3: String) -> String
 ): String {
@@ -69,7 +69,7 @@ internal inline fun String.replaceDestructured(
 }
 
 @InternalStatikApi
-internal inline fun String.replaceDestructured(
+public inline fun String.replaceDestructured(
   regex: Regex,
   crossinline transform: (group1: String, group2: String, group3: String, group4: String) -> String
 ): String {
@@ -84,7 +84,7 @@ internal inline fun String.replaceDestructured(
 }
 
 @InternalStatikApi
-internal inline fun String.replaceDestructured(
+public inline fun String.replaceDestructured(
   regex: Regex,
   crossinline transform: (
     group1: String,
@@ -114,7 +114,7 @@ internal inline fun String.replaceDestructured(
  * @return The constructed `Regex` instance.
  */
 @InternalStatikApi
-internal inline fun regex(builder: RegexBuilder.() -> Unit): Regex {
+public inline fun regex(builder: RegexBuilder.() -> Unit): Regex {
   return RegexBuilder()
     .apply(builder)
     .stringBuilder
@@ -124,7 +124,7 @@ internal inline fun regex(builder: RegexBuilder.() -> Unit): Regex {
 
 /** Supports the [regex] builder function. */
 @InternalStatikApi
-internal class RegexBuilder {
+public class RegexBuilder {
 
   @PublishedApi
   internal val stringBuilder: StringBuilder = StringBuilder()
@@ -133,7 +133,8 @@ internal class RegexBuilder {
    * Appends a pattern to the regex builder, injecting the language in the IDE.
    * @return The current `RegexBuilderScope` instance
    */
-  fun append(@Language("regexp") pattern: String): RegexBuilder = apply {
+  @InternalStatikApi
+  public fun append(@Language("regexp") pattern: String): RegexBuilder = apply {
     stringBuilder.append(pattern)
   }
 
@@ -144,7 +145,8 @@ internal class RegexBuilder {
    * Before using this, try restructuring the different components of the
    * builder invocation so that the [pattern] argument has enough context.
    */
-  fun appendWithoutInjection(pattern: String): RegexBuilder = apply {
+  @InternalStatikApi
+  public fun appendWithoutInjection(pattern: String): RegexBuilder = apply {
     stringBuilder.append(pattern)
   }
 
@@ -153,7 +155,8 @@ internal class RegexBuilder {
    *
    * @return The current `RegexBuilderScope` instance
    */
-  fun or(): RegexBuilder = apply {
+  @InternalStatikApi
+  public fun or(): RegexBuilder = apply {
     stringBuilder.append("|")
   }
 
@@ -168,7 +171,8 @@ internal class RegexBuilder {
    * @param builder Defines the group content in between the start and end.
    * @return The current `RegexBuilderScope` instance
    */
-  inline fun grouped(
+  @InternalStatikApi
+  public inline fun grouped(
     groupStart: String,
     groupEnd: String,
     builder: RegexBuilder.() -> Unit
@@ -187,10 +191,12 @@ internal class RegexBuilder {
    *   as its receiver, used to define the section content.
    * @return The current `RegexBuilderScope` instance, enabling function chaining.
    */
-  inline fun section(builder: RegexBuilder.() -> Unit): RegexBuilder = apply(builder)
+  @InternalStatikApi
+  public inline fun section(builder: RegexBuilder.() -> Unit): RegexBuilder = apply(builder)
 
   /** overload for building a regex inside a regex builder */
-  inline fun regex(builder: RegexBuilder.() -> Unit): String {
+  @InternalStatikApi
+  public inline fun regex(builder: RegexBuilder.() -> Unit): String {
     return RegexBuilder()
       .apply(builder)
       .stringBuilder
@@ -202,7 +208,8 @@ internal class RegexBuilder {
    * @param builders The builders to combine.
    * @return The current `RegexBuilder` instance.
    */
-  fun anyOf(vararg builders: RegexBuilder.() -> Unit): RegexBuilder {
+  @InternalStatikApi
+  public fun anyOf(vararg builders: RegexBuilder.() -> Unit): RegexBuilder {
     return applyEachIndexed(builders) { index, builder ->
       builder()
       if (index != builders.lastIndex) {

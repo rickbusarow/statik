@@ -15,8 +15,8 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.forAllBlocking
 import com.rickbusarow.statik.name.SimpleName.Companion.SIMPLE_NAME_REGEX
+import com.rickbusarow.statik.testing.internal.forAllBlocking
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.assertions.throwables.shouldThrowWithMessage

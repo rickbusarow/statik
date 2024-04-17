@@ -32,9 +32,9 @@ import kotlin.reflect.KClass
  * Models a curated call stack from some root, up to this Trace
  * node. In practice, the root will be `ModuleCheckRunner.run`.
  *
- * This class this leverages [CoroutineContext.Element] in order to avoid passing
- * a 'TraceContext' around. Trace nodes are stored in the [CoroutineContext].
- * This means that traces can only be started or added to from within a coroutine.
+ * This class this leverages [CoroutineContext.Element] to avoid passing a
+ * 'TraceContext' around. Trace nodes are stored in the [CoroutineContext]. This
+ * means that traces can only be started or added to from within a coroutine.
  *
  * The simplest way to add to a trace is to make the class implement [HasTraceTags]
  * to provide static tags, then use one of the [traced] extensions at the trace site.
@@ -50,8 +50,8 @@ import kotlin.reflect.KClass
  * ```
  */
 @InternalStatikApi
-internal sealed class Trace(
-  val tags: List<String>
+public sealed class Trace(
+  public val tags: List<String>
 ) : CoroutineContext.Element {
   init {
     check(tags.isNotEmpty()) {
@@ -61,7 +61,8 @@ internal sealed class Trace(
 
   override val key: CoroutineContext.Key<*> get() = Key
 
-  abstract val depth: Int
+  @InternalStatikApi
+  public abstract val depth: Int
 
   /**
    * ```
@@ -74,7 +75,8 @@ internal sealed class Trace(
    *             └─ tags: [home]  --  args: [shower]
    * ```
    */
-  abstract fun asString(): String
+  @InternalStatikApi
+  public abstract fun asString(): String
 
   internal fun child(tags: Iterable<Any>, args: Iterable<Any>): Trace = Child(
     parent = this,
@@ -114,9 +116,11 @@ internal sealed class Trace(
       .toString()
   }
 
-  companion object Key : CoroutineContext.Key<Trace> {
+  @InternalStatikApi
+  public companion object Key : CoroutineContext.Key<Trace> {
     /** Creates a new [Trace] root. Prefer adding to an existing trace via a [traced] extension. */
-    fun start(vararg tags: Any): Trace = Root(tags.traceStrings())
+    @InternalStatikApi
+    public fun start(vararg tags: Any): Trace = Root(tags.traceStrings())
 
     private fun Array<out Any>.traceStrings(): List<String> = map { it.traceString() }
     private fun Iterable<Any>.traceStrings(): List<String> = map { it.traceString() }
@@ -145,8 +149,8 @@ internal sealed class Trace(
  * ```
  */
 @InternalStatikApi
-internal interface HasTraceTags {
-  val tags: Iterable<Any>
+public interface HasTraceTags {
+  public val tags: Iterable<Any>
 }
 
 /**
@@ -162,15 +166,15 @@ internal interface HasTraceTags {
  * @throws IllegalArgumentException if the [coroutineContext] does not have a [Trace]
  */
 @InternalStatikApi
-internal suspend fun <T> traced(
+public suspend fun <T> traced(
   tags: Iterable<Any>,
   args: Iterable<Any>,
   block: suspend CoroutineScope.() -> T
 ): T = tracedInternal(tags, args, block)
 
 /**
- * Don't use. This overload exists in order to prevent accidentally providing the
- * wrong tags to a [Trace] from inside a [HasTraceTags]. If you need to provide runtime
+ * Don't use. This overload exists to prevent accidentally providing the wrong
+ * tags to a [Trace] from inside a [HasTraceTags]. If you need to provide runtime
  */
 @Deprecated(
   message = "Don't provide dynamic tags from inside HasTraceTags.",
@@ -178,7 +182,7 @@ internal suspend fun <T> traced(
   replaceWith = ReplaceWith("traced(args, block)")
 )
 @InternalStatikApi
-internal suspend fun <T> HasTraceTags.traced(
+public suspend fun <T> HasTraceTags.traced(
   @Suppress("UNUSED_PARAMETER")
   tags: Iterable<Any>,
   args: Iterable<Any>,
@@ -196,7 +200,7 @@ internal suspend fun <T> HasTraceTags.traced(
  * @throws IllegalArgumentException if the [coroutineContext] does not have a [Trace]
  */
 @InternalStatikApi
-internal suspend fun <T> HasTraceTags.traced(
+public suspend fun <T> HasTraceTags.traced(
   args: Iterable<Any>,
   block: suspend CoroutineScope.() -> T
 ): T =
@@ -213,7 +217,7 @@ internal suspend fun <T> HasTraceTags.traced(
  * @throws IllegalArgumentException if the [coroutineContext] does not have a [Trace]
  */
 @InternalStatikApi
-internal suspend fun <T> HasTraceTags.traced(
+public suspend fun <T> HasTraceTags.traced(
   vararg args: Any,
   block: suspend CoroutineScope.() -> T
 ): T =
@@ -245,7 +249,7 @@ private suspend fun <T> tracedInternal(
  * @throws IllegalArgumentException if the [coroutineContext] does not have a [Trace]
  */
 @InternalStatikApi
-internal suspend fun trace(): Trace = currentCoroutineContext().requireTrace()
+public suspend fun trace(): Trace = currentCoroutineContext().requireTrace()
 
 /** @return a [Trace] from inside a coroutine if it exists, else null */
 internal suspend fun traceOrNull(): Trace? = currentCoroutineContext()[Trace]
@@ -278,6 +282,6 @@ internal suspend fun traceOrNull(): Trace? = currentCoroutineContext()[Trace]
  * @throws IllegalArgumentException if the [coroutineContext] does not have a [Trace]
  */
 @InternalStatikApi
-internal fun CoroutineContext.requireTrace(): Trace = requireNotNull(get(Trace)) {
+public fun CoroutineContext.requireTrace(): Trace = requireNotNull(get(Trace)) {
   "This coroutineContext doesn't have a ${Trace::class.simpleName} in it -- $this"
 }

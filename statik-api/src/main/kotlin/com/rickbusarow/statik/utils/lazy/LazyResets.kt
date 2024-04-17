@@ -30,12 +30,12 @@ public interface Resets {
 }
 
 @InternalStatikApi
-internal inline fun <reified T : Any> ResetManager.lazyResets(
+public inline fun <reified T : Any> ResetManager.lazyResets(
   noinline valueFactory: () -> T
 ): LazyResets<T> = LazyResets(this, valueFactory)
 
 @InternalStatikApi
-internal fun <T : Any> LazyResets(
+public fun <T : Any> LazyResets(
   resetManager: ResetManager,
   valueFactory: () -> T
 ): LazyResets<T> =

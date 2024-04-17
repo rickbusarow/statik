@@ -17,19 +17,8 @@ package com.rickbusarow.statik.element
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.compiler.StatikElementContext
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.util.slicedMap.ReadOnlySlice
 
 @InternalStatikApi
-public interface HasStatikElementContext {
-  public val context: StatikElementContext<PsiElement>
-
-  public suspend fun bindingContext(): BindingContext {
-    return context.bindingContextDeferred.await()
-  }
-
-  public suspend fun <K, V> bindingContext(readOnlySlice: ReadOnlySlice<K, V>?, key: K): V? {
-    return bindingContext().get(readOnlySlice, key)
-  }
+public interface HasStatikElementContext<T : StatikElementContext<*>> {
+  public val context: T
 }

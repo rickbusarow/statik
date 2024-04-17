@@ -20,7 +20,7 @@ import com.rickbusarow.statik.compiler.inerceptor.ParsingInterceptor
 import com.rickbusarow.statik.name.ReferenceName
 
 @InternalStatikApi
-internal class InterpretingInterceptor : ParsingInterceptor {
+public class InterpretingInterceptor : ParsingInterceptor {
   override suspend fun intercept(chain: ParsingInterceptor.Chain): ReferenceName? {
 
     TODO("this probably shouldn't be used")

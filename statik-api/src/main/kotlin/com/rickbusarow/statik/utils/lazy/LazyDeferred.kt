@@ -61,7 +61,7 @@ public interface LazyDeferred<out T> {
  * ```
  */
 @InternalStatikApi
-internal fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
+public fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
 
   return LazyDeferredImpl(
     action = action,
@@ -70,12 +70,12 @@ internal fun <T> lazyDeferred(action: suspend () -> T): LazyDeferred<T> {
 }
 
 @InternalStatikApi
-internal fun <T, R> LazyDeferred<T>.map(transform: suspend (T) -> R): LazyDeferred<R> {
+public fun <T, R> LazyDeferred<T>.map(transform: suspend (T) -> R): LazyDeferred<R> {
   return lazyDeferred { transform(await()) }
 }
 
 @InternalStatikApi
-internal fun <T> (suspend () -> T).asLazyDeferred(): LazyDeferred<T> = lazyDeferred(this)
+public fun <T> (suspend () -> T).asLazyDeferred(): LazyDeferred<T> = lazyDeferred(this)
 
 @InternalStatikApi
 public suspend fun <T> Collection<LazyDeferred<T>>.awaitAll(): List<T> {

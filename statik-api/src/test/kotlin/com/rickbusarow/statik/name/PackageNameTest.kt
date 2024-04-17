@@ -15,8 +15,7 @@
 
 package com.rickbusarow.statik.name
 
-import com.rickbusarow.statik.forAllBlocking
-import com.rickbusarow.statik.name.PackageName.DEFAULT
+import com.rickbusarow.statik.testing.internal.forAllBlocking
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.assertions.throwables.shouldThrowWithMessage
 import io.kotest.matchers.shouldBe
@@ -44,7 +43,7 @@ internal class PackageNameTest {
     shouldThrowWithMessage<IllegalArgumentException>(
       "A ${PackageNameImpl::class.qualifiedName} must be a non-empty, " +
         "non-blank String.  Represent an empty/blank " +
-        "or missing package name as ${DEFAULT::class.qualifiedName}.  " +
+        "or missing package name as ${PackageName.DEFAULT::class.qualifiedName}.  " +
         "This name argument, wrapped in single quotes: ''"
     ) {
       PackageNameImpl("")
@@ -60,7 +59,7 @@ internal class PackageNameTest {
         shouldThrowWithMessage<IllegalArgumentException>(
           "A ${PackageNameImpl::class.qualifiedName} must be a non-empty, " +
             "non-blank String.  Represent an empty/blank " +
-            "or missing package name as ${DEFAULT::class.qualifiedName}.  " +
+            "or missing package name as ${PackageName.DEFAULT::class.qualifiedName}.  " +
             "This name argument, wrapped in single quotes: '$name'"
         ) {
           PackageNameImpl(name)
@@ -71,7 +70,7 @@ internal class PackageNameTest {
   @Test
   fun `an empty package name becomes DEFAULT`() {
 
-    PackageName("") shouldBe DEFAULT
+    PackageName("") shouldBe PackageName.DEFAULT
   }
 
   @Test
@@ -80,7 +79,7 @@ internal class PackageNameTest {
     Arb.stringPattern("\\s*")
       .forAllBlocking { name ->
 
-        PackageName(name) shouldBe DEFAULT
+        PackageName(name) shouldBe PackageName.DEFAULT
       }
   }
 }

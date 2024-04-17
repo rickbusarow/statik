@@ -20,12 +20,12 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 @InternalStatikApi
-internal fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
+public fun <T> unsafeLazy(initializer: () -> T): Lazy<T> =
   lazy(mode = LazyThreadSafetyMode.NONE, initializer = initializer)
 
 /** just a var, but the initial value is lazy */
 @InternalStatikApi
-internal fun <T> lazyVar(
+public fun <T> lazyVar(
   initializer: () -> T
 ): ReadWriteProperty<Any?, T> = SynchronizedLazyVar(initializer)
 

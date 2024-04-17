@@ -19,8 +19,8 @@ package com.rickbusarow.statik.name
 public sealed interface Generated : StatikName {
 
   /**
-   * The references which the underlying code generator (AGP,
-   * Dagger, etc.) uses in order to trigger the new declaration.
+   * The references which the underlying code generator
+   * (AGP, Dagger, etc.) uses to trigger the new declaration.
    */
   public val sources: Set<ReferenceName>
 }

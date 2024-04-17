@@ -38,8 +38,6 @@ kotlin {
 dependencies {
   api(libs.junit.jupiter.api)
 
-  api(project(":statik-logging"))
-
   implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlinx.coroutines.core)
@@ -59,4 +57,6 @@ dependencies {
   testImplementation(libs.kotlin.reflect)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.rickBusarow.kase)
+
+  testImplementation(project(":statik-testing-internal"))
 }

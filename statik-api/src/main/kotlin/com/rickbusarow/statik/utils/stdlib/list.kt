@@ -27,7 +27,7 @@ import com.rickbusarow.statik.InternalStatikApi
  * @return A list containing only the receiver item.
  */
 @InternalStatikApi
-internal fun <T> T.singletonList(): List<T> = listOf(this)
+public fun <T> T.singletonList(): List<T> = listOf(this)
 
 /**
  * Shorthand for `subList(count, size)`.
@@ -40,7 +40,7 @@ internal fun <T> T.singletonList(): List<T> = listOf(this)
  * @see List.subList for more information about list views.
  */
 @InternalStatikApi
-internal fun <E> List<E>.dropView(count: Int): List<E> = subList(count, size)
+public fun <E> List<E>.dropView(count: Int): List<E> = subList(count, size)
 
 /**
  * Shorthand for `subList(0, count)`.
@@ -53,7 +53,7 @@ internal fun <E> List<E>.dropView(count: Int): List<E> = subList(count, size)
  * @see List.subList for more information about list views.
  */
 @InternalStatikApi
-internal fun <E> List<E>.takeView(count: Int): List<E> = subList(0, count)
+public fun <E> List<E>.takeView(count: Int): List<E> = subList(0, count)
 
 /**
  * Shorthand for `subList(0, size - count)`.
@@ -66,7 +66,7 @@ internal fun <E> List<E>.takeView(count: Int): List<E> = subList(0, count)
  * @see List.subList for more information about list views.
  */
 @InternalStatikApi
-internal fun <E> List<E>.dropLastView(count: Int): List<E> = subList(0, size - count)
+public fun <E> List<E>.dropLastView(count: Int): List<E> = subList(0, size - count)
 
 /**
  * Shorthand for `subList(size - count, size)`.
@@ -79,4 +79,4 @@ internal fun <E> List<E>.dropLastView(count: Int): List<E> = subList(0, size - c
  * @see List.subList for more information about list views.
  */
 @InternalStatikApi
-internal fun <E> List<E>.takeLastView(count: Int): List<E> = subList(size - count, size)
+public fun <E> List<E>.takeLastView(count: Int): List<E> = subList(size - count, size)

@@ -32,6 +32,7 @@ pluginManagement {
 plugins {
   id("com.gradle.develocity") version "3.17.2"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.0"
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
 @Suppress("UnstableApiUsage")
@@ -79,5 +80,8 @@ develocity {
 
 include(
   ":statik-api",
-  ":statik-logging"
+  ":statik-kotlin",
+  ":statik-kotlin-psi",
+  ":statik-logging",
+  ":statik-testing-internal"
 )

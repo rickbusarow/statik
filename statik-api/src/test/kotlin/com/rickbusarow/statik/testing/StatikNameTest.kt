@@ -32,6 +32,7 @@ import com.rickbusarow.statik.name.StatikName
 import com.rickbusarow.statik.name.UnqualifiedAndroidResourceName
 import com.rickbusarow.statik.name.UnqualifiedAndroidResourceReferenceName
 import com.rickbusarow.statik.name.asDeclaredName
+import com.rickbusarow.statik.testing.internal.TrimmedAsserts
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.trace.Trace
@@ -226,6 +227,7 @@ fun Collection<StatikName>.prettyPrint(): String = asSequence()
           statikName.languages.containsAll(
             setOf(StatikLanguage.KOTLIN, StatikLanguage.JAVA)
           ) -> "agnostic"
+
           statikName.languages.contains(StatikLanguage.KOTLIN) -> "kotlin"
           statikName.languages.contains(StatikLanguage.JAVA) -> "java"
           statikName.languages.contains(StatikLanguage.XML) -> "xml"

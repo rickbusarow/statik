@@ -16,25 +16,10 @@
 package com.rickbusarow.statik.compiler
 
 import com.rickbusarow.statik.element.StatikElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
-import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
-/** Creates an [StatikElement] */
+/** Creates a [StatikElement] */
 public interface StatikElementFactory<T> {
-  /**
-   * @param context the context from which symbols should be resolved
-   * @param fileSystemFile the java.io.File containing this element
-   * @param backingElement the AST symbol used for actual parsing
-   * @return a KtFile for this [backingElement]
-   */
-  public suspend fun createKtFile(
-    context: StatikElementContext<PsiElement>,
-    fileSystemFile: File,
-    backingElement: KtFile
-  ): StatikKotlinFile
-
   /**
    * @param context the context from which symbols should be resolved
    * @param fileSystemFile the java.io.File containing this element

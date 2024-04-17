@@ -24,7 +24,7 @@ import com.rickbusarow.statik.InternalStatikApi
  * preserve their order relative to each other after sorting.
  */
 @InternalStatikApi
-internal fun <T> Iterable<T>.sortedWith(vararg selectors: (T) -> Comparable<*>): List<T> {
+public fun <T> Iterable<T>.sortedWith(vararg selectors: (T) -> Comparable<*>): List<T> {
   if (this is Collection) {
     if (size <= 1) return this.toList()
     @Suppress("UNCHECKED_CAST")
@@ -40,7 +40,7 @@ internal fun <T> Iterable<T>.sortedWith(vararg selectors: (T) -> Comparable<*>):
  * preserve their order relative to each other after sorting.
  */
 @InternalStatikApi
-internal fun <T> Iterable<T>.sortedWithDescending(vararg selectors: (T) -> Comparable<*>): List<T> {
+public fun <T> Iterable<T>.sortedWithDescending(vararg selectors: (T) -> Comparable<*>): List<T> {
   return sortedWith(*selectors).reversed()
 }
 
@@ -49,7 +49,7 @@ internal fun <T> Iterable<T>.sortedWithDescending(vararg selectors: (T) -> Compa
  *   within the receiver collection, otherwise returns false
  */
 @InternalStatikApi
-internal fun <E> Iterable<E>.containsAny(other: Iterable<Any?>): Boolean {
+public fun <E> Iterable<E>.containsAny(other: Iterable<Any?>): Boolean {
 
   return when {
     this === other -> true
@@ -71,7 +71,7 @@ internal fun <E> Iterable<E>.containsAny(other: Iterable<Any?>): Boolean {
  *   `Set<E>`, otherwise calls `toSet()` to create a new one
  */
 @InternalStatikApi
-internal fun <E> Iterable<E>.asSet(): Set<E> = this as? Set<E> ?: toSet()
+public fun <E> Iterable<E>.asSet(): Set<E> = this as? Set<E> ?: toSet()
 
 /**
  * shorthand for `this as? List<E> ?: toList()`
@@ -80,7 +80,7 @@ internal fun <E> Iterable<E>.asSet(): Set<E> = this as? Set<E> ?: toSet()
  *   `List<E>`, otherwise calls `toList()` to create a new one
  */
 @InternalStatikApi
-internal fun <E> Iterable<E>.asList(): List<E> = this as? List<E> ?: toList()
+public fun <E> Iterable<E>.asList(): List<E> = this as? List<E> ?: toList()
 
 /**
  * shorthand for `this as? Collection<E> ?: toList()`
@@ -89,7 +89,7 @@ internal fun <E> Iterable<E>.asList(): List<E> = this as? List<E> ?: toList()
  *   `Collection<E>`, otherwise calls `toList()` to create a new one
  */
 @InternalStatikApi
-internal fun <E> Iterable<E>.asCollection(): Collection<E> = this as? Collection<E> ?: toList()
+public fun <E> Iterable<E>.asCollection(): Collection<E> = this as? Collection<E> ?: toList()
 
 /**
  * Returns a list containing the elements from the receiver iterable up to and
@@ -101,7 +101,7 @@ internal fun <E> Iterable<E>.asCollection(): Collection<E> = this as? Collection
  *   and including the first element for which the predicate returns false.
  */
 @InternalStatikApi
-internal inline fun <E> Iterable<E>.takeWhileInclusive(predicate: (E) -> Boolean): List<E> {
+public inline fun <E> Iterable<E>.takeWhileInclusive(predicate: (E) -> Boolean): List<E> {
   return buildList {
     for (e in this@takeWhileInclusive) {
       add(e)
@@ -121,7 +121,7 @@ internal inline fun <E> Iterable<E>.takeWhileInclusive(predicate: (E) -> Boolean
  * @return A list of chunks, where each chunk is a list of elements from the receiver iterable.
  */
 @InternalStatikApi
-internal fun <E> Iterable<E>.chunkedBy(selector: (E) -> Boolean): List<List<E>> {
+public fun <E> Iterable<E>.chunkedBy(selector: (E) -> Boolean): List<List<E>> {
   return fold(mutableListOf<MutableList<E>>(mutableListOf())) { acc, e ->
     acc.last().add(e)
     acc.alsoIf(selector(e)) {

@@ -62,7 +62,7 @@ import com.rickbusarow.statik.InternalStatikApi
  * @return List of lists containing the Cartesian product.
  */
 @InternalStatikApi
-internal fun <T> Iterable<Iterable<T>>.cartesianProduct(): List<List<T>> {
+public fun <T> Iterable<Iterable<T>>.cartesianProduct(): List<List<T>> {
   return fold(listOf(emptyList())) { acc, list ->
     acc.flatMap { existingList ->
       list.map { element ->
@@ -74,7 +74,7 @@ internal fun <T> Iterable<Iterable<T>>.cartesianProduct(): List<List<T>> {
 
 /** shorthand for `values.flatten().distinct()` */
 @InternalStatikApi
-internal fun <K : Any, T : Any> Map<K, Collection<T>>.allValues(): List<T> {
+public fun <K : Any, T : Any> Map<K, Collection<T>>.allValues(): List<T> {
   return values.flatten().distinct()
 }
 
@@ -89,7 +89,7 @@ internal fun <K : Any, T : Any> Map<K, Collection<T>>.allValues(): List<T> {
  * @return A string representation of the collection.
  */
 @InternalStatikApi
-internal fun <E> Collection<E>.pluralString(
+public fun <E> Collection<E>.pluralString(
   empty: () -> String,
   single: (E) -> String,
   moreThanOne: (Iterable<E>) -> String
@@ -108,7 +108,7 @@ internal fun <E> Collection<E>.pluralString(
  * @return A list containing the indices of all elements that match the predicate.
  */
 @InternalStatikApi
-internal inline fun <E> Collection<E>.indicesOf(predicate: (E) -> Boolean): List<Int> {
+public inline fun <E> Collection<E>.indicesOf(predicate: (E) -> Boolean): List<Int> {
   return buildList {
     for ((index, e) in this@indicesOf.withIndex()) {
       if (predicate(e)) {

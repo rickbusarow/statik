@@ -26,7 +26,7 @@ import kotlin.experimental.ExperimentalTypeInference
  * @return The receiver object after applying the block to each kaseParam.
  */
 @InternalStatikApi
-internal inline fun <T, E> T.applyEach(elements: Iterable<E>, block: T.(e: E) -> Unit): T = apply {
+public inline fun <T, E> T.applyEach(elements: Iterable<E>, block: T.(e: E) -> Unit): T = apply {
   for (element in elements) {
     block(element)
   }
@@ -40,7 +40,7 @@ internal inline fun <T, E> T.applyEach(elements: Iterable<E>, block: T.(e: E) ->
  * @return The receiver object after applying the block to each kaseParam.
  */
 @InternalStatikApi
-internal inline fun <T, E> T.applyEachIndexed(
+public inline fun <T, E> T.applyEachIndexed(
   elements: Iterable<E>,
   block: T.(index: Int, e: E) -> Unit
 ): T = apply {
@@ -57,7 +57,7 @@ internal inline fun <T, E> T.applyEachIndexed(
  * @return The receiver object after applying the block to each kaseParam.
  */
 @InternalStatikApi
-internal inline fun <T, E> T.applyEachIndexed(
+public inline fun <T, E> T.applyEachIndexed(
   elements: Array<E>,
   block: T.(index: Int, e: E) -> Unit
 ): T =
@@ -77,7 +77,7 @@ internal inline fun <T, E> T.applyEachIndexed(
  */
 @Suppress("NOTHING_TO_INLINE")
 @InternalStatikApi
-internal inline fun <T> T.applyEach(blocks: Iterable<T.() -> Unit>): T = apply {
+public inline fun <T> T.applyEach(blocks: Iterable<T.() -> Unit>): T = apply {
   for (block in blocks) block()
 }
 
@@ -91,7 +91,7 @@ internal inline fun <T> T.applyEach(blocks: Iterable<T.() -> Unit>): T = apply {
  */
 @Suppress("NOTHING_TO_INLINE")
 @InternalStatikApi
-internal inline fun <T> T.applyEach(vararg blocks: T.() -> Unit): T = apply {
+public inline fun <T> T.applyEach(vararg blocks: T.() -> Unit): T = apply {
   for (block in blocks) block()
 }
 
@@ -106,7 +106,7 @@ internal inline fun <T> T.applyEach(vararg blocks: T.() -> Unit): T = apply {
  */
 @OptIn(ExperimentalTypeInference::class)
 @InternalStatikApi
-internal inline fun <T : R, R> T.applyIf(
+public inline fun <T : R, R> T.applyIf(
   predicate: Boolean,
   @BuilderInference body: T.() -> R
 ): R = apply { if (predicate) body() }
@@ -123,7 +123,7 @@ internal inline fun <T : R, R> T.applyIf(
  */
 @OptIn(ExperimentalTypeInference::class)
 @InternalStatikApi
-internal inline fun <T : R, R> T.letIf(
+public inline fun <T : R, R> T.letIf(
   predicate: Boolean,
   @BuilderInference transform: (T) -> R
 ): R {
@@ -141,7 +141,7 @@ internal inline fun <T : R, R> T.letIf(
  *   predicate is true, or the receiver object itself otherwise.
  */
 @InternalStatikApi
-internal inline fun <T> T.alsoIf(predicate: Boolean, body: (T) -> Unit): T {
+public inline fun <T> T.alsoIf(predicate: Boolean, body: (T) -> Unit): T {
   if (predicate) {
     body(this)
   }

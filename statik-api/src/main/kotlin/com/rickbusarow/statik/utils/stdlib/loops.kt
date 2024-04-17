@@ -18,11 +18,11 @@ package com.rickbusarow.statik.utils.stdlib
 import com.rickbusarow.statik.InternalStatikApi
 
 @InternalStatikApi
-internal inline fun <T> forEach(vararg items: T, action: (T) -> Unit) {
+public inline fun <T> forEach(vararg items: T, action: (T) -> Unit) {
   for (item in items) action(item)
 }
 
 @InternalStatikApi
-internal inline fun <T : Any> forEachNotNull(vararg items: T?, action: (T) -> Unit) {
+public inline fun <T : Any> forEachNotNull(vararg items: T?, action: (T) -> Unit) {
   for (item in items) if (item != null) action(item)
 }

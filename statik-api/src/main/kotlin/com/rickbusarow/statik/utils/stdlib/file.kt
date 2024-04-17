@@ -36,7 +36,7 @@ import java.io.File
  * @see resolveInParent for a version which throws if nothing is resolved
  */
 @InternalStatikApi
-internal fun File.resolveInParentOrNull(relativePath: String): File? {
+public fun File.resolveInParentOrNull(relativePath: String): File? {
   return resolve(relativePath).existsOrNull()
     ?: parentFile?.resolveInParentOrNull(relativePath)
 }
@@ -48,7 +48,7 @@ internal fun File.resolveInParentOrNull(relativePath: String): File? {
  * @throws IllegalArgumentException if a file cannot be resolved
  */
 @InternalStatikApi
-internal fun File.resolveInParent(relativePath: String): File {
+public fun File.resolveInParent(relativePath: String): File {
   return requireNotNull(resolveInParentOrNull(relativePath)) {
     "Could not resolve a file with relative path in any parent paths.\n" +
       "\t       relative path: $relativePath\n" +
@@ -58,19 +58,19 @@ internal fun File.resolveInParent(relativePath: String): File {
 
 /** @return the receiver [File] if it exists in the file system, otherwise null */
 @InternalStatikApi
-internal fun File.existsOrNull(): File? = takeIf { it.exists() }
+public fun File.existsOrNull(): File? = takeIf { it.exists() }
 
 /** `File("a/b/c/d.txt").segments() == ["a", "b", "c", "d.txt"]` */
 @InternalStatikApi
-internal fun File.segments(): List<String> = path.split(File.separatorChar)
+public fun File.segments(): List<String> = path.split(File.separatorChar)
 
 /* */
 @InternalStatikApi
-internal operator fun File.div(relative: String): File = resolve(relative)
+public operator fun File.div(relative: String): File = resolve(relative)
 
 /* */
 @InternalStatikApi
-internal operator fun File.div(relative: File): File = resolve(relative)
+public operator fun File.div(relative: File): File = resolve(relative)
 
 /**
  * Creates a new file if it doesn't already exist, creating parent
@@ -82,7 +82,7 @@ internal operator fun File.div(relative: File): File = resolve(relative)
  * @return The created file.
  */
 @InternalStatikApi
-internal fun File.createSafely(content: String? = null, overwrite: Boolean = true): File = apply {
+public fun File.createSafely(content: String? = null, overwrite: Boolean = true): File = apply {
   when {
     content != null && (!exists() || overwrite) -> makeParentDir().writeText(content)
     else -> {
@@ -118,18 +118,18 @@ internal fun File.makeParentDir(): File = apply {
  *   and has an extension of `.kt` or `.kts`, otherwise false
  */
 @InternalStatikApi
-internal fun File.isKotlinFile(): Boolean = exists() && extension in setOf("kts", "kt")
+public fun File.isKotlinFile(): Boolean = exists() && extension in setOf("kts", "kt")
 
 /**
  * @return true if the file exists in the Java file system
  *   and has an extension of `.kts`, otherwise false
  */
 @InternalStatikApi
-internal fun File.isKotlinScriptFile(): Boolean = exists() && extension == "kts"
+public fun File.isKotlinScriptFile(): Boolean = exists() && extension == "kts"
 
 /**
  * @return true if the file exists in the Java file
  *   system and has an extension of `.kt`, otherwise false
  */
 @InternalStatikApi
-internal fun File.isKtFile(): Boolean = exists() && extension == "kt"
+public fun File.isKtFile(): Boolean = exists() && extension == "kt"
