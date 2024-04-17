@@ -30,7 +30,8 @@ pluginManagement {
 }
 
 plugins {
-  id("com.gradle.enterprise") version "3.17"
+  id("com.gradle.develocity") version "3.17.1"
+  id("com.gradle.common-custom-user-data-gradle-plugin") version "2.0"
 }
 
 @Suppress("UnstableApiUsage")
@@ -41,20 +42,28 @@ dependencyResolutionManagement {
   }
 }
 
-gradleEnterprise {
+develocity {
   buildScan {
 
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
+    val isCI = !System.getenv("CI").isNullOrEmpty()
 
-    publishAlways()
+    uploadInBackground = !isCI
+    termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
+    termsOfUseAgree = "yes"
 
-    // https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+    capture {
+      testLogging = true
+      buildLogging = true
+      fileFingerprints = true
+    }
 
-    tag(if (System.getenv("CI").isNullOrBlank()) "Local" else "CI")
+    obfuscation {
+      hostname { "<hostName>" }
+      ipAddresses { listOf("<ip address>") }
+      username { "<username>" }
+    }
 
     val gitHubActions = System.getenv("GITHUB_ACTIONS")?.toBoolean() ?: false
-
     if (gitHubActions) {
       // ex: `octocat/Hello-World` as in github.com/octocat/Hello-World
       val repository = System.getenv("GITHUB_REPOSITORY")!!
