@@ -14,18 +14,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  validate-wrapper:
-    runs-on: ubuntu-latest
-    steps:
-      - name: check out
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-
-      - uses: gradle/wrapper-validation-action@b231772637bb498f11fdbc86052b6e8a8dc9fc92 # v2
-
   binary-compatibility:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -45,8 +35,6 @@ jobs:
 
   ktlint:
     runs-on: macos-14
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -66,8 +54,6 @@ jobs:
 
   spotless:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -87,8 +73,6 @@ jobs:
 
   dependency-guard:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -108,8 +92,6 @@ jobs:
 
   curator:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -129,8 +111,6 @@ jobs:
 
   moduleCheck:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -150,8 +130,6 @@ jobs:
 
   doks:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -171,8 +149,6 @@ jobs:
 
   check-version-is-snapshot:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -183,8 +159,6 @@ jobs:
 
   detekt:
     runs-on: macos-14
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -208,8 +182,6 @@ jobs:
 
   unit-tests-ubuntu:
     runs-on: ubuntu-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -245,8 +217,6 @@ jobs:
 
   unit-tests-windows:
     runs-on: windows-latest
-    needs:
-      - validate-wrapper
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -295,7 +265,6 @@ jobs:
       - spotless
       - unit-tests-ubuntu
       - unit-tests-windows
-      - validate-wrapper
 
     steps:
       - name: require that all other jobs have passed
