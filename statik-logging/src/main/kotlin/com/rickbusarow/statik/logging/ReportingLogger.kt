@@ -17,46 +17,6 @@ package com.rickbusarow.statik.logging
 
 import com.rickbusarow.statik.logging.Report.ReportEntry
 
-public interface StatikLogger {
-  /**     */
-  public fun printReport(report: Report)
-
-  /**     */
-  public fun warning(message: String)
-
-  /**     */
-  public fun info(message: String)
-
-  /**     */
-  public fun failure(message: String)
-
-  /**     */
-  public fun success(message: String)
-}
-
-public class PrintLogger : StatikLogger {
-
-  override fun failure(message: String) {
-    println(message)
-  }
-
-  override fun info(message: String) {
-    println(message)
-  }
-
-  override fun printReport(report: Report) {
-    println(report.joinToString())
-  }
-
-  override fun success(message: String) {
-    println(message)
-  }
-
-  override fun warning(message: String) {
-    println(message)
-  }
-}
-
 public class ReportingLogger(
   private val mirrorToStandardOut: Boolean = true
 ) : StatikLogger {
