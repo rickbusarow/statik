@@ -18,12 +18,16 @@ package com.rickbusarow.statik.logging
 public interface StatikLogger {
   /** */
   public fun printReport(report: Report)
+
   /** */
   public fun warning(message: String)
+
   /** */
   public fun info(message: String)
+
   /** */
   public fun failure(message: String)
+
   /** */
   public fun success(message: String)
 }
