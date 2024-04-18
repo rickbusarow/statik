@@ -32,9 +32,9 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 
-class StatikKotlinFileImplTest : ProjectTest(), StatikNameTest {
+class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
-  override val testEnvironmentFactory = PsiTestEnvironment.Factory
+  override val testEnvironmentFactory = PsiTestEnvironment
 
   override val defaultLanguage = StatikLanguage.KOTLIN
 
@@ -44,9 +44,7 @@ class StatikKotlinFileImplTest : ProjectTest(), StatikNameTest {
   suspend fun StatikKotlinConcreteType<*>.property(name: String): StatikKotlinProperty<*> =
     properties.first { it.simplestName.asString == name }
 
-  suspend fun StatikKotlinConcreteType<*>.subjectProp(): StatikKotlinProperty<*> = property(
-    "subjectProp"
-  )
+  suspend fun StatikKotlinConcreteType<*>.subjectProp() = property("subjectProp")
 
   @TestFactory
   fun `constructor property explicit types`() = Properties.explicitTypes.asTests { params ->
