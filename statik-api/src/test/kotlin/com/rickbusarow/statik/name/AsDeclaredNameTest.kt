@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-internal class AsDeclaredNameTestElement {
+internal class AsDeclaredNameTest {
 
   @Nested
   inner class `FqName` {
