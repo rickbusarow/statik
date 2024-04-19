@@ -16,14 +16,18 @@
 package com.rickbusarow.statik.element.kotlin
 
 import com.rickbusarow.statik.element.StatikDeclaredElement
+import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.name.HasPackageName
 
 /** Represents a declared Kotlin element in the source code. */
 public interface StatikKotlinDeclaredElement<out PARENT> :
   StatikKotlinElementWithParent<PARENT>,
   StatikDeclaredElement<PARENT>,
-  StatikKotlinElementWithPackageName
+  StatikKotlinElementWithPackageName,
+  HasChildrenInternal
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
+
   override val containingFile: StatikKotlinFile
+  override val visibility: StatikKotlinVisibility
 }

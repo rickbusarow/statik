@@ -17,18 +17,21 @@ package com.rickbusarow.statik.element.kotlin
 
 import com.rickbusarow.statik.element.StatikConcreteType
 import com.rickbusarow.statik.element.StatikDeclaredElement
-import com.rickbusarow.statik.element.StatikType
+import com.rickbusarow.statik.element.StatikTypeDeclaration
+import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public interface StatikKotlinType<out PARENT : StatikKotlinElement> :
-  StatikType<PARENT>,
-  StatikKotlinElementWithParent<PARENT> {
-  override val parent: PARENT
-}
+public interface StatikKotlinTypeReference<out PARENT : StatikKotlinElement> :
+  StatikTypeReference<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
+
+public interface StatikKotlinTypeDeclaration<out PARENT : StatikKotlinElement> :
+  StatikTypeDeclaration<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
 
 public interface StatikKotlinConcreteType<out PARENT> :
-  StatikKotlinType<PARENT>,
+  StatikKotlinTypeDeclaration<PARENT>,
   StatikConcreteType<PARENT>,
   StatikKotlinDeclaredElement<PARENT>,
   StatikKotlinElementWithParent<PARENT>
@@ -39,7 +42,7 @@ public interface StatikKotlinConcreteType<out PARENT> :
   override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*>>
 
   override val properties: LazySet<StatikKotlinProperty<*>>
-  override val functions: LazySet<StatikKotlinFunction<*>>
+  override val functions: LazySet<StatikKotlinDeclaredFunction<*>>
 }
 
 public interface StatikKotlinAnnotationClass<out PARENT> :

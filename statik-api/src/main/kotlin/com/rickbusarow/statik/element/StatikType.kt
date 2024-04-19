@@ -17,24 +17,25 @@ package com.rickbusarow.statik.element
 
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public interface StatikType<out PARENT : StatikElement> :
+public sealed interface StatikType<out PARENT : StatikElement> :
   StatikElementWithParent<PARENT>,
   StatikHasTypeParameters<PARENT>,
-  StatikAnnotated {
+  StatikAnnotated
+
+public interface StatikTypeDeclaration<out PARENT : StatikElement> :
+  StatikType<PARENT> {
 
   /**
    * In a concrete type, this represents super-classes and interfaces.
    *
    * In a generic type, supers are the upper bound(s).
    */
-  public val superTypes: LazySet<StatikType<*>>
+  public val superTypes: LazySet<StatikTypeReference<*>>
 }
 
 /** Represents a class, interface, object, or companion object */
 public interface StatikConcreteType<out PARENT : StatikElement> :
-  StatikType<PARENT>,
-  StatikElementWithParent<PARENT>,
-  StatikDeclaredElement<PARENT> {
+  StatikTypeDeclaration<PARENT> {
 
   override val containingFile: StatikFile
 
@@ -44,5 +45,5 @@ public interface StatikConcreteType<out PARENT : StatikElement> :
   public val functions: LazySet<StatikFunction<*>>
 }
 
-/** Represents a generic type used as a parameter, like `<T>` or `<R: Any>`. */
-public interface StatikTypeParameter<out PARENT : StatikElement> : StatikType<PARENT>
+public interface StatikTypeReference<out PARENT : StatikElement> :
+  StatikType<PARENT>

@@ -23,6 +23,7 @@ import com.rickbusarow.statik.name.HasSimpleNames
 public interface StatikDeclaredElement<out PARENT : StatikElement> :
   StatikElementWithParent<PARENT>,
   HasPackageName,
+  HasVisibility,
   HasSimpleNames {
   /** The name of this declared element. */
   public val declaredName: DeclaredName

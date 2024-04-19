@@ -16,6 +16,7 @@
 package com.rickbusarow.statik.utils.stdlib
 
 import com.rickbusarow.statik.InternalStatikApi
+import org.intellij.lang.annotations.Language
 import java.io.File
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
@@ -333,7 +334,8 @@ internal fun String.osFileSeparators(): String {
  * @receiver The original CharSequence.
  * @return The string with the prefix added.
  */
-internal fun CharSequence.prefix(prefix: String): String = "$prefix$this"
+@InternalStatikApi
+public fun CharSequence.prefix(prefix: String): String = "$prefix$this"
 
 /**
  * Adds the specified [prefix] to this [String] if it does not already start with it.
@@ -342,7 +344,8 @@ internal fun CharSequence.prefix(prefix: String): String = "$prefix$this"
  * @receiver The original String.
  * @return The string with the prefix added if not present.
  */
-internal fun String.prefixIfNot(prefix: String): String =
+@InternalStatikApi
+public fun String.prefixIfNot(prefix: String): String =
   if (this.startsWith(prefix)) this else "$prefix$this"
 
 /**
@@ -525,3 +528,20 @@ internal fun String.useRelativePaths(workingDir: File): String {
 /** `"$prefix$this$suffix"` */
 internal fun CharSequence.wrapIn(prefix: String, suffix: String = prefix): String =
   "$prefix$this$suffix"
+
+/**
+ * Removes trailing whitespaces from all lines in a string.
+ *
+ * Shorthand for `lines().joinToString("\n") { it.trimEnd() }`
+ */
+internal fun String.trimLineEnds(): String = mapLines { it.trimEnd() }
+
+/**
+ * shorthand for `replace(___, "")` against multiple tokens.
+ * The input strings are converted to Regex before replacement.
+ */
+@InternalStatikApi
+public fun String.removeRegex(@Language("regexp") vararg regex: String): String =
+  regex.fold(this) { acc, reg ->
+    acc.replace(reg.toRegex(), "")
+  }

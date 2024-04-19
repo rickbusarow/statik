@@ -16,7 +16,7 @@
 package com.rickbusarow.statik.utils.traversal
 
 import com.rickbusarow.statik.InternalStatikApi
-import com.rickbusarow.statik.utils.stdlib.mapLines
+import com.rickbusarow.statik.utils.stdlib.letIf
 import com.rickbusarow.statik.utils.stdlib.noAnsi
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.Color.Companion.colorized
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.SIMPLE
@@ -30,7 +30,7 @@ import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.TYPE
  */
 @InternalStatikApi
 public abstract class AbstractTreePrinter<T : Any>(
-  private val whitespaceChar: Char = ' '
+  private val whitespaceChar: Char? = null
 ) {
   private val elementSimpleNameMap = mutableMapOf<T, String>()
   private val elementTypeNameMap = mutableMapOf<T, String>()
@@ -76,10 +76,9 @@ public abstract class AbstractTreePrinter<T : Any>(
 
     val thisName = rootNode.uniqueSimpleName()
 
-    fun String.colorized(): String {
-      return this
-      // return colorized(getCurrentColor())
-    }
+    val color = getCurrentColor()
+
+    fun String.colorized(): String = colorized(color)
 
     val parentName = rootNode.parent()?.uniqueSimpleName() ?: "null"
     val parentType = rootNode.parent()?.typeName() ?: "null"
@@ -94,43 +93,89 @@ public abstract class AbstractTreePrinter<T : Any>(
     @Suppress("MagicNumber")
     return buildString {
 
+      val chars = BoxChars.LIGHT
+
       val header =
         "$thisName [type: $typeName] [parent: $parentName] [parent type: $parentType]"
 
-      val text = rootNode.text().replace(" ", "$whitespaceChar")
+      val text = rootNode.text()
+        .letIf(whitespaceChar != null) {
+          it.replace(" ", "$whitespaceChar")
+        }
 
       val headerLength = header.countVisibleChars()
 
-      val len = maxOf(headerLength + 4, text.lines().maxOf { it.countVisibleChars() })
+      val longestTextLine = text.lines().maxOf { it.countVisibleChars() }
 
-      val headerBoxStart = "┏━".colorized()
+      val len = maxOf(headerLength + 4, longestTextLine)
 
-      val headerBoxEnd = ("━".repeat(len - 3 - headerLength) + "┓").colorized()
+      val headerBoxStart = "${chars.topLeft}${chars.dash}".colorized()
+
+      val headerBoxEnd =
+        ("${chars.dash}".repeat((len - 3) - headerLength) + chars.topRight).colorized()
 
       append("$indent$headerBoxStart $header $headerBoxEnd")
 
       append('\n')
       append(indent)
-      append("┣${"━".repeat(len)}┫".colorized())
+      append("${chars.midLeft}${"${chars.dash}".repeat(len)}${chars.bottomRight}".colorized())
       append('\n')
 
-      val paddedText = text.mapLines { line ->
+      val pipe = "${chars.pipe}".colorized()
 
-        val pipe = "┃".colorized()
+      val prependedText = text.prependIndent("$indent$pipe")
 
-        "$indent$pipe${line.padEnd(len)}$pipe"
-      }
-
-      append(paddedText)
+      append(prependedText)
 
       append('\n')
       append(indent)
-      append("┗${"━".repeat(len)}┛".colorized())
+      append("${chars.bottomLeft}${"${chars.dash}".repeat(len)}${chars.dash}".colorized())
+      // append("${chars.bottomLeft}${"${chars.dash}".repeat(longestTextLine)}".colorized())
 
       if (childrenText.isNotEmpty()) {
         append("\n")
         append(childrenText)
       }
+    }
+  }
+
+  private data class BoxChars(
+    val dash: Char,
+    val pipe: Char,
+    val topLeft: Char,
+    val midLeft: Char,
+    val bottomLeft: Char,
+    val midBottom: Char,
+    val midTop: Char,
+    val topRight: Char,
+    val midRight: Char,
+    val bottomRight: Char
+  ) {
+    companion object {
+      val HEAVY = BoxChars(
+        dash = '━',
+        pipe = '┃',
+        topLeft = '┏',
+        midLeft = '┣',
+        bottomLeft = '┗',
+        midBottom = '┻',
+        midTop = '┳',
+        topRight = '┓',
+        midRight = '┫',
+        bottomRight = '┛'
+      )
+      val LIGHT = BoxChars(
+        dash = '─',
+        pipe = '│',
+        topLeft = '┌',
+        midLeft = '├',
+        bottomLeft = '└',
+        midBottom = '┴',
+        midTop = '┬',
+        topRight = '┐',
+        midRight = '┤',
+        bottomRight = '┘'
+      )
     }
   }
 

@@ -120,6 +120,7 @@ public interface StatikName : HasNameSegments, Comparable<StatikName>, Serializa
       { it::class.java.simpleName }
     )
   }
+  public companion object
 }
 
 /**

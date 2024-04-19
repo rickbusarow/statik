@@ -18,6 +18,8 @@ package com.rickbusarow.statik.element.kotlin.psi
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.compiler.StatikElementContext
 import com.rickbusarow.statik.compiler.inerceptor.NameParser.NameParserPacket
+import com.rickbusarow.statik.element.internal.HasChildrenInternal
+import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotation
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotationArgument
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
@@ -53,7 +55,8 @@ public class StatikKotlinAnnotationImpl<out PARENT : StatikKotlinElement>(
   private val context: StatikElementContext<PsiElement>,
   override val psi: KtAnnotationEntry,
   override val parent: PARENT
-) : StatikKotlinAnnotation<PARENT> {
+) : StatikKotlinAnnotation<PARENT>,
+  HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val referenceName: LazyDeferred<ReferenceName> = lazyDeferred {
 
@@ -75,7 +78,8 @@ public class StatikKotlinAnnotationArgumentImpl<out PARENT : StatikKotlinElement
   private val context: StatikElementContext<PsiElement>,
   override val psi: KtValueArgument,
   override val parent: PARENT
-) : StatikKotlinAnnotationArgument<PARENT> {
+) : StatikKotlinAnnotationArgument<PARENT>,
+  HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val value: Any = TODO()
 

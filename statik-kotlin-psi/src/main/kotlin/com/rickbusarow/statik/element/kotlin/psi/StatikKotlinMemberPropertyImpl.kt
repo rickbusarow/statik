@@ -17,7 +17,6 @@ package com.rickbusarow.statik.element.kotlin.psi
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
-import com.rickbusarow.statik.element.kotlin.HasKotlinVisibility
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConstructorProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinMemberProperty
@@ -42,7 +41,6 @@ public class StatikKotlinMemberPropertyImpl<out PARENT : StatikKotlinDeclaredEle
   override val psi: KtProperty,
   override val parent: PARENT
 ) : StatikKotlinMemberProperty<PARENT>,
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent),
   HasStatikKotlinElementContext {
 
@@ -67,7 +65,6 @@ public class StatikKotlinConstructorPropertyImpl<out PARENT : StatikKotlinDeclar
   override val psi: KtParameter,
   override val parent: PARENT
 ) : StatikKotlinConstructorProperty<PARENT>,
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent),
   HasStatikKotlinElementContext {
 

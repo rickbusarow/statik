@@ -37,6 +37,7 @@ import kotlinx.coroutines.sync.withLock
 public interface LazyDeferred<out T> {
   public val isCompleted: Boolean
   public suspend fun await(): T
+  public suspend operator fun invoke(): T = await()
 
   /**
    * Immediately returns the deferred value **if already completed**.

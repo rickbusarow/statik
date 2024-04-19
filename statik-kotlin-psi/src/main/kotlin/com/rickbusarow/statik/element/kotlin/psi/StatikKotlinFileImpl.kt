@@ -17,6 +17,8 @@ package com.rickbusarow.statik.element.kotlin.psi
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
+import com.rickbusarow.statik.element.internal.HasChildrenInternal
+import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFunction
@@ -29,12 +31,8 @@ import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.dataSource
-import com.rickbusarow.statik.utils.lazy.lazySet
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import com.rickbusarow.statik.utils.stdlib.mapToSet
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.toSet
 import org.jetbrains.kotlin.fileClasses.javaFileFacadeFqName
@@ -48,7 +46,9 @@ public class StatikKotlinFileImpl(
   override val context: StatikKotlinElementContext,
   override val file: File,
   override val psi: KtFile
-) : StatikKotlinFile, HasStatikKotlinElementContext {
+) : StatikKotlinFile,
+  HasStatikKotlinElementContext,
+  HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
     psi.fileAnnotationList
@@ -67,10 +67,6 @@ public class StatikKotlinFileImpl(
     }
   }
   override val containingFile: StatikKotlinFile get() = this
-
-  override val children: Flow<StatikKotlinConcreteType<*>> = flow {
-    emitAll(declaredTypes)
-  }
 
   @Suppress("UnusedPrivateProperty")
   private val fileJavaFacadeName by lazy { psi.javaFileFacadeFqName.asString() }

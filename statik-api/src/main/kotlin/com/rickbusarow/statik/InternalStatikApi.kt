@@ -15,5 +15,5 @@
 
 package com.rickbusarow.statik
 
-@RequiresOptIn
+@RequiresOptIn("This API is internal to Statik.")
 public annotation class InternalStatikApi

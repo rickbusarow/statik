@@ -16,23 +16,28 @@
 package com.rickbusarow.statik.element
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 /**
  * Base interface for all code elements parsed from source
  * files. This includes classes, functions, variables, etc.
  */
-public interface StatikElement {
+public interface StatikElement : HasChildren {
 
   /** The PSI element representing the physical code element in the source code. */
   public val psi: PsiElement
 
+  public val text: String
+    get() = psi.text
+
   /** The file that contains this element. */
   public val containingFile: StatikFile
+}
+public interface HasChildren {
 
   /** The direct children elements of this element. */
-  public val children: Flow<StatikElement> get() = flowOf()
+  public val children: Flow<StatikElement>
+  // get() = flowOf()
 }
 
 /** Represents an element with a parent element. */

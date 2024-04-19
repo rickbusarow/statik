@@ -15,16 +15,18 @@
 
 package com.rickbusarow.statik.element.java
 
+import com.rickbusarow.statik.element.HasJavaVisibility
 import com.rickbusarow.statik.element.StatikCallable
 import com.rickbusarow.statik.element.StatikFunction
 import com.rickbusarow.statik.element.StatikJavaVisibility
-import com.rickbusarow.statik.element.StatikParameter
 import com.rickbusarow.statik.element.StatikProperty
+import com.rickbusarow.statik.element.StatikValueParameter
 import com.rickbusarow.statik.name.HasPackageName
 
 /** A Java callable element. */
 public interface StatikJavaCallable<out PARENT : StatikJavaElement> :
   StatikCallable<PARENT>,
+  HasJavaVisibility,
   StatikJavaElement {
 
   override val visibility: StatikJavaVisibility
@@ -38,9 +40,8 @@ public sealed interface StatikJavaProperty<out PARENT : StatikJavaElement> :
 /** A Java member property. */
 public interface JavaMemberProperty<out PARENT : StatikJavaElement> : StatikJavaProperty<PARENT>
 
-/** A Java parameter element. */
-public interface StatikJavaParameter<out PARENT : StatikJavaElement> :
-  StatikParameter<PARENT>,
+public interface StatikJavaValueParameter<out PARENT : StatikJavaElement> :
+  StatikValueParameter<PARENT>,
   StatikJavaCallable<PARENT>
 
 /** A Java function element. */

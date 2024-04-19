@@ -26,6 +26,7 @@ import org.jetbrains.kotlin.psi.KtQualifiedExpression
 import org.jetbrains.kotlin.psi.psiUtil.getNonStrictParentOfType
 import org.jetbrains.kotlin.types.KotlinType
 
+/** @return `true` if this [PsiElement] is a descendant of [T], `false` otherwise. */
 @InternalStatikApi
 public inline fun <reified T : PsiElement> PsiElement.isPartOf(): Boolean =
   getNonStrictParentOfType<T>() != null
@@ -93,13 +94,13 @@ public fun PsiElement.childrenBreadthFirst(): Sequence<PsiElement> {
 @InternalStatikApi
 public inline fun PsiElement.childrenBreadthFirst(
   crossinline predicate: (PsiElement) -> Boolean
-): Sequence<PsiElement> = Traversals.breadthFirstTraversal(this) { children.filter(predicate) }
+): Sequence<PsiElement> {
+  return Traversals.breadthFirstTraversal(this) { children.filter(predicate) }
+}
 
 @InternalStatikApi
 public fun KotlinType?.requireReferenceName(): ReferenceName {
-
-  return requireNotNull { "The receiver type is null" }
-    .asReferenceName()
+  return requireNotNull { "The receiver type is null" }.asReferenceName()
 }
 
 @InternalStatikApi

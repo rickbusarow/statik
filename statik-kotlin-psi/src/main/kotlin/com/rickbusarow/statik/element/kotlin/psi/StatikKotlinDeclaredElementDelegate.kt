@@ -16,6 +16,9 @@
 package com.rickbusarow.statik.element.kotlin.psi
 
 import com.rickbusarow.statik.InternalStatikApi
+import com.rickbusarow.statik.element.internal.HasChildrenInternal
+import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
+import com.rickbusarow.statik.element.kotlin.HasKotlinVisibility
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
@@ -34,7 +37,9 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 public class StatikKotlinDeclaredElementDelegate<T : KtModifierListOwner, PARENT>(
   override val psi: T,
   override val parent: PARENT
-) : StatikKotlinDeclaredElement<PARENT>
+) : StatikKotlinDeclaredElement<PARENT>,
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+  HasChildrenInternal by HasChildrenInternalDelegate()
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 

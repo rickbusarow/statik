@@ -16,7 +16,7 @@
 package com.rickbusarow.statik.element.kotlin.psi.testing
 
 import com.rickbusarow.kase.Kase4
-import com.rickbusarow.statik.element.kotlin.psi.testing.SubjectBuilder.SubjectParams
+import com.rickbusarow.statik.element.kotlin.psi.testing.SubjectBuilder.SubjectPropertyParams.Companion.subjectProperty
 import com.rickbusarow.statik.utils.stdlib.justifyToFirstLine
 import com.rickbusarow.statik.utils.stdlib.letIf
 import com.rickbusarow.statik.utils.stdlib.replaceRegex
@@ -25,48 +25,48 @@ import org.intellij.lang.annotations.Language
 object Properties {
 
   val explicitTypes = listOf(
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": String",
       typeAsString = "kotlin.String",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": kotlin.String",
       typeAsString = "kotlin.String",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": String",
       typeAsString = "kotlin.String",
       imports = listOf("kotlin.String")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": KotlinString",
       typeAsString = "kotlin.String",
       imports = listOf("kotlin.String as KotlinString")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": KotlinString",
       typeAsString = "com.subject.KotlinString",
       imports = emptyList(),
       additionalTypes = "typealias KotlinString = String"
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": Int",
       typeAsString = "kotlin.Int",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": kotlin.Int",
       typeAsString = "kotlin.Int",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": Int",
       typeAsString = "kotlin.Int",
       imports = listOf("kotlin.Int")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = ": Lib1Class",
       typeAsString = "com.lib1.Lib1Class",
       imports = listOf("com.lib1.Lib1Class")
@@ -74,47 +74,47 @@ object Properties {
   )
 
   val inferredTypes = listOf(
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= \"hello world\"",
       typeAsString = "kotlin.String",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= \"hello world\"",
       typeAsString = "kotlin.String",
       imports = listOf("kotlin.String")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3",
       typeAsString = "kotlin.Int",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3_00",
       typeAsString = "kotlin.Int",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3",
       typeAsString = "kotlin.Int",
       imports = listOf("kotlin.Int")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3L",
       typeAsString = "kotlin.Long",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3_00L",
       typeAsString = "kotlin.Long",
       imports = emptyList()
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= 3L",
       typeAsString = "kotlin.Long",
       imports = listOf("kotlin.Long")
     ),
-    SubjectParams(
+    subjectProperty(
       afterProperty = "= Lib1Class()",
       typeAsString = "com.lib1.Lib1Class",
       imports = listOf("com.lib1.Lib1Class")
@@ -124,10 +124,10 @@ object Properties {
 
 data class SubjectBuilder(
   val name: String,
-  private val builder: (declarationKeyword: String, params: SubjectParams) -> String
+  private val builder: (declarationKeyword: String, params: SubjectPropertyParams) -> String
 ) {
 
-  fun build(declarationKeyword: String, params: SubjectParams): String = builder(
+  fun build(declarationKeyword: String, params: SubjectPropertyParams): String = builder(
     declarationKeyword,
     params
   )
@@ -136,22 +136,36 @@ data class SubjectBuilder(
     .trim()
     .plus("\n\n")
 
-  class SubjectParams(
+  class SubjectPropertyParams private constructor(
     // override val displayName: String,
     val afterProperty: String,
     val typeAsString: String,
     val imports: List<String>,
-    @Language("kotlin")
     val additionalTypes: String = ""
   ) : Kase4<String, String, List<String>, String> {
 
     override val displayName: String
-      get() = "vax subjectParam $afterProperty"
+      get() = "val/var subjectProperty $afterProperty"
         .letIf(imports.isNotEmpty()) { "$it   (with imports)" }
 
     override val a1 = afterProperty
     override val a2 = typeAsString
     override val a3 = imports
     override val a4 = additionalTypes
+
+    companion object {
+      fun subjectProperty(
+        afterProperty: String,
+        typeAsString: String,
+        imports: List<String>,
+        @Language("kotlin")
+        additionalTypes: String = ""
+      ): SubjectPropertyParams = SubjectPropertyParams(
+        afterProperty = afterProperty,
+        typeAsString = typeAsString,
+        imports = imports,
+        additionalTypes = additionalTypes
+      )
+    }
   }
 }

@@ -76,6 +76,10 @@ public abstract interface class com/rickbusarow/statik/compiler/inerceptor/Parsi
 	public abstract fun proceed (Lcom/rickbusarow/statik/compiler/inerceptor/NameParser$NameParserPacket;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
+public abstract interface class com/rickbusarow/statik/element/HasChildren {
+	public abstract fun getChildren ()Lkotlinx/coroutines/flow/Flow;
+}
+
 public abstract interface class com/rickbusarow/statik/element/HasJavaVisibility : com/rickbusarow/statik/element/HasVisibility {
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/StatikJavaVisibility;
 }
@@ -97,7 +101,7 @@ public abstract interface class com/rickbusarow/statik/element/StatikAnnotation 
 }
 
 public final class com/rickbusarow/statik/element/StatikAnnotation$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikAnnotation;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikAnnotation;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikAnnotationArgument : com/rickbusarow/statik/element/StatikElementWithParent {
@@ -106,17 +110,24 @@ public abstract interface class com/rickbusarow/statik/element/StatikAnnotationA
 }
 
 public final class com/rickbusarow/statik/element/StatikAnnotationArgument$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikAnnotationArgument;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikAnnotationArgument;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikCallable : com/rickbusarow/statik/element/HasVisibility, com/rickbusarow/statik/element/StatikAnnotated, com/rickbusarow/statik/element/StatikElement, com/rickbusarow/statik/element/StatikElementWithParent {
+public abstract interface class com/rickbusarow/statik/element/StatikArgument : com/rickbusarow/statik/element/StatikVariable {
+}
+
+public final class com/rickbusarow/statik/element/StatikArgument$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikArgument;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikCallable : com/rickbusarow/statik/element/StatikAnnotated, com/rickbusarow/statik/element/StatikElement, com/rickbusarow/statik/element/StatikElementWithParent {
 }
 
 public final class com/rickbusarow/statik/element/StatikCallable$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikCallable;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikCallable;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikConcreteType : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/element/StatikType {
+public abstract interface class com/rickbusarow/statik/element/StatikConcreteType : com/rickbusarow/statik/element/StatikTypeDeclaration {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
 	public abstract fun getFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
@@ -125,32 +136,29 @@ public abstract interface class com/rickbusarow/statik/element/StatikConcreteTyp
 }
 
 public final class com/rickbusarow/statik/element/StatikConcreteType$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikConcreteType;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getSegments (Lcom/rickbusarow/statik/element/StatikConcreteType;)Ljava/util/List;
-	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/StatikConcreteType;)Ljava/lang/String;
-	public static fun isApi (Lcom/rickbusarow/statik/element/StatikConcreteType;)Z
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikConcreteType;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikDeclaredElement : com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames {
+public abstract interface class com/rickbusarow/statik/element/StatikDeclaredElement : com/rickbusarow/statik/element/HasVisibility, com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/name/HasPackageName, com/rickbusarow/statik/name/HasSimpleNames {
 	public abstract fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public abstract fun isApi ()Z
 }
 
 public final class com/rickbusarow/statik/element/StatikDeclaredElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikDeclaredElement;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/StatikDeclaredElement;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/StatikDeclaredElement;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikDeclaredElement;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/StatikDeclaredElement;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikElement {
-	public abstract fun getChildren ()Lkotlinx/coroutines/flow/Flow;
+public abstract interface class com/rickbusarow/statik/element/StatikElement : com/rickbusarow/statik/element/HasChildren {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
 	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public abstract fun getText ()Ljava/lang/String;
 }
 
 public final class com/rickbusarow/statik/element/StatikElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikElement;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikElement;)Ljava/lang/String;
 }
 
 public final class com/rickbusarow/statik/element/StatikElementKt {
@@ -162,7 +170,7 @@ public abstract interface class com/rickbusarow/statik/element/StatikElementWith
 }
 
 public final class com/rickbusarow/statik/element/StatikElementWithParent$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikElementWithParent;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikElementWithParent;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikFile : com/rickbusarow/statik/element/StatikElement, com/rickbusarow/statik/name/HasPackageName {
@@ -177,17 +185,16 @@ public abstract interface class com/rickbusarow/statik/element/StatikFile : com/
 }
 
 public final class com/rickbusarow/statik/element/StatikFile$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikFile;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikFile;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikFunction : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikHasTypeParameters {
-	public abstract fun getParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
+public abstract interface class com/rickbusarow/statik/element/StatikFunction : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikHasTypeParameters, com/rickbusarow/statik/element/StatikHasValueParameters {
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
 public final class com/rickbusarow/statik/element/StatikFunction$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikFunction;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikFunction;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikHasTypeParameters : com/rickbusarow/statik/element/StatikElementWithParent {
@@ -195,7 +202,15 @@ public abstract interface class com/rickbusarow/statik/element/StatikHasTypePara
 }
 
 public final class com/rickbusarow/statik/element/StatikHasTypeParameters$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikHasTypeParameters;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikHasTypeParameters;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikHasValueParameters : com/rickbusarow/statik/element/StatikElementWithParent {
+	public abstract fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
+public final class com/rickbusarow/statik/element/StatikHasValueParameters$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikHasValueParameters;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikJavaVisibility : com/rickbusarow/statik/element/StatikVisibility {
@@ -217,12 +232,11 @@ public final class com/rickbusarow/statik/element/StatikJavaVisibility$Public : 
 	public static final field INSTANCE Lcom/rickbusarow/statik/element/StatikJavaVisibility$Public;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikParameter : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikElement {
-	public abstract fun getIndex ()I
+public abstract interface class com/rickbusarow/statik/element/StatikParameter : com/rickbusarow/statik/element/StatikVariable {
 }
 
 public final class com/rickbusarow/statik/element/StatikParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikParameter;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikParameter;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikProperty : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikDeclaredElement {
@@ -231,25 +245,84 @@ public abstract interface class com/rickbusarow/statik/element/StatikProperty : 
 }
 
 public final class com/rickbusarow/statik/element/StatikProperty$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikProperty;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/StatikProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/StatikProperty;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/StatikProperty;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikType : com/rickbusarow/statik/element/StatikAnnotated, com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/element/StatikHasTypeParameters {
-	public abstract fun getSuperTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
 public final class com/rickbusarow/statik/element/StatikType$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikType;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikType;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/StatikTypeParameter : com/rickbusarow/statik/element/StatikType {
+public abstract interface class com/rickbusarow/statik/element/StatikTypeArgument : com/rickbusarow/statik/element/StatikArgument, com/rickbusarow/statik/element/StatikTypeVariable {
+}
+
+public final class com/rickbusarow/statik/element/StatikTypeArgument$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikTypeArgument;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikTypeDeclaration : com/rickbusarow/statik/element/StatikType {
+	public abstract fun getSuperTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
+public final class com/rickbusarow/statik/element/StatikTypeDeclaration$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikTypeDeclaration;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikTypeParameter : com/rickbusarow/statik/element/StatikParameter, com/rickbusarow/statik/element/StatikTypeVariable {
 }
 
 public final class com/rickbusarow/statik/element/StatikTypeParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/StatikTypeParameter;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikTypeParameter;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikTypeReference : com/rickbusarow/statik/element/StatikType {
+}
+
+public final class com/rickbusarow/statik/element/StatikTypeReference$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikTypeReference;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikTypeVariable : com/rickbusarow/statik/element/StatikType, com/rickbusarow/statik/element/StatikVariable {
+}
+
+public final class com/rickbusarow/statik/element/StatikTypeVariable$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikTypeVariable;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikValueArgument : com/rickbusarow/statik/element/StatikParameter, com/rickbusarow/statik/element/StatikValueVariable {
+}
+
+public final class com/rickbusarow/statik/element/StatikValueArgument$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueArgument;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikValueParameter : com/rickbusarow/statik/element/StatikParameter, com/rickbusarow/statik/element/StatikValueVariable {
+}
+
+public final class com/rickbusarow/statik/element/StatikValueParameter$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueParameter;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikValueVariable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikVariable {
+	public abstract fun getName ()Lcom/rickbusarow/statik/name/StatikName;
+	public abstract fun getType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+}
+
+public final class com/rickbusarow/statik/element/StatikValueVariable$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueVariable;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/StatikVariable : com/rickbusarow/statik/element/StatikElementWithParent {
+	public abstract fun getIndex ()I
+}
+
+public final class com/rickbusarow/statik/element/StatikVariable$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/StatikVariable;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikVisibility {
@@ -259,13 +332,27 @@ public final class com/rickbusarow/statik/element/TraversalKt {
 	public static final fun childrenRecursive (Lcom/rickbusarow/statik/element/StatikElement;)Lkotlinx/coroutines/flow/Flow;
 }
 
+public abstract interface class com/rickbusarow/statik/element/internal/HasChildrenInternal : com/rickbusarow/statik/element/HasChildren {
+	public abstract fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
+public final class com/rickbusarow/statik/element/internal/HasChildrenInternal$DefaultImpls {
+	public static synthetic fun lazySet$default (Lcom/rickbusarow/statik/element/internal/HasChildrenInternal;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
+public final class com/rickbusarow/statik/element/internal/HasChildrenInternalDelegate : com/rickbusarow/statik/element/internal/HasChildrenInternal {
+	public fun <init> ()V
+	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
+	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
 public abstract interface class com/rickbusarow/statik/element/java/JavaMemberProperty : com/rickbusarow/statik/element/java/StatikJavaProperty {
 }
 
 public final class com/rickbusarow/statik/element/java/JavaMemberProperty$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/JavaMemberProperty;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/java/JavaMemberProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/JavaMemberProperty;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/JavaMemberProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/java/JavaMemberProperty;)Z
 }
 
@@ -277,22 +364,22 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaAn
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaAnnotation$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaAnnotation;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaAnnotation;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaAnnotationArgument : com/rickbusarow/statik/element/StatikAnnotationArgument, com/rickbusarow/statik/element/java/StatikJavaElementWithParent {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaAnnotationArgument$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaAnnotationArgument;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaAnnotationArgument;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/java/StatikJavaCallable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/java/StatikJavaElement {
+public abstract interface class com/rickbusarow/statik/element/java/StatikJavaCallable : com/rickbusarow/statik/element/HasJavaVisibility, com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/java/StatikJavaElement {
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/StatikJavaVisibility;
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaCallable$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaCallable;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaCallable;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaConcreteType : com/rickbusarow/statik/element/StatikConcreteType, com/rickbusarow/statik/element/java/StatikJavaElementWithParent, com/rickbusarow/statik/element/java/StatikJavaType {
@@ -302,10 +389,7 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaCo
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaConcreteType$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType;)Lkotlinx/coroutines/flow/Flow;
-	public static fun getSegments (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType;)Ljava/util/List;
-	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType;)Ljava/lang/String;
-	public static fun isApi (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType;)Z
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/java/StatikJavaConcreteType {
@@ -313,9 +397,9 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaCo
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaClass;)Z
 }
 
@@ -323,9 +407,9 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaCo
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/java/StatikJavaConcreteType$StatikJavaInterface;)Z
 }
 
@@ -333,9 +417,9 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaDe
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaDeclaredElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaDeclaredElement;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/java/StatikJavaDeclaredElement;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/StatikJavaDeclaredElement;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaDeclaredElement;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/java/StatikJavaDeclaredElement;)Z
 }
 
@@ -344,28 +428,28 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaEl
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaElement$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaElement;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaElement;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaElementWithParent : com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/element/java/StatikJavaElement {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaElementWithParent$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaElementWithParent;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaElementWithParent;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaFile : com/rickbusarow/statik/element/StatikFile, com/rickbusarow/statik/element/java/StatikJavaElement {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaFile$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaFile;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaFile;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaFunction : com/rickbusarow/statik/element/StatikFunction, com/rickbusarow/statik/element/java/StatikJavaCallable {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaFunction$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaFunction;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaFunction;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaHasTypeParameters : com/rickbusarow/statik/element/StatikHasTypeParameters, com/rickbusarow/statik/element/java/StatikJavaElementWithParent {
@@ -373,39 +457,39 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaHa
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaHasTypeParameters$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaHasTypeParameters;)Lkotlinx/coroutines/flow/Flow;
-}
-
-public abstract interface class com/rickbusarow/statik/element/java/StatikJavaParameter : com/rickbusarow/statik/element/StatikParameter, com/rickbusarow/statik/element/java/StatikJavaCallable {
-}
-
-public final class com/rickbusarow/statik/element/java/StatikJavaParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaParameter;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaHasTypeParameters;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaProperty : com/rickbusarow/statik/element/StatikProperty, com/rickbusarow/statik/element/java/StatikJavaCallable {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaProperty$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaProperty;)Lkotlinx/coroutines/flow/Flow;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/java/StatikJavaProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/java/StatikJavaProperty;)Ljava/lang/String;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/java/StatikJavaProperty;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/java/StatikJavaType : com/rickbusarow/statik/element/StatikType, com/rickbusarow/statik/element/java/StatikJavaElementWithParent {
+public abstract interface class com/rickbusarow/statik/element/java/StatikJavaType : com/rickbusarow/statik/element/StatikTypeDeclaration, com/rickbusarow/statik/element/java/StatikJavaElementWithParent {
 	public abstract fun getParent ()Lcom/rickbusarow/statik/element/java/StatikJavaElement;
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaType$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaType;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaType;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/StatikJavaTypeParameter : com/rickbusarow/statik/element/StatikTypeParameter, com/rickbusarow/statik/element/java/StatikJavaType {
 }
 
 public final class com/rickbusarow/statik/element/java/StatikJavaTypeParameter$DefaultImpls {
-	public static fun getChildren (Lcom/rickbusarow/statik/element/java/StatikJavaTypeParameter;)Lkotlinx/coroutines/flow/Flow;
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaTypeParameter;)Ljava/lang/String;
+}
+
+public abstract interface class com/rickbusarow/statik/element/java/StatikJavaValueParameter : com/rickbusarow/statik/element/StatikValueParameter, com/rickbusarow/statik/element/java/StatikJavaCallable {
+}
+
+public final class com/rickbusarow/statik/element/java/StatikJavaValueParameter$DefaultImpls {
+	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaValueParameter;)Ljava/lang/String;
 }
 
 public final class com/rickbusarow/statik/name/AndroidDataBindingDeclaredName : com/rickbusarow/statik/name/QualifiedDeclaredName, com/rickbusarow/statik/name/AndroidResourceDeclaredName, com/rickbusarow/statik/name/Generated {
@@ -1050,6 +1134,7 @@ public final class com/rickbusarow/statik/name/StatikLanguage$XML : com/rickbusa
 }
 
 public abstract interface class com/rickbusarow/statik/name/StatikName : com/rickbusarow/statik/name/HasNameSegments, java/io/Serializable, java/lang/Comparable {
+	public static final field Companion Lcom/rickbusarow/statik/name/StatikName$Companion;
 	public abstract fun append (Ljava/lang/Iterable;)Ljava/lang/String;
 	public abstract fun append ([Ljava/lang/String;)Ljava/lang/String;
 	public abstract fun append-DyUeMRA (Ljava/lang/String;)Ljava/lang/String;
@@ -1063,6 +1148,9 @@ public abstract interface class com/rickbusarow/statik/name/StatikName : com/ric
 	public abstract fun isBlank ()Z
 	public abstract fun isEmpty ()Z
 	public abstract fun startsWith (Lcom/rickbusarow/statik/name/StatikName;)Z
+}
+
+public final class com/rickbusarow/statik/name/StatikName$Companion {
 }
 
 public final class com/rickbusarow/statik/name/StatikName$DefaultImpls {
@@ -1244,7 +1332,12 @@ public final class com/rickbusarow/statik/utils/lazy/EmptyResetManager : com/ric
 public abstract interface class com/rickbusarow/statik/utils/lazy/LazyDeferred {
 	public abstract fun await (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getCompleted ()Ljava/lang/Object;
+	public abstract fun invoke (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun isCompleted ()Z
+}
+
+public final class com/rickbusarow/statik/utils/lazy/LazyDeferred$DefaultImpls {
+	public static fun invoke (Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/rickbusarow/statik/utils/lazy/LazyDeferredKt {
@@ -1283,6 +1376,7 @@ public abstract interface class com/rickbusarow/statik/utils/lazy/LazySet$DataSo
 
 public final class com/rickbusarow/statik/utils/lazy/LazySet$DataSource$DefaultImpls {
 	public static fun compareTo (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;)I
+	public static fun invoke (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority : java/lang/Enum, java/lang/Comparable {
@@ -1371,6 +1465,7 @@ public final class com/rickbusarow/statik/utils/lazy/internal/DataSourceImpl : c
 	public fun getCompleted ()Ljava/util/Set;
 	public fun getPriority ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 	public fun hashCode ()I
+	public fun invoke (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun isCompleted ()Z
 }
 
@@ -1556,6 +1651,9 @@ public final class com/rickbusarow/statik/utils/stdlib/StringKt {
 	public static final fun findMinimumIndent (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 	public static synthetic fun findMinimumIndent$default (Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
 	public static final fun justifyToFirstLine (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun prefix (Ljava/lang/CharSequence;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun prefixIfNot (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static final fun removeRegex (Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/utils/trace/HasTraceTags {
@@ -1590,8 +1688,8 @@ public final class com/rickbusarow/statik/utils/trace/TraceKt {
 
 public abstract class com/rickbusarow/statik/utils/traversal/AbstractTreePrinter {
 	public fun <init> ()V
-	public fun <init> (C)V
-	public synthetic fun <init> (CILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/Character;)V
+	public synthetic fun <init> (Ljava/lang/Character;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public abstract fun children (Ljava/lang/Object;)Lkotlin/sequences/Sequence;
 	public abstract fun parent (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun printTreeString (Ljava/lang/Object;)V

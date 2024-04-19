@@ -30,18 +30,15 @@ ktlint_ignore_back_ticked_identifier = true
 kt-rules_project_version = 0.10.0-SNAPSHOT
 kt-rules_wrapping_style = equal
 
-# Disabled rules for 0.48.0+
 ktlint_standard_class-naming = disabled
+ktlint_standard_class-signature = disabled
 ktlint_standard_filename = disabled
+ktlint_standard_function-expression-body = disabled
 ktlint_standard_function-naming = disabled
 ktlint_standard_function-signature = disabled
 ktlint_standard_max-line-length = disabled
 ktlint_standard_no-empty-first-line-in-method-block = disabled
 ktlint_standard_property-naming = disabled
-
-# Disabled rules for 1.0.0+
-ktlint_standard_function-expression-body = disabled
-ktlint_standard_class-signature = disabled
 
 ktlint_experimental = disabled
 ktlint_code_style = intellij_idea
@@ -82,7 +79,7 @@ ij_kotlin_extends_list_wrap = on_every_item
 ij_kotlin_field_annotation_wrap = normal
 ij_kotlin_finally_on_new_line = false
 ij_kotlin_if_rparen_on_new_line = true
-ij_kotlin_import_nested_classes = true
+ij_kotlin_import_nested_classes = false
 ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
 ij_kotlin_insert_whitespaces_in_simple_one_line_method = true
 ij_kotlin_keep_blank_lines_before_right_brace = 0

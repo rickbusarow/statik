@@ -17,11 +17,11 @@ package com.rickbusarow.statik.element.java
 
 import com.rickbusarow.statik.element.StatikConcreteType
 import com.rickbusarow.statik.element.StatikDeclaredElement
-import com.rickbusarow.statik.element.StatikType
+import com.rickbusarow.statik.element.StatikTypeDeclaration
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 public interface StatikJavaType<out PARENT : StatikJavaElement> :
-  StatikType<PARENT>,
+  StatikTypeDeclaration<PARENT>,
   StatikJavaElementWithParent<PARENT> {
   override val parent: PARENT
 }

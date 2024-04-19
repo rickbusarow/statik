@@ -35,46 +35,46 @@ class AbstractTreePrinterTest {
     }
 
     TestNodeTreePrinter().treeString(tree).noAnsi() shouldBe """
-    ┏━ CompositeNode [type: root] [parent: null] [parent type: null] ━┓
-    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ┃text for root                                                    ┃
-    ┃the element type is root                                         ┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ CompositeNode (2) [type: composite] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text for a                                                                         ┃
-    ╎  ┃the element type is composite                                                      ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text for a1                                                                   ┃
-    ╎  ╎  ┃the element type is leaf                                                      ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (2) [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text for a2                                                                       ┃
-    ╎  ╎  ┃the element type is leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ CompositeNode (3) [type: composite] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text for b                                                                         ┃
-    ╎  ┃the element type is composite                                                      ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (3) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text for b1                                                                       ┃
-    ╎  ╎  ┃the element type is leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (4) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text for b2                                                                       ┃
-    ╎  ╎  ┃the element type is leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ LeafNode (5) [type: typeC] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text for c                                                                ┃
-    ╎  ┃the element type is typeC                                                 ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+      ┌─ CompositeNode [type: root] [parent: null] [parent type: null] ─┐
+      ├─────────────────────────────────────────────────────────────────┘
+      │text for root
+      │the element type is root
+      └──────────────────────────────────────────────────────────────────
+      ╎  ┌─ CompositeNode (2) [type: composite] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├───────────────────────────────────────────────────────────────────────────────────┘
+      ╎  │text for a
+      ╎  │the element type is composite
+      ╎  └────────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text for a1
+      ╎  ╎  │the element type is leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (2) [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text for a2
+      ╎  ╎  │the element type is leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ┌─ CompositeNode (3) [type: composite] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├───────────────────────────────────────────────────────────────────────────────────┘
+      ╎  │text for b
+      ╎  │the element type is composite
+      ╎  └────────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (3) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text for b1
+      ╎  ╎  │the element type is leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (4) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text for b2
+      ╎  ╎  │the element type is leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ┌─ LeafNode (5) [type: typeC] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├──────────────────────────────────────────────────────────────────────────┘
+      ╎  │text for c
+      ╎  │the element type is typeC
+      ╎  └───────────────────────────────────────────────────────────────────────────
     """.trimIndent()
   }
 
@@ -93,46 +93,46 @@ class AbstractTreePrinterTest {
     }
 
     TestNodeTreePrinter('·').treeString(tree).noAnsi() shouldBe """
-    ┏━ CompositeNode [type: root] [parent: null] [parent type: null] ━┓
-    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ┃text·for·root                                                    ┃
-    ┃the·element·type·is·root                                         ┃
-    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ CompositeNode (2) [type: composite] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text·for·a                                                                         ┃
-    ╎  ┃the·element·type·is·composite                                                      ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text·for·a1                                                                   ┃
-    ╎  ╎  ┃the·element·type·is·leaf                                                      ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (2) [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text·for·a2                                                                       ┃
-    ╎  ╎  ┃the·element·type·is·leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ CompositeNode (3) [type: composite] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text·for·b                                                                         ┃
-    ╎  ┃the·element·type·is·composite                                                      ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (3) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text·for·b1                                                                       ┃
-    ╎  ╎  ┃the·element·type·is·leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ╎  ┏━ LeafNode (4) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ━┓
-    ╎  ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ╎  ┃text·for·b2                                                                       ┃
-    ╎  ╎  ┃the·element·type·is·leaf                                                          ┃
-    ╎  ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-    ╎  ┏━ LeafNode (5) [type: typeC] [parent: CompositeNode] [parent type: root] ━┓
-    ╎  ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    ╎  ┃text·for·c                                                                ┃
-    ╎  ┃the·element·type·is·typeC                                                 ┃
-    ╎  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+      ┌─ CompositeNode [type: root] [parent: null] [parent type: null] ─┐
+      ├─────────────────────────────────────────────────────────────────┘
+      │text·for·root
+      │the·element·type·is·root
+      └──────────────────────────────────────────────────────────────────
+      ╎  ┌─ CompositeNode (2) [type: composite] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├───────────────────────────────────────────────────────────────────────────────────┘
+      ╎  │text·for·a
+      ╎  │the·element·type·is·composite
+      ╎  └────────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text·for·a1
+      ╎  ╎  │the·element·type·is·leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (2) [type: leaf] [parent: CompositeNode (2)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text·for·a2
+      ╎  ╎  │the·element·type·is·leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ┌─ CompositeNode (3) [type: composite] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├───────────────────────────────────────────────────────────────────────────────────┘
+      ╎  │text·for·b
+      ╎  │the·element·type·is·composite
+      ╎  └────────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (3) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text·for·b1
+      ╎  ╎  │the·element·type·is·leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ╎  ┌─ LeafNode (4) [type: leaf] [parent: CompositeNode (3)] [parent type: composite] ─┐
+      ╎  ╎  ├──────────────────────────────────────────────────────────────────────────────────┘
+      ╎  ╎  │text·for·b2
+      ╎  ╎  │the·element·type·is·leaf
+      ╎  ╎  └───────────────────────────────────────────────────────────────────────────────────
+      ╎  ┌─ LeafNode (5) [type: typeC] [parent: CompositeNode] [parent type: root] ─┐
+      ╎  ├──────────────────────────────────────────────────────────────────────────┘
+      ╎  │text·for·c
+      ╎  │the·element·type·is·typeC
+      ╎  └───────────────────────────────────────────────────────────────────────────
     """.trimIndent()
   }
 }

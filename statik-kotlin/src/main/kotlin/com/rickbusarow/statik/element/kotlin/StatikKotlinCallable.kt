@@ -17,7 +17,6 @@ package com.rickbusarow.statik.element.kotlin
 
 import com.rickbusarow.statik.element.StatikCallable
 import com.rickbusarow.statik.element.StatikFunction
-import com.rickbusarow.statik.element.StatikParameter
 import com.rickbusarow.statik.element.StatikProperty
 import com.rickbusarow.statik.element.StatikType
 import com.rickbusarow.statik.name.HasPackageName
@@ -33,18 +32,13 @@ import org.jetbrains.kotlin.psi.KtProperty
 public interface StatikKotlinCallable<out PARENT : StatikKotlinElement> :
   StatikCallable<PARENT>,
   StatikKotlinElementWithParent<PARENT> {
-
   override val psi: KtCallableDeclaration
-
-  override val visibility: StatikKotlinVisibility
 }
 
 /** A Kotlin property element. */
 public sealed interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName> :
   StatikProperty<PARENT>,
-  StatikKotlinCallable<PARENT> {
-  override val psi: KtCallableDeclaration
-}
+  StatikKotlinCallable<PARENT>
 
 /** A Kotlin member property element. */
 public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName> :
@@ -65,25 +59,29 @@ public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElemen
   override val psi: KtParameter
 }
 
-/** A Kotlin parameter element. */
-public interface StatikKotlinParameter<out PARENT : StatikKotlinElement> :
-  StatikParameter<PARENT>,
-  StatikKotlinCallable<PARENT>
-
 /** Represents a Kotlin function element. */
 public interface StatikKotlinFunction<out PARENT> :
   StatikFunction<PARENT>,
   StatikKotlinCallable<PARENT>,
+  StatikKotlinHasValueParameters<PARENT>,
   StatikKotlinHasTypeParameters<PARENT>
   where PARENT : StatikKotlinElementWithPackageName,
         PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
   override val psi: KtFunction
-  override val parameters: LazySet<StatikKotlinParameter<*>>
+  override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
   override val properties: LazySet<StatikKotlinProperty<*>>
   override val returnType: LazyDeferred<ReferenceName>
 }
+
+/** Represents a Kotlin function element. */
+public interface StatikKotlinDeclaredFunction<out PARENT> :
+  StatikKotlinFunction<PARENT>,
+  StatikKotlinDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElementWithPackageName,
+        PARENT : StatikKotlinElement,
+        PARENT : HasPackageName
 
 /** An extension element. */
 public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName> :
@@ -102,3 +100,8 @@ public interface StatikKotlinExtensionProperty<out PARENT : StatikKotlinElementW
 public interface StatikKotlinExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
   StatikKotlinExtensionElement<PARENT>,
   StatikKotlinFunction<PARENT>
+
+/** A Kotlin extension function. */
+public interface StatikKotlinDeclaredExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinExtensionElement<PARENT>,
+  StatikKotlinDeclaredFunction<PARENT>

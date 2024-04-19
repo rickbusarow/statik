@@ -23,7 +23,6 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 public interface StatikCallable<out PARENT : StatikElement> :
   StatikElement,
   StatikElementWithParent<PARENT>,
-  HasVisibility,
   StatikAnnotated
 
 /** A property element. */
@@ -38,21 +37,11 @@ public interface StatikProperty<out PARENT : StatikElement> :
   public val isMutable: Boolean
 }
 
-/** A parameter element. */
-public interface StatikParameter<out PARENT : StatikElement> :
-  StatikCallable<PARENT>,
-  StatikElement {
-  /** The index of the parameter. */
-  public val index: Int
-}
-
 /** A function element. */
 public interface StatikFunction<out PARENT : StatikElement> :
   StatikCallable<PARENT>,
+  StatikHasValueParameters<PARENT>,
   StatikHasTypeParameters<PARENT> {
-
-  /** The value parameters of the function. */
-  public val parameters: LazySet<StatikParameter<*>>
 
   /** Local variables declared in the function body. */
   public val properties: LazySet<StatikProperty<*>>

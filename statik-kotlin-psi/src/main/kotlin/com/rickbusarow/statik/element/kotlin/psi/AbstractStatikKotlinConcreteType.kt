@@ -16,10 +16,14 @@
 package com.rickbusarow.statik.element.kotlin.psi
 
 import com.rickbusarow.statik.InternalStatikApi
+import com.rickbusarow.statik.element.internal.HasChildrenInternal
+import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
+import com.rickbusarow.statik.element.kotlin.HasKotlinVisibility
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotation
 import com.rickbusarow.statik.element.kotlin.StatikKotlinClass
 import com.rickbusarow.statik.element.kotlin.StatikKotlinCompanionObject
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
+import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFunction
@@ -27,8 +31,9 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinHasTypeParameters
 import com.rickbusarow.statik.element.kotlin.StatikKotlinInterface
 import com.rickbusarow.statik.element.kotlin.StatikKotlinObject
 import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
-import com.rickbusarow.statik.element.kotlin.StatikKotlinType
+import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeDeclaration
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
+import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeReference
 import com.rickbusarow.statik.element.kotlin.psi.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.psi.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.name.DeclaredName
@@ -37,7 +42,6 @@ import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.SimpleName
 import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
 import com.rickbusarow.statik.utils.lazy.LazySet
-import com.rickbusarow.statik.utils.lazy.lazySet
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import com.rickbusarow.statik.utils.stdlib.mapToSet
 import com.rickbusarow.statik.utils.stdlib.requireNotNull
@@ -53,9 +57,10 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
   override val containingFile: StatikKotlinFile,
   override val psi: KtClassOrObject
 ) : StatikKotlinConcreteType<PARENT>,
-  StatikKotlinType<PARENT>,
+  StatikKotlinTypeDeclaration<PARENT>,
   StatikKotlinHasTypeParameters<PARENT>,
-  HasStatikKotlinElementContext
+  HasStatikKotlinElementContext,
+  HasChildrenInternal by HasChildrenInternalDelegate()
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
@@ -64,6 +69,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
       .asString()
       .stripPackageNameFromFqName(containingFile.packageName)
   }
+
   override val declaredName: DeclaredName by lazy {
     DeclaredName.agnostic(
       containingFile.packageName,
@@ -71,7 +77,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
     )
   }
 
-  override val innerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  final override val innerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
     psi.body
       ?.StatikKotlinConcreteTypesDirect(context, containingFile, parent)
       .orEmpty()
@@ -114,12 +120,13 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
       }
     }
   }
-  override val functions: LazySet<StatikKotlinFunction<*>> = lazySet {
+  override val functions: LazySet<StatikKotlinDeclaredFunction<*>> = lazySet {
     psi.body?.functions
       .orEmpty()
-      .mapToSet { StatikKotlinFunctionImpl(context = context, psi = it, parent = this) }
+      .mapToSet { StatikKotlinDeclaredFunctionImpl(context = context, psi = it, parent = this) }
   }
-  override val superTypes: LazySet<StatikKotlinType<*>> = lazySet { TODO("Not yet implemented") }
+  override val superTypes: LazySet<StatikKotlinTypeReference<*>> =
+    lazySet { TODO("Not yet implemented") }
   override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = lazySet {
     TODO("Not yet implemented")
   }
@@ -128,7 +135,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
 
   override fun toString(): String {
     return buildString {
-      append(this::class.java.simpleName)
+      append(this@AbstractStatikKotlinConcreteType::class.java.simpleName)
       append("(name = `${declaredName.asString}`, ")
       append("containingFile=${containingFile.file.path}, ")
       append("psi=${psi::class.simpleName}")
@@ -144,6 +151,7 @@ public class StatikKotlinClassImpl<out PARENT>(
   override val psi: KtClass,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(context, containingFile, psi),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinClass<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
@@ -164,6 +172,7 @@ public class StatikKotlinInterfaceImpl<out PARENT>(
   containingFile = containingFile,
   psi = psi
 ),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinInterface<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -179,6 +188,7 @@ public class StatikKotlinCompanionObjectImpl<out PARENT>(
   containingFile = containingFile,
   psi = psi
 ),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinCompanionObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -194,6 +204,7 @@ public class StatikKotlinObjectImpl<out PARENT>(
   containingFile = containingFile,
   psi = psi
 ),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
   StatikKotlinObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
