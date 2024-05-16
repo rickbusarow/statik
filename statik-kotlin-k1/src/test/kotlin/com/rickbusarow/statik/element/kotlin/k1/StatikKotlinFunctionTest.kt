@@ -22,6 +22,11 @@ import com.rickbusarow.statik.element.kotlin.k1.psi.traversal.PsiTreePrinter.Com
 import com.rickbusarow.statik.element.kotlin.k1.testing.ProjectTest
 import com.rickbusarow.statik.element.kotlin.k1.testing.Properties
 import com.rickbusarow.statik.element.kotlin.k1.testing.PsiTestEnvironment
+import com.rickbusarow.statik.element.kotlin.psi.testing.ProjectTest
+import com.rickbusarow.statik.element.kotlin.psi.testing.Properties
+import com.rickbusarow.statik.element.kotlin.psi.testing.PsiTestEnvironment
+import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.PsiTreePrinter.Companion.printEverything
+import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.StatikTreePrinter.Companion.printEverything
 import com.rickbusarow.statik.name.StatikLanguage
 import com.rickbusarow.statik.testing.internal.StatikNameTest
 import kotlinx.coroutines.flow.first
@@ -57,7 +62,7 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
         import java.io.Serializable
 
         class SubjectClass {
-          fun <T> subjectFunction(a: Int, b: String, c: T): String
+          fun <S: Number, T> subjectFunction(a: Int, b: String, c: T): String
             where T : java.io.Serializable,
                   T : CharSequence {
             println("hello")
@@ -70,7 +75,8 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
       val subjectFunction = file.subjectClass().subjectFun()
 
-      subjectFunction.psi.printEverything()
+      // subjectFunction.psi.printEverything()
+      subjectFunction.printEverything()
 
       println("==========================================")
 

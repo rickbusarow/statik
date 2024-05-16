@@ -17,6 +17,8 @@ package com.rickbusarow.statik.element.kotlin.k1.psi.traversal
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 /**
@@ -32,7 +34,7 @@ public class PsiTreePrinter(
   override fun PsiElement.typeName(): String = node.elementType.toString()
   override fun PsiElement.parent(): PsiElement? = parent
   override fun PsiElement.simpleClassName(): String = this::class.java.simpleName
-  override fun PsiElement.children(): Sequence<PsiElement> = children.asSequence()
+  override fun PsiElement.children(): Flow<PsiElement> = children.asFlow()
 
   @InternalStatikApi
   public companion object {

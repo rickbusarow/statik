@@ -17,6 +17,8 @@ package com.rickbusarow.statik.element.kotlin.k1.psi.traversal
 
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.parent
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.children as realChildren
 
@@ -32,7 +34,7 @@ internal class ASTTreePrinter(
   override fun ASTNode.typeName(): String = elementType.toString()
   override fun ASTNode.parent(): ASTNode? = parent
   override fun ASTNode.simpleClassName(): String = this::class.java.simpleName
-  override fun ASTNode.children(): Sequence<ASTNode> = realChildren()
+  override fun ASTNode.children(): Flow<ASTNode> = realChildren().asFlow()
 
   companion object {
 

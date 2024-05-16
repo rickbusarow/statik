@@ -19,11 +19,17 @@ import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.HasChildren
 import com.rickbusarow.statik.element.StatikElement
 import com.rickbusarow.statik.utils.lazy.LazySet
+import com.rickbusarow.statik.utils.lazy.LazySetComponent
 import com.rickbusarow.statik.utils.lazy.dataSource
+import com.rickbusarow.statik.utils.lazy.dataSourceOf
 import kotlinx.coroutines.flow.Flow
 
 @InternalStatikApi
 public interface HasChildrenInternal : HasChildren {
+
+  public fun <E : StatikElement> child(
+    dataSource: () -> E
+  ): E
 
   public fun <E : StatikElement> lazySet(
     priority: LazySet.DataSource.Priority = LazySet.DataSource.Priority.MEDIUM,
@@ -34,11 +40,16 @@ public interface HasChildrenInternal : HasChildren {
 @InternalStatikApi
 public class HasChildrenInternalDelegate : HasChildrenInternal {
 
-  private val _children: MutableList<LazySet<StatikElement>> = mutableListOf()
+  private val _children: MutableList<LazySetComponent<StatikElement>> = mutableListOf()
 
   override val children: Flow<StatikElement> by lazy {
     com.rickbusarow.statik.utils.lazy.lazySet(_children)
   }
+
+  public override fun <E : StatikElement> child(
+    dataSource: () -> E
+  ): E = dataSource()
+    .also { _children.add(dataSourceOf(it)) }
 
   public override fun <E : StatikElement> lazySet(
     priority: LazySet.DataSource.Priority,

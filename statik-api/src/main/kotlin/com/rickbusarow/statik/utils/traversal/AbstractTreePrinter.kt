@@ -21,6 +21,9 @@ import com.rickbusarow.statik.utils.stdlib.noAnsi
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.Color.Companion.colorized
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.SIMPLE
 import com.rickbusarow.statik.utils.traversal.AbstractTreePrinter.NameType.TYPE
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.runBlocking
 
 /**
  * Base class for printing a tree structure of objects of type [T].
@@ -49,8 +52,8 @@ public abstract class AbstractTreePrinter<T : Any>(
   /** Returns the text representation of an object of type [T]. */
   public abstract fun T.text(): String
 
-  /** Returns the children of an object of type [T] as a [Sequence]. */
-  public abstract fun T.children(): Sequence<T>
+  /** Returns the children of an object of type [T] as a [Flow]. */
+  public abstract fun T.children(): Flow<T>
 
   /**
    * Prints the tree structure of an object of type [T] to the console.
@@ -71,7 +74,7 @@ public abstract class AbstractTreePrinter<T : Any>(
     return buildTreeString(rootNode, 0)
   }
 
-  private fun buildTreeString(rootNode: T, indentLevel: Int): String {
+  private fun buildTreeString(rootNode: T, indentLevel: Int): String = runBlocking {
     val indent = "╎  ".repeat(indentLevel)
 
     val thisName = rootNode.uniqueSimpleName()
@@ -84,6 +87,7 @@ public abstract class AbstractTreePrinter<T : Any>(
     val parentType = rootNode.parent()?.typeName() ?: "null"
 
     val childrenText = rootNode.children()
+      .toList()
       .joinToString("\n") { child ->
         buildTreeString(child, indentLevel + 1)
       }
@@ -91,7 +95,7 @@ public abstract class AbstractTreePrinter<T : Any>(
     val typeName = rootNode.typeName()
 
     @Suppress("MagicNumber")
-    return buildString {
+    buildString {
 
       val chars = BoxChars.LIGHT
 
