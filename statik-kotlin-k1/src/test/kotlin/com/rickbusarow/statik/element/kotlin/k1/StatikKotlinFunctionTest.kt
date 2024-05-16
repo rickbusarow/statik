@@ -25,8 +25,8 @@ import com.rickbusarow.statik.element.kotlin.k1.testing.PsiTestEnvironment
 import com.rickbusarow.statik.element.kotlin.psi.testing.ProjectTest
 import com.rickbusarow.statik.element.kotlin.psi.testing.Properties
 import com.rickbusarow.statik.element.kotlin.psi.testing.PsiTestEnvironment
-import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.PsiTreePrinter.Companion.printEverything
 import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.StatikTreePrinter.Companion.printEverything
+import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.StatikTreePrinter.Companion.printEverythingFromPSINode
 import com.rickbusarow.statik.name.StatikLanguage
 import com.rickbusarow.statik.testing.internal.StatikNameTest
 import kotlinx.coroutines.flow.first
@@ -75,27 +75,8 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
       val subjectFunction = file.subjectClass().subjectFun()
 
-      // subjectFunction.psi.printEverything()
       subjectFunction.printEverything()
-
-      println("==========================================")
-
-      println(" -- children")
-      subjectFunction.children.collect {
-        println(it.text)
-      }
-
-      println(" -- type parameters")
-      subjectFunction.typeParameters.collect { tp ->
-        println("${tp.text}  --  ${tp.superTypes.toList().joinToString { it.text }}")
-      }
-
-      println(" -- value parameters")
-      subjectFunction.valueParameters.collect { vp ->
-        println("${vp.text}  --  ${vp.name.asString}  --  ${vp.type().asString}")
-      }
-
-      println("==========================================")
+      subjectFunction.printEverythingFromPSINode()
 
       // subjectFunction.childrenOfTypeRecursive<StatikKotlinMemberProperty<*>>()
       //   .single()

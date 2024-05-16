@@ -23,15 +23,35 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 public interface StatikCallable<out PARENT : StatikElement> :
   StatikElement,
   StatikElementWithParent<PARENT>,
-  StatikAnnotated
+  StatikAnnotated {
+
+  /**
+   * The resolved type of this callable.
+   *
+   * This is the declared/public type for a variable,
+   * or the declared return type in a function signature.
+   *
+   * If the type isn't specified, then it will be inferred.
+   */
+  public val returnType: LazyDeferred<ReferenceName>
+
+  /**
+   * The resolved type of this callable.
+   *
+   * This is the declared/public type for a variable,
+   * or the declared return type in a function signature.
+   *
+   * This value is `null` if the type isn't specified.
+   */
+  public val returnTypeDeclaration: StatikTypeReference<StatikCallable<PARENT>>?
+}
 
 /** A property element. */
 public interface StatikProperty<out PARENT : StatikElement> :
   StatikCallable<PARENT>,
   StatikDeclaredElement<PARENT> {
 
-  /** The type name of the property. */
-  public val typeReferenceName: LazyDeferred<ReferenceName>
+  override val returnTypeDeclaration: StatikTypeReference<StatikProperty<PARENT>>?
 
   /**  */
   public val isMutable: Boolean
@@ -46,6 +66,5 @@ public interface StatikFunction<out PARENT : StatikElement> :
   /** Local variables declared in the function body. */
   public val properties: LazySet<StatikProperty<*>>
 
-  /** The return type of the function. */
-  public val returnType: LazyDeferred<ReferenceName>
+  override val returnTypeDeclaration: StatikTypeReference<StatikFunction<PARENT>>?
 }

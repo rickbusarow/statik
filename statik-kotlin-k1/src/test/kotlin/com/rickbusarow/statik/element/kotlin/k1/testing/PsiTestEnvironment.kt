@@ -80,12 +80,12 @@ class PsiTestEnvironment(
 
     val def = FileDef(content)
 
-    val javaFile = sources.path
+    val kotlinFile = sources.path
       .resolve("src/main/kotlin")
       .resolve(def.fileRelativePath)
       .createSafely(content.trimIndent())
 
-    val ktFile = kotlinEnvironmentDeferred.await().ktFile(javaFile)
+    val ktFile = kotlinEnvironmentDeferred.await().ktFile(kotlinFile)
 
     // val androidDataBinding = AndroidDataBindingNameProvider { emptyLazySet() }
     // val androidRNameProvider = RealAndroidRNameProvider(updatedProject, sourceSetName)
@@ -112,7 +112,7 @@ class PsiTestEnvironment(
 
     return K1KotlinFile(
       context = context,
-      file = javaFile,
+      file = kotlinFile,
       psi = ktFile
     )
   }

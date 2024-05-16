@@ -19,6 +19,7 @@ import com.rickbusarow.statik.element.StatikCallable
 import com.rickbusarow.statik.element.StatikFunction
 import com.rickbusarow.statik.element.StatikProperty
 import com.rickbusarow.statik.element.StatikType
+import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
@@ -33,12 +34,15 @@ public interface StatikKotlinCallable<out PARENT : StatikKotlinElement> :
   StatikCallable<PARENT>,
   StatikKotlinElementWithParent<PARENT> {
   override val psi: KtCallableDeclaration
+  override val returnTypeDeclaration: StatikTypeReference<StatikKotlinCallable<PARENT>>?
 }
 
 /** A Kotlin property element. */
 public sealed interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName> :
   StatikProperty<PARENT>,
-  StatikKotlinCallable<PARENT>
+  StatikKotlinCallable<PARENT> {
+  override val returnTypeDeclaration: StatikTypeReference<StatikKotlinProperty<PARENT>>?
+}
 
 /** A Kotlin member property element. */
 public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName> :
@@ -64,6 +68,7 @@ public interface StatikKotlinFunction<out PARENT> :
   StatikFunction<PARENT>,
   StatikKotlinCallable<PARENT>,
   StatikKotlinHasValueParameters<PARENT>,
+  StatikKotlinElementWithPackageName,
   StatikKotlinHasTypeParameters<PARENT>
   where PARENT : StatikKotlinElementWithPackageName,
         PARENT : StatikKotlinElement,
@@ -73,6 +78,7 @@ public interface StatikKotlinFunction<out PARENT> :
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
   override val properties: LazySet<StatikKotlinProperty<*>>
   override val returnType: LazyDeferred<ReferenceName>
+  override val returnTypeDeclaration: StatikKotlinTypeReference<StatikKotlinFunction<PARENT>>?
 }
 
 /** Represents a Kotlin function element. */

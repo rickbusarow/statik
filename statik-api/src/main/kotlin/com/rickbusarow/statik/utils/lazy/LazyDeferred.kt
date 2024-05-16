@@ -34,7 +34,7 @@ import kotlinx.coroutines.sync.withLock
  * ```
  */
 @InternalStatikApi
-public interface LazyDeferred<out T> {
+public interface LazyDeferred<out T> : LazySetComponent<T> {
   public val isCompleted: Boolean
   public suspend fun await(): T
   public suspend operator fun invoke(): T = await()
@@ -96,6 +96,8 @@ internal class LazyDeferredImpl<T>(
 
   @Volatile
   private var _completed = false
+
+  @Suppress("ktlint:standard:backing-property-naming")
   private var _value: T? = null
 
   override val isCompleted: Boolean get() = _completed

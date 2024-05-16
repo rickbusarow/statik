@@ -18,18 +18,21 @@ package com.rickbusarow.statik.element.internal
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.HasChildren
 import com.rickbusarow.statik.element.StatikElement
+import com.rickbusarow.statik.utils.lazy.LazyDeferred
+import com.rickbusarow.statik.utils.lazy.LazyDeferredImpl
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.LazySetComponent
+import com.rickbusarow.statik.utils.lazy.asDataSource
 import com.rickbusarow.statik.utils.lazy.dataSource
-import com.rickbusarow.statik.utils.lazy.dataSourceOf
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.sync.Mutex
 
 @InternalStatikApi
 public interface HasChildrenInternal : HasChildren {
 
-  public fun <E : StatikElement> child(
-    dataSource: () -> E
-  ): E
+  public fun <E : StatikElement?> child(dataSource: () -> E): Lazy<E>
+  public fun <T : StatikElement> childDeferred(action: suspend () -> T): LazyDeferred<T>
 
   public fun <E : StatikElement> lazySet(
     priority: LazySet.DataSource.Priority = LazySet.DataSource.Priority.MEDIUM,
@@ -38,20 +41,21 @@ public interface HasChildrenInternal : HasChildren {
 }
 
 @InternalStatikApi
-public class HasChildrenInternalDelegate : HasChildrenInternal {
+public open class HasChildrenInternalDelegate : HasChildrenInternal {
 
-  private val _children: MutableList<LazySetComponent<StatikElement>> = mutableListOf()
+  private val _children: MutableList<LazySetComponent<StatikElement?>> = mutableListOf()
 
   override val children: Flow<StatikElement> by lazy {
     com.rickbusarow.statik.utils.lazy.lazySet(_children)
+      .filterNotNull()
   }
 
-  public override fun <E : StatikElement> child(
+  public final override fun <E : StatikElement?> child(
     dataSource: () -> E
-  ): E = dataSource()
-    .also { _children.add(dataSourceOf(it)) }
+  ): Lazy<E> = lazy(dataSource)
+    .also { _children.add(it.asDataSource()) }
 
-  public override fun <E : StatikElement> lazySet(
+  public final override fun <E : StatikElement> lazySet(
     priority: LazySet.DataSource.Priority,
     dataSource: suspend () -> Set<E>
   ): LazySet<E> = com.rickbusarow.statik.utils.lazy.lazySet(
@@ -61,4 +65,15 @@ public class HasChildrenInternalDelegate : HasChildrenInternal {
     )
   )
     .also { _children.add(it) }
+
+  public final override fun <T : StatikElement> childDeferred(
+    action: suspend () -> T
+  ): LazyDeferred<T> {
+
+    return LazyDeferredImpl(
+      action = action,
+      lock = Mutex(false)
+    )
+      .also { _children.add(it) }
+  }
 }

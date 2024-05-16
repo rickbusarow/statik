@@ -26,10 +26,8 @@ import org.jetbrains.kotlin.psi.psiUtil.getChildrenOfType
 
 @InternalStatikApi
 public fun KtTypeParameter.upperBounds(): Set<KtTypeReference> {
-
   return extendsBound?.singletonSet()
-    ?: (parent as? KtTypeParameterList)
-      ?.let { it.parent as? KtTypeParameterListOwner }
+    ?: typeParameterListOwner()
       ?.typeConstraintList
       ?.getChildrenOfType<KtTypeConstraint>()
       ?.mapNotNullTo(mutableSetOf()) {
@@ -40,4 +38,10 @@ public fun KtTypeParameter.upperBounds(): Set<KtTypeReference> {
         }
       }
       .orEmpty()
+}
+
+@InternalStatikApi
+public fun KtTypeParameter.typeParameterListOwner(): KtTypeParameterListOwner? {
+  return getStrictParentOfType<KtTypeParameterList>()
+    ?.getStrictParentOfType<KtTypeParameterListOwner>()
 }

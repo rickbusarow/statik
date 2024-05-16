@@ -16,7 +16,6 @@
 package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
-import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.HasKotlinVisibility
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotation
@@ -60,7 +59,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
   StatikKotlinTypeDeclaration<PARENT>,
   StatikKotlinHasTypeParameters<PARENT>,
   HasStatikKotlinElementContext,
-  HasChildrenInternal by HasChildrenInternalDelegate()
+  HasChildrenInternalDelegate()
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 

@@ -45,7 +45,10 @@ public sealed interface StatikValueVariable<out PARENT : StatikElement> :
   StatikVariable<PARENT>,
   StatikCallable<PARENT> {
   public val name: StatikName
+
+  @Deprecated("renamed to returnType", ReplaceWith("returnType"))
   public val type: LazyDeferred<ReferenceName>
+    get() = returnType
 }
 
 public sealed interface StatikParameter<out PARENT : StatikElement> : StatikVariable<PARENT>

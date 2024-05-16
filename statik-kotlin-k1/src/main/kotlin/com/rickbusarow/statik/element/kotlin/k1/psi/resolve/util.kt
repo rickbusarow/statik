@@ -214,10 +214,19 @@ public fun KtCallElement.getCallNameExpression(): KtSimpleNameExpression? {
   }
 }
 
-/** @return the strict parent of type [T], or `null`. */
+/** @return the direct/strict parent of type [T], or `null`. */
 public inline fun <reified T : PsiElement> PsiElement.getStrictParentOfType(): T? {
   return PsiTreeUtil.getParentOfType(this, T::class.java, true)
 }
+
+/**
+ * alias for [getStrictParentOfType]
+ *
+ * @return the direct/strict parent of type [T], or `null`.
+ * @see getStrictParentOfType
+ */
+public inline fun <reified T : PsiElement> PsiElement.getDirectParentOfType(): T? =
+  getStrictParentOfType<T>()
 
 /** @return the non-strict parent of type [T], or `null`. */
 public inline fun <reified T : PsiElement> PsiElement.getNonStrictParentOfType(): T? {

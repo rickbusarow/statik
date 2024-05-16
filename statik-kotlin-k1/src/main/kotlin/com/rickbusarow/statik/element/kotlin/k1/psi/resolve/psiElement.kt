@@ -32,13 +32,31 @@ public inline fun <reified T : PsiElement> PsiElement.isPartOf(): Boolean =
   getNonStrictParentOfType<T>() != null
 
 /**
+ * Just an alias for [PsiElement.getChildren],
+ * making it more explicit for those of us who tend to overthink things.
+ *
+ * @see PsiElement.getChildren
+ */
+@InternalStatikApi
+public fun PsiElement.directChildren(): List<PsiElement> = children.asList()
+
+/**
+ * Returns a list of children of type [T] of this [PsiElement].
+ *
+ * @see PsiElement.getChildren
+ */
+@InternalStatikApi
+public inline fun <reified T : PsiElement> PsiElement.directChildrenOfType(): List<T> =
+  children.filterIsInstance<T>()
+
+/**
  * @return a sequence of child nodes of this [PsiElement] in depth-first
  *   order. The sequence starts with the first child node of this [PsiElement],
  *   followed by the first child node of the first child node, and so on.
  */
 @InternalStatikApi
 public fun PsiElement.childrenDepthFirst(): Sequence<PsiElement> {
-  return Traversals.depthFirstTraversal(this) { children.toList() }
+  return Traversals.depthFirstTraversal(this) { children.asList() }
 }
 
 /**
@@ -48,7 +66,7 @@ public fun PsiElement.childrenDepthFirst(): Sequence<PsiElement> {
  */
 @InternalStatikApi
 public inline fun <reified T : PsiElement> PsiElement.childrenOfTypeDepthFirst(): Sequence<T> {
-  return Traversals.depthFirstTraversal(this) { children.toList() }
+  return Traversals.depthFirstTraversal(this) { children.asList() }
     .filterIsInstance<T>()
 }
 
@@ -70,7 +88,7 @@ public inline fun PsiElement.childrenDepthFirst(
  */
 @InternalStatikApi
 public inline fun <reified T : PsiElement> PsiElement.childrenOfTypeBreadthFirst(): Sequence<T> {
-  return Traversals.breadthFirstTraversal(this) { children.toList() }
+  return Traversals.breadthFirstTraversal(this) { children.asList() }
     .filterIsInstance<T>()
 }
 
@@ -81,7 +99,7 @@ public inline fun <reified T : PsiElement> PsiElement.childrenOfTypeBreadthFirst
  */
 @InternalStatikApi
 public fun PsiElement.childrenBreadthFirst(): Sequence<PsiElement> {
-  return Traversals.breadthFirstTraversal(this) { children.toList() }
+  return Traversals.breadthFirstTraversal(this) { children.asList() }
 }
 
 /**

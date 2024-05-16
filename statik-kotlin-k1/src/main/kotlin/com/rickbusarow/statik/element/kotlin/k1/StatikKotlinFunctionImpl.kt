@@ -21,6 +21,7 @@ import com.rickbusarow.statik.element.StatikTypeParameter
 import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
+import com.rickbusarow.statik.element.kotlin.StatikKotlinCallable
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
@@ -30,12 +31,14 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinValueParameter
+import com.rickbusarow.statik.element.kotlin.psi.StatikKotlinTypeReferenceImpl.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.getStrictParentOfType
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
 import com.rickbusarow.statik.element.kotlin.psi.resolve.upperBounds
 import com.rickbusarow.statik.name.HasPackageName
+import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.SimpleName
 import com.rickbusarow.statik.name.StatikName
@@ -46,6 +49,7 @@ import com.rickbusarow.statik.utils.lazy.lazyDeferred
 import com.rickbusarow.statik.utils.stdlib.mapToSet
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtParameterList
 import org.jetbrains.kotlin.psi.KtTypeParameter
@@ -66,6 +70,9 @@ public class K1Function<out PARENT>(
         PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
+  override val packageName: PackageName
+    get() = parent.packageName
+
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
     get() = lazySet { TODO("Not yet implemented") }
 
@@ -76,6 +83,9 @@ public class K1Function<out PARENT>(
     bindingContext(BindingContext.FUNCTION, psi)
       ?.returnType
       .requireReferenceName()
+  }
+  override val returnTypeDeclaration: StatikKotlinTypeReference<StatikKotlinFunction<PARENT>>? by child {
+    psi.typeReference?.statik()
   }
 
   override val annotations: LazySet<StatikAnnotation<*>>
@@ -88,7 +98,7 @@ public class K1Function<out PARENT>(
 @InternalStatikApi
 public class K1DeclaredFunction<out PARENT>(
   override val context: StatikKotlinElementContext,
-  override val psi: KtFunction,
+  override val psi: KtNamedFunction,
   override val parent: PARENT
 ) : StatikKotlinDeclaredFunction<PARENT>,
   HasStatikKotlinElementContext,
@@ -102,7 +112,19 @@ public class K1DeclaredFunction<out PARENT>(
   }
   override val properties: LazySet<StatikKotlinProperty<*>>
     get() = TODO("Not yet implemented")
+
+  override val returnTypeDeclaration: StatikKotlinTypeReference<StatikKotlinFunction<PARENT>>? by child {
+    psi.typeReference?.let { ref ->
+
+      StatikKotlinTypeReferenceImpl(
+        context = context,
+        psi = ref,
+        parent = this@StatikKotlinDeclaredFunctionImpl
+      )
+    }
+  }
   override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
+
     bindingContext(BindingContext.FUNCTION, psi)
       ?.returnType
       .requireReferenceName()
@@ -133,6 +155,36 @@ public class K1TypeReference<out PARENT>(
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
     psi.annotations(context, this@K1TypeReference)
+  }
+
+  @InternalStatikApi
+  public companion object {
+
+    context(HasStatikKotlinElementContext, PARENT)
+    @InternalStatikApi
+    public fun <PARENT> KtTypeReference.statik(): StatikKotlinTypeReferenceImpl<PARENT>
+      where PARENT : StatikKotlinElementWithPackageName,
+            PARENT : StatikKotlinElement,
+            PARENT : HasPackageName =
+      StatikKotlinTypeReferenceImpl(
+        context = this@HasStatikKotlinElementContext.context,
+        psi = this@statik,
+        parent = this@PARENT
+      )
+
+    @InternalStatikApi
+    public fun <PARENT> KtTypeReference.statik(
+      context: StatikKotlinElementContext,
+      parent: PARENT
+    ): StatikKotlinTypeReferenceImpl<PARENT>
+      where PARENT : StatikKotlinElementWithPackageName,
+            PARENT : StatikKotlinElement,
+            PARENT : HasPackageName =
+      StatikKotlinTypeReferenceImpl(
+        context = context,
+        psi = this,
+        parent = parent
+      )
   }
 }
 
@@ -186,9 +238,12 @@ public class K1ValueParameter<out PARENT>(
   override val name: StatikName
     get() = simplestName
 
-  override val type: LazyDeferred<ReferenceName> = lazyDeferred {
+  override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
     bindingContext(BindingContext.VALUE_PARAMETER, psi)?.type
       .requireReferenceName()
+  }
+  override val returnTypeDeclaration: StatikTypeReference<StatikKotlinCallable<PARENT>>? by child {
+    psi.typeReference?.statik()
   }
 
   override val index: Int

@@ -22,6 +22,7 @@ import com.rickbusarow.statik.utils.lazy.LazySet.DataSource.Priority.MEDIUM
 import com.rickbusarow.statik.utils.lazy.internal.DataSourceImpl
 import com.rickbusarow.statik.utils.lazy.internal.LazySetImpl
 import com.rickbusarow.statik.utils.stdlib.flatMapToSet
+import com.rickbusarow.statik.utils.stdlib.singletonSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.firstOrNull
@@ -49,8 +50,7 @@ public interface LazySet<out E> : Flow<E>, LazySetComponent<E> {
   @InternalStatikApi
   public interface DataSource<out E> :
     Comparable<DataSource<*>>,
-    LazySetComponent<E>,
-    LazyDeferred<Set<E>> {
+    LazySetComponent<E> {
 
     /**
      * The priority which should be applied to this source while
@@ -120,8 +120,13 @@ public fun <E> LazyDeferred<Set<E>>.asDataSource(priority: Priority = MEDIUM): D
   dataSource(priority) { await() }
 
 @InternalStatikApi
+@JvmName("asDataSourceLazySet")
 public fun <E> Lazy<Set<E>>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
   dataSource(priority) { value }
+
+@InternalStatikApi
+public fun <E> Lazy<E>.asDataSource(priority: Priority = MEDIUM): DataSource<E> =
+  dataSource(priority) { value.singletonSet() }
 
 @InternalStatikApi
 public fun <E> dataSourceOf(vararg elements: E, priority: Priority = MEDIUM): DataSource<E> =

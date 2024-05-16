@@ -53,7 +53,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
     val subjectProp = file.subjectClass().subjectProp()
 
-    subjectProp.typeReferenceName.await().asString shouldBe params.typeAsString
+    subjectProp.returnType.await().asString shouldBe params.typeAsString
   }
 
   @TestFactory
@@ -63,7 +63,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
     val subjectProp = file.subjectClass().subjectProp()
 
-    subjectProp.typeReferenceName.await().asString shouldBe params.typeAsString
+    subjectProp.returnType.await().asString shouldBe params.typeAsString
   }
 
   @TestFactory
@@ -73,7 +73,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
     val subjectProp = file.subjectClass().subjectProp()
 
-    subjectProp.typeReferenceName.await().asString shouldBe params.typeAsString
+    subjectProp.returnType.await().asString shouldBe params.typeAsString
   }
 
   @Nested
@@ -95,7 +95,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
+      subjectProp.returnType.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
     }
 
     @Test
@@ -114,7 +114,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
         val subjectProp = file.subjectClass().subjectProp()
 
-        subjectProp.typeReferenceName.await() shouldBe "kotlin.collections.List".asReferenceName()
+        subjectProp.returnType.await() shouldBe "kotlin.collections.List".asReferenceName()
           .parameterizedBy("kotlin.String".asReferenceName())
       }
   }
@@ -140,7 +140,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
+      subjectProp.returnType.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
     }
 
     @Test
@@ -160,7 +160,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "kotlin.String".asReferenceName()
+      subjectProp.returnType.await() shouldBe "kotlin.String".asReferenceName()
     }
 
     @Test
@@ -177,7 +177,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "kotlin.collections.List".asReferenceName()
+      subjectProp.returnType.await() shouldBe "kotlin.collections.List".asReferenceName()
         .parameterizedBy("kotlin.String".asReferenceName())
     }
 
@@ -200,7 +200,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
         val subjectProp = file.subjectClass().subjectProp()
 
-        subjectProp.typeReferenceName.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
+        subjectProp.returnType.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
       }
 
     @Test
@@ -222,7 +222,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
         val subjectProp = file.subjectClass().subjectProp()
 
-        subjectProp.typeReferenceName.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
+        subjectProp.returnType.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
       }
 
     @Test
@@ -243,7 +243,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val nested = file.subjectClass().property("nested")
 
-      nested.typeReferenceName.await() shouldBe "com.subject.SubjectClass.NestedClass".asReferenceName()
+      nested.returnType.await() shouldBe "com.subject.SubjectClass.NestedClass".asReferenceName()
     }
 
     @Test
@@ -260,7 +260,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val map = file.subjectClass().property("map")
 
-      map.typeReferenceName.await() shouldBe "kotlin.collections.Map".asReferenceName()
+      map.returnType.await() shouldBe "kotlin.collections.Map".asReferenceName()
         .parameterizedBy("kotlin.String".asReferenceName(), "kotlin.Int".asReferenceName())
     }
 
@@ -280,7 +280,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "com.subject.StringList".asReferenceName()
+      subjectProp.returnType.await() shouldBe "com.subject.StringList".asReferenceName()
     }
 
     @Test
@@ -299,7 +299,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "com.subject.StringList".asReferenceName()
+      subjectProp.returnType.await() shouldBe "com.subject.StringList".asReferenceName()
         .parameterizedBy("kotlin.String".asReferenceName())
     }
 
@@ -319,7 +319,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().property("kunit")
 
-      subjectProp.typeReferenceName.await() shouldBe "kotlin.Unit".asReferenceName()
+      subjectProp.returnType.await() shouldBe "kotlin.Unit".asReferenceName()
     }
 
     @Test
@@ -336,7 +336,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "kotlin.String".asReferenceName()
+      subjectProp.returnType.await() shouldBe "kotlin.String".asReferenceName()
     }
 
     @Test
@@ -355,7 +355,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val myGeneric = file.subjectClass().property("myGeneric")
 
-      myGeneric.typeReferenceName.await() shouldBe "com.subject.MyGeneric".asReferenceName()
+      myGeneric.returnType.await() shouldBe "com.subject.MyGeneric".asReferenceName()
         .parameterizedBy("kotlin.String".asReferenceName())
     }
 
@@ -376,7 +376,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val subjectProp = file.subjectClass().subjectProp()
 
-      subjectProp.typeReferenceName.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
+      subjectProp.returnType.await() shouldBe "com.lib1.Lib1Class".asReferenceName()
     }
 
     @Test
@@ -395,7 +395,7 @@ class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
 
       val myGeneric = file.subjectClass().property("myGeneric")
 
-      myGeneric.typeReferenceName.await() shouldBe "com.subject.MyGeneric".asReferenceName()
+      myGeneric.returnType.await() shouldBe "com.subject.MyGeneric".asReferenceName()
         .parameterizedBy(
           "kotlin.collections.List".asReferenceName()
             .parameterizedBy("kotlin.String".asReferenceName())

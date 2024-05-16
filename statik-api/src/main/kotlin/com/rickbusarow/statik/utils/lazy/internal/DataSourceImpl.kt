@@ -22,9 +22,9 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 internal class DataSourceImpl<E>(
   override val priority: LazySet.DataSource.Priority,
   private val lazyDeferred: LazyDeferred<Set<E>>
-) : LazySet.DataSource<E>, LazyDeferred<Set<E>> by lazyDeferred {
+) : LazySet.DataSource<E> {
 
-  override suspend fun get(): Set<E> = await()
+  override suspend fun get(): Set<E> = lazyDeferred.await()
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
