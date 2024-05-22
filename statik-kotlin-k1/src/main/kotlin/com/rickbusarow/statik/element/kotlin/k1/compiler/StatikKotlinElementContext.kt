@@ -20,7 +20,7 @@ import com.rickbusarow.statik.compiler.StatikElementContext
 import com.rickbusarow.statik.compiler.inerceptor.NameParser
 import com.rickbusarow.statik.element.HasStatikElementContext
 import com.rickbusarow.statik.element.StatikFile
-import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
+import com.rickbusarow.statik.element.kotlin.k1.K1Environment
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.StatikLanguage
@@ -49,7 +49,7 @@ public interface StatikKotlinElementContext : StatikElementContext<PsiElement> {
    * A deferred [KotlinEnvironment][com.rickbusarow.statik.element.kotlin.psi.KotlinEnvironment]
    * that provides a context for Kotlin language features.
    * */
-  public val kotlinEnvironmentDeferred: LazyDeferred<KotlinEnvironment>
+  public val kotlinEnvironmentDeferred: LazyDeferred<K1Environment>
 
   /**
    * A deferred binding context obtained from the
@@ -65,21 +65,21 @@ public interface StatikKotlinElementContext : StatikElementContext<PsiElement> {
  *
  * @property nameParser The parser used to parse names in the system.
  * @property language The language that is compatible with the system.
- * @property kotlinEnvironmentDeferred A deferred [KotlinEnvironment]
+ * @property kotlinEnvironmentDeferred A deferred [K1Environment]
  *   that provides a context for Kotlin language features.
  * @property stdLibNameOrNull A function that takes a [ReferenceName] and returns a
  *   [QualifiedDeclaredName] from the standard library, or null if no such name exists.
  */
 @InternalStatikApi
-public class StatikKotlinElementContextImpl(
+public class K1ElementContext(
   override val nameParser: NameParser,
   override val language: StatikLanguage,
-  override val kotlinEnvironmentDeferred: LazyDeferred<KotlinEnvironment>,
+  override val kotlinEnvironmentDeferred: LazyDeferred<K1Environment>,
   override val stdLibNameOrNull: ReferenceName.() -> QualifiedDeclaredName?
 ) : StatikKotlinElementContext {
 
   /**
-   * A deferred binding context obtained from the [KotlinEnvironment].
+   * A deferred binding context obtained from the [K1Environment].
    * This context is used to resolve bindings in the system.
    */
   override val bindingContextDeferred: LazyDeferred<BindingContext> = lazyDeferred {

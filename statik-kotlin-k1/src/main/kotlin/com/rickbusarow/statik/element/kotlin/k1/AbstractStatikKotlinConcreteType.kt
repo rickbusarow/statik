@@ -97,7 +97,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
       for (property in psi.body?.properties.orEmpty()) {
 
         add(
-          StatikKotlinMemberPropertyImpl(
+          K1MemberProperty(
             context = context,
             psi = property,
             parent = this@AbstractStatikKotlinConcreteType
@@ -111,7 +111,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
 
       for (property in valueParams) {
         add(
-          StatikKotlinConstructorPropertyImpl(
+          K1ConstructorProperty(
             context = context,
             psi = property,
             parent = this@AbstractStatikKotlinConcreteType
@@ -123,7 +123,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
   override val functions: LazySet<StatikKotlinDeclaredFunction<*>> = lazySet {
     psi.body?.functions
       .orEmpty()
-      .mapToSet { StatikKotlinDeclaredFunctionImpl(context = context, psi = it, parent = this) }
+      .mapToSet { K1DeclaredFunction(context = context, psi = it, parent = this) }
   }
   override val superTypes: LazySet<StatikKotlinTypeReference<*>> =
     lazySet { TODO("Not yet implemented") }
@@ -145,7 +145,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
 }
 
 @InternalStatikApi
-public class StatikKotlinClassImpl<out PARENT>(
+public class K1Class<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
   override val psi: KtClass,
@@ -162,7 +162,7 @@ public class StatikKotlinClassImpl<out PARENT>(
 }
 
 @InternalStatikApi
-public class StatikKotlinInterfaceImpl<out PARENT>(
+public class K1Interface<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
   override val psi: KtClass,
@@ -178,7 +178,7 @@ public class StatikKotlinInterfaceImpl<out PARENT>(
         PARENT : HasPackageName
 
 @InternalStatikApi
-public class StatikKotlinCompanionObjectImpl<out PARENT>(
+public class K1CompanionObject<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
   override val psi: KtObjectDeclaration,
@@ -194,7 +194,7 @@ public class StatikKotlinCompanionObjectImpl<out PARENT>(
         PARENT : HasPackageName
 
 @InternalStatikApi
-public class StatikKotlinObjectImpl<out PARENT>(
+public class K1Object<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
   override val psi: KtObjectDeclaration,

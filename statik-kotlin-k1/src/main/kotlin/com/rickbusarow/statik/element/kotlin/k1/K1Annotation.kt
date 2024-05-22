@@ -21,7 +21,6 @@ import com.rickbusarow.statik.compiler.inerceptor.NameParser.NameParserPacket
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotation
-import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotationArgument
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.kotlinStdLibNameOrNull
 import com.rickbusarow.statik.name.ReferenceName
@@ -35,14 +34,13 @@ import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
-import org.jetbrains.kotlin.psi.KtValueArgument
 
 internal fun KtAnnotated.annotations(
   context: StatikElementContext<PsiElement>,
   parent: StatikKotlinElement
-): Set<StatikKotlinAnnotationImpl<*>> = annotationEntries
+): Set<K1Annotation<*>> = annotationEntries
   .mapToSet {
-    StatikKotlinAnnotationImpl(
+    K1Annotation(
       context = context,
       psi = it,
       parent = parent
@@ -51,7 +49,7 @@ internal fun KtAnnotated.annotations(
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinAnnotationImpl<out PARENT : StatikKotlinElement>(
+public class K1Annotation<out PARENT : StatikKotlinElement>(
   private val context: StatikElementContext<PsiElement>,
   override val psi: KtAnnotationEntry,
   override val parent: PARENT
@@ -69,23 +67,5 @@ public class StatikKotlinAnnotationImpl<out PARENT : StatikKotlinElement>(
       )
     )
       .requireNotNull()
-  }
-}
-
-@Poko
-@InternalStatikApi
-public class StatikKotlinAnnotationArgumentImpl<out PARENT : StatikKotlinElement>(
-  private val context: StatikElementContext<PsiElement>,
-  override val psi: KtValueArgument,
-  override val parent: PARENT
-) : StatikKotlinAnnotationArgument<PARENT>,
-  HasChildrenInternal by HasChildrenInternalDelegate() {
-
-  override val value: Any = TODO()
-
-  override val type: LazyDeferred<ReferenceName?> = lazyDeferred {
-
-    psi
-    TODO()
   }
 }

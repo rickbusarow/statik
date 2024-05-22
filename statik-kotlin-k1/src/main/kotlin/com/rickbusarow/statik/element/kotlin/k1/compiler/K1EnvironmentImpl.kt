@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.element.kotlin.k1.compiler
 
-import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
+import com.rickbusarow.statik.element.kotlin.k1.K1Environment
 import com.rickbusarow.statik.logging.StatikLogger
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.ResetManager
@@ -67,7 +67,7 @@ import java.io.File
  * @property logger logs Kotlin compiler messages during analysis
  * @param resetManager used to reset caching
  */
-internal class KotlinEnvironmentImpl(
+internal class K1EnvironmentImpl(
   val moduleName: String,
   val classpathFiles: LazyDeferred<List<File>>,
   private val sourceDirs: Collection<File>,
@@ -76,7 +76,7 @@ internal class KotlinEnvironmentImpl(
   val dependencyModuleDescriptors: LazyDeferred<List<ModuleDescriptorImpl>>,
   val logger: StatikLogger,
   private val resetManager: ResetManager
-) : KotlinEnvironment {
+) : K1Environment {
 
   private val sourceFiles by lazy {
     sourceDirs.asSequence()

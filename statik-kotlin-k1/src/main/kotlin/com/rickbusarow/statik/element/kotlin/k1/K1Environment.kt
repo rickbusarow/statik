@@ -29,7 +29,7 @@ import java.io.File
 
 /** Models everything needed to create Psi files for [BindingContext]-backed type resolution. */
 @InternalStatikApi
-public interface KotlinEnvironment : HasAnalysisResult {
+public interface K1Environment : HasAnalysisResult {
   /**
    * Used to create Psi files without necessarily performing compiler analysis first.
    * This is only useful for Kotlin files, as Java Psi files require analysis first.
@@ -75,9 +75,8 @@ public interface KotlinEnvironment : HasAnalysisResult {
 }
 
 /**
- * Holds the [AnalysisResult], [BindingContext], and [ModuleDescriptorImpl]
- * for a [KotlinEnvironment]. These are retrieved from an
- * [AnalysisResult][org.jetbrains.kotlin.analyzer.AnalysisResult].
+ * Holds the [AnalysisResult], [BindingContext], and [ModuleDescriptorImpl] for a [K1Environment].
+ * These are retrieved from an [AnalysisResult][org.jetbrains.kotlin.analyzer.AnalysisResult].
  */
 @InternalStatikApi
 public interface HasAnalysisResult {

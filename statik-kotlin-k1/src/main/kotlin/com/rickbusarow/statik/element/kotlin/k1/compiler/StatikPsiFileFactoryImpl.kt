@@ -15,7 +15,7 @@
 
 package com.rickbusarow.statik.element.kotlin.k1.compiler
 
-import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
+import com.rickbusarow.statik.element.kotlin.k1.K1Environment
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
@@ -28,14 +28,14 @@ import java.io.FileNotFoundException
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * A real implementation of [StatikPsiFileFactory] using a curated [KotlinEnvironment].
+ * A real implementation of [StatikPsiFileFactory] using a curated [K1Environment].
  *
  * The files created from this factory are backed by a meaningful
  * [BindingContext][org.jetbrains.kotlin.resolve.BindingContext] which
  * is aware of the full classpath and may be used for type resolution.
  */
 internal class StatikPsiFileFactoryImpl(
-  kotlinEnvironment: KotlinEnvironment
+  kotlinEnvironment: K1Environment
 ) : AbstractStatikPsiFileFactory(),
   StatikPsiFileFactory {
 

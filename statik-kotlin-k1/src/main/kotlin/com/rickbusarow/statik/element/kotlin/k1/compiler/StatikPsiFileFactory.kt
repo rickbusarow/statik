@@ -15,12 +15,12 @@
 
 package com.rickbusarow.statik.element.kotlin.k1.compiler
 
-import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
+import com.rickbusarow.statik.element.kotlin.k1.K1Environment
 import org.jetbrains.kotlin.com.intellij.psi.PsiJavaFile
 import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
-/** Creates Kotlin and Java Psi files using a shared [KotlinEnvironment] */
+/** Creates Kotlin and Java Psi files using a shared [K1Environment] */
 public interface StatikPsiFileFactory {
 
   /**
@@ -41,6 +41,6 @@ public interface StatikPsiFileFactory {
   public fun interface Factory {
 
     /** @return an instance of [StatikPsiFileFactory] for the given [kotlinEnvironment] */
-    public fun create(kotlinEnvironment: KotlinEnvironment): StatikPsiFileFactory
+    public fun create(kotlinEnvironment: K1Environment): StatikPsiFileFactory
   }
 }

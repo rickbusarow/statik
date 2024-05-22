@@ -40,13 +40,13 @@ public interface StatikKotlinPsiElementFactory : StatikElementFactory<PsiElement
   ): StatikKotlinFile
 }
 
-internal class StatikKotlinPsiElementFactoryImpl : StatikKotlinPsiElementFactory {
+internal class K1PsiElementFactory : StatikKotlinPsiElementFactory {
 
   override suspend fun createKotlinFile(
     context: StatikKotlinElementContext,
     fileSystemFile: File,
     backingElement: KtFile
-  ): StatikKotlinFileImpl = StatikKotlinFileImpl(
+  ): K1KotlinFile = K1KotlinFile(
     context = context,
     file = fileSystemFile,
     psi = context.kotlinEnvironmentDeferred.await().ktFile(fileSystemFile)

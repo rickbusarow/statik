@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.psi.psiUtil.getChildrenOfType
 import java.io.File
 
 @InternalStatikApi
-public class StatikKotlinFileImpl(
+public class K1KotlinFile(
   override val context: StatikKotlinElementContext,
   override val file: File,
   override val psi: KtFile
@@ -91,7 +91,7 @@ public class StatikKotlinFileImpl(
   override val topLevelFunctions: LazySet<StatikKotlinFunction<*>> =
     lazySet {
       psi.getChildrenOfType<KtFunction>()
-        .mapToSet { StatikKotlinFunctionImpl(context = context, psi = it, parent = this) }
+        .mapToSet { K1Function(context = context, psi = it, parent = this) }
     }
   override val topLevelProperties: LazySet<StatikKotlinProperty<*>>
     get() = TODO("Not yet implemented")

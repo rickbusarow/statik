@@ -23,9 +23,9 @@ import com.rickbusarow.kase.files.HasWorkingDir
 import com.rickbusarow.kase.files.TestLocation
 import com.rickbusarow.statik.compiler.inerceptor.ParsingChain
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinFileImpl
-import com.rickbusarow.statik.element.kotlin.k1.compiler.KotlinEnvironmentImpl
-import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContextImpl
+import com.rickbusarow.statik.element.kotlin.k1.K1KotlinFile
+import com.rickbusarow.statik.element.kotlin.k1.compiler.K1ElementContext
+import com.rickbusarow.statik.element.kotlin.k1.compiler.K1EnvironmentImpl
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikMessageCollector
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.ImportAliasUnwrappingParsingInterceptor
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.kotlinStdLibNameOrNull
@@ -55,8 +55,8 @@ class PsiTestEnvironment(
       .also { it.createLib1Class() }
   }
 
-  internal val kotlinEnvironmentDeferred: LazyDeferred<KotlinEnvironmentImpl> = lazyDeferred {
-    KotlinEnvironmentImpl(
+  internal val kotlinEnvironmentDeferred: LazyDeferred<K1EnvironmentImpl> = lazyDeferred {
+    K1EnvironmentImpl(
       moduleName = "statik-test",
       classpathFiles = lazyDeferred {
         listOf(
@@ -103,14 +103,14 @@ class PsiTestEnvironment(
       )
     )
 
-    val context = StatikKotlinElementContextImpl(
+    val context = K1ElementContext(
       nameParser = nameParser,
       language = StatikLanguage.KOTLIN,
       kotlinEnvironmentDeferred = kotlinEnvironmentDeferred,
       stdLibNameOrNull = ReferenceName::kotlinStdLibNameOrNull
     )
 
-    return StatikKotlinFileImpl(
+    return K1KotlinFile(
       context = context,
       file = javaFile,
       psi = ktFile

@@ -39,14 +39,14 @@ public fun <PARENT> StatikKotlinConcreteType(
         PARENT : HasPackageName = when (clazz) {
   is KtClass ->
     if (clazz.isInterface()) {
-      StatikKotlinInterfaceImpl(
+      K1Interface(
         context = context,
         containingFile = containingFile,
         psi = clazz,
         parent = parent
       )
     } else {
-      StatikKotlinClassImpl(
+      K1Class(
         context = context,
         containingFile = containingFile,
         psi = clazz,
@@ -56,7 +56,7 @@ public fun <PARENT> StatikKotlinConcreteType(
 
   is KtObjectDeclaration ->
     if (clazz.isCompanion()) {
-      StatikKotlinCompanionObjectImpl(
+      K1CompanionObject(
         context = context,
         containingFile = containingFile,
         psi = clazz,
@@ -64,7 +64,7 @@ public fun <PARENT> StatikKotlinConcreteType(
       )
     } else {
       require(!clazz.isObjectLiteral())
-      StatikKotlinObjectImpl(
+      K1Object(
         context = context,
         containingFile = containingFile,
         psi = clazz,

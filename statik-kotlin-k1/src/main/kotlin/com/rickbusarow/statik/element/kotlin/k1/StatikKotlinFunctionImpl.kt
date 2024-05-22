@@ -52,7 +52,7 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinFunctionImpl<out PARENT>(
+public class K1Function<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val psi: KtFunction,
   override val parent: PARENT
@@ -83,7 +83,7 @@ public class StatikKotlinFunctionImpl<out PARENT>(
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinDeclaredFunctionImpl<out PARENT>(
+public class K1DeclaredFunction<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val psi: KtFunction,
   override val parent: PARENT
@@ -95,7 +95,7 @@ public class StatikKotlinDeclaredFunctionImpl<out PARENT>(
         PARENT : HasPackageName {
 
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>> = lazySet {
-    psi.valueParameters.mapToSet { StatikKotlinValueParameterImpl(context, it, this) }
+    psi.valueParameters.mapToSet { K1ValueParameter(context, it, this) }
   }
   override val properties: LazySet<StatikKotlinProperty<*>>
     get() = TODO("Not yet implemented")
@@ -105,16 +105,16 @@ public class StatikKotlinDeclaredFunctionImpl<out PARENT>(
       .requireReferenceName()
   }
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.annotations(context, this@StatikKotlinDeclaredFunctionImpl)
+    psi.annotations(context, this@K1DeclaredFunction)
   }
   override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = lazySet {
-    psi.typeParameters.mapToSet { StatikKotlinTypeParameterImpl(context, it, this) }
+    psi.typeParameters.mapToSet { K1TypeParameter(context, it, this) }
   }
 }
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinTypeParameterImpl<out PARENT>(
+public class K1TypeParameter<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val psi: KtTypeParameter,
   override val parent: PARENT
@@ -135,13 +135,13 @@ public class StatikKotlinTypeParameterImpl<out PARENT>(
     get() = emptyLazySet()
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.annotations(context, this@StatikKotlinTypeParameterImpl)
+    psi.annotations(context, this@K1TypeParameter)
   }
 }
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinValueParameterImpl<out PARENT>(
+public class K1ValueParameter<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val psi: KtParameter,
   override val parent: PARENT
@@ -164,7 +164,7 @@ public class StatikKotlinValueParameterImpl<out PARENT>(
     get() = psi.getStrictParentOfType<KtParameterList>()?.parameters?.indexOf(psi) ?: -1
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.annotations(context, this@StatikKotlinValueParameterImpl)
+    psi.annotations(context, this@K1ValueParameter)
   }
 }
 
