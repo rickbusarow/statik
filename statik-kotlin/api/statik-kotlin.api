@@ -34,6 +34,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationC
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
 	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/StatikTypeReference;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable$DefaultImpls {
@@ -199,10 +200,11 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinFile$Defaul
 	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;)Ljava/lang/String;
 }
 
-public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinFunction : com/rickbusarow/statik/element/StatikFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters {
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinFunction : com/rickbusarow/statik/element/StatikFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName, com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters {
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeReference;
 	public abstract fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
@@ -274,6 +276,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinObject$Defa
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinProperty : com/rickbusarow/statik/element/StatikProperty, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable {
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/StatikTypeReference;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinProperty$DefaultImpls {
@@ -333,6 +336,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinValueArgume
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/lang/String;
 	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Z
 }
 
@@ -343,6 +347,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinValueParame
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/lang/String;
 	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Z
 }
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik.element.kotlin.psi.utils.traversal
+package com.rickbusarow.statik.element.kotlin.k1.psi.traversal
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikElement

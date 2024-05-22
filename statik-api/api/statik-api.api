@@ -121,6 +121,8 @@ public final class com/rickbusarow/statik/element/StatikArgument$DefaultImpls {
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikCallable : com/rickbusarow/statik/element/StatikAnnotated, com/rickbusarow/statik/element/StatikElement, com/rickbusarow/statik/element/StatikElementWithParent {
+	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/StatikTypeReference;
 }
 
 public final class com/rickbusarow/statik/element/StatikCallable$DefaultImpls {
@@ -190,7 +192,7 @@ public final class com/rickbusarow/statik/element/StatikFile$DefaultImpls {
 
 public abstract interface class com/rickbusarow/statik/element/StatikFunction : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikHasTypeParameters, com/rickbusarow/statik/element/StatikHasValueParameters {
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/StatikTypeReference;
 }
 
 public final class com/rickbusarow/statik/element/StatikFunction$DefaultImpls {
@@ -240,7 +242,7 @@ public final class com/rickbusarow/statik/element/StatikParameter$DefaultImpls {
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikProperty : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikDeclaredElement {
-	public abstract fun getTypeReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
+	public abstract fun getReturnTypeDeclaration ()Lcom/rickbusarow/statik/element/StatikTypeReference;
 	public abstract fun isMutable ()Z
 }
 
@@ -299,6 +301,7 @@ public abstract interface class com/rickbusarow/statik/element/StatikValueArgume
 
 public final class com/rickbusarow/statik/element/StatikValueArgument$DefaultImpls {
 	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueArgument;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/StatikValueArgument;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikValueParameter : com/rickbusarow/statik/element/StatikParameter, com/rickbusarow/statik/element/StatikValueVariable {
@@ -306,6 +309,7 @@ public abstract interface class com/rickbusarow/statik/element/StatikValueParame
 
 public final class com/rickbusarow/statik/element/StatikValueParameter$DefaultImpls {
 	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueParameter;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/StatikValueParameter;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikValueVariable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/StatikVariable {
@@ -315,6 +319,7 @@ public abstract interface class com/rickbusarow/statik/element/StatikValueVariab
 
 public final class com/rickbusarow/statik/element/StatikValueVariable$DefaultImpls {
 	public static fun getText (Lcom/rickbusarow/statik/element/StatikValueVariable;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/StatikValueVariable;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
 public abstract interface class com/rickbusarow/statik/element/StatikVariable : com/rickbusarow/statik/element/StatikElementWithParent {
@@ -333,6 +338,8 @@ public final class com/rickbusarow/statik/element/TraversalKt {
 }
 
 public abstract interface class com/rickbusarow/statik/element/internal/HasChildrenInternal : com/rickbusarow/statik/element/HasChildren {
+	public abstract fun child (Lkotlin/jvm/functions/Function0;)Lkotlin/Lazy;
+	public abstract fun childDeferred (Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
@@ -340,10 +347,12 @@ public final class com/rickbusarow/statik/element/internal/HasChildrenInternal$D
 	public static synthetic fun lazySet$default (Lcom/rickbusarow/statik/element/internal/HasChildrenInternal;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
-public final class com/rickbusarow/statik/element/internal/HasChildrenInternalDelegate : com/rickbusarow/statik/element/internal/HasChildrenInternal {
+public class com/rickbusarow/statik/element/internal/HasChildrenInternalDelegate : com/rickbusarow/statik/element/internal/HasChildrenInternal {
 	public fun <init> ()V
+	public final fun child (Lkotlin/jvm/functions/Function0;)Lkotlin/Lazy;
+	public final fun childDeferred (Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
+	public final fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
 public abstract interface class com/rickbusarow/statik/element/java/JavaMemberProperty : com/rickbusarow/statik/element/java/StatikJavaProperty {
@@ -490,6 +499,7 @@ public abstract interface class com/rickbusarow/statik/element/java/StatikJavaVa
 
 public final class com/rickbusarow/statik/element/java/StatikJavaValueParameter$DefaultImpls {
 	public static fun getText (Lcom/rickbusarow/statik/element/java/StatikJavaValueParameter;)Ljava/lang/String;
+	public static fun getType (Lcom/rickbusarow/statik/element/java/StatikJavaValueParameter;)Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 }
 
 public final class com/rickbusarow/statik/name/AndroidDataBindingDeclaredName : com/rickbusarow/statik/name/QualifiedDeclaredName, com/rickbusarow/statik/name/AndroidResourceDeclaredName, com/rickbusarow/statik/name/Generated {
@@ -1329,7 +1339,7 @@ public final class com/rickbusarow/statik/utils/lazy/EmptyResetManager : com/ric
 	public fun reset ()V
 }
 
-public abstract interface class com/rickbusarow/statik/utils/lazy/LazyDeferred {
+public abstract interface class com/rickbusarow/statik/utils/lazy/LazyDeferred : com/rickbusarow/statik/utils/lazy/LazySetComponent {
 	public abstract fun await (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getCompleted ()Ljava/lang/Object;
 	public abstract fun invoke (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -1368,7 +1378,7 @@ public abstract interface class com/rickbusarow/statik/utils/lazy/LazySet : com/
 	public abstract fun snapshot ()Lcom/rickbusarow/statik/utils/lazy/LazySet$State;
 }
 
-public abstract interface class com/rickbusarow/statik/utils/lazy/LazySet$DataSource : com/rickbusarow/statik/utils/lazy/LazyDeferred, com/rickbusarow/statik/utils/lazy/LazySetComponent, java/lang/Comparable {
+public abstract interface class com/rickbusarow/statik/utils/lazy/LazySet$DataSource : com/rickbusarow/statik/utils/lazy/LazySetComponent, java/lang/Comparable {
 	public abstract fun compareTo (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;)I
 	public abstract fun get (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getPriority ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
@@ -1376,7 +1386,6 @@ public abstract interface class com/rickbusarow/statik/utils/lazy/LazySet$DataSo
 
 public final class com/rickbusarow/statik/utils/lazy/LazySet$DataSource$DefaultImpls {
 	public static fun compareTo (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;)I
-	public static fun invoke (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority : java/lang/Enum, java/lang/Comparable {
@@ -1404,6 +1413,8 @@ public final class com/rickbusarow/statik/utils/lazy/LazySetKt {
 	public static synthetic fun asDataSource$default (Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
 	public static synthetic fun asDataSource$default (Lkotlin/Lazy;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
 	public static synthetic fun asDataSource$default (Lkotlinx/coroutines/flow/Flow;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
+	public static final fun asDataSourceLazySet (Lkotlin/Lazy;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
+	public static synthetic fun asDataSourceLazySet$default (Lkotlin/Lazy;Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;ILjava/lang/Object;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
 	public static final fun containsAny (Lcom/rickbusarow/statik/utils/lazy/LazySet;Ljava/util/Collection;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static final fun dataSource (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
 	public static final fun dataSource (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
@@ -1454,19 +1465,14 @@ public abstract interface class com/rickbusarow/statik/utils/lazy/Resets {
 	public abstract fun reset ()V
 }
 
-public final class com/rickbusarow/statik/utils/lazy/internal/DataSourceImpl : com/rickbusarow/statik/utils/lazy/LazyDeferred, com/rickbusarow/statik/utils/lazy/LazySet$DataSource {
+public final class com/rickbusarow/statik/utils/lazy/internal/DataSourceImpl : com/rickbusarow/statik/utils/lazy/LazySet$DataSource {
 	public fun <init> (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;)V
-	public fun await (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun compareTo (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;)I
 	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public fun equals (Ljava/lang/Object;)Z
 	public fun get (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public synthetic fun getCompleted ()Ljava/lang/Object;
-	public fun getCompleted ()Ljava/util/Set;
 	public fun getPriority ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 	public fun hashCode ()I
-	public fun invoke (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun isCompleted ()Z
 }
 
 public final class com/rickbusarow/statik/utils/stdlib/ApplyKt {
@@ -1690,7 +1696,7 @@ public abstract class com/rickbusarow/statik/utils/traversal/AbstractTreePrinter
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/Character;)V
 	public synthetic fun <init> (Ljava/lang/Character;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public abstract fun children (Ljava/lang/Object;)Lkotlin/sequences/Sequence;
+	public abstract fun children (Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
 	public abstract fun parent (Ljava/lang/Object;)Ljava/lang/Object;
 	public final fun printTreeString (Ljava/lang/Object;)V
 	public abstract fun simpleClassName (Ljava/lang/Object;)Ljava/lang/String;

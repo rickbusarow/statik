@@ -31,12 +31,12 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinValueParameter
-import com.rickbusarow.statik.element.kotlin.psi.StatikKotlinTypeReferenceImpl.Companion.statik
+import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinTypeReferenceImpl.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.getStrictParentOfType
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
-import com.rickbusarow.statik.element.kotlin.psi.resolve.upperBounds
+import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.upperBounds
 import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.ReferenceName

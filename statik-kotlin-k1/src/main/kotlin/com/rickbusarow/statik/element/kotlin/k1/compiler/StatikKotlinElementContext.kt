@@ -22,7 +22,7 @@ import com.rickbusarow.statik.element.HasStatikElementContext
 import com.rickbusarow.statik.element.StatikFile
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
-import com.rickbusarow.statik.element.kotlin.psi.StatikKotlinFileImpl
+import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinFileImpl
 import com.rickbusarow.statik.element.kotlin.k1.K1Environment
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName

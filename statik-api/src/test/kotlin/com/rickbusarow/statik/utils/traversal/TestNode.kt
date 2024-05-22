@@ -16,6 +16,8 @@
 package com.rickbusarow.statik.utils.traversal
 
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 
 sealed interface TestNode {
   val name: String
@@ -79,5 +81,5 @@ class TestNodeTreePrinter(
   override fun TestNode.typeName(): String = elementType
 
   override fun TestNode.text(): String = text
-  override fun TestNode.children() = children.asSequence()
+  override fun TestNode.children(): Flow<TestNode> = children.asFlow()
 }

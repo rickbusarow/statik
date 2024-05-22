@@ -28,8 +28,8 @@ public interface StatikCallable<out PARENT : StatikElement> :
   /**
    * The resolved type of this callable.
    *
-   * This is the declared/public type for a variable,
-   * or the declared return type in a function signature.
+   * This is the declared/public type for a variable, or
+   * the declared return type in a function signature.
    *
    * If the type isn't specified, then it will be inferred.
    */
@@ -38,8 +38,8 @@ public interface StatikCallable<out PARENT : StatikElement> :
   /**
    * The resolved type of this callable.
    *
-   * This is the declared/public type for a variable,
-   * or the declared return type in a function signature.
+   * This is the declared/public type for a variable, or
+   * the declared return type in a function signature.
    *
    * This value is `null` if the type isn't specified.
    */

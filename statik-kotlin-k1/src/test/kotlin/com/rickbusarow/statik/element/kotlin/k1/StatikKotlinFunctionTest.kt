@@ -18,15 +18,11 @@ package com.rickbusarow.statik.element.kotlin.k1
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import com.rickbusarow.statik.element.kotlin.k1.psi.traversal.PsiTreePrinter.Companion.printEverything
+import com.rickbusarow.statik.element.kotlin.k1.psi.traversal.StatikTreePrinter.Companion.printEverything
+import com.rickbusarow.statik.element.kotlin.k1.psi.traversal.StatikTreePrinter.Companion.printEverythingFromPSINode
 import com.rickbusarow.statik.element.kotlin.k1.testing.ProjectTest
 import com.rickbusarow.statik.element.kotlin.k1.testing.Properties
 import com.rickbusarow.statik.element.kotlin.k1.testing.PsiTestEnvironment
-import com.rickbusarow.statik.element.kotlin.psi.testing.ProjectTest
-import com.rickbusarow.statik.element.kotlin.psi.testing.Properties
-import com.rickbusarow.statik.element.kotlin.psi.testing.PsiTestEnvironment
-import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.StatikTreePrinter.Companion.printEverything
-import com.rickbusarow.statik.element.kotlin.psi.utils.traversal.StatikTreePrinter.Companion.printEverythingFromPSINode
 import com.rickbusarow.statik.name.StatikLanguage
 import com.rickbusarow.statik.testing.internal.StatikNameTest
 import kotlinx.coroutines.flow.first

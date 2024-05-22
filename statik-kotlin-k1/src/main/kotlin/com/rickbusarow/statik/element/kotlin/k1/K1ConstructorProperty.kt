@@ -21,7 +21,7 @@ import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConstructorProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinMemberProperty
-import com.rickbusarow.statik.element.kotlin.psi.StatikKotlinTypeReferenceImpl.Companion.statik
+import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinTypeReferenceImpl.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName

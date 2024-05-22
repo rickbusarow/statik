@@ -32,8 +32,8 @@ public inline fun <reified T : PsiElement> PsiElement.isPartOf(): Boolean =
   getNonStrictParentOfType<T>() != null
 
 /**
- * Just an alias for [PsiElement.getChildren],
- * making it more explicit for those of us who tend to overthink things.
+ * Just an alias for [PsiElement.getChildren], making it more
+ * explicit for those of us who tend to overthink things.
  *
  * @see PsiElement.getChildren
  */

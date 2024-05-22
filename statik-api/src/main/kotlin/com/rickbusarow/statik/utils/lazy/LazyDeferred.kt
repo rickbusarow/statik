@@ -97,7 +97,6 @@ internal class LazyDeferredImpl<T>(
   @Volatile
   private var _completed = false
 
-  @Suppress("ktlint:standard:backing-property-naming")
   private var _value: T? = null
 
   override val isCompleted: Boolean get() = _completed

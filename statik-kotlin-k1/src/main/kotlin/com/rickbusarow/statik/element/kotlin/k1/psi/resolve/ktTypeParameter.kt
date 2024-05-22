@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik.element.kotlin.psi.resolve
+package com.rickbusarow.statik.element.kotlin.k1.psi.resolve
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.utils.stdlib.singletonSet
