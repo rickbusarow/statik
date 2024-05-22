@@ -18,10 +18,10 @@
     "publicationName": "maven"
   },
   {
-    "gradlePath": ":statik-kotlin-psi",
+    "gradlePath": ":statik-kotlin-k1",
     "group": "com.rickbusarow.statik",
-    "artifactId": "statik-kotlin-psi",
-    "description": "Kotlin language models backed by PSI elements",
+    "artifactId": "statik-kotlin-k1",
+    "description": "Kotlin language models backed by PSI elements for Kotlin 1.x.x",
     "packaging": "jar",
     "javaVersion": "11",
     "publicationName": "maven"

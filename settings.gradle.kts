@@ -81,7 +81,7 @@ develocity {
 include(
   ":statik-api",
   ":statik-kotlin",
-  ":statik-kotlin-psi",
+  ":statik-kotlin-k1",
   ":statik-logging",
   ":statik-testing-internal"
 )

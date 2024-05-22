@@ -1,4 +1,6 @@
 :statik-api
+:statik-kotlin
+:statik-logging
 com.rickbusarow.dispatch:dispatch-core:1.0.0-beta10
 dev.drewhamilton.poko:poko-annotations-jvm:0.15.3
 dev.drewhamilton.poko:poko-annotations:0.15.3
