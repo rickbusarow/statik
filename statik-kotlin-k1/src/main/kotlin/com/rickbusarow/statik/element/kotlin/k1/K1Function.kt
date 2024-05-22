@@ -31,7 +31,7 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinValueParameter
-import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinTypeReferenceImpl.Companion.statik
+import com.rickbusarow.statik.element.kotlin.k1.K1TypeReference.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.getStrictParentOfType
@@ -116,10 +116,10 @@ public class K1DeclaredFunction<out PARENT>(
   override val returnTypeDeclaration: StatikKotlinTypeReference<StatikKotlinFunction<PARENT>>? by child {
     psi.typeReference?.let { ref ->
 
-      StatikKotlinTypeReferenceImpl(
+      K1TypeReference(
         context = context,
         psi = ref,
-        parent = this@StatikKotlinDeclaredFunctionImpl
+        parent = this@K1DeclaredFunction
       )
     }
   }
@@ -165,11 +165,11 @@ public class K1TypeReference<out PARENT>(
     public fun <PARENT> KtTypeReference.statik(
       context: StatikKotlinElementContext = this@HasStatikKotlinElementContext.context,
       parent: PARENT = this@PARENT
-    ): StatikKotlinTypeReferenceImpl<PARENT>
+    ): K1TypeReference<PARENT>
       where PARENT : StatikKotlinElementWithPackageName,
             PARENT : StatikKotlinElement,
             PARENT : HasPackageName =
-      StatikKotlinTypeReferenceImpl(
+      K1TypeReference(
         context = context,
         psi = this@statik,
         parent = parent
@@ -179,11 +179,11 @@ public class K1TypeReference<out PARENT>(
     public fun <PARENT> KtTypeReference.statik(
       context: StatikKotlinElementContext,
       parent: PARENT
-    ): StatikKotlinTypeReferenceImpl<PARENT>
+    ): K1TypeReference<PARENT>
       where PARENT : StatikKotlinElementWithPackageName,
             PARENT : StatikKotlinElement,
             PARENT : HasPackageName =
-      StatikKotlinTypeReferenceImpl(
+      K1TypeReference(
         context = context,
         psi = this,
         parent = parent

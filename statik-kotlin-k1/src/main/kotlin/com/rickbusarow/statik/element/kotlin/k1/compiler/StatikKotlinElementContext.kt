@@ -21,9 +21,8 @@ import com.rickbusarow.statik.compiler.inerceptor.NameParser
 import com.rickbusarow.statik.element.HasStatikElementContext
 import com.rickbusarow.statik.element.StatikFile
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import com.rickbusarow.statik.element.kotlin.k1.KotlinEnvironment
-import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinFileImpl
 import com.rickbusarow.statik.element.kotlin.k1.K1Environment
+import com.rickbusarow.statik.element.kotlin.k1.K1KotlinFile
 import com.rickbusarow.statik.name.QualifiedDeclaredName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.StatikLanguage
@@ -52,14 +51,14 @@ public interface HasStatikKotlinElementContext : HasStatikElementContext<StatikK
 public interface StatikKotlinElementContext : StatikElementContext<PsiElement> {
 
   /**
-   * A deferred [KotlinEnvironment][com.rickbusarow.statik.element.kotlin.psi.KotlinEnvironment]
+   * A deferred [KotlinEnvironment][com.rickbusarow.statik.element.kotlin.k1.K1Environment]
    * that provides a context for Kotlin language features.
    * */
   public val kotlinEnvironmentDeferred: LazyDeferred<K1Environment>
 
   /**
    * A deferred binding context obtained from the
-   * [KotlinEnvironment][com.rickbusarow.statik.element.kotlin.psi.KotlinEnvironment].
+   * [KotlinEnvironment][com.rickbusarow.statik.element.kotlin.k1.K1Environment].
    * This context is used to resolve bindings in the system.
    */
   public val bindingContextDeferred: LazyDeferred<BindingContext>
@@ -86,7 +85,7 @@ public class K1ElementContext(
   override val stdLibNameOrNull: ReferenceName.() -> QualifiedDeclaredName?
 ) : StatikKotlinElementContext {
 
-  private val files: MutableMap<KtFile, StatikKotlinFileImpl> = mutableMapOf()
+  private val files: MutableMap<KtFile, K1KotlinFile> = mutableMapOf()
 
   /**
    * A deferred binding context obtained from the [K1Environment].
@@ -96,10 +95,10 @@ public class K1ElementContext(
     kotlinEnvironmentDeferred
       .map { it.bindingContextDeferred.await() }
 
-  override suspend fun file(ktFile: KtFile): StatikKotlinFileImpl {
+  override suspend fun file(ktFile: KtFile): K1KotlinFile {
     return files.getOrPut(ktFile) {
-      StatikKotlinFileImpl(
-        context = this@StatikKotlinElementContextImpl,
+      K1KotlinFile(
+        context = this@K1ElementContext,
         file = File(ktFile.virtualFilePath),
         psi = ktFile
       )

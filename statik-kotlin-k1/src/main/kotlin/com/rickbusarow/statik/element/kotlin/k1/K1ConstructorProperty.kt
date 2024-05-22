@@ -20,8 +20,7 @@ import com.rickbusarow.statik.element.StatikAnnotation
 import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConstructorProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinMemberProperty
-import com.rickbusarow.statik.element.kotlin.k1.StatikKotlinTypeReferenceImpl.Companion.statik
+import com.rickbusarow.statik.element.kotlin.k1.K1TypeReference.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
@@ -32,39 +31,11 @@ import com.rickbusarow.statik.utils.lazy.lazyDeferred
 import com.rickbusarow.statik.utils.stdlib.requireNotNull
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.psi.KtParameter
-import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class StatikKotlinMemberPropertyImpl<out PARENT : StatikKotlinDeclaredElement<*>>(
-  override val context: StatikKotlinElementContext,
-  override val psi: KtProperty,
-  override val parent: PARENT
-) : StatikKotlinMemberProperty<PARENT>,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent),
-  HasStatikKotlinElementContext {
-
-  override val returnTypeDeclaration: StatikTypeReference<StatikKotlinMemberProperty<PARENT>>?
-    by child { psi.typeReference?.statik() }
-
-  override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
-    bindingContext(BindingContext.VARIABLE, psi)
-      .requireNotNull()
-      .type
-      .requireReferenceName()
-  }
-
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.annotations(context, parent = this)
-  }
-  override val isMutable: Boolean
-    get() = psi.isVar
-}
-
-@Poko
-@InternalStatikApi
-public class StatikKotlinConstructorPropertyImpl<out PARENT : StatikKotlinDeclaredElement<*>>(
+public class K1ConstructorProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
   override val context: StatikKotlinElementContext,
   override val psi: KtParameter,
   override val parent: PARENT

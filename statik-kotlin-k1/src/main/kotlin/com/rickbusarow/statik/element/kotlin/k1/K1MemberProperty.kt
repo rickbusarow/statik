@@ -17,8 +17,10 @@ package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
+import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinMemberProperty
+import com.rickbusarow.statik.element.kotlin.k1.K1TypeReference.Companion.statik
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
@@ -41,7 +43,10 @@ public class K1MemberProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
   StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent),
   HasStatikKotlinElementContext {
 
-  override val typeReferenceName: LazyDeferred<ReferenceName> = lazyDeferred {
+  override val returnTypeDeclaration: StatikTypeReference<StatikKotlinMemberProperty<PARENT>>?
+    by child { psi.typeReference?.statik() }
+
+  override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
     bindingContext(BindingContext.VARIABLE, psi)
       .requireNotNull()
       .type
