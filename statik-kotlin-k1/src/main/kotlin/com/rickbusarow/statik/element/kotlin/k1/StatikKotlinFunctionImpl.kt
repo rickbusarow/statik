@@ -162,14 +162,17 @@ public class K1TypeReference<out PARENT>(
 
     context(HasStatikKotlinElementContext, PARENT)
     @InternalStatikApi
-    public fun <PARENT> KtTypeReference.statik(): StatikKotlinTypeReferenceImpl<PARENT>
+    public fun <PARENT> KtTypeReference.statik(
+      context: StatikKotlinElementContext = this@HasStatikKotlinElementContext.context,
+      parent: PARENT = this@PARENT
+    ): StatikKotlinTypeReferenceImpl<PARENT>
       where PARENT : StatikKotlinElementWithPackageName,
             PARENT : StatikKotlinElement,
             PARENT : HasPackageName =
       StatikKotlinTypeReferenceImpl(
-        context = this@HasStatikKotlinElementContext.context,
+        context = context,
         psi = this@statik,
-        parent = this@PARENT
+        parent = parent
       )
 
     @InternalStatikApi
@@ -205,13 +208,8 @@ public class K1TypeParameter<out PARENT>(
     get() = psi.getStrictParentOfType<KtTypeParameterList>()?.parameters?.indexOf(psi) ?: -1
 
   override val superTypes: LazySet<StatikTypeReference<*>> = lazySet {
-    psi.upperBounds().mapToSet { bound ->
-      K1TypeReference(
-        context = context,
-        psi = bound,
-        parent = parent
-      )
-    }
+    psi.upperBounds()
+      .mapToSet { bound -> bound.statik(parent = parent) }
   }
 
   override val typeParameters: LazySet<StatikTypeParameter<*>>
