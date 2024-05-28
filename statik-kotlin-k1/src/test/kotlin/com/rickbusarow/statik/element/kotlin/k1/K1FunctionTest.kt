@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
 import org.junit.jupiter.api.TestFactory
 
-class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
+class K1FunctionTest : ProjectTest(), StatikNameTest {
 
   override val testEnvironmentFactory = PsiTestEnvironment
 
@@ -57,8 +57,10 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
         import java.io.Serializable
 
+        typealias StringReturn = kotlin.String
+
         class SubjectClass {
-          fun <S: Number, T> subjectFunction(a: Int, b: String, c: T): String
+          fun <S: Number, T> subjectFunction(a: Int, b: String, c: T): StringReturn
             where T : java.io.Serializable,
                   T : CharSequence {
             println("hello")

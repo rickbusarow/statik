@@ -64,15 +64,12 @@ public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElemen
 }
 
 /** Represents a Kotlin function element. */
-public interface StatikKotlinFunction<out PARENT> :
+public interface StatikKotlinFunction<out PARENT : StatikKotlinElementWithPackageName> :
   StatikFunction<PARENT>,
   StatikKotlinCallable<PARENT>,
   StatikKotlinHasValueParameters<PARENT>,
   StatikKotlinElementWithPackageName,
-  StatikKotlinHasTypeParameters<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  StatikKotlinHasTypeParameters<PARENT> {
 
   override val psi: KtFunction
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>>

@@ -76,20 +76,23 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
     )
   }
 
-  final override val innerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  final override val innerTypes: LazySet<StatikKotlinConcreteType<*>> = children {
     psi.body
       ?.StatikKotlinConcreteTypesDirect(context, containingFile, parent)
       .orEmpty()
   }
-  override val annotations: LazySet<StatikKotlinAnnotation<*>> = lazySet {
+
+  override val annotations: LazySet<StatikKotlinAnnotation<*>> = children {
     psi.annotations(context, this)
   }
-  override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+
+  override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*>> = children {
     innerTypes.fold(emptySet()) { acc, type ->
       acc + type + type.innerTypesRecursive.toSet()
     }
   }
-  override val properties: LazySet<StatikKotlinProperty<*>> = lazySet {
+
+  override val properties: LazySet<StatikKotlinProperty<*>> = children {
 
     buildSet {
 
@@ -119,14 +122,14 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
       }
     }
   }
-  override val functions: LazySet<StatikKotlinDeclaredFunction<*>> = lazySet {
+  override val functions: LazySet<StatikKotlinDeclaredFunction<*>> = children {
     psi.body?.functions
       .orEmpty()
       .mapToSet { K1DeclaredFunction(context = context, psi = it, parent = this) }
   }
   override val superTypes: LazySet<StatikKotlinTypeReference<*>> =
-    lazySet { TODO("Not yet implemented") }
-  override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = lazySet {
+    children { TODO("Not yet implemented") }
+  override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = children {
     TODO("Not yet implemented")
   }
   override val packageName: PackageName

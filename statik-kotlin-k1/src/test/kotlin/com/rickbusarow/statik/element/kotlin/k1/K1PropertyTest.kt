@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 
-class StatikKotlinPropertyTest : ProjectTest(), StatikNameTest {
+class K1PropertyTest : ProjectTest(), StatikNameTest {
 
   override val testEnvironmentFactory = PsiTestEnvironment
 

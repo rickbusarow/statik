@@ -50,18 +50,18 @@ public class K1KotlinFile(
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.fileAnnotationList
     TODO("Not yet implemented")
   }
-  override val declaredTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  override val declaredTypes: LazySet<StatikKotlinConcreteType<*>> = children {
     psi.StatikKotlinConcreteTypesDirect(
       context = context,
       containingFile = this,
       parent = this
     )
   }
-  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*>> = children {
     declaredTypes.fold(emptySet()) { acc, type ->
       acc + type + type.innerTypesRecursive.toSet()
     }
@@ -89,7 +89,7 @@ public class K1KotlinFile(
   override val packageName: PackageName by lazy { PackageName(psi.packageFqName.asString()) }
 
   override val topLevelFunctions: LazySet<StatikKotlinFunction<*>> =
-    lazySet {
+    children {
       psi.getChildrenOfType<KtFunction>()
         .mapToSet { K1Function(context = context, psi = it, parent = this) }
     }

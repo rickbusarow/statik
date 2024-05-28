@@ -34,10 +34,12 @@ public interface HasChildrenInternal : HasChildren {
   public fun <E : StatikElement?> child(dataSource: () -> E): Lazy<E>
   public fun <T : StatikElement> childDeferred(action: suspend () -> T): LazyDeferred<T>
 
-  public fun <E : StatikElement> lazySet(
+  public fun <E : StatikElement> children(
     priority: LazySet.DataSource.Priority = LazySet.DataSource.Priority.MEDIUM,
     dataSource: suspend () -> Set<E>
   ): LazySet<E>
+
+  // public class ChildBuilderScope(public val parent: HasChildrenInternal)
 }
 
 @InternalStatikApi
@@ -55,7 +57,7 @@ public open class HasChildrenInternalDelegate : HasChildrenInternal {
   ): Lazy<E> = lazy(dataSource)
     .also { _children.add(it.asDataSource()) }
 
-  public final override fun <E : StatikElement> lazySet(
+  public final override fun <E : StatikElement> children(
     priority: LazySet.DataSource.Priority,
     dataSource: suspend () -> Set<E>
   ): LazySet<E> = com.rickbusarow.statik.utils.lazy.lazySet(

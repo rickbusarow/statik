@@ -26,6 +26,7 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElementWithPackageName
+import com.rickbusarow.statik.element.kotlin.StatikKotlinElementWithParent
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
@@ -37,7 +38,6 @@ import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementCont
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.getStrictParentOfType
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.upperBounds
-import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.PackageName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.SimpleName
@@ -48,6 +48,7 @@ import com.rickbusarow.statik.utils.lazy.emptyLazySet
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
 import com.rickbusarow.statik.utils.stdlib.mapToSet
 import dev.drewhamilton.poko.Poko
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtParameter
@@ -59,25 +60,22 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class K1Function<out PARENT>(
+public class K1Function<out PARENT : StatikKotlinElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val psi: KtFunction,
   override val parent: PARENT
 ) : StatikKotlinFunction<PARENT>,
   HasStatikKotlinElementContext,
-  HasChildrenInternal by HasChildrenInternalDelegate()
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val packageName: PackageName
     get() = parent.packageName
 
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
-    get() = lazySet { TODO("Not yet implemented") }
+    get() = children { TODO("Not yet implemented") }
 
   override val properties: LazySet<StatikKotlinProperty<*>>
-    get() = lazySet { TODO("Not yet implemented") }
+    get() = children { TODO("Not yet implemented") }
 
   override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
     bindingContext(BindingContext.FUNCTION, psi)
@@ -89,25 +87,22 @@ public class K1Function<out PARENT>(
   }
 
   override val annotations: LazySet<StatikAnnotation<*>>
-    get() = lazySet { TODO("Not yet implemented") }
+    get() = children { TODO("Not yet implemented") }
   override val typeParameters: LazySet<StatikKotlinTypeParameter<*>>
-    get() = lazySet { TODO("Not yet implemented") }
+    get() = children { TODO("Not yet implemented") }
 }
 
 @Poko
 @InternalStatikApi
-public class K1DeclaredFunction<out PARENT>(
+public class K1DeclaredFunction<out PARENT : StatikKotlinElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val psi: KtNamedFunction,
   override val parent: PARENT
 ) : StatikKotlinDeclaredFunction<PARENT>,
   HasStatikKotlinElementContext,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent)
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent) {
 
-  override val valueParameters: LazySet<StatikKotlinValueParameter<*>> = lazySet {
+  override val valueParameters: LazySet<StatikKotlinValueParameter<*>> = children {
     psi.valueParameters.mapToSet { K1ValueParameter(context, it, this) }
   }
   override val properties: LazySet<StatikKotlinProperty<*>>
@@ -129,85 +124,72 @@ public class K1DeclaredFunction<out PARENT>(
       ?.returnType
       .requireReferenceName()
   }
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.annotations(context, this@K1DeclaredFunction)
   }
-  override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = lazySet {
+  override val typeParameters: LazySet<StatikKotlinTypeParameter<*>> = children {
     psi.typeParameters.mapToSet { K1TypeParameter(context, it, this) }
   }
 }
 
+public interface K1ElementSource<
+  PARENT : StatikKotlinElement,
+  out E : StatikKotlinElementWithParent<PARENT>,
+  P : KtElement
+  > {
+
+  context(HasStatikKotlinElementContext, PARENT)
+  public fun P.statik(
+    context: StatikKotlinElementContext = this@HasStatikKotlinElementContext.context,
+    parent: PARENT = this@PARENT
+  ): E
+}
+
 @Poko
 @InternalStatikApi
-public class K1TypeReference<out PARENT>(
+public class K1TypeReference<out PARENT : StatikKotlinElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val psi: KtTypeReference,
   override val parent: PARENT
 ) : StatikKotlinTypeReference<PARENT>,
   HasStatikKotlinElementContext,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent)
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent) {
 
   override val typeParameters: LazySet<StatikTypeParameter<*>>
     get() = emptyLazySet()
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.annotations(context, this@K1TypeReference)
   }
 
   @InternalStatikApi
   public companion object {
-
     context(HasStatikKotlinElementContext, PARENT)
-    @InternalStatikApi
-    public fun <PARENT> KtTypeReference.statik(
+    public fun <PARENT : StatikKotlinElementWithPackageName> KtTypeReference.statik(
       context: StatikKotlinElementContext = this@HasStatikKotlinElementContext.context,
       parent: PARENT = this@PARENT
-    ): K1TypeReference<PARENT>
-      where PARENT : StatikKotlinElementWithPackageName,
-            PARENT : StatikKotlinElement,
-            PARENT : HasPackageName =
-      K1TypeReference(
-        context = context,
-        psi = this@statik,
-        parent = parent
-      )
-
-    @InternalStatikApi
-    public fun <PARENT> KtTypeReference.statik(
-      context: StatikKotlinElementContext,
-      parent: PARENT
-    ): K1TypeReference<PARENT>
-      where PARENT : StatikKotlinElementWithPackageName,
-            PARENT : StatikKotlinElement,
-            PARENT : HasPackageName =
-      K1TypeReference(
-        context = context,
-        psi = this,
-        parent = parent
-      )
+    ): K1TypeReference<PARENT> = K1TypeReference(
+      context = context,
+      psi = this,
+      parent = parent
+    )
   }
 }
 
 @Poko
 @InternalStatikApi
-public class K1TypeParameter<out PARENT>(
+public class K1TypeParameter<out PARENT : StatikKotlinElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val psi: KtTypeParameter,
   override val parent: PARENT
 ) : StatikKotlinTypeParameter<PARENT>,
   HasStatikKotlinElementContext,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent)
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent) {
 
   override val index: Int
     get() = psi.getStrictParentOfType<KtTypeParameterList>()?.parameters?.indexOf(psi) ?: -1
 
-  override val superTypes: LazySet<StatikTypeReference<*>> = lazySet {
+  override val superTypes: LazySet<StatikTypeReference<*>> = children {
     psi.upperBounds()
       .mapToSet { bound -> bound.statik(parent = parent) }
   }
@@ -215,23 +197,24 @@ public class K1TypeParameter<out PARENT>(
   override val typeParameters: LazySet<StatikTypeParameter<*>>
     get() = emptyLazySet()
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.annotations(context, this@K1TypeParameter)
+  }
+
+  @InternalStatikApi
+  public companion object {
   }
 }
 
 @Poko
 @InternalStatikApi
-public class K1ValueParameter<out PARENT>(
+public class K1ValueParameter<out PARENT : StatikKotlinElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val psi: KtParameter,
   override val parent: PARENT
 ) : StatikKotlinValueParameter<PARENT>,
   HasStatikKotlinElementContext,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent)
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
+  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent) {
 
   override val name: StatikName
     get() = simplestName
@@ -247,8 +230,12 @@ public class K1ValueParameter<out PARENT>(
   override val index: Int
     get() = psi.getStrictParentOfType<KtParameterList>()?.parameters?.indexOf(psi) ?: -1
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.annotations(context, this@K1ValueParameter)
+  }
+
+  @InternalStatikApi
+  public companion object {
   }
 }
 

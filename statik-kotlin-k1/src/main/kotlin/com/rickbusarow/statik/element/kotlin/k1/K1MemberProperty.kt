@@ -53,7 +53,7 @@ public class K1MemberProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
       .requireReferenceName()
   }
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = children {
     psi.annotations(context, parent = this)
   }
   override val isMutable: Boolean
