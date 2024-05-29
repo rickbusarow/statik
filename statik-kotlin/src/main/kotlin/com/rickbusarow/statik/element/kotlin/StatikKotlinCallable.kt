@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 public interface StatikKotlinCallable<out PARENT : StatikKotlinElement> :
   StatikCallable<PARENT>,
   StatikKotlinElementWithParent<PARENT> {
-  override val psi: KtCallableDeclaration
+  override val node: KtCallableDeclaration
 }
 
 /** A Kotlin property element. */
@@ -43,20 +43,20 @@ public sealed interface StatikKotlinProperty<out PARENT : StatikKotlinElementWit
 /** A Kotlin member property element. */
 public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName> :
   StatikKotlinProperty<PARENT> {
-  override val psi: KtProperty
+  override val node: KtProperty
 }
 
 /** A Kotlin extension property element. */
 public interface StatikKotlinMemberExtensionProperty<out PARENT : StatikKotlinElementWithPackageName> :
   StatikKotlinMemberProperty<PARENT>,
   StatikKotlinHasTypeParameters<PARENT> {
-  override val psi: KtProperty
+  override val node: KtProperty
 }
 
 /** A Kotlin constructor property element. */
 public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElementWithPackageName> :
   StatikKotlinProperty<PARENT> {
-  override val psi: KtParameter
+  override val node: KtParameter
 }
 
 /** Represents a Kotlin function element. */
@@ -69,7 +69,7 @@ public interface StatikKotlinFunction<out PARENT> :
         PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
-  override val psi: KtFunction
+  override val node: KtFunction
   override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
   override val properties: LazySet<StatikKotlinProperty<*>>
   override val returnType: LazyDeferred<ReferenceName>

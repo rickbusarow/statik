@@ -13,9 +13,9 @@ public abstract class com/rickbusarow/statik/element/kotlin/k1/AbstractStatikKot
 	public fun getInnerTypesRecursive ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -41,9 +41,9 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Annotation : com/r
 	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtAnnotationEntry;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtAnnotationEntry;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public fun getText ()Ljava/lang/String;
 	public fun hashCode ()I
@@ -59,9 +59,9 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1AnnotationArgument
 	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtValueArgument;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtValueArgument;
 	public fun getText ()Ljava/lang/String;
 	public fun getType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public fun getValue ()Ljava/lang/Object;
@@ -80,10 +80,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Class : com/rickbu
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
 	public fun getPrimaryConstructor ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFunction;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClass;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtClass;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
 	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
@@ -96,10 +96,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1CompanionObject : 
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtObjectDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtObjectDeclaration;
 	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
 	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
@@ -119,10 +119,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1ConstructorPropert
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtParameter;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -153,10 +153,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1DeclaredFunction :
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;
 	public fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFunction;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
@@ -196,10 +196,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Function : com/ric
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;
 	public fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFunction;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public fun getText ()Ljava/lang/String;
 	public fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
@@ -217,10 +217,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Interface : com/ri
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClass;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtClass;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
 	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
@@ -243,9 +243,9 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1KotlinFile : com/r
 	public fun getImportAliases ()Ljava/util/Map;
 	public fun getImports ()Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource;
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFile;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtFile;
 	public fun getReferences ()Ljava/util/List;
 	public fun getText ()Ljava/lang/String;
 	public fun getTopLevelFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
@@ -269,10 +269,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1MemberProperty : c
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtProperty;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -295,10 +295,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Object : com/rickb
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtObjectDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtClassOrObject;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtObjectDeclaration;
 	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
 	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
@@ -319,9 +319,9 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1TypeParameter : co
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtTypeParameter;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtTypeParameter;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -353,10 +353,10 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1ValueParameter : c
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtParameter;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -383,9 +383,9 @@ public final class com/rickbusarow/statik/element/kotlin/k1/StatikKotlinDeclared
 	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
-	public synthetic fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtModifierListOwner;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtModifierListOwner;
 	public fun getSegments ()Ljava/util/List;
 	public fun getSimpleNames ()Ljava/util/List;
 	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
@@ -945,4 +945,3 @@ public final class com/rickbusarow/statik/element/kotlin/k1/psi/traversal/PsiTre
 	public final fun printEverythingFromASTNode (Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;C)Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
 	public static synthetic fun printEverythingFromASTNode$default (Lcom/rickbusarow/statik/element/kotlin/k1/psi/traversal/PsiTreePrinter$Companion;Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;CILjava/lang/Object;)Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
 }
-

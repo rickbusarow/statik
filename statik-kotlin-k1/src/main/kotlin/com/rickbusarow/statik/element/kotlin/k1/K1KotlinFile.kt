@@ -45,17 +45,17 @@ import java.io.File
 public class K1KotlinFile(
   override val context: StatikKotlinElementContext,
   override val file: File,
-  override val psi: KtFile
+  override val node: KtFile
 ) : StatikKotlinFile,
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.fileAnnotationList
+    node.fileAnnotationList
     TODO("Not yet implemented")
   }
   override val declaredTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
-    psi.StatikKotlinConcreteTypesDirect(
+    node.StatikKotlinConcreteTypesDirect(
       context = context,
       containingFile = this,
       parent = this
@@ -69,9 +69,9 @@ public class K1KotlinFile(
   override val containingFile: StatikKotlinFile get() = this
 
   @Suppress("UnusedPrivateProperty")
-  private val fileJavaFacadeName by lazy { psi.javaFileFacadeFqName.asString() }
+  private val fileJavaFacadeName by lazy { node.javaFileFacadeFqName.asString() }
 
-  private val importParser by unsafeLazy { ImportParser(psi.importDirectives) }
+  private val importParser by unsafeLazy { ImportParser(node.importDirectives) }
 
   // For `import com.foo as Bar`, the entry is `"Bar" to "com.foo"`
   override val importAliases: Map<String, ReferenceName> by lazy {
@@ -86,12 +86,12 @@ public class K1KotlinFile(
     importParser.wildcards
   }
 
-  override val packageName: PackageName by lazy { PackageName(psi.packageFqName.asString()) }
+  override val packageName: PackageName by lazy { PackageName(node.packageFqName.asString()) }
 
   override val topLevelFunctions: LazySet<StatikKotlinFunction<*>> =
     lazySet {
-      psi.getChildrenOfType<KtFunction>()
-        .mapToSet { K1Function(context = context, psi = it, parent = this) }
+      node.getChildrenOfType<KtFunction>()
+        .mapToSet { K1Function(context = context, node = it, parent = this) }
     }
   override val topLevelProperties: LazySet<StatikKotlinProperty<*>>
     get() = TODO("Not yet implemented")

@@ -42,7 +42,7 @@ internal fun KtAnnotated.annotations(
   .mapToSet {
     K1Annotation(
       context = context,
-      psi = it,
+      node = it,
       parent = parent
     )
   }
@@ -51,9 +51,10 @@ internal fun KtAnnotated.annotations(
 @InternalStatikApi
 public class K1Annotation<out PARENT : StatikKotlinElement>(
   private val context: StatikElementContext<PsiElement>,
-  override val psi: KtAnnotationEntry,
+  override val node: KtAnnotationEntry,
   override val parent: PARENT
 ) : StatikKotlinAnnotation<PARENT>,
+  K1StatikKotlinElement,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val referenceName: LazyDeferred<ReferenceName> = lazyDeferred {
@@ -61,7 +62,7 @@ public class K1Annotation<out PARENT : StatikKotlinElement>(
     context.nameParser.parse(
       NameParserPacket(
         file = containingFile,
-        toResolve = psi.shortName.requireNotNull().asString().asReferenceName(KOTLIN),
+        toResolve = node.shortName.requireNotNull().asString().asReferenceName(KOTLIN),
         referenceLanguage = KOTLIN,
         stdLibNameOrNull = { asString.kotlinStdLibNameOrNull() }
       )

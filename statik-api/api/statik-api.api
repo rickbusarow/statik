@@ -153,7 +153,7 @@ public final class com/rickbusarow/statik/element/StatikDeclaredElement$DefaultI
 
 public abstract interface class com/rickbusarow/statik/element/StatikElement : com/rickbusarow/statik/element/HasChildren {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/com/intellij/psi/PsiElement;
 	public abstract fun getText ()Ljava/lang/String;
 }
 
@@ -1704,4 +1704,3 @@ public final class com/rickbusarow/statik/utils/traversal/Traversals {
 	public final fun breadthFirstTraversal (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Lkotlin/sequences/Sequence;
 	public final fun depthFirstTraversal (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;)Lkotlin/sequences/Sequence;
 }
-

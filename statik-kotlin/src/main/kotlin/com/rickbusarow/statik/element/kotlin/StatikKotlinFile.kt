@@ -28,7 +28,7 @@ public interface StatikKotlinFile :
   StatikAnnotated,
   StatikKotlinElementWithPackageName {
 
-  override val psi: KtFile
+  override val node: KtFile
 
   override val declaredTypes: LazySet<StatikKotlinConcreteType<*>>
 
