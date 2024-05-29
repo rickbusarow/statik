@@ -38,7 +38,6 @@ kotlin {
 dependencies {
   api(libs.junit.jupiter.api)
 
-  implementation(libs.kotlin.compiler)
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.rickBusarow.dispatch.core)

@@ -49,7 +49,7 @@ internal class K1PsiElementFactory : StatikKotlinPsiElementFactory {
   ): K1KotlinFile = K1KotlinFile(
     context = context,
     file = fileSystemFile,
-    psi = context.kotlinEnvironmentDeferred.await().ktFile(fileSystemFile)
+    node = context.kotlinEnvironmentDeferred.await().ktFile(fileSystemFile)
   )
 
   override fun create(

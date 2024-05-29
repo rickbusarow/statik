@@ -33,7 +33,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationC
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable$DefaultImpls {
@@ -78,7 +78,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteTyp
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinProperty {
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtParameter;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty$DefaultImpls {
@@ -123,7 +123,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFun
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinElement : com/rickbusarow/statik/element/StatikElement {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinElement$DefaultImpls {
@@ -189,7 +189,7 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 	public abstract fun getDeclaredTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getDeclaredTypesAndInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getImportAliases ()Ljava/util/Map;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFile;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtFile;
 	public abstract fun getTopLevelFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getTopLevelProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
@@ -201,7 +201,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinFile$Defaul
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinFunction : com/rickbusarow/statik/element/StatikFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters {
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtFunction;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
@@ -240,7 +240,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinInterface$D
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty {
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtProperty;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty$DefaultImpls {
@@ -252,7 +252,7 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberExten
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinProperty {
-	public abstract fun getPsi ()Lorg/jetbrains/kotlin/psi/KtProperty;
+	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty$DefaultImpls {
@@ -364,4 +364,3 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$Public : com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility {
 	public static final field INSTANCE Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$Public;
 }
-

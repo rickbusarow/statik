@@ -18,12 +18,9 @@ package com.rickbusarow.statik.element.kotlin
 import com.rickbusarow.statik.element.StatikElement
 import com.rickbusarow.statik.element.StatikElementWithParent
 import com.rickbusarow.statik.name.HasPackageName
-import org.jetbrains.kotlin.psi.KtElement
 
 /** Represents a Kotlin element in the source code. */
 public interface StatikKotlinElement : StatikElement {
-
-  override val psi: KtElement
 
   override val containingFile: StatikKotlinFile
     get() = when (this) {

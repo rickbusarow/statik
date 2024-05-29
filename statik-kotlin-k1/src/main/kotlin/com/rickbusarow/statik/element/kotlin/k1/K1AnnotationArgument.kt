@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtValueArgument
 @InternalStatikApi
 public class K1AnnotationArgument<out PARENT : StatikKotlinElement>(
   private val context: StatikElementContext<PsiElement>,
-  override val psi: KtValueArgument,
+  override val node: KtValueArgument,
   override val parent: PARENT
 ) : StatikKotlinAnnotationArgument<PARENT>,
   HasChildrenInternal by HasChildrenInternalDelegate() {
@@ -41,7 +41,7 @@ public class K1AnnotationArgument<out PARENT : StatikKotlinElement>(
 
   override val type: LazyDeferred<ReferenceName?> = lazyDeferred {
     context
-    psi
+    node
     TODO()
   }
 }

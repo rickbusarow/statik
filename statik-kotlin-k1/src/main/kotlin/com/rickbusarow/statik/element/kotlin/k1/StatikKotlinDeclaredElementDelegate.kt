@@ -35,10 +35,10 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 @InternalStatikApi
 public class StatikKotlinDeclaredElementDelegate<T : KtModifierListOwner, PARENT>(
-  override val psi: T,
+  override val node: T,
   override val parent: PARENT
 ) : StatikKotlinDeclaredElement<PARENT>,
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
   HasChildrenInternal by HasChildrenInternalDelegate()
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
@@ -47,8 +47,8 @@ public class StatikKotlinDeclaredElementDelegate<T : KtModifierListOwner, PARENT
   override val packageName: PackageName by unsafeLazy { parent.packageName }
   override val simpleNames: List<SimpleName> by unsafeLazy {
     when (parent) {
-      is HasSimpleNames -> parent.simpleNames + psi.requireSimpleName()
-      else -> psi.requireSimpleName().singletonList()
+      is HasSimpleNames -> parent.simpleNames + node.requireSimpleName()
+      else -> node.requireSimpleName().singletonList()
     }
   }
   override val declaredName: DeclaredName by unsafeLazy {
