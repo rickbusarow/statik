@@ -55,7 +55,7 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal constructor(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
-  override val psi: KtClassOrObject
+  override val node: KtClassOrObject
 ) : StatikKotlinConcreteType<PARENT>,
   StatikKotlinTypeDeclaration<PARENT>,
   StatikKotlinHasTypeParameters<PARENT>,
@@ -65,7 +65,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
         PARENT : HasPackageName {
 
   override val simpleNames: List<SimpleName> by unsafeLazy {
-    psi.fqName.requireNotNull()
+    node.fqName.requireNotNull()
       .asString()
       .stripPackageNameFromFqName(containingFile.packageName)
   }
@@ -78,12 +78,12 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
   }
 
   final override val innerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
-    psi.body
+    node.body
       ?.StatikKotlinConcreteTypesDirect(context, containingFile, parent)
       .orEmpty()
   }
   override val annotations: LazySet<StatikKotlinAnnotation<*>> = lazySet {
-    psi.annotations(context, this)
+    node.annotations(context, this)
   }
   override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*>> = lazySet {
     innerTypes.fold(emptySet()) { acc, type ->
@@ -94,18 +94,18 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
 
     buildSet {
 
-      for (property in psi.body?.properties.orEmpty()) {
+      for (property in node.body?.properties.orEmpty()) {
 
         add(
           K1MemberProperty(
             context = context,
-            psi = property,
+            node = property,
             parent = this@AbstractStatikKotlinConcreteType
           )
         )
       }
 
-      val valueParams = psi.primaryConstructor?.valueParameters
+      val valueParams = node.primaryConstructor?.valueParameters
         ?.filter { it.hasValOrVar() }
         .orEmpty()
 
@@ -113,7 +113,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
         add(
           K1ConstructorProperty(
             context = context,
-            psi = property,
+            node = property,
             parent = this@AbstractStatikKotlinConcreteType
           )
         )
@@ -121,9 +121,9 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
     }
   }
   override val functions: LazySet<StatikKotlinDeclaredFunction<*>> = lazySet {
-    psi.body?.functions
+    node.body?.functions
       .orEmpty()
-      .mapToSet { K1DeclaredFunction(context = context, psi = it, parent = this) }
+      .mapToSet { K1DeclaredFunction(context = context, node = it, parent = this) }
   }
   override val superTypes: LazySet<StatikKotlinTypeReference<*>> =
     lazySet { TODO("Not yet implemented") }
@@ -138,7 +138,7 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
       append(this@AbstractStatikKotlinConcreteType::class.java.simpleName)
       append("(name = `${declaredName.asString}`, ")
       append("containingFile=${containingFile.file.path}, ")
-      append("psi=${psi::class.simpleName}")
+      append("psi=${node::class.simpleName}")
       append(")")
     }
   }
@@ -148,10 +148,10 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal cons
 public class K1Class<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
-  override val psi: KtClass,
+  override val node: KtClass,
   override val parent: PARENT
-) : AbstractStatikKotlinConcreteType<PARENT>(context, containingFile, psi),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+) : AbstractStatikKotlinConcreteType<PARENT>(context, containingFile, node),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
   StatikKotlinClass<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
@@ -165,14 +165,14 @@ public class K1Class<out PARENT>(
 public class K1Interface<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
-  override val psi: KtClass,
+  override val node: KtClass,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
   context = context,
   containingFile = containingFile,
-  psi = psi
+  node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
   StatikKotlinInterface<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -181,14 +181,14 @@ public class K1Interface<out PARENT>(
 public class K1CompanionObject<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
-  override val psi: KtObjectDeclaration,
+  override val node: KtObjectDeclaration,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
   context = context,
   containingFile = containingFile,
-  psi = psi
+  node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
   StatikKotlinCompanionObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -197,14 +197,14 @@ public class K1CompanionObject<out PARENT>(
 public class K1Object<out PARENT>(
   override val context: StatikKotlinElementContext,
   override val containingFile: StatikKotlinFile,
-  override val psi: KtObjectDeclaration,
+  override val node: KtObjectDeclaration,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
   context = context,
   containingFile = containingFile,
-  psi = psi
+  node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(psi),
+  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
   StatikKotlinObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName

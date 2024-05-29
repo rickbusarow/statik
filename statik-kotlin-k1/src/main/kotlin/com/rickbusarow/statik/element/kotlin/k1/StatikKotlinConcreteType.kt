@@ -42,14 +42,14 @@ public fun <PARENT> StatikKotlinConcreteType(
       K1Interface(
         context = context,
         containingFile = containingFile,
-        psi = clazz,
+        node = clazz,
         parent = parent
       )
     } else {
       K1Class(
         context = context,
         containingFile = containingFile,
-        psi = clazz,
+        node = clazz,
         parent = parent
       )
     }
@@ -59,7 +59,7 @@ public fun <PARENT> StatikKotlinConcreteType(
       K1CompanionObject(
         context = context,
         containingFile = containingFile,
-        psi = clazz,
+        node = clazz,
         parent = parent
       )
     } else {
@@ -67,7 +67,7 @@ public fun <PARENT> StatikKotlinConcreteType(
       K1Object(
         context = context,
         containingFile = containingFile,
-        psi = clazz,
+        node = clazz,
         parent = parent
       )
     }

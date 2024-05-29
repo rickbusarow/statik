@@ -113,7 +113,7 @@ class PsiTestEnvironment(
     return K1KotlinFile(
       context = context,
       file = javaFile,
-      psi = ktFile
+      node = ktFile
     )
   }
 

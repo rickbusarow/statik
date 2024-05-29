@@ -35,22 +35,22 @@ import org.jetbrains.kotlin.resolve.BindingContext
 @InternalStatikApi
 public class K1ConstructorProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
   override val context: StatikKotlinElementContext,
-  override val psi: KtParameter,
+  override val node: KtParameter,
   override val parent: PARENT
 ) : StatikKotlinConstructorProperty<PARENT>,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(psi, parent),
+  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(node, parent),
   HasStatikKotlinElementContext {
 
   override val typeReferenceName: LazyDeferred<ReferenceName> = lazyDeferred {
-    bindingContext(BindingContext.VALUE_PARAMETER, psi)
+    bindingContext(BindingContext.VALUE_PARAMETER, node)
       .requireNotNull()
       .type
       .requireReferenceName()
   }
 
   override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
-    psi.annotations(context, parent = this)
+    node.annotations(context, parent = this)
   }
   override val isMutable: Boolean
-    get() = psi.isMutable
+    get() = node.isMutable
 }

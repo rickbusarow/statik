@@ -16,7 +16,6 @@
 package com.rickbusarow.statik.element
 
 import kotlinx.coroutines.flow.Flow
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 
 /**
  * Base interface for all code elements parsed from source
@@ -24,11 +23,10 @@ import org.jetbrains.kotlin.com.intellij.psi.PsiElement
  */
 public interface StatikElement : HasChildren {
 
-  /** The PSI element representing the physical code element in the source code. */
-  public val psi: PsiElement
+  /** The underlying AST's node representing the physical code element in the source code. */
+  public val node: Any
 
   public val text: String
-    get() = psi.text
 
   /** The file that contains this element. */
   public val containingFile: StatikFile

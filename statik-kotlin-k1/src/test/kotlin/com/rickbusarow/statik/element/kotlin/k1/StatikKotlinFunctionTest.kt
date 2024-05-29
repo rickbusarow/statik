@@ -70,7 +70,7 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
       val subjectFunction = file.subjectClass().subjectFun()
 
-      subjectFunction.psi.printEverything()
+      subjectFunction.node.printEverything()
 
       println("==========================================")
 
