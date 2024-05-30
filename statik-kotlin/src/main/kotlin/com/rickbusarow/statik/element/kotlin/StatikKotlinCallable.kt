@@ -16,92 +16,40 @@
 package com.rickbusarow.statik.element.kotlin
 
 import com.rickbusarow.statik.element.StatikCallable
-import com.rickbusarow.statik.element.StatikFunction
 import com.rickbusarow.statik.element.StatikProperty
 import com.rickbusarow.statik.element.StatikType
-import com.rickbusarow.statik.name.HasPackageName
-import com.rickbusarow.statik.name.ReferenceName
-import com.rickbusarow.statik.utils.lazy.LazyDeferred
-import com.rickbusarow.statik.utils.lazy.LazySet
-import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtParameter
-import org.jetbrains.kotlin.psi.KtProperty
 
 /** A Kotlin callable element. */
-public interface StatikKotlinCallable<out PARENT : StatikKotlinElement> :
+public interface StatikKotlinCallable<out PARENT : StatikKotlinElement<*>, NODE : Any> :
   StatikCallable<PARENT>,
-  StatikKotlinElementWithParent<PARENT> {
-  override val node: KtCallableDeclaration
-}
+  StatikKotlinElementWithParent<PARENT, NODE>
 
 /** A Kotlin property element. */
-public sealed interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName> :
+public interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
   StatikProperty<PARENT>,
-  StatikKotlinCallable<PARENT>
+  StatikKotlinCallable<PARENT, NODE>
 
 /** A Kotlin member property element. */
-public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinProperty<PARENT> {
-  override val node: KtProperty
-}
+public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikKotlinProperty<PARENT, NODE>
 
 /** A Kotlin extension property element. */
-public interface StatikKotlinMemberExtensionProperty<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinMemberProperty<PARENT>,
-  StatikKotlinHasTypeParameters<PARENT> {
-  override val node: KtProperty
-}
+public interface StatikKotlinMemberExtensionProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikKotlinMemberProperty<PARENT, NODE>,
+  StatikKotlinHasTypeParameters<PARENT, NODE>
 
 /** A Kotlin constructor property element. */
-public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinProperty<PARENT> {
-  override val node: KtParameter
-}
-
-/** Represents a Kotlin function element. */
-public interface StatikKotlinFunction<out PARENT> :
-  StatikFunction<PARENT>,
-  StatikKotlinCallable<PARENT>,
-  StatikKotlinHasValueParameters<PARENT>,
-  StatikKotlinHasTypeParameters<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName {
-
-  override val node: KtFunction
-  override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
-  override val properties: LazySet<StatikKotlinProperty<*>>
-  override val returnType: LazyDeferred<ReferenceName>
-}
-
-/** Represents a Kotlin function element. */
-public interface StatikKotlinDeclaredFunction<out PARENT> :
-  StatikKotlinFunction<PARENT>,
-  StatikKotlinDeclaredElement<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName
+public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikKotlinProperty<PARENT, NODE>
 
 /** An extension element. */
-public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinCallable<PARENT>,
-  StatikKotlinElement {
+public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikKotlinCallable<PARENT, NODE> {
   /** The receiver type. */
   public val receiver: StatikType<*>
 }
 
 /** A Kotlin extension property. */
-public interface StatikKotlinExtensionProperty<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinExtensionElement<PARENT>,
-  StatikKotlinProperty<PARENT>
-
-/** A Kotlin extension function. */
-public interface StatikKotlinExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinExtensionElement<PARENT>,
-  StatikKotlinFunction<PARENT>
-
-/** A Kotlin extension function. */
-public interface StatikKotlinDeclaredExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
-  StatikKotlinExtensionElement<PARENT>,
-  StatikKotlinDeclaredFunction<PARENT>
+public interface StatikKotlinExtensionProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikKotlinExtensionElement<PARENT, NODE>,
+  StatikKotlinProperty<PARENT, NODE>

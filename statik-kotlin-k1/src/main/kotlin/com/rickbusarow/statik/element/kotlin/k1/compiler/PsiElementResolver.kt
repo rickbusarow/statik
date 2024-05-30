@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.rickbusarow.statik.compiler.inerceptor.impl
+package com.rickbusarow.statik.element.kotlin.k1.compiler
 
 import com.rickbusarow.statik.compiler.inerceptor.SymbolResolver
 import com.rickbusarow.statik.name.QualifiedDeclaredName

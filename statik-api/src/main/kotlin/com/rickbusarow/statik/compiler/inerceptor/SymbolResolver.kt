@@ -22,12 +22,12 @@ import com.rickbusarow.statik.name.QualifiedDeclaredName
  * `T` represents the type of the symbols that this resolver can handle.
  */
 @Deprecated("Probably not used?")
-internal fun interface SymbolResolver<T> {
+public fun interface SymbolResolver<T> {
   /**
    * Resolves the declared name of a symbol in the system.
    *
    * @param symbol The symbol whose declared name is to be resolved.
    * @return The declared name of the symbol, or null if the symbol does not have a declared name.
    */
-  suspend fun declaredNameOrNull(symbol: T): QualifiedDeclaredName?
+  public suspend fun declaredNameOrNull(symbol: T): QualifiedDeclaredName?
 }

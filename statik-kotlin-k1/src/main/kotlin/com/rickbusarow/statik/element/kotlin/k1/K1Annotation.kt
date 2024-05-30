@@ -21,7 +21,6 @@ import com.rickbusarow.statik.compiler.inerceptor.NameParser.NameParserPacket
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotation
-import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.kotlinStdLibNameOrNull
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.name.ReferenceName.Companion.asReferenceName
@@ -37,7 +36,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
 internal fun KtAnnotated.annotations(
   context: StatikElementContext<PsiElement>,
-  parent: StatikKotlinElement
+  parent: K1Element<*>
 ): Set<K1Annotation<*>> = annotationEntries
   .mapToSet {
     K1Annotation(
@@ -49,12 +48,12 @@ internal fun KtAnnotated.annotations(
 
 @Poko
 @InternalStatikApi
-public class K1Annotation<out PARENT : StatikKotlinElement>(
+public class K1Annotation<out PARENT : K1Element<*>>(
   private val context: StatikElementContext<PsiElement>,
   override val node: KtAnnotationEntry,
   override val parent: PARENT
-) : StatikKotlinAnnotation<PARENT>,
-  K1StatikKotlinElement,
+) : StatikKotlinAnnotation<PARENT, KtAnnotationEntry>,
+  K1Element<KtAnnotationEntry>,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val referenceName: LazyDeferred<ReferenceName> = lazyDeferred {

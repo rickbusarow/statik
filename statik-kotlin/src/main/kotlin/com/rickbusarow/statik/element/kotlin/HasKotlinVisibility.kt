@@ -16,11 +16,14 @@
 package com.rickbusarow.statik.element.kotlin
 
 import com.rickbusarow.statik.element.HasVisibility
+import com.rickbusarow.statik.element.StatikModifier
 import com.rickbusarow.statik.element.StatikVisibility
 
 public interface HasKotlinVisibility : HasVisibility {
   override val visibility: StatikKotlinVisibility
 }
+
+public sealed interface StatikKotlinModifier : StatikModifier
 
 public sealed interface StatikKotlinVisibility : StatikVisibility {
 

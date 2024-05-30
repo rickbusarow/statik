@@ -24,29 +24,30 @@ import com.rickbusarow.statik.element.StatikValueParameter
 import com.rickbusarow.statik.name.HasPackageName
 
 /** A Java callable element. */
-public interface StatikJavaCallable<out PARENT : StatikJavaElement> :
-  StatikCallable<PARENT>,
+public interface StatikJavaCallable<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikCallable<PARENT, NODE>,
   HasJavaVisibility,
-  StatikJavaElement {
+  StatikJavaElement<NODE> {
 
   override val visibility: StatikJavaVisibility
 }
 
 /** A Java property element. */
-public sealed interface StatikJavaProperty<out PARENT : StatikJavaElement> :
-  StatikProperty<PARENT>,
-  StatikJavaCallable<PARENT>
+public sealed interface StatikJavaProperty<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikProperty<PARENT, NODE>,
+  StatikJavaCallable<PARENT, NODE>
 
 /** A Java member property. */
-public interface JavaMemberProperty<out PARENT : StatikJavaElement> : StatikJavaProperty<PARENT>
+public interface JavaMemberProperty<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikJavaProperty<PARENT, NODE>
 
-public interface StatikJavaValueParameter<out PARENT : StatikJavaElement> :
-  StatikValueParameter<PARENT>,
-  StatikJavaCallable<PARENT>
+public interface StatikJavaValueParameter<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikValueParameter<PARENT, NODE>,
+  StatikJavaCallable<PARENT, NODE>
 
 /** A Java function element. */
-public interface StatikJavaFunction<out PARENT> :
-  StatikFunction<PARENT>,
-  StatikJavaCallable<PARENT>
-  where PARENT : StatikJavaElement,
+public interface StatikJavaFunction<out PARENT, NODE : Any> :
+  StatikFunction<PARENT, NODE>,
+  StatikJavaCallable<PARENT, NODE>
+  where PARENT : StatikJavaElement<NODE>,
         PARENT : HasPackageName

@@ -20,15 +20,15 @@ import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** A callable element. */
-public interface StatikCallable<out PARENT : StatikElement> :
-  StatikElement,
-  StatikElementWithParent<PARENT>,
+public interface StatikCallable<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikElement<NODE>,
+  StatikElementWithParent<PARENT, NODE>,
   StatikAnnotated
 
 /** A property element. */
-public interface StatikProperty<out PARENT : StatikElement> :
-  StatikCallable<PARENT>,
-  StatikDeclaredElement<PARENT> {
+public interface StatikProperty<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikCallable<PARENT, NODE>,
+  StatikDeclaredElement<PARENT, NODE> {
 
   /** The type name of the property. */
   public val typeReferenceName: LazyDeferred<ReferenceName>
@@ -38,13 +38,13 @@ public interface StatikProperty<out PARENT : StatikElement> :
 }
 
 /** A function element. */
-public interface StatikFunction<out PARENT : StatikElement> :
-  StatikCallable<PARENT>,
-  StatikHasValueParameters<PARENT>,
-  StatikHasTypeParameters<PARENT> {
+public interface StatikFunction<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikCallable<PARENT, NODE>,
+  StatikHasValueParameters<PARENT, NODE>,
+  StatikHasTypeParameters<PARENT, NODE> {
 
   /** Local variables declared in the function body. */
-  public val properties: LazySet<StatikProperty<*>>
+  public val properties: LazySet<StatikProperty<*, *>>
 
   /** The return type of the function. */
   public val returnType: LazyDeferred<ReferenceName>

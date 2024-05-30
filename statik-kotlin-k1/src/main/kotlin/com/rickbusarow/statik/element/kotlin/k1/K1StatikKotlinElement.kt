@@ -15,15 +15,36 @@
 
 package com.rickbusarow.statik.element.kotlin.k1
 
+import com.rickbusarow.statik.element.StatikElementWithParent
 import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
+import com.rickbusarow.statik.element.kotlin.StatikKotlinElementWithPackageName
 import org.jetbrains.kotlin.psi.KtElement
 
-public interface K1StatikKotlinElement : StatikKotlinElement {
-  override val node: KtElement
+public interface K1Element<NODE : KtElement> : StatikKotlinElement<NODE> {
+
+  override val node: NODE
 
   /** An alias for [node]. */
-  public val psi: KtElement
-    get() = node
+  public val psi: NODE get() = node
+
   override val text: String
     get() = node.text
+
+  override val containingFile: K1KotlinFile
+    get() = when (this) {
+      is K1ExtensionElement<*, *> -> parent.containingFile
+      is K1ElementWithParent<*, *> -> parent.containingFile
+      is K1KotlinFile -> this
+      else -> error("Unknown Kotlin element type: $this")
+    }
 }
+
+/** */
+public interface K1ElementWithPackageName<NODE : KtElement> :
+  K1Element<NODE>,
+  StatikKotlinElementWithPackageName<NODE>
+
+/** Represents an element with a parent element. */
+public interface K1ElementWithParent<out PARENT : K1Element<*>, NODE : KtElement> :
+  StatikElementWithParent<PARENT, NODE>,
+  K1Element<NODE>

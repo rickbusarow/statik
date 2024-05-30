@@ -24,14 +24,14 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 public interface StatikJavaAnnotated : StatikAnnotated {
 
   /** The annotations of this element. */
-  override val annotations: LazySet<StatikJavaAnnotation<*>>
+  override val annotations: LazySet<StatikJavaAnnotation<*, *>>
 }
 
-public interface StatikJavaAnnotation<out PARENT : StatikJavaElement> :
-  StatikJavaElementWithParent<PARENT>,
-  StatikAnnotation<PARENT>
+public interface StatikJavaAnnotation<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikJavaElementWithParent<PARENT, NODE>,
+  StatikAnnotation<PARENT, NODE>
 
 /** Represents an argument of an annotation. */
-public interface StatikJavaAnnotationArgument<out PARENT : StatikJavaElement> :
-  StatikJavaElementWithParent<PARENT>,
-  StatikAnnotationArgument<PARENT>
+public interface StatikJavaAnnotationArgument<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikJavaElementWithParent<PARENT, NODE>,
+  StatikAnnotationArgument<PARENT, NODE>

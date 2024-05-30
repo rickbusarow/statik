@@ -17,33 +17,33 @@ package com.rickbusarow.statik.element
 
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public sealed interface StatikType<out PARENT : StatikElement> :
-  StatikElementWithParent<PARENT>,
-  StatikHasTypeParameters<PARENT>,
+public sealed interface StatikType<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikElementWithParent<PARENT, NODE>,
+  StatikHasTypeParameters<PARENT, NODE>,
   StatikAnnotated
 
-public interface StatikTypeDeclaration<out PARENT : StatikElement> :
-  StatikType<PARENT> {
+public interface StatikTypeDeclaration<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikType<PARENT, NODE> {
 
   /**
    * In a concrete type, this represents super-classes and interfaces.
    *
    * In a generic type, supers are the upper bound(s).
    */
-  public val superTypes: LazySet<StatikTypeReference<*>>
+  public val superTypes: LazySet<StatikTypeReference<*, *>>
 }
 
 /** Represents a class, interface, object, or companion object */
-public interface StatikConcreteType<out PARENT : StatikElement> :
-  StatikTypeDeclaration<PARENT> {
+public interface StatikConcreteType<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikTypeDeclaration<PARENT, NODE> {
 
-  override val containingFile: StatikFile
+  override val containingFile: StatikFile<*>
 
-  public val innerTypes: LazySet<StatikConcreteType<*>>
-  public val innerTypesRecursive: LazySet<StatikType<*>>
-  public val properties: LazySet<StatikProperty<*>>
-  public val functions: LazySet<StatikFunction<*>>
+  public val innerTypes: LazySet<StatikConcreteType<*, *>>
+  public val innerTypesRecursive: LazySet<StatikType<*, *>>
+  public val properties: LazySet<StatikProperty<*, *>>
+  public val functions: LazySet<StatikFunction<*, *>>
 }
 
-public interface StatikTypeReference<out PARENT : StatikElement> :
-  StatikType<PARENT>
+public interface StatikTypeReference<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikType<PARENT, NODE>

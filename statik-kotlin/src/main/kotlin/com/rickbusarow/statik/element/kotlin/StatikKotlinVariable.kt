@@ -21,47 +21,34 @@ import com.rickbusarow.statik.element.StatikTypeArgument
 import com.rickbusarow.statik.element.StatikTypeParameter
 import com.rickbusarow.statik.element.StatikValueArgument
 import com.rickbusarow.statik.element.StatikValueParameter
-import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public interface StatikKotlinValueParameter<out PARENT> :
-  StatikValueParameter<PARENT>,
-  StatikKotlinDeclaredElement<PARENT>,
-  StatikKotlinCallable<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName
+public interface StatikKotlinValueParameter<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikValueParameter<PARENT, NODE>,
+  StatikKotlinDeclaredElement<PARENT, NODE>,
+  StatikKotlinCallable<PARENT, NODE>
 
-public interface StatikKotlinValueArgument<out PARENT> :
-  StatikValueArgument<PARENT>,
-  StatikKotlinDeclaredElement<PARENT>,
-  StatikKotlinCallable<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName
+public interface StatikKotlinValueArgument<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikValueArgument<PARENT, NODE>,
+  StatikKotlinDeclaredElement<PARENT, NODE>,
+  StatikKotlinCallable<PARENT, NODE>
 
-public interface StatikKotlinHasValueParameters<out PARENT : StatikKotlinElement> :
-  StatikHasValueParameters<PARENT>,
-  StatikKotlinElementWithParent<PARENT> {
-  override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
+public interface StatikKotlinHasValueParameters<out PARENT : StatikKotlinElement<*>, NODE : Any> :
+  StatikHasValueParameters<PARENT, NODE>,
+  StatikKotlinElementWithParent<PARENT, NODE> {
+  override val valueParameters: LazySet<StatikKotlinValueParameter<*, *>>
 }
 
-public interface StatikKotlinTypeParameter<out PARENT> :
-  StatikTypeParameter<PARENT>,
-  StatikKotlinTypeDeclaration<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName
+public interface StatikKotlinTypeParameter<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikTypeParameter<PARENT, NODE>,
+  StatikKotlinTypeDeclaration<PARENT, NODE>
 
-public interface StatikKotlinTypeArgument<out PARENT> :
-  StatikTypeArgument<PARENT>,
-  StatikKotlinTypeDeclaration<PARENT>
-  where PARENT : StatikKotlinElementWithPackageName,
-        PARENT : StatikKotlinElement,
-        PARENT : HasPackageName
+public interface StatikKotlinTypeArgument<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
+  StatikTypeArgument<PARENT, NODE>,
+  StatikKotlinTypeDeclaration<PARENT, NODE>
 
-public interface StatikKotlinHasTypeParameters<out PARENT : StatikKotlinElement> :
-  StatikHasTypeParameters<PARENT>,
-  StatikKotlinElementWithParent<PARENT> {
-  override val typeParameters: LazySet<StatikKotlinTypeParameter<*>>
+public interface StatikKotlinHasTypeParameters<out PARENT : StatikKotlinElement<*>, NODE : Any> :
+  StatikHasTypeParameters<PARENT, NODE>,
+  StatikKotlinElementWithParent<PARENT, NODE> {
+  override val typeParameters: LazySet<StatikKotlinTypeParameter<*, *>>
 }

@@ -23,7 +23,8 @@ public interface HasJavaVisibility : HasVisibility {
   override val visibility: StatikJavaVisibility
 }
 
-public interface StatikVisibility
+public interface StatikModifier
+public interface StatikVisibility : StatikModifier
 
 public sealed interface StatikJavaVisibility : StatikVisibility {
   public object Public : StatikJavaVisibility
