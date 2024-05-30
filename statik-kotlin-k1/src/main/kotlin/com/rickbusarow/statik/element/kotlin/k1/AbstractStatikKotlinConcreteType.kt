@@ -151,7 +151,7 @@ public class K1Class<out PARENT>(
   override val node: KtClass,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(context, containingFile, node),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
+  HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinClass<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
@@ -172,7 +172,7 @@ public class K1Interface<out PARENT>(
   containingFile = containingFile,
   node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
+  HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinInterface<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -188,7 +188,7 @@ public class K1CompanionObject<out PARENT>(
   containingFile = containingFile,
   node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
+  HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinCompanionObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
@@ -204,7 +204,7 @@ public class K1Object<out PARENT>(
   containingFile = containingFile,
   node = node
 ),
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
+  HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinObject<PARENT>
   where PARENT : StatikKotlinElement,
         PARENT : HasPackageName

@@ -20,20 +20,16 @@ import com.rickbusarow.statik.element.StatikElementWithParent
 import com.rickbusarow.statik.name.HasPackageName
 
 /** Represents a Kotlin element in the source code. */
-public interface StatikKotlinElement : StatikElement {
+public interface StatikKotlinElement<NODE : Any> : StatikElement<NODE> {
 
-  override val containingFile: StatikKotlinFile
-    get() = when (this) {
-      is StatikKotlinExtensionElement<*> -> parent.containingFile
-      is StatikKotlinElementWithParent<*> -> parent.containingFile
-      is StatikKotlinFile -> this
-      else -> error("Unknown Kotlin element type: $this")
-    }
+  override val containingFile: StatikKotlinFile<*>
 }
 
 /** */
-public interface StatikKotlinElementWithPackageName : StatikKotlinElement, HasPackageName
+public interface StatikKotlinElementWithPackageName<NODE : Any> :
+  StatikKotlinElement<NODE>,
+  HasPackageName
 
 /** Represents an element with a parent element. */
-public interface StatikKotlinElementWithParent<out PARENT : StatikKotlinElement> :
-  StatikElementWithParent<PARENT>, StatikKotlinElement
+public interface StatikKotlinElementWithParent<out PARENT : StatikKotlinElement<*>, NODE : Any> :
+  StatikElementWithParent<PARENT, NODE>

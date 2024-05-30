@@ -17,7 +17,7 @@ package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
-import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
+import com.rickbusarow.statik.element.kotlin.StatikKotlinHasTypeParameters
 import com.rickbusarow.statik.element.kotlin.StatikKotlinMemberProperty
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
@@ -33,12 +33,13 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class K1MemberProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
+public open class K1MemberProperty<out PARENT : K1DeclaredElement<*>>(
   override val context: StatikKotlinElementContext,
   override val node: KtProperty,
   override val parent: PARENT
 ) : StatikKotlinMemberProperty<PARENT>,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(node, parent),
+  K1ElementWithParent<PARENT>,
+  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent),
   HasStatikKotlinElementContext {
 
   override val typeReferenceName: LazyDeferred<ReferenceName> = lazyDeferred {
@@ -53,4 +54,21 @@ public class K1MemberProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
   }
   override val isMutable: Boolean
     get() = node.isVar
+}
+
+@Poko
+@InternalStatikApi
+public class K1MemberExtensionProperty<out PARENT : K1DeclaredElement<*>>(
+  context: StatikKotlinElementContext,
+  node: KtProperty,
+  parent: PARENT
+) : K1MemberProperty<PARENT>(context, node, parent),
+  K1HasTypeParameters<PARENT> {
+  override val typeParameters: LazySet<K1TypeParameter<*>> = lazySet { TODO() }
+}
+
+public interface K1HasTypeParameters<out PARENT : K1Element> :
+  StatikKotlinHasTypeParameters<PARENT>,
+  K1ElementWithParent<PARENT> {
+  override val typeParameters: LazySet<K1TypeParameter<*>>
 }

@@ -20,14 +20,13 @@ import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.name.HasPackageName
 
 /** Represents a declared Kotlin element in the source code. */
-public interface StatikKotlinDeclaredElement<out PARENT> :
-  StatikKotlinElementWithParent<PARENT>,
-  StatikDeclaredElement<PARENT>,
-  StatikKotlinElementWithPackageName,
+public interface StatikKotlinDeclaredElement<out PARENT, NODE : Any> :
+  StatikKotlinElementWithParent<PARENT, NODE>,
+  StatikDeclaredElement<PARENT, NODE>,
+  StatikKotlinElementWithPackageName<NODE>,
   HasChildrenInternal
-  where PARENT : StatikKotlinElement,
+  where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName {
 
-  override val containingFile: StatikKotlinFile
   override val visibility: StatikKotlinVisibility
 }

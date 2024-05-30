@@ -19,9 +19,6 @@ import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.HasKotlinVisibility
-import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireSimpleName
 import com.rickbusarow.statik.name.DeclaredName
 import com.rickbusarow.statik.name.HasPackageName
@@ -31,19 +28,19 @@ import com.rickbusarow.statik.name.SimpleName
 import com.rickbusarow.statik.name.asDeclaredName
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import com.rickbusarow.statik.utils.stdlib.singletonList
-import org.jetbrains.kotlin.psi.KtModifierListOwner
+import org.jetbrains.kotlin.psi.KtDeclaration
 
 @InternalStatikApi
-public class StatikKotlinDeclaredElementDelegate<T : KtModifierListOwner, PARENT>(
-  override val node: T,
+public class K1DeclaredElementDelegate<PARENT, NODE : KtDeclaration>(
+  override val node: NODE,
   override val parent: PARENT
-) : StatikKotlinDeclaredElement<PARENT>,
-  HasKotlinVisibility by StatikKotlinVisibilityDelegate(node),
+) : K1DeclaredElement<PARENT, NODE>,
+  HasKotlinVisibility by K1VisibilityDelegate(node),
   HasChildrenInternal by HasChildrenInternalDelegate()
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element<*>,
         PARENT : HasPackageName {
 
-  override val containingFile: StatikKotlinFile by unsafeLazy { parent.containingFile }
+  override val containingFile: K1KotlinFile by unsafeLazy { parent.containingFile }
   override val packageName: PackageName by unsafeLazy { parent.packageName }
   override val simpleNames: List<SimpleName> by unsafeLazy {
     when (parent) {

@@ -23,18 +23,20 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 public interface StatikAnnotated {
 
   /** The annotations of this element. */
-  public val annotations: LazySet<StatikAnnotation<*>>
+  public val annotations: LazySet<StatikAnnotation<*, *>>
 }
 
 /** Represents an annotation. */
-public interface StatikAnnotation<out PARENT : StatikElement> : StatikElementWithParent<PARENT> {
+public interface StatikAnnotation<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikElementWithParent<PARENT, NODE> {
 
   /** The reference name of this annotation. */
   public val referenceName: LazyDeferred<ReferenceName?>
 }
 
 /** Represents an argument of an annotation. */
-public interface StatikAnnotationArgument<out PARENT : StatikElement> : StatikElementWithParent<PARENT> {
+public interface StatikAnnotationArgument<out PARENT : StatikElement<*>, NODE : Any> :
+  StatikElementWithParent<PARENT, NODE> {
 
   /** The type of this argument. */
   public val type: LazyDeferred<ReferenceName?>

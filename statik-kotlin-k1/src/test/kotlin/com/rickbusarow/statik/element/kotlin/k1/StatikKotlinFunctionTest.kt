@@ -18,7 +18,6 @@ package com.rickbusarow.statik.element.kotlin.k1
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import com.rickbusarow.statik.element.kotlin.k1.psi.traversal.PsiTreePrinter.Companion.printEverything
 import com.rickbusarow.statik.element.kotlin.k1.testing.ProjectTest
 import com.rickbusarow.statik.element.kotlin.k1.testing.Properties
 import com.rickbusarow.statik.element.kotlin.k1.testing.PsiTestEnvironment
@@ -34,16 +33,16 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
   override val defaultLanguage = StatikLanguage.KOTLIN
 
-  suspend fun StatikKotlinFile.subjectClass(): StatikKotlinConcreteType<*> {
+  suspend fun StatikKotlinFile<*>.subjectClass(): StatikKotlinConcreteType<*, *> {
     return declaredTypesAndInnerTypes.toList()
       .single { it.simpleNames.last().asString == "SubjectClass" }
   }
 
-  suspend fun StatikKotlinConcreteType<*>.function(name: String): StatikKotlinDeclaredFunction<*> {
-    return functions.first { it.simplestName.asString == name }
-  }
+  suspend fun StatikKotlinConcreteType<*, *>.function(
+    name: String
+  ): StatikKotlinDeclaredFunction<*, *> = functions.first { it.simplestName.asString == name }
 
-  suspend fun StatikKotlinConcreteType<*>.subjectFun() = function("subjectFunction")
+  suspend fun StatikKotlinConcreteType<*, *>.subjectFun() = function("subjectFunction")
 
   @TestFactory
   fun `caaaaaanary thing`() = Properties.explicitTypes
@@ -68,28 +67,28 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
         """
       )
 
-      val subjectFunction = file.subjectClass().subjectFun()
-
-      subjectFunction.node.printEverything()
-
-      println("==========================================")
-
-      println(" -- children")
-      subjectFunction.children.collect {
-        println(it.text)
-      }
-
-      println(" -- type parameters")
-      subjectFunction.typeParameters.collect { tp ->
-        println("${tp.text}  --  ${tp.superTypes.toList().joinToString { it.text }}")
-      }
-
-      println(" -- value parameters")
-      subjectFunction.valueParameters.collect { vp ->
-        println("${vp.text}  --  ${vp.name.asString}  --  ${vp.type().asString}")
-      }
-
-      println("==========================================")
+      // val subjectFunction = file.subjectClass().subjectFun()
+      //
+      // subjectFunction.node.printEverything()
+      //
+      // println("==========================================")
+      //
+      // println(" -- children")
+      // subjectFunction.children.collect {
+      //   println(it.text)
+      // }
+      //
+      // println(" -- type parameters")
+      // subjectFunction.typeParameters.collect { tp ->
+      //   println("${tp.text}  --  ${tp.superTypes.toList().joinToString { it.text }}")
+      // }
+      //
+      // println(" -- value parameters")
+      // subjectFunction.valueParameters.collect { vp ->
+      //   println("${vp.text}  --  ${vp.name.asString}  --  ${vp.type().asString}")
+      // }
+      //
+      // println("==========================================")
 
       // subjectFunction.childrenOfTypeRecursive<StatikKotlinMemberProperty<*>>()
       //   .single()

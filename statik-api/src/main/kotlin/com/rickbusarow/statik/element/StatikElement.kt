@@ -21,28 +21,32 @@ import kotlinx.coroutines.flow.Flow
  * Base interface for all code elements parsed from source
  * files. This includes classes, functions, variables, etc.
  */
-public interface StatikElement : HasChildren {
+public interface StatikElement<NODE : Any> : HasChildren {
 
   /** The underlying AST's node representing the physical code element in the source code. */
-  public val node: Any
+  public val node: NODE
 
   public val text: String
 
   /** The file that contains this element. */
-  public val containingFile: StatikFile
+  public val containingFile: StatikFile<*>
 }
+
 public interface HasChildren {
 
   /** The direct children elements of this element. */
-  public val children: Flow<StatikElement>
+  public val children: Flow<StatikElement<*>>
   // get() = flowOf()
 }
 
 /** Represents an element with a parent element. */
-public interface StatikElementWithParent<out PARENT : StatikElement> : StatikElement {
+public interface StatikElementWithParent<out PARENT : StatikElement<*>, NODE : Any> : StatikElement<NODE> {
   /** The parent element */
   public val parent: PARENT
 }
+
+// MyStatikElement
+// StatikElement<Foo>
 
 /**
  * Generates a sequence of parent elements.
@@ -50,10 +54,10 @@ public interface StatikElementWithParent<out PARENT : StatikElement> : StatikEle
  * @receiver An element with a parent.
  * @return A sequence of parent elements.
  */
-public fun StatikElementWithParent<*>.parents(): Sequence<StatikElement> {
+public fun StatikElementWithParent<*, *>.parents(): Sequence<StatikElement<*>> {
 
-  return generateSequence<StatikElement>(this) { element ->
+  return generateSequence<StatikElement<*>>(this) { element ->
 
-    (element as? StatikElementWithParent<*>)?.parent
+    (element as? StatikElementWithParent<*, *>)?.parent
   }
 }

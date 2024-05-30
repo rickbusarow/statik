@@ -17,13 +17,11 @@ package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
 import com.rickbusarow.statik.name.ReferenceName.Companion.asReferenceName
-import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
 import com.rickbusarow.statik.name.StatikLanguage.JAVA
 import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
 import com.rickbusarow.statik.name.StatikLanguage.XML
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import com.rickbusarow.statik.utils.stdlib.singletonList
-import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
 public sealed interface DeclaredName : StatikName, HasSimpleNames {
@@ -147,17 +145,6 @@ internal class QualifiedDeclaredNameImpl(
   init {
     checkSimpleNames()
   }
-}
-
-/**
- * @return a [QualifiedDeclaredName], where the String after [packageName]
- *   is split and treated as the collection of [SimpleNames][SimpleName].
- */
-public fun FqName.asDeclaredName(
-  packageName: PackageName,
-  vararg languages: StatikLanguage
-): QualifiedDeclaredName {
-  return asString().stripPackageNameFromFqName(packageName).asDeclaredName(packageName, *languages)
 }
 
 /**

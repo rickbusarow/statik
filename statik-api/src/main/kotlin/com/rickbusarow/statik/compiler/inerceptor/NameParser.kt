@@ -44,14 +44,14 @@ public fun interface NameParser {
    */
   @Poko
   public class NameParserPacket(
-    public val file: StatikFile,
+    public val file: StatikFile<*>,
     public val toResolve: ReferenceName,
     public val referenceLanguage: StatikLanguage,
     public val stdLibNameOrNull: ReferenceName.() -> QualifiedDeclaredName?
   ) {
 
     public fun copy(
-      file: StatikFile = this.file,
+      file: StatikFile<*> = this.file,
       toResolve: ReferenceName = this.toResolve,
       referenceLanguage: StatikLanguage = this.referenceLanguage,
       stdLibNameOrNull: ReferenceName.() -> QualifiedDeclaredName? = this.stdLibNameOrNull

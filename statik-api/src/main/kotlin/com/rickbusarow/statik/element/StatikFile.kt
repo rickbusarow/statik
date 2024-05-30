@@ -22,7 +22,7 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 import java.io.File
 
 /** Represents a file. */
-public interface StatikFile : StatikElement, HasPackageName {
+public interface StatikFile<NODE : Any> : StatikElement<NODE>, HasPackageName {
   /** The actual file. */
   public val file: File
 
@@ -39,10 +39,10 @@ public interface StatikFile : StatikElement, HasPackageName {
   public val declarations: List<LazySet.DataSource<DeclaredName>>
 
   /** The declared types in this file. */
-  public val declaredTypes: LazySet<StatikConcreteType<*>>
+  public val declaredTypes: LazySet<StatikConcreteType<*, *>>
 
   /** The declared types and inner types in this file. */
-  public val declaredTypesAndInnerTypes: LazySet<StatikConcreteType<*>>
+  public val declaredTypesAndInnerTypes: LazySet<StatikConcreteType<*, *>>
 
   /** The wildcard imports in this file. */
   public val wildcardImports: LazySet.DataSource<String>

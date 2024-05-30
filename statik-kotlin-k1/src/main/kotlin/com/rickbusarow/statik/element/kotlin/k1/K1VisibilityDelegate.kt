@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 @InternalStatikApi
-public class StatikKotlinVisibilityDelegate(psi: KtModifierListOwner) : HasKotlinVisibility {
+public class K1VisibilityDelegate(psi: KtModifierListOwner) : HasKotlinVisibility {
   override val visibility: StatikKotlinVisibility by lazy {
     when {
       psi.hasModifier(KtTokens.PRIVATE_KEYWORD) -> StatikKotlinVisibility.Private

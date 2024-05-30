@@ -19,26 +19,23 @@ import com.rickbusarow.statik.element.StatikAnnotated
 import com.rickbusarow.statik.element.StatikFile
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazySet
-import org.jetbrains.kotlin.psi.KtFile
 
 /** Represents a single Kotlin file. */
-public interface StatikKotlinFile :
+public interface StatikKotlinFile<NODE : Any> :
   StatikFile,
-  StatikKotlinElement,
+  StatikKotlinElement<NODE>,
   StatikAnnotated,
-  StatikKotlinElementWithPackageName {
+  StatikKotlinElementWithPackageName<NODE> {
 
-  override val node: KtFile
+  override val declaredTypes: LazySet<StatikKotlinConcreteType<*, *>>
 
-  override val declaredTypes: LazySet<StatikKotlinConcreteType<*>>
-
-  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*>>
+  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*, *>>
 
   /** The top level functions in this file. */
-  public val topLevelFunctions: LazySet<StatikKotlinFunction<*>>
+  public val topLevelFunctions: LazySet<StatikKotlinFunction<*, *>>
 
   /** The top level properties in this file. */
-  public val topLevelProperties: LazySet<StatikKotlinProperty<*>>
+  public val topLevelProperties: LazySet<StatikKotlinProperty<*, *>>
 
   /** The import aliases in this file. */
   public val importAliases: Map<String, ReferenceName>

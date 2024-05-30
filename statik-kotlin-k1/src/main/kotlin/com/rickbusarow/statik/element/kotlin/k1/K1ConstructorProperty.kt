@@ -17,28 +17,47 @@ package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
+import com.rickbusarow.statik.element.StatikType
+import com.rickbusarow.statik.element.kotlin.StatikKotlinCallable
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConstructorProperty
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredElement
+import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
+import com.rickbusarow.statik.element.kotlin.StatikKotlinVisibility
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.requireReferenceName
+import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
 import com.rickbusarow.statik.utils.stdlib.requireNotNull
 import dev.drewhamilton.poko.Poko
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.resolve.BindingContext
+
+/** Represents a declared Kotlin element in the source code. */
+public interface K1DeclaredElement<out PARENT, NODE : KtDeclaration> :
+  K1ElementWithParent<PARENT, NODE>,
+  K1ElementWithPackageName<NODE>,
+  StatikKotlinDeclaredElement<PARENT, NODE>
+  where PARENT : K1Element<*>,
+        PARENT : HasPackageName {
+
+  override val visibility: StatikKotlinVisibility
+}
 
 @Poko
 @InternalStatikApi
-public class K1ConstructorProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
+public class K1ConstructorProperty<out PARENT : K1DeclaredElement<*, *>>(
   override val context: StatikKotlinElementContext,
   override val node: KtParameter,
   override val parent: PARENT
-) : StatikKotlinConstructorProperty<PARENT>,
-  StatikKotlinDeclaredElement<PARENT> by StatikKotlinDeclaredElementDelegate(node, parent),
+) : StatikKotlinConstructorProperty<PARENT, KtParameter>,
+  K1DeclaredElement<PARENT, KtParameter> by K1DeclaredElementDelegate(node, parent),
   HasStatikKotlinElementContext {
 
   override val typeReferenceName: LazyDeferred<ReferenceName> = lazyDeferred {
@@ -48,9 +67,31 @@ public class K1ConstructorProperty<out PARENT : StatikKotlinDeclaredElement<*>>(
       .requireReferenceName()
   }
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*, *>> = lazySet {
     node.annotations(context, parent = this)
   }
+
   override val isMutable: Boolean
     get() = node.isMutable
 }
+
+public interface K1Callable<out PARENT : K1Element<*>, NODE : KtCallableDeclaration> :
+  StatikKotlinCallable<PARENT, NODE>
+
+/** A Kotlin property element. */
+public sealed interface K1Property<out PARENT : K1ElementWithPackageName<*>> :
+  StatikKotlinProperty<PARENT, KtProperty>,
+  K1Callable<PARENT, KtProperty>
+
+/** An extension element. */
+public sealed interface K1ExtensionElement<out PARENT : K1ElementWithPackageName<*>, NODE : KtCallableDeclaration> :
+  K1Callable<PARENT, NODE>,
+  K1Element<NODE> {
+  /** The receiver type. */
+  public val receiver: StatikType<*>
+}
+
+/** A Kotlin extension property. */
+public interface K1ExtensionProperty<out PARENT : K1ElementWithPackageName<*>> :
+  K1ExtensionElement<PARENT, KtProperty>,
+  K1Property<PARENT>

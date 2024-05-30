@@ -16,12 +16,10 @@
 package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
-import com.rickbusarow.statik.element.StatikAnnotation
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
-import com.rickbusarow.statik.element.kotlin.StatikKotlinFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinProperty
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
@@ -37,7 +35,7 @@ import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.toSet
 import org.jetbrains.kotlin.fileClasses.javaFileFacadeFqName
 import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.psiUtil.getChildrenOfType
 import java.io.File
 
@@ -46,27 +44,28 @@ public class K1KotlinFile(
   override val context: StatikKotlinElementContext,
   override val file: File,
   override val node: KtFile
-) : StatikKotlinFile,
+) : StatikKotlinFile<KtFile>,
+  K1ElementWithPackageName<KtFile>,
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
-  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
+  override val annotations: LazySet<K1Annotation<K1KotlinFile>> = lazySet {
     node.fileAnnotationList
     TODO("Not yet implemented")
   }
-  override val declaredTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  override val declaredTypes: LazySet<StatikKotlinConcreteType<*, *>> = lazySet {
     node.StatikKotlinConcreteTypesDirect(
       context = context,
       containingFile = this,
       parent = this
     )
   }
-  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
+  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*, *>> = lazySet {
     declaredTypes.fold(emptySet()) { acc, type ->
       acc + type + type.innerTypesRecursive.toSet()
     }
   }
-  override val containingFile: StatikKotlinFile get() = this
+  override val containingFile: K1KotlinFile get() = this
 
   @Suppress("UnusedPrivateProperty")
   private val fileJavaFacadeName by lazy { node.javaFileFacadeFqName.asString() }
@@ -88,12 +87,11 @@ public class K1KotlinFile(
 
   override val packageName: PackageName by lazy { PackageName(node.packageFqName.asString()) }
 
-  override val topLevelFunctions: LazySet<StatikKotlinFunction<*>> =
-    lazySet {
-      node.getChildrenOfType<KtFunction>()
-        .mapToSet { K1Function(context = context, node = it, parent = this) }
-    }
-  override val topLevelProperties: LazySet<StatikKotlinProperty<*>>
+  override val topLevelFunctions: LazySet<K1DeclaredFunction<K1KotlinFile>> = lazySet {
+    node.getChildrenOfType<KtNamedFunction>()
+      .mapToSet { K1DeclaredFunction(context = context, node = it, parent = this) }
+  }
+  override val topLevelProperties: LazySet<StatikKotlinProperty<*, *>>
     get() = TODO("Not yet implemented")
   override val apiReferences: List<LazySet.DataSource<ReferenceName>> = emptyList()
   override val declarations: List<LazySet.DataSource<DeclaredName>> = emptyList()
