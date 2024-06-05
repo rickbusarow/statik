@@ -208,7 +208,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Unit test results
-        uses: mikepenz/action-junit-report@9379f0ccddcab154835d4e2487555ee79614fe95 # v4
+        uses: mikepenz/action-junit-report@ac30be7acb0a361e5492575ab42e47fcadec4928 # v4
         if: failure()
         with:
           github_token: ${{ steps.app-token.outputs.token }}
@@ -243,7 +243,7 @@ jobs:
           private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
 
       - name: Unit test results
-        uses: mikepenz/action-junit-report@9379f0ccddcab154835d4e2487555ee79614fe95 # v4
+        uses: mikepenz/action-junit-report@ac30be7acb0a361e5492575ab42e47fcadec4928 # v4
         if: failure()
         with:
           github_token: ${{ steps.app-token.outputs.token }}
