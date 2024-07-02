@@ -34,6 +34,7 @@ Statik is a high-level [Abstract Syntax Tree] or [Abstract Semantic Graph] with 
      override val node: KtFunction
    }
    ```
+
 2. Make Statik's published artifacts work with multiple versions of the Kotlin compiler, so that a
    Statik update does not require a simultaneous Kotlin update. This is accomplished using
    Gradle's [Feature Variants], so that Gradle automatically selects the right Statik .jar based
@@ -56,7 +57,5 @@ limitations under the License.
 ```
 
 [Abstract Syntax Tree]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
-
 [Abstract Semantic Graph]: https://en.wikipedia.org/wiki/Abstract_semantic_graph
-
 [Feature Variants]: https://docs.gradle.org/current/userguide/feature_variants.html
