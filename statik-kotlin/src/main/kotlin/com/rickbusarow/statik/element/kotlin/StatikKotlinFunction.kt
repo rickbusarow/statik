@@ -23,7 +23,7 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** Represents a Kotlin function element. */
 public sealed interface StatikKotlinFunction<out PARENT, NODE : Any> :
-  StatikFunction<PARENT>,
+  StatikFunction<PARENT, NODE>,
   StatikKotlinCallable<PARENT, NODE>,
   StatikKotlinHasValueParameters<PARENT, NODE>,
   StatikKotlinHasTypeParameters<PARENT, NODE>

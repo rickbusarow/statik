@@ -52,9 +52,9 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 @InternalStatikApi
-public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal constructor(
+public abstract class AbstractStatikKotlinConcreteType<out PARENT, NODE : Any> internal constructor(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile,
+  override val containingFile: StatikKotlinFile<*>,
   override val node: KtClassOrObject
 ) : StatikKotlinConcreteType<PARENT>,
   StatikKotlinTypeDeclaration<PARENT>,

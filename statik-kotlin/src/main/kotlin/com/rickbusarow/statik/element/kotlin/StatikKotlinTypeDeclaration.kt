@@ -23,16 +23,16 @@ import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 public interface StatikKotlinTypeReference<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikTypeReference<PARENT>,
+  StatikTypeReference<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>
 
 public interface StatikKotlinTypeDeclaration<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikTypeDeclaration<PARENT>,
+  StatikTypeDeclaration<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>
 
 public interface StatikKotlinConcreteType<out PARENT, NODE : Any> :
   StatikKotlinTypeDeclaration<PARENT, NODE>,
-  StatikConcreteType<PARENT>,
+  StatikConcreteType<PARENT, NODE>,
   StatikKotlinDeclaredElement<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
@@ -48,14 +48,14 @@ public interface StatikKotlinConcreteType<out PARENT, NODE : Any> :
 public interface StatikKotlinAnnotationClass<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<NODE>,
         PARENT : HasPackageName
 
 public interface StatikKotlinClass<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName {
 
@@ -68,34 +68,34 @@ public interface StatikKotlinClass<out PARENT, NODE : Any> :
 public interface StatikKotlinCompanionObject<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName
 
 public interface StatikKotlinTypeAlias<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName
 
 public interface StatikKotlinEnum<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName
 
 public interface StatikKotlinInterface<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName
 
 public interface StatikKotlinObject<out PARENT, NODE : Any> :
   StatikKotlinConcreteType<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT>
+  StatikDeclaredElement<PARENT, NODE>
   where PARENT : StatikKotlinElement<*>,
         PARENT : HasPackageName

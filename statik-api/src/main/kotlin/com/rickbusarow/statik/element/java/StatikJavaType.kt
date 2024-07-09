@@ -20,30 +20,30 @@ import com.rickbusarow.statik.element.StatikDeclaredElement
 import com.rickbusarow.statik.element.StatikTypeDeclaration
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public interface StatikJavaType<out PARENT : StatikJavaElement> :
-  StatikTypeDeclaration<PARENT>,
-  StatikJavaElementWithParent<PARENT> {
+public interface StatikJavaType<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikTypeDeclaration<PARENT, NODE>,
+  StatikJavaElementWithParent<PARENT, NODE> {
   override val parent: PARENT
 }
 
-public sealed interface StatikJavaConcreteType<out PARENT : StatikJavaElement> :
-  StatikConcreteType<PARENT>,
-  StatikJavaType<PARENT>,
-  StatikJavaElementWithParent<PARENT> {
+public sealed interface StatikJavaConcreteType<out PARENT : StatikJavaElement<*>, NODE : Any> :
+  StatikConcreteType<PARENT, NODE>,
+  StatikJavaType<PARENT, NODE>,
+  StatikJavaElementWithParent<PARENT, NODE> {
 
-  override val innerTypes: LazySet<StatikJavaConcreteType<*>>
-  override val innerTypesRecursive: LazySet<StatikJavaConcreteType<*>>
+  override val innerTypes: LazySet<StatikJavaConcreteType<*, *>>
+  override val innerTypesRecursive: LazySet<StatikJavaConcreteType<*, *>>
 
-  override val containingFile: StatikJavaFile
+  override val containingFile: StatikJavaFile<*>
 
-  public interface StatikJavaInterface<out PARENT : StatikJavaElement> :
-    StatikJavaConcreteType<PARENT>,
-    StatikDeclaredElement<PARENT>
+  public interface StatikJavaInterface<out PARENT : StatikJavaElement<*>, NODE : Any> :
+    StatikJavaConcreteType<PARENT, NODE>,
+    StatikDeclaredElement<PARENT, NODE>
 
-  public interface StatikJavaClass<out PARENT : StatikJavaElement> :
-    StatikJavaConcreteType<PARENT>,
-    StatikDeclaredElement<PARENT> {
+  public interface StatikJavaClass<out PARENT : StatikJavaElement<*>, NODE : Any> :
+    StatikJavaConcreteType<PARENT, NODE>,
+    StatikDeclaredElement<PARENT, NODE> {
 
-    public val constructors: LazySet<StatikJavaFunction<*>>
+    public val constructors: LazySet<StatikJavaFunction<*, *>>
   }
 }

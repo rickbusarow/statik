@@ -16,12 +16,10 @@
 package com.rickbusarow.statik.name
 
 import com.rickbusarow.statik.name.HasSimpleNames.Companion.checkSimpleNames
-import com.rickbusarow.statik.name.SimpleName.Companion.stripPackageNameFromFqName
 import com.rickbusarow.statik.utils.lazy.unsafeLazy
 import com.rickbusarow.statik.utils.stdlib.asList
 import com.rickbusarow.statik.utils.stdlib.singletonList
 import dev.drewhamilton.poko.Poko
-import org.jetbrains.kotlin.name.FqName
 
 /** Represents a "declaration" -- a named object which can be referenced elsewhere. */
 public sealed interface NameWithPackageName :
@@ -65,13 +63,13 @@ internal class NameWithPackageNameImpl(
   override val segments: List<String> by unsafeLazy { asString.split('.') }
 }
 
-/**
- * @return a [NameWithPackageName], where the String after [packageName]
- *   is split and treated as the collection of [SimpleNames][SimpleName].
- */
-public fun FqName.asNameWithPackageName(packageName: PackageName): NameWithPackageName = asString()
-  .stripPackageNameFromFqName(packageName)
-  .asNameWithPackageName(packageName)
+// /**
+//  * @return a [NameWithPackageName], where the String after [packageName]
+//  *   is split and treated as the collection of [SimpleNames][SimpleName].
+//  */
+// public fun FqName.asNameWithPackageName(packageName: PackageName): NameWithPackageName = asString()
+//   .stripPackageNameFromFqName(packageName)
+//   .asNameWithPackageName(packageName)
 
 /**
  * @return a [NameWithPackageName] from the [packageName]

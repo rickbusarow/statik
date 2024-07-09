@@ -15,6 +15,7 @@
 
 import com.rickbusarow.doks.DoksTask
 import com.rickbusarow.kgx.mustRunAfter
+import modulecheck.gradle.ModuleCheckExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -43,6 +44,10 @@ doks {
       replacement = mahoutProperties.group.get()
     }
   }
+}
+
+extensions.configure<ModuleCheckExtension> {
+  checks.sortDependencies = false
 }
 
 subprojects.map {
@@ -75,7 +80,7 @@ val foo by tasks.registering {
         println(
           """
           | -- $name
-          |${files .joinToString("\n") }
+          |${files.joinToString("\n")}
           """.trimMargin()
         )
       }

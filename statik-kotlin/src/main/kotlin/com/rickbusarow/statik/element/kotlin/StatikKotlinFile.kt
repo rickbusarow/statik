@@ -22,7 +22,7 @@ import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** Represents a single Kotlin file. */
 public interface StatikKotlinFile<NODE : Any> :
-  StatikFile,
+  StatikFile<NODE>,
   StatikKotlinElement<NODE>,
   StatikAnnotated,
   StatikKotlinElementWithPackageName<NODE> {

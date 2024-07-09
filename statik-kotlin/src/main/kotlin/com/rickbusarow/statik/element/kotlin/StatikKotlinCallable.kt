@@ -21,12 +21,12 @@ import com.rickbusarow.statik.element.StatikType
 
 /** A Kotlin callable element. */
 public interface StatikKotlinCallable<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikCallable<PARENT>,
+  StatikCallable<PARENT, NODE>,
   StatikKotlinElementWithParent<PARENT, NODE>
 
 /** A Kotlin property element. */
 public interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikProperty<PARENT>,
+  StatikProperty<PARENT, NODE>,
   StatikKotlinCallable<PARENT, NODE>
 
 /** A Kotlin member property element. */
@@ -46,7 +46,7 @@ public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElemen
 public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
   StatikKotlinCallable<PARENT, NODE> {
   /** The receiver type. */
-  public val receiver: StatikType<*>
+  public val receiver: StatikType<*, *>
 }
 
 /** A Kotlin extension property. */

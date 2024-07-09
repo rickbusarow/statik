@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.flow
 
-public fun StatikElement.childrenRecursive(): Flow<StatikElement> {
+public fun StatikElement<*>.childrenRecursive(): Flow<StatikElement<*>> {
   return flow {
     children.collect { child ->
       emit(child)
@@ -29,6 +29,6 @@ public fun StatikElement.childrenRecursive(): Flow<StatikElement> {
   }
 }
 
-public inline fun <reified E : StatikElement> StatikElement.childrenOfTypeRecursive(): Flow<E> {
+public inline fun <reified E : StatikElement<*>> StatikElement<*>.childrenOfTypeRecursive(): Flow<E> {
   return childrenRecursive().filterIsInstance()
 }

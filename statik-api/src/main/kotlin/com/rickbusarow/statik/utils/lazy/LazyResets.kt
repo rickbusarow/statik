@@ -19,7 +19,6 @@ package com.rickbusarow.statik.utils.lazy
 
 import com.rickbusarow.statik.InternalStatikApi
 import kotlinx.coroutines.DisposableHandle
-import org.jetbrains.kotlin.com.intellij.openapi.Disposable
 
 @InternalStatikApi
 public interface LazyResets<out T : Any> : Lazy<T>, Resets
@@ -64,10 +63,8 @@ internal class LazyResetsImpl<out T : Any>(
 }
 
 @InternalStatikApi
-public interface ResetManager : Resets, Disposable {
+public interface ResetManager : Resets {
   public fun register(delegate: Resets)
-
-  override fun dispose()
 
   override fun reset()
   public fun child(childDelegates: MutableCollection<Resets> = mutableListOf()): ResetManager
@@ -79,7 +76,6 @@ public interface ResetManager : Resets, Disposable {
 
 public object EmptyResetManager : ResetManager {
   override fun register(delegate: Resets): Unit = Unit
-  override fun dispose(): Unit = Unit
   override fun reset(): Unit = Unit
   override fun child(childDelegates: MutableCollection<Resets>): EmptyResetManager = this
 }
