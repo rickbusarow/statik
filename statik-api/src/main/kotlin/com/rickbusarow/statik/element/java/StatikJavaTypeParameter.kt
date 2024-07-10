@@ -20,12 +20,12 @@ import com.rickbusarow.statik.element.StatikTypeParameter
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** Represents an element with type parameters. */
-public interface StatikJavaHasTypeParameters<out PARENT : StatikJavaElement<*>, NODE : Any> :
-  StatikHasTypeParameters<PARENT, NODE>,
-  StatikJavaElementWithParent<PARENT, NODE> {
-  override val typeParameters: LazySet<StatikJavaTypeParameter<*, *>>
+public interface StatikJavaHasTypeParameters<out PARENT : StatikJavaElement> :
+  StatikHasTypeParameters<PARENT>,
+  StatikJavaElementWithParent<PARENT> {
+  override val typeParameters: LazySet<StatikJavaTypeParameter<*>>
 }
 
-public interface StatikJavaTypeParameter<out PARENT : StatikJavaElement<*>, NODE : Any> :
-  StatikTypeParameter<PARENT, NODE>,
-  StatikJavaType<PARENT, NODE>
+public interface StatikJavaTypeParameter<out PARENT : StatikJavaElement> :
+  StatikTypeParameter<PARENT>,
+  StatikJavaType<PARENT>

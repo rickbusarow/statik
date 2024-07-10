@@ -31,6 +31,6 @@ public interface StatikElementFactory<T> {
     context: StatikElementContext<T>,
     fileSystemFile: File,
     backingElement: T,
-    parent: StatikElement<*>
-  ): StatikElement<*>
+    parent: StatikElement
+  ): StatikElement
 }

@@ -18,6 +18,6 @@ package com.rickbusarow.statik.element.java
 import com.rickbusarow.statik.element.StatikFile
 
 /** Represents a Java file. */
-public interface StatikJavaFile<NODE : Any> :
-  StatikFile<NODE>,
-  StatikJavaElement<NODE>
+public interface StatikJavaFile :
+  StatikFile,
+  StatikJavaElement

@@ -32,65 +32,65 @@ import com.rickbusarow.statik.utils.lazy.LazySet
  *
  * ```
  */
-public sealed interface StatikVariable<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE> {
+public sealed interface StatikVariable<out PARENT : StatikElement> :
+  StatikElementWithParent<PARENT> {
   /** The index of the parameter. */
   public val index: Int
 }
 
-public sealed interface StatikTypeVariable<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikVariable<PARENT, NODE>,
-  StatikType<PARENT, NODE>
+public sealed interface StatikTypeVariable<out PARENT : StatikElement> :
+  StatikVariable<PARENT>,
+  StatikType<PARENT>
 
-public sealed interface StatikValueVariable<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikVariable<PARENT, NODE>,
-  StatikCallable<PARENT, NODE> {
+public sealed interface StatikValueVariable<out PARENT : StatikElement> :
+  StatikVariable<PARENT>,
+  StatikCallable<PARENT> {
   public val name: StatikName
   public val type: LazyDeferred<ReferenceName>
 }
 
-public sealed interface StatikParameter<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikVariable<PARENT, NODE>
+public sealed interface StatikParameter<out PARENT : StatikElement> :
+  StatikVariable<PARENT>
 
-public sealed interface StatikArgument<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikVariable<PARENT, NODE>
+public sealed interface StatikArgument<out PARENT : StatikElement> :
+  StatikVariable<PARENT>
 
 /** Represents a generic type used as a parameter, like `<T>` or `<R: Any>`. */
-public interface StatikTypeParameter<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikParameter<PARENT, NODE>,
-  StatikTypeVariable<PARENT, NODE>
+public interface StatikTypeParameter<out PARENT : StatikElement> :
+  StatikParameter<PARENT>,
+  StatikTypeVariable<PARENT>
 
 /**
  * Represents a value parameter, like `x: Int` in `fun foo(x: Int)` or `class MyClass(val x: Int)`.
  */
-public interface StatikValueParameter<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikParameter<PARENT, NODE>,
-  StatikValueVariable<PARENT, NODE>
+public interface StatikValueParameter<out PARENT : StatikElement> :
+  StatikParameter<PARENT>,
+  StatikValueVariable<PARENT>
 
 /** Represents a generic type used as a parameter, like `<T>` or `<R: Any>`. */
-public interface StatikTypeArgument<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikArgument<PARENT, NODE>,
-  StatikTypeVariable<PARENT, NODE>
+public interface StatikTypeArgument<out PARENT : StatikElement> :
+  StatikArgument<PARENT>,
+  StatikTypeVariable<PARENT>
 
 /**
  * Represents a value parameter, like `x: Int` in `fun foo(x: Int)` or `class MyClass(val x: Int)`.
  */
-public interface StatikValueArgument<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikParameter<PARENT, NODE>,
-  StatikValueVariable<PARENT, NODE>
+public interface StatikValueArgument<out PARENT : StatikElement> :
+  StatikParameter<PARENT>,
+  StatikValueVariable<PARENT>
 
 /** Represents an element with type parameters. */
-public interface StatikHasTypeParameters<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE> {
+public interface StatikHasTypeParameters<out PARENT : StatikElement> :
+  StatikElementWithParent<PARENT> {
 
   /** The type parameters of this element. */
-  public val typeParameters: LazySet<StatikTypeParameter<*, *>>
+  public val typeParameters: LazySet<StatikTypeParameter<*>>
 }
 
 /** Represents an element with type parameters. */
-public interface StatikHasValueParameters<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE> {
+public interface StatikHasValueParameters<out PARENT : StatikElement> :
+  StatikElementWithParent<PARENT> {
 
   /** The type parameters of this element. */
-  public val valueParameters: LazySet<StatikValueParameter<*, *>>
+  public val valueParameters: LazySet<StatikValueParameter<*>>
 }

@@ -20,8 +20,8 @@ import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.name.HasSimpleNames
 
 /** An element that has been declared, it can be a class, function, variable, etc. */
-public interface StatikDeclaredElement<out PARENT : StatikElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE>,
+public interface StatikDeclaredElement<out PARENT : StatikElement> :
+  StatikElementWithParent<PARENT>,
   HasPackageName,
   HasVisibility,
   HasSimpleNames {

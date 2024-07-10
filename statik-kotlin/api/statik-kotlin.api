@@ -9,17 +9,7 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotation : com/rickbusarow/statik/element/StatikAnnotation, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotation$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotation;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotation;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationArgument : com/rickbusarow/statik/element/StatikAnnotationArgument, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationArgument$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationArgument;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationArgument;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
@@ -28,17 +18,13 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinAnnotationClass;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtCallableDeclaration;
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinAnonymousFunction : com/rickbusarow/statik/element/kotlin/StatikKotlinFunction {
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCallable;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCallable;)Ljava/lang/String;
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinCallable : com/rickbusarow/statik/element/StatikCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinClass : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
@@ -49,7 +35,6 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinClass$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinClass;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinClass;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinClass;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinClass;)Z
 }
 
@@ -59,7 +44,6 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinCompanionObject$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCompanionObject;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCompanionObject;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCompanionObject;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinCompanionObject;)Z
 }
 
@@ -73,41 +57,34 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinProperty {
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/internal/HasChildrenInternal, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public abstract fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction : com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement {
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction : com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement, com/rickbusarow/statik/element/kotlin/StatikKotlinFunction {
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredExtensionFunction;)Z
 }
 
@@ -117,34 +94,17 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinElement : com/rickbusarow/statik/element/StatikElement {
 	public abstract fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinElement$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElement;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName : com/rickbusarow/statik/element/kotlin/StatikKotlinElement, com/rickbusarow/statik/name/HasPackageName {
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithPackageName;)Ljava/lang/String;
-}
-
-public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent : com/rickbusarow/statik/element/StatikElementWithParent, com/rickbusarow/statik/element/kotlin/StatikKotlinElement {
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent;)Ljava/lang/String;
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent : com/rickbusarow/statik/element/StatikElementWithParent {
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinEnum : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
@@ -153,35 +113,22 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinEnum$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinEnum;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinEnum;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinEnum;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinEnum;)Z
 }
 
-public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement : com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinElement {
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement : com/rickbusarow/statik/element/kotlin/StatikKotlinCallable {
 	public abstract fun getReceiver ()Lcom/rickbusarow/statik/element/StatikType;
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionFunction : com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement, com/rickbusarow/statik/element/kotlin/StatikKotlinFunction {
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionFunction$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionFunction;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionFunction;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionElement, com/rickbusarow/statik/element/kotlin/StatikKotlinProperty {
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinExtensionProperty;)Z
 }
 
@@ -189,44 +136,22 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 	public abstract fun getDeclaredTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getDeclaredTypesAndInnerTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getImportAliases ()Ljava/util/Map;
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtFile;
 	public abstract fun getTopLevelFunctions ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public abstract fun getTopLevelProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinFile$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinFunction : com/rickbusarow/statik/element/StatikFunction, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters {
 	public abstract fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtFunction;
 	public abstract fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinFunction$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFunction;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFunction;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters : com/rickbusarow/statik/element/StatikHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
 	public abstract fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters : com/rickbusarow/statik/element/StatikHasValueParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
 	public abstract fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinHasValueParameters;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinInterface : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
@@ -235,32 +160,28 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinInterface$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinInterface;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinInterface;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinInterface;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinInterface;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinHasTypeParameters, com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty {
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberExtensionProperty;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinProperty {
-	public abstract fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty;)Z
+}
+
+public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinModifier : com/rickbusarow/statik/element/StatikModifier {
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinObject : com/rickbusarow/statik/element/StatikDeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConcreteType, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
@@ -269,7 +190,6 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinObject$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinObject;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinObject;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinObject;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinObject;)Z
 }
 
@@ -277,10 +197,8 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 }
 
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinProperty$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinProperty;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinProperty;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinProperty;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinProperty;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinProperty;)Z
 }
 
@@ -290,40 +208,19 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeAlias$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeAlias;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeAlias;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeAlias;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeAlias;)Z
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeArgument : com/rickbusarow/statik/element/StatikTypeArgument, com/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration {
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeArgument$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeArgument;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeArgument;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration : com/rickbusarow/statik/element/StatikTypeDeclaration, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter : com/rickbusarow/statik/element/StatikTypeParameter, com/rickbusarow/statik/element/kotlin/StatikKotlinTypeDeclaration {
 }
 
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter;)Ljava/lang/String;
-}
-
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeReference : com/rickbusarow/statik/element/StatikTypeReference, com/rickbusarow/statik/element/kotlin/StatikKotlinElementWithParent {
-}
-
-public final class com/rickbusarow/statik/element/kotlin/StatikKotlinTypeReference$DefaultImpls {
-	public static fun getContainingFile (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeReference;)Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinTypeReference;)Ljava/lang/String;
 }
 
 public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument : com/rickbusarow/statik/element/StatikValueArgument, com/rickbusarow/statik/element/kotlin/StatikKotlinCallable, com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredElement {
@@ -332,7 +229,6 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueArgument;)Z
 }
 
@@ -342,7 +238,6 @@ public abstract interface class com/rickbusarow/statik/element/kotlin/StatikKotl
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter$DefaultImpls {
 	public static fun getSegments (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/util/List;
 	public static fun getSimplestName-i5e9x4A (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/lang/String;
-	public static fun getText (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Ljava/lang/String;
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter;)Z
 }
 
@@ -364,3 +259,4 @@ public final class com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$
 public final class com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$Public : com/rickbusarow/statik/element/kotlin/StatikKotlinVisibility {
 	public static final field INSTANCE Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility$Public;
 }
+

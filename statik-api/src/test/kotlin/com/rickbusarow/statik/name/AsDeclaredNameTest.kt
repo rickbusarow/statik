@@ -20,86 +20,10 @@ import com.rickbusarow.statik.name.SimpleName.Companion.asSimpleName
 import com.rickbusarow.statik.name.StatikLanguage.JAVA
 import com.rickbusarow.statik.name.StatikLanguage.KOTLIN
 import io.kotest.matchers.shouldBe
-import org.jetbrains.kotlin.name.FqName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 internal class AsDeclaredNameTest {
-
-  @Nested
-  inner class `FqName` {
-
-    @Test
-    fun `FqName asDeclaredName with nested type treats outer type as simple name`() {
-
-      val packageName = "com.test".asPackageName()
-      val simpleNames = listOf("Outer".asSimpleName(), "Inner".asSimpleName())
-
-      val asString = packageName.append(simpleNames)
-
-      FqName(asString).asDeclaredName(packageName) shouldBe DeclaredName.agnostic(
-        packageName = packageName,
-        simpleNames = simpleNames
-      )
-    }
-
-    @Test
-    fun `asDeclaredName with no language creates agnostic declared name`() {
-
-      val packageName = "com.test".asPackageName()
-      val simpleNames = listOf("Subject".asSimpleName())
-
-      val asString = packageName.append(simpleNames)
-
-      FqName(asString).asDeclaredName(packageName) shouldBe DeclaredName.agnostic(
-        packageName = packageName,
-        simpleNames = simpleNames
-      )
-    }
-
-    @Test
-    fun `asDeclaredName with Kotlin language creates Kotlin declared name`() {
-
-      val packageName = "com.test".asPackageName()
-      val simpleNames = listOf("Subject".asSimpleName())
-
-      val asString = packageName.append(simpleNames)
-
-      FqName(asString).asDeclaredName(packageName, KOTLIN) shouldBe DeclaredName.kotlin(
-        packageName = packageName,
-        simpleNames = simpleNames
-      )
-    }
-
-    @Test
-    fun `asDeclaredName with Java language creates Java declared name`() {
-
-      val packageName = "com.test".asPackageName()
-      val simpleNames = listOf("Subject".asSimpleName())
-
-      val asString = packageName.append(simpleNames)
-
-      FqName(asString).asDeclaredName(packageName, JAVA) shouldBe DeclaredName.java(
-        packageName = packageName,
-        simpleNames = simpleNames
-      )
-    }
-
-    @Test
-    fun `asDeclaredName with Java and Kotlin languages creates agnostic declared name`() {
-
-      val packageName = "com.test".asPackageName()
-      val simpleNames = listOf("Subject".asSimpleName())
-
-      val asString = packageName.append(simpleNames)
-
-      FqName(asString).asDeclaredName(packageName, JAVA, KOTLIN) shouldBe DeclaredName.agnostic(
-        packageName = packageName,
-        simpleNames = simpleNames
-      )
-    }
-  }
-
   @Nested
   inner class `iterable receiver` {
 

@@ -31,13 +31,13 @@ import com.rickbusarow.statik.utils.stdlib.singletonList
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 @InternalStatikApi
-public class K1DeclaredElementDelegate<PARENT, NODE : KtDeclaration>(
-  override val node: NODE,
+public class K1DeclaredElementDelegate<PARENT>(
+  override val node: KtDeclaration,
   override val parent: PARENT
-) : K1DeclaredElement<PARENT, NODE>,
+) : K1DeclaredElement<PARENT>,
   HasKotlinVisibility by K1VisibilityDelegate(node),
   HasChildrenInternal by HasChildrenInternalDelegate()
-  where PARENT : K1Element<*>,
+  where PARENT : K1Element,
         PARENT : HasPackageName {
 
   override val containingFile: K1KotlinFile by unsafeLazy { parent.containingFile }

@@ -43,7 +43,7 @@ public interface StatikElementContext<T> {
    * @return The resolved reference name, or null if the reference name could not be resolved.
    */
   public suspend fun resolveReferenceNameOrNull(
-    file: StatikFile<*>,
+    file: StatikFile,
     toResolve: ReferenceName
   ): ReferenceName?
 }

@@ -20,16 +20,16 @@ import com.rickbusarow.statik.element.StatikElementWithParent
 import com.rickbusarow.statik.name.HasPackageName
 
 /** Represents a Kotlin element in the source code. */
-public interface StatikKotlinElement<NODE : Any> : StatikElement<NODE> {
+public interface StatikKotlinElement : StatikElement {
 
-  override val containingFile: StatikKotlinFile<*>
+  override val containingFile: StatikKotlinFile
 }
 
 /** */
-public interface StatikKotlinElementWithPackageName<NODE : Any> :
-  StatikKotlinElement<NODE>,
+public interface StatikKotlinElementWithPackageName :
+  StatikKotlinElement,
   HasPackageName
 
 /** Represents an element with a parent element. */
-public interface StatikKotlinElementWithParent<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE>
+public interface StatikKotlinElementWithParent<out PARENT : StatikKotlinElement> :
+  StatikElementWithParent<PARENT>

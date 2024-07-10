@@ -36,7 +36,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
 internal fun KtAnnotated.annotations(
   context: StatikElementContext<PsiElement>,
-  parent: K1Element<*>
+  parent: K1Element
 ): Set<K1Annotation<*>> = annotationEntries
   .mapToSet {
     K1Annotation(
@@ -48,12 +48,12 @@ internal fun KtAnnotated.annotations(
 
 @Poko
 @InternalStatikApi
-public class K1Annotation<out PARENT : K1Element<*>>(
+public class K1Annotation<out PARENT : K1Element>(
   private val context: StatikElementContext<PsiElement>,
   override val node: KtAnnotationEntry,
   override val parent: PARENT
-) : StatikKotlinAnnotation<PARENT, KtAnnotationEntry>,
-  K1Element<KtAnnotationEntry>,
+) : StatikKotlinAnnotation<PARENT>,
+  K1Element,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
   override val referenceName: LazyDeferred<ReferenceName> = lazyDeferred {

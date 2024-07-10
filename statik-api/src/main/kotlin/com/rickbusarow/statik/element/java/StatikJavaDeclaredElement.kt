@@ -19,8 +19,8 @@ import com.rickbusarow.statik.element.StatikDeclaredElement
 import com.rickbusarow.statik.name.HasPackageName
 
 /** Represents a declared Java element in the source code. */
-public interface StatikJavaDeclaredElement<out PARENT, NODE : Any> :
-  StatikJavaElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikJavaElement<*>,
+public interface StatikJavaDeclaredElement<out PARENT> :
+  StatikJavaElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikJavaElement,
         PARENT : HasPackageName

@@ -26,6 +26,7 @@ import com.rickbusarow.statik.name.StatikName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
+import com.rickbusarow.statik.utils.lazy.lazySet
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtParameterList
@@ -33,13 +34,13 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class K1ValueParameter<out PARENT : K1ElementWithPackageName<*>>(
+public class K1ValueParameter<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtParameter,
   override val parent: PARENT
-) : StatikKotlinValueParameter<PARENT, KtParameter>,
+) : StatikKotlinValueParameter<PARENT>,
   HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT, KtParameter> by K1DeclaredElementDelegate(node, parent) {
+  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
 
   override val text: String
     get() = node.text

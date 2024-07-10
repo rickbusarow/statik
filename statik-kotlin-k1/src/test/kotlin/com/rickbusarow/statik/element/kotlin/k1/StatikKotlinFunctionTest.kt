@@ -33,23 +33,23 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
 
   override val defaultLanguage = StatikLanguage.KOTLIN
 
-  suspend fun StatikKotlinFile<*>.subjectClass(): StatikKotlinConcreteType<*, *> {
+  suspend fun StatikKotlinFile.subjectClass(): StatikKotlinConcreteType<*> {
     return declaredTypesAndInnerTypes.toList()
       .single { it.simpleNames.last().asString == "SubjectClass" }
   }
 
-  suspend fun StatikKotlinConcreteType<*, *>.function(
+  suspend fun StatikKotlinConcreteType<*>.function(
     name: String
-  ): StatikKotlinDeclaredFunction<*, *> = functions.first { it.simplestName.asString == name }
+  ): StatikKotlinDeclaredFunction<*> = functions.first { it.simplestName.asString == name }
 
-  suspend fun StatikKotlinConcreteType<*, *>.subjectFun() = function("subjectFunction")
+  suspend fun StatikKotlinConcreteType<*>.subjectFun() = function("subjectFunction")
 
   @TestFactory
   fun `caaaaaanary thing`() = Properties.explicitTypes
     .take(1)
     .asTests { params ->
 
-      val file = createKotlin(
+      createKotlin(
         """
         package com.subject
 

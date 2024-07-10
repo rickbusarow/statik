@@ -56,7 +56,6 @@ public open class K1MemberProperty<out PARENT : K1DeclaredElement<*>>(
     get() = node.isVar
 }
 
-@Poko
 @InternalStatikApi
 public class K1MemberExtensionProperty<out PARENT : K1DeclaredElement<*>>(
   context: StatikKotlinElementContext,

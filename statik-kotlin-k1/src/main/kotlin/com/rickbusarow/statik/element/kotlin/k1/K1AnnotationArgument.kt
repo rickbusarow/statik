@@ -20,7 +20,6 @@ import com.rickbusarow.statik.compiler.StatikElementContext
 import com.rickbusarow.statik.element.internal.HasChildrenInternal
 import com.rickbusarow.statik.element.internal.HasChildrenInternalDelegate
 import com.rickbusarow.statik.element.kotlin.StatikKotlinAnnotationArgument
-import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
 import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
@@ -30,12 +29,17 @@ import org.jetbrains.kotlin.psi.KtValueArgument
 
 @Poko
 @InternalStatikApi
-public class K1AnnotationArgument<out PARENT : StatikKotlinElement>(
+public class K1AnnotationArgument<out PARENT : K1Element>(
   private val context: StatikElementContext<PsiElement>,
   override val node: KtValueArgument,
   override val parent: PARENT
 ) : StatikKotlinAnnotationArgument<PARENT>,
   HasChildrenInternal by HasChildrenInternalDelegate() {
+
+  override val text: String
+    get() = node.text
+  override val containingFile: K1KotlinFile
+    get() = parent.containingFile
 
   override val value: Any = TODO()
 

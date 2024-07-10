@@ -28,6 +28,7 @@ import com.rickbusarow.statik.name.ReferenceName
 import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 import com.rickbusarow.statik.utils.lazy.lazyDeferred
+import com.rickbusarow.statik.utils.lazy.lazySet
 import com.rickbusarow.statik.utils.stdlib.mapToSet
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.psi.KtFunction
@@ -36,12 +37,12 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 @Poko
 @InternalStatikApi
-public class K1AnonymousFunction<out PARENT : K1ElementWithPackageName<*>>(
+public class K1AnonymousFunction<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtFunction,
   override val parent: PARENT
-) : K1ElementWithParent<PARENT, KtFunction>,
-  StatikKotlinAnonymousFunction<PARENT, KtFunction>,
+) : K1ElementWithParent<PARENT>,
+  StatikKotlinAnonymousFunction<PARENT>,
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
@@ -57,7 +58,7 @@ public class K1AnonymousFunction<out PARENT : K1ElementWithPackageName<*>>(
       .requireReferenceName()
   }
 
-  override val annotations: LazySet<StatikAnnotation<*, *>>
+  override val annotations: LazySet<StatikAnnotation<*>>
     get() = lazySet { TODO("Not yet implemented") }
   override val typeParameters: LazySet<K1TypeParameter<*>>
     get() = lazySet { TODO("Not yet implemented") }
@@ -65,13 +66,13 @@ public class K1AnonymousFunction<out PARENT : K1ElementWithPackageName<*>>(
 
 @Poko
 @InternalStatikApi
-public class K1DeclaredFunction<out PARENT : K1ElementWithPackageName<*>>(
+public class K1DeclaredFunction<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtNamedFunction,
   override val parent: PARENT
-) : StatikKotlinDeclaredFunction<PARENT, KtNamedFunction>,
+) : StatikKotlinDeclaredFunction<PARENT>,
   HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT, KtNamedFunction> by K1DeclaredElementDelegate(node, parent) {
+  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
 
   override val text: String
     get() = node.text

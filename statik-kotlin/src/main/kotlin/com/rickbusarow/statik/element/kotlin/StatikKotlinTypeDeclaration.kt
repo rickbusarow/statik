@@ -22,80 +22,80 @@ import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.name.HasPackageName
 import com.rickbusarow.statik.utils.lazy.LazySet
 
-public interface StatikKotlinTypeReference<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikTypeReference<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>
+public interface StatikKotlinTypeReference<out PARENT : StatikKotlinElement> :
+  StatikTypeReference<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
 
-public interface StatikKotlinTypeDeclaration<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikTypeDeclaration<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>
+public interface StatikKotlinTypeDeclaration<out PARENT : StatikKotlinElement> :
+  StatikTypeDeclaration<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
 
-public interface StatikKotlinConcreteType<out PARENT, NODE : Any> :
-  StatikKotlinTypeDeclaration<PARENT, NODE>,
-  StatikConcreteType<PARENT, NODE>,
-  StatikKotlinDeclaredElement<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinConcreteType<out PARENT> :
+  StatikKotlinTypeDeclaration<PARENT>,
+  StatikConcreteType<PARENT>,
+  StatikKotlinDeclaredElement<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
-  override val innerTypes: LazySet<StatikKotlinConcreteType<*, *>>
-  override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*, *>>
+  override val innerTypes: LazySet<StatikKotlinConcreteType<*>>
+  override val innerTypesRecursive: LazySet<StatikKotlinConcreteType<*>>
 
-  override val properties: LazySet<StatikKotlinProperty<*, *>>
-  override val functions: LazySet<StatikKotlinDeclaredFunction<*, *>>
+  override val properties: LazySet<StatikKotlinProperty<*>>
+  override val functions: LazySet<StatikKotlinDeclaredFunction<*>>
 }
 
-public interface StatikKotlinAnnotationClass<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<NODE>,
+public interface StatikKotlinAnnotationClass<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
 
-public interface StatikKotlinClass<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinClass<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
-  public val primaryConstructor: StatikKotlinFunction<*, *>?
+  public val primaryConstructor: StatikKotlinFunction<*>?
 
   /** All constructors, including the primary if it exists */
-  public val constructors: LazySet<StatikKotlinFunction<*, *>>
+  public val constructors: LazySet<StatikKotlinFunction<*>>
 }
 
-public interface StatikKotlinCompanionObject<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinCompanionObject<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
 
-public interface StatikKotlinTypeAlias<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinTypeAlias<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
 
-public interface StatikKotlinEnum<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinEnum<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
 
-public interface StatikKotlinInterface<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinInterface<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName
 
-public interface StatikKotlinObject<out PARENT, NODE : Any> :
-  StatikKotlinConcreteType<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikDeclaredElement<PARENT, NODE>
-  where PARENT : StatikKotlinElement<*>,
+public interface StatikKotlinObject<out PARENT> :
+  StatikKotlinConcreteType<PARENT>,
+  StatikKotlinElementWithParent<PARENT>,
+  StatikDeclaredElement<PARENT>
+  where PARENT : StatikKotlinElement,
         PARENT : HasPackageName

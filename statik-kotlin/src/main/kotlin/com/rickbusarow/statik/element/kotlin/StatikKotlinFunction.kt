@@ -22,36 +22,36 @@ import com.rickbusarow.statik.utils.lazy.LazyDeferred
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** Represents a Kotlin function element. */
-public sealed interface StatikKotlinFunction<out PARENT, NODE : Any> :
-  StatikFunction<PARENT, NODE>,
-  StatikKotlinCallable<PARENT, NODE>,
-  StatikKotlinHasValueParameters<PARENT, NODE>,
-  StatikKotlinHasTypeParameters<PARENT, NODE>
-  where PARENT : StatikKotlinElementWithPackageName<*>,
-        PARENT : StatikKotlinElement<*>,
+public sealed interface StatikKotlinFunction<out PARENT> :
+  StatikFunction<PARENT>,
+  StatikKotlinCallable<PARENT>,
+  StatikKotlinHasValueParameters<PARENT>,
+  StatikKotlinHasTypeParameters<PARENT>
+  where PARENT : StatikKotlinElementWithPackageName,
+        PARENT : StatikKotlinElement,
         PARENT : HasPackageName {
 
-  override val valueParameters: LazySet<StatikKotlinValueParameter<*, *>>
-  override val properties: LazySet<StatikKotlinProperty<*, *>>
+  override val valueParameters: LazySet<StatikKotlinValueParameter<*>>
+  override val properties: LazySet<StatikKotlinProperty<*>>
   override val returnType: LazyDeferred<ReferenceName>
 }
 
 /** Represents a Kotlin function element. */
-public interface StatikKotlinAnonymousFunction<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinFunction<PARENT, NODE>
+public interface StatikKotlinAnonymousFunction<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinFunction<PARENT>
 
 /** Represents a Kotlin function element. */
-public interface StatikKotlinDeclaredFunction<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinFunction<PARENT, NODE>,
-  StatikKotlinDeclaredElement<PARENT, NODE>
+public interface StatikKotlinDeclaredFunction<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinFunction<PARENT>,
+  StatikKotlinDeclaredElement<PARENT>
 
 /** A Kotlin extension function. */
-public interface StatikKotlinExtensionFunction<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinExtensionElement<PARENT, NODE>,
-  StatikKotlinFunction<PARENT, NODE>
+public interface StatikKotlinExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinExtensionElement<PARENT>,
+  StatikKotlinFunction<PARENT>
 
 /** A Kotlin extension function. */
-public interface StatikKotlinDeclaredExtensionFunction<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinExtensionElement<PARENT, NODE>,
-  StatikKotlinFunction<PARENT, NODE>,
-  StatikKotlinDeclaredFunction<PARENT, NODE>
+public interface StatikKotlinDeclaredExtensionFunction<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinExtensionElement<PARENT>,
+  StatikKotlinFunction<PARENT>,
+  StatikKotlinDeclaredFunction<PARENT>

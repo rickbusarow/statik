@@ -19,11 +19,11 @@ import com.rickbusarow.statik.element.StatikElement
 import com.rickbusarow.statik.element.StatikElementWithParent
 
 /** Represents a Java element in the source code. */
-public interface StatikJavaElement<NODE : Any> : StatikElement<NODE> {
+public interface StatikJavaElement : StatikElement {
   /** The Java file that contains this element. */
-  override val containingFile: StatikJavaFile<*>
+  override val containingFile: StatikJavaFile
 }
 
 /** Represents an element with a parent element. */
-public interface StatikJavaElementWithParent<out PARENT : StatikJavaElement<*>, NODE : Any> :
-  StatikElementWithParent<PARENT, NODE>, StatikJavaElement<NODE>
+public interface StatikJavaElementWithParent<out PARENT : StatikJavaElement> :
+  StatikElementWithParent<PARENT>, StatikJavaElement

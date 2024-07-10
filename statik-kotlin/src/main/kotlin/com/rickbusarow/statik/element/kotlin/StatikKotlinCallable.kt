@@ -20,36 +20,36 @@ import com.rickbusarow.statik.element.StatikProperty
 import com.rickbusarow.statik.element.StatikType
 
 /** A Kotlin callable element. */
-public interface StatikKotlinCallable<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikCallable<PARENT, NODE>,
-  StatikKotlinElementWithParent<PARENT, NODE>
+public interface StatikKotlinCallable<out PARENT : StatikKotlinElement> :
+  StatikCallable<PARENT>,
+  StatikKotlinElementWithParent<PARENT>
 
 /** A Kotlin property element. */
-public interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikProperty<PARENT, NODE>,
-  StatikKotlinCallable<PARENT, NODE>
+public interface StatikKotlinProperty<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikProperty<PARENT>,
+  StatikKotlinCallable<PARENT>
 
 /** A Kotlin member property element. */
-public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinProperty<PARENT, NODE>
+public interface StatikKotlinMemberProperty<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinProperty<PARENT>
 
 /** A Kotlin extension property element. */
-public interface StatikKotlinMemberExtensionProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinMemberProperty<PARENT, NODE>,
-  StatikKotlinHasTypeParameters<PARENT, NODE>
+public interface StatikKotlinMemberExtensionProperty<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinMemberProperty<PARENT>,
+  StatikKotlinHasTypeParameters<PARENT>
 
 /** A Kotlin constructor property element. */
-public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinProperty<PARENT, NODE>
+public interface StatikKotlinConstructorProperty<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinProperty<PARENT>
 
 /** An extension element. */
-public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinCallable<PARENT, NODE> {
+public sealed interface StatikKotlinExtensionElement<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinCallable<PARENT> {
   /** The receiver type. */
-  public val receiver: StatikType<*, *>
+  public val receiver: StatikType<*>
 }
 
 /** A Kotlin extension property. */
-public interface StatikKotlinExtensionProperty<out PARENT : StatikKotlinElementWithPackageName<*>, NODE : Any> :
-  StatikKotlinExtensionElement<PARENT, NODE>,
-  StatikKotlinProperty<PARENT, NODE>
+public interface StatikKotlinExtensionProperty<out PARENT : StatikKotlinElementWithPackageName> :
+  StatikKotlinExtensionElement<PARENT>,
+  StatikKotlinProperty<PARENT>

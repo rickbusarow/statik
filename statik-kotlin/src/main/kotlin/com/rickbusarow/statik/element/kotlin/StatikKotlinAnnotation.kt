@@ -21,17 +21,17 @@ import com.rickbusarow.statik.element.StatikAnnotationArgument
 import com.rickbusarow.statik.utils.lazy.LazySet
 
 /** Represents an annotated element. */
-public interface StatikKotlinAnnotated<E : StatikKotlinAnnotation<*, *>> : StatikAnnotated {
+public interface StatikKotlinAnnotated<E : StatikKotlinAnnotation<*>> : StatikAnnotated {
 
   /** The annotations of this element. */
   override val annotations: LazySet<E>
 }
 
-public interface StatikKotlinAnnotation<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikAnnotation<PARENT, NODE>
+public interface StatikKotlinAnnotation<out PARENT : StatikKotlinElement> :
+  StatikKotlinElementWithParent<PARENT>,
+  StatikAnnotation<PARENT>
 
 /** Represents an argument of an annotation. */
-public interface StatikKotlinAnnotationArgument<out PARENT : StatikKotlinElement<*>, NODE : Any> :
-  StatikKotlinElementWithParent<PARENT, NODE>,
-  StatikAnnotationArgument<PARENT, NODE>
+public interface StatikKotlinAnnotationArgument<out PARENT : StatikKotlinElement> :
+  StatikKotlinElementWithParent<PARENT>,
+  StatikAnnotationArgument<PARENT>

@@ -17,36 +17,39 @@ package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.StatikAnnotation
+import com.rickbusarow.statik.element.StatikTypeParameter
 import com.rickbusarow.statik.element.StatikTypeReference
 import com.rickbusarow.statik.element.kotlin.StatikKotlinTypeParameter
 import com.rickbusarow.statik.element.kotlin.k1.compiler.HasStatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.element.kotlin.k1.psi.resolve.getStrictParentOfType
 import com.rickbusarow.statik.utils.lazy.LazySet
+import com.rickbusarow.statik.utils.lazy.emptyLazySet
+import com.rickbusarow.statik.utils.lazy.lazySet
 import dev.drewhamilton.poko.Poko
 import org.jetbrains.kotlin.psi.KtTypeParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterList
 
 @Poko
 @InternalStatikApi
-public class K1TypeParameter<out PARENT : K1ElementWithPackageName<*>>(
+public class K1TypeParameter<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtTypeParameter,
   override val parent: PARENT
-) : StatikKotlinTypeParameter<PARENT, KtTypeParameter>,
+) : StatikKotlinTypeParameter<PARENT>,
   HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT, KtTypeParameter> by K1DeclaredElementDelegate(node, parent) {
+  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
 
   override val index: Int
     get() = node.getStrictParentOfType<KtTypeParameterList>()?.parameters?.indexOf(node) ?: -1
 
-  override val superTypes: LazySet<StatikTypeReference<*, *>> = lazySet {
+  override val superTypes: LazySet<StatikTypeReference<*>> = lazySet {
     emptySet()
   }
 
-  // override val typeParameters: LazySet<StatikTypeParameter<*, *>> get() = emptyLazySet()
+  override val typeParameters: LazySet<StatikTypeParameter<*>> get() = emptyLazySet()
 
-  override val annotations: LazySet<StatikAnnotation<*, *>> = lazySet {
+  override val annotations: LazySet<StatikAnnotation<*>> = lazySet {
     node.annotations(context, this@K1TypeParameter)
   }
 }

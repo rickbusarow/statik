@@ -17,8 +17,6 @@ package com.rickbusarow.statik.element.kotlin.k1
 
 import com.rickbusarow.statik.InternalStatikApi
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
-import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.k1.compiler.StatikKotlinElementContext
 import com.rickbusarow.statik.name.HasPackageName
 import org.jetbrains.kotlin.psi.KtClass
@@ -31,11 +29,11 @@ import org.jetbrains.kotlin.psi.psiUtil.getChildrenOfType
 @InternalStatikApi
 public fun <PARENT> StatikKotlinConcreteType(
   context: StatikKotlinElementContext,
-  containingFile: StatikKotlinFile,
+  containingFile: K1KotlinFile,
   clazz: KtClassOrObject,
   parent: PARENT
 ): StatikKotlinConcreteType<*>?
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName = when (clazz) {
   is KtClass ->
     if (clazz.isInterface()) {
@@ -78,10 +76,10 @@ public fun <PARENT> StatikKotlinConcreteType(
 @Suppress("FunctionName")
 internal fun <PARENT> KtElement.StatikKotlinConcreteTypesDirect(
   context: StatikKotlinElementContext,
-  containingFile: StatikKotlinFile,
+  containingFile: K1KotlinFile,
   parent: PARENT
 ): Set<StatikKotlinConcreteType<*>>
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName {
 
   return getChildrenOfType<KtClassOrObject>()

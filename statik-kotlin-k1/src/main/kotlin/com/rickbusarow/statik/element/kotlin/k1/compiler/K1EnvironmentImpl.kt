@@ -38,6 +38,7 @@ import org.jetbrains.kotlin.cli.jvm.config.addJavaSourceRoots
 import org.jetbrains.kotlin.cli.jvm.config.addJvmClasspathRoots
 import org.jetbrains.kotlin.cli.jvm.config.addJvmSdkRoots
 import org.jetbrains.kotlin.cli.jvm.modules.CoreJrtFileSystem
+import org.jetbrains.kotlin.com.intellij.openapi.Disposable
 import org.jetbrains.kotlin.com.intellij.psi.PsiJavaFile
 import org.jetbrains.kotlin.config.ApiVersion
 import org.jetbrains.kotlin.config.CommonConfigurationKeys
@@ -252,9 +253,21 @@ internal class K1EnvironmentImpl(
     setIdeaIoUseFallback()
 
     return KotlinCoreEnvironment.createForProduction(
-      parentDisposable = resetManager,
+      parentDisposable = DisposableResetManager(resetManager),
       configuration = configuration,
       configFiles = JVM_CONFIG_FILES
     )
+  }
+}
+
+private class DisposableResetManager(
+  private val resetManager: ResetManager
+) : ResetManager by resetManager, Disposable {
+  override fun reset() {
+    dispose()
+  }
+
+  override fun dispose() {
+    resetManager.reset()
   }
 }

@@ -44,8 +44,8 @@ public class K1KotlinFile(
   override val context: StatikKotlinElementContext,
   override val file: File,
   override val node: KtFile
-) : StatikKotlinFile<KtFile>,
-  K1ElementWithPackageName<KtFile>,
+) : StatikKotlinFile,
+  K1ElementWithPackageName,
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate() {
 
@@ -53,14 +53,14 @@ public class K1KotlinFile(
     node.fileAnnotationList
     TODO("Not yet implemented")
   }
-  override val declaredTypes: LazySet<StatikKotlinConcreteType<*, *>> = lazySet {
+  override val declaredTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
     node.StatikKotlinConcreteTypesDirect(
       context = context,
       containingFile = this,
       parent = this
     )
   }
-  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*, *>> = lazySet {
+  override val declaredTypesAndInnerTypes: LazySet<StatikKotlinConcreteType<*>> = lazySet {
     declaredTypes.fold(emptySet()) { acc, type ->
       acc + type + type.innerTypesRecursive.toSet()
     }
@@ -91,7 +91,7 @@ public class K1KotlinFile(
     node.getChildrenOfType<KtNamedFunction>()
       .mapToSet { K1DeclaredFunction(context = context, node = it, parent = this) }
   }
-  override val topLevelProperties: LazySet<StatikKotlinProperty<*, *>>
+  override val topLevelProperties: LazySet<StatikKotlinProperty<*>>
     get() = TODO("Not yet implemented")
   override val apiReferences: List<LazySet.DataSource<ReferenceName>> = emptyList()
   override val declarations: List<LazySet.DataSource<DeclaredName>> = emptyList()

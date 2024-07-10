@@ -24,8 +24,6 @@ import com.rickbusarow.statik.element.kotlin.StatikKotlinClass
 import com.rickbusarow.statik.element.kotlin.StatikKotlinCompanionObject
 import com.rickbusarow.statik.element.kotlin.StatikKotlinConcreteType
 import com.rickbusarow.statik.element.kotlin.StatikKotlinDeclaredFunction
-import com.rickbusarow.statik.element.kotlin.StatikKotlinElement
-import com.rickbusarow.statik.element.kotlin.StatikKotlinFile
 import com.rickbusarow.statik.element.kotlin.StatikKotlinFunction
 import com.rickbusarow.statik.element.kotlin.StatikKotlinHasTypeParameters
 import com.rickbusarow.statik.element.kotlin.StatikKotlinInterface
@@ -52,16 +50,17 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 @InternalStatikApi
-public abstract class AbstractStatikKotlinConcreteType<out PARENT, NODE : Any> internal constructor(
+public abstract class AbstractStatikKotlinConcreteType<out PARENT> internal constructor(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile<*>,
+  override val containingFile: K1KotlinFile,
   override val node: KtClassOrObject
 ) : StatikKotlinConcreteType<PARENT>,
+  K1DeclaredElement<PARENT>,
   StatikKotlinTypeDeclaration<PARENT>,
   StatikKotlinHasTypeParameters<PARENT>,
   HasStatikKotlinElementContext,
   HasChildrenInternal by HasChildrenInternalDelegate()
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName {
 
   override val simpleNames: List<SimpleName> by unsafeLazy {
@@ -147,13 +146,13 @@ public abstract class AbstractStatikKotlinConcreteType<out PARENT, NODE : Any> i
 @InternalStatikApi
 public class K1Class<out PARENT>(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile,
+  override val containingFile: K1KotlinFile,
   override val node: KtClass,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(context, containingFile, node),
   HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinClass<PARENT>
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName {
   override val primaryConstructor: StatikKotlinFunction<*>
     get() = TODO("Not yet implemented")
@@ -164,7 +163,7 @@ public class K1Class<out PARENT>(
 @InternalStatikApi
 public class K1Interface<out PARENT>(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile,
+  override val containingFile: K1KotlinFile,
   override val node: KtClass,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
@@ -174,13 +173,13 @@ public class K1Interface<out PARENT>(
 ),
   HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinInterface<PARENT>
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName
 
 @InternalStatikApi
 public class K1CompanionObject<out PARENT>(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile,
+  override val containingFile: K1KotlinFile,
   override val node: KtObjectDeclaration,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
@@ -190,13 +189,13 @@ public class K1CompanionObject<out PARENT>(
 ),
   HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinCompanionObject<PARENT>
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName
 
 @InternalStatikApi
 public class K1Object<out PARENT>(
   override val context: StatikKotlinElementContext,
-  override val containingFile: StatikKotlinFile,
+  override val containingFile: K1KotlinFile,
   override val node: KtObjectDeclaration,
   override val parent: PARENT
 ) : AbstractStatikKotlinConcreteType<PARENT>(
@@ -206,5 +205,5 @@ public class K1Object<out PARENT>(
 ),
   HasKotlinVisibility by K1VisibilityDelegate(node),
   StatikKotlinObject<PARENT>
-  where PARENT : StatikKotlinElement,
+  where PARENT : K1Element,
         PARENT : HasPackageName
