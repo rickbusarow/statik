@@ -36,15 +36,15 @@ public class K1TypeParameter<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtTypeParameter,
   override val parent: PARENT
-) : StatikKotlinTypeParameter<PARENT>,
-  HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
+) : DefaultK1DeclaredElement<PARENT>(node, parent),
+  StatikKotlinTypeParameter<PARENT>,
+  HasStatikKotlinElementContext {
 
   override val index: Int
     get() = node.getStrictParentOfType<KtTypeParameterList>()?.parameters?.indexOf(node) ?: -1
 
   override val superTypes: LazySet<StatikTypeReference<*>> = lazySet {
-    emptySet()
+    TODO("Not yet implemented")
   }
 
   override val typeParameters: LazySet<StatikTypeParameter<*>> get() = emptyLazySet()

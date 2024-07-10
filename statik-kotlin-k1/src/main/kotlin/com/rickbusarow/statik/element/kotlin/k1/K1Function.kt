@@ -70,9 +70,9 @@ public class K1DeclaredFunction<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtNamedFunction,
   override val parent: PARENT
-) : StatikKotlinDeclaredFunction<PARENT>,
-  HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
+) : DefaultK1DeclaredElement<PARENT>(node, parent),
+  StatikKotlinDeclaredFunction<PARENT>,
+  HasStatikKotlinElementContext {
 
   override val text: String
     get() = node.text
@@ -80,16 +80,19 @@ public class K1DeclaredFunction<out PARENT : K1ElementWithPackageName>(
   override val valueParameters: LazySet<K1ValueParameter<*>> = lazySet {
     node.valueParameters.mapToSet { K1ValueParameter(context, it, this) }
   }
-  override val properties: LazySet<K1Property<*>>
-    get() = TODO("Not yet implemented")
+
+  override val properties: LazySet<K1Property<*>> = lazySet { TODO("Not yet implemented") }
+
   override val returnType: LazyDeferred<ReferenceName> = lazyDeferred {
     bindingContext(BindingContext.FUNCTION, node)
       ?.returnType
       .requireReferenceName()
   }
+
   override val annotations: LazySet<K1Annotation<*>> = lazySet {
     node.annotations(context, this@K1DeclaredFunction)
   }
+
   override val typeParameters: LazySet<K1TypeParameter<*>> = lazySet {
     node.typeParameters.mapToSet { K1TypeParameter(context, it, this) }
   }

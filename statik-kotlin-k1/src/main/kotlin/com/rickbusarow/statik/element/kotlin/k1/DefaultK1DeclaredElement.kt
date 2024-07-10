@@ -31,7 +31,8 @@ import com.rickbusarow.statik.utils.stdlib.singletonList
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 @InternalStatikApi
-public class K1DeclaredElementDelegate<PARENT>(
+@Suppress("UnnecessaryAbstractClass")
+public abstract class DefaultK1DeclaredElement<out PARENT>(
   override val node: KtDeclaration,
   override val parent: PARENT
 ) : K1DeclaredElement<PARENT>,
@@ -43,8 +44,8 @@ public class K1DeclaredElementDelegate<PARENT>(
   override val containingFile: K1KotlinFile by unsafeLazy { parent.containingFile }
   override val packageName: PackageName by unsafeLazy { parent.packageName }
   override val simpleNames: List<SimpleName> by unsafeLazy {
-    when (parent) {
-      is HasSimpleNames -> parent.simpleNames + node.requireSimpleName()
+    when (val p = parent) {
+      is HasSimpleNames -> p.simpleNames + node.requireSimpleName()
       else -> node.requireSimpleName().singletonList()
     }
   }

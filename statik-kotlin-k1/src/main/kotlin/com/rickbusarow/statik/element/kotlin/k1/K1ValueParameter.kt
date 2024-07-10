@@ -38,9 +38,9 @@ public class K1ValueParameter<out PARENT : K1ElementWithPackageName>(
   override val context: StatikKotlinElementContext,
   override val node: KtParameter,
   override val parent: PARENT
-) : StatikKotlinValueParameter<PARENT>,
-  HasStatikKotlinElementContext,
-  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent) {
+) : DefaultK1DeclaredElement<PARENT>(node, parent),
+  StatikKotlinValueParameter<PARENT>,
+  HasStatikKotlinElementContext {
 
   override val text: String
     get() = node.text

@@ -54,8 +54,8 @@ public class K1ConstructorProperty<out PARENT : K1DeclaredElement<*>>(
   override val context: StatikKotlinElementContext,
   override val node: KtParameter,
   override val parent: PARENT
-) : StatikKotlinConstructorProperty<PARENT>,
-  K1DeclaredElement<PARENT> by K1DeclaredElementDelegate(node, parent),
+) : DefaultK1DeclaredElement<PARENT>(node, parent),
+  StatikKotlinConstructorProperty<PARENT>,
   HasStatikKotlinElementContext {
 
   override val typeReferenceName: LazyDeferred<ReferenceName> = lazyDeferred {

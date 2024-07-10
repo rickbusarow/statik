@@ -47,7 +47,7 @@ class StatikKotlinFunctionTest : ProjectTest(), StatikNameTest {
   @TestFactory
   fun `caaaaaanary thing`() = Properties.explicitTypes
     .take(1)
-    .asTests { params ->
+    .asTests {
 
       createKotlin(
         """

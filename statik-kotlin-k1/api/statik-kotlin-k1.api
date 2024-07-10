@@ -29,6 +29,30 @@ public abstract class com/rickbusarow/statik/element/kotlin/k1/AbstractStatikKot
 	public fun toString ()Ljava/lang/String;
 }
 
+public abstract class com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement : com/rickbusarow/statik/element/internal/HasChildrenInternal, com/rickbusarow/statik/element/kotlin/HasKotlinVisibility, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement {
+	public fun <init> (Lorg/jetbrains/kotlin/psi/KtDeclaration;Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;)V
+	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
+	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
+	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
+	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
+	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
+	public synthetic fun getNode ()Ljava/lang/Object;
+	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
+	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
+	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
+	public fun getSegments ()Ljava/util/List;
+	public fun getSimpleNames ()Ljava/util/List;
+	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
+	public fun getText ()Ljava/lang/String;
+	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
+	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
+	public fun isApi ()Z
+	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
+}
+
 public abstract interface class com/rickbusarow/statik/element/kotlin/k1/HasAnalysisResult {
 	public abstract fun getAnalysisResultDeferred ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
 	public abstract fun getBindingContextDeferred ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
@@ -140,37 +164,24 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1CompanionObject : 
 	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 }
 
-public final class com/rickbusarow/statik/element/kotlin/k1/K1ConstructorProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
+public final class com/rickbusarow/statik/element/kotlin/k1/K1ConstructorProperty : com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinConstructorProperty, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
 	public fun <init> (Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;Lorg/jetbrains/kotlin/psi/KtParameter;Lcom/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement;)V
 	public fun bindingContext (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun bindingContext (Lorg/jetbrains/kotlin/util/slicedMap/ReadOnlySlice;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
 	public synthetic fun getContext ()Lcom/rickbusarow/statik/compiler/StatikElementContext;
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public synthetic fun getNode ()Ljava/lang/Object;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
 	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
-	public fun getText ()Ljava/lang/String;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
 	public fun getTypeReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 	public fun hashCode ()I
-	public fun isApi ()Z
 	public fun isMutable ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -187,63 +198,27 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement$De
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement;)Z
 }
 
-public final class com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElementDelegate : com/rickbusarow/statik/element/internal/HasChildrenInternal, com/rickbusarow/statik/element/kotlin/HasKotlinVisibility, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement {
-	public fun <init> (Lorg/jetbrains/kotlin/psi/KtDeclaration;Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;)V
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
-	public synthetic fun getNode ()Ljava/lang/Object;
-	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
-	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
-	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
-	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
-	public fun getText ()Ljava/lang/String;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
-	public fun isApi ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
-}
-
-public final class com/rickbusarow/statik/element/kotlin/k1/K1DeclaredFunction : com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
+public final class com/rickbusarow/statik/element/kotlin/k1/K1DeclaredFunction : com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinDeclaredFunction, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
 	public fun <init> (Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;Lorg/jetbrains/kotlin/psi/KtNamedFunction;Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;)V
 	public fun bindingContext (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun bindingContext (Lorg/jetbrains/kotlin/util/slicedMap/ReadOnlySlice;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
 	public synthetic fun getContext ()Lcom/rickbusarow/statik/compiler/StatikElementContext;
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public synthetic fun getNode ()Ljava/lang/Object;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
 	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtNamedFunction;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;
 	public fun getProperties ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getReturnType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
 	public fun getText ()Ljava/lang/String;
 	public fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun getValueParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 	public fun hashCode ()I
-	public fun isApi ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -373,37 +348,24 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1MemberExtensionPro
 	public fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
 }
 
-public class com/rickbusarow/statik/element/kotlin/k1/K1MemberProperty : com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement, com/rickbusarow/statik/element/kotlin/k1/K1ElementWithParent, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
+public class com/rickbusarow/statik/element/kotlin/k1/K1MemberProperty : com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinMemberProperty, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
 	public fun <init> (Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;Lorg/jetbrains/kotlin/psi/KtProperty;Lcom/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement;)V
 	public fun bindingContext (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun bindingContext (Lorg/jetbrains/kotlin/util/slicedMap/ReadOnlySlice;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
 	public synthetic fun getContext ()Lcom/rickbusarow/statik/compiler/StatikElementContext;
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public synthetic fun getNode ()Ljava/lang/Object;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
 	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtProperty;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
-	public fun getText ()Ljava/lang/String;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
 	public fun getTypeReferenceName ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 	public fun hashCode ()I
-	public fun isApi ()Z
 	public fun isMutable ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -433,73 +395,48 @@ public final class com/rickbusarow/statik/element/kotlin/k1/K1Property$DefaultIm
 	public static fun isApi (Lcom/rickbusarow/statik/element/kotlin/k1/K1Property;)Z
 }
 
-public final class com/rickbusarow/statik/element/kotlin/k1/K1TypeParameter : com/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
+public final class com/rickbusarow/statik/element/kotlin/k1/K1TypeParameter : com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinTypeParameter, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
 	public fun <init> (Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;Lorg/jetbrains/kotlin/psi/KtTypeParameter;Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;)V
 	public fun bindingContext (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun bindingContext (Lorg/jetbrains/kotlin/util/slicedMap/ReadOnlySlice;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
 	public synthetic fun getContext ()Lcom/rickbusarow/statik/compiler/StatikElementContext;
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public fun getIndex ()I
 	public synthetic fun getNode ()Ljava/lang/Object;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
 	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtTypeParameter;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
 	public fun getSuperTypes ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getText ()Ljava/lang/String;
 	public fun getTypeParameters ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 	public fun hashCode ()I
-	public fun isApi ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/rickbusarow/statik/element/kotlin/k1/K1ValueParameter : com/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter, com/rickbusarow/statik/element/kotlin/k1/K1DeclaredElement, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
+public final class com/rickbusarow/statik/element/kotlin/k1/K1ValueParameter : com/rickbusarow/statik/element/kotlin/k1/DefaultK1DeclaredElement, com/rickbusarow/statik/element/kotlin/StatikKotlinValueParameter, com/rickbusarow/statik/element/kotlin/k1/compiler/HasStatikKotlinElementContext {
 	public fun <init> (Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;Lorg/jetbrains/kotlin/psi/KtParameter;Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;)V
 	public fun bindingContext (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun bindingContext (Lorg/jetbrains/kotlin/util/slicedMap/ReadOnlySlice;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAnnotations ()Lcom/rickbusarow/statik/utils/lazy/LazySet;
-	public fun getChildren ()Lkotlinx/coroutines/flow/Flow;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/StatikFile;
-	public synthetic fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinFile;
-	public fun getContainingFile ()Lcom/rickbusarow/statik/element/kotlin/k1/K1KotlinFile;
 	public synthetic fun getContext ()Lcom/rickbusarow/statik/compiler/StatikElementContext;
 	public fun getContext ()Lcom/rickbusarow/statik/element/kotlin/k1/compiler/StatikKotlinElementContext;
-	public fun getDeclaredName ()Lcom/rickbusarow/statik/name/DeclaredName;
 	public fun getIndex ()I
 	public fun getName ()Lcom/rickbusarow/statik/name/StatikName;
 	public synthetic fun getNode ()Ljava/lang/Object;
+	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtDeclaration;
 	public synthetic fun getNode ()Lorg/jetbrains/kotlin/psi/KtElement;
 	public fun getNode ()Lorg/jetbrains/kotlin/psi/KtParameter;
-	public fun getPackageName ()Lcom/rickbusarow/statik/name/PackageName;
 	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/StatikElement;
+	public synthetic fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1Element;
 	public fun getParent ()Lcom/rickbusarow/statik/element/kotlin/k1/K1ElementWithPackageName;
-	public fun getPsi ()Lorg/jetbrains/kotlin/psi/KtElement;
-	public fun getSegments ()Ljava/util/List;
-	public fun getSimpleNames ()Ljava/util/List;
-	public fun getSimplestName-i5e9x4A ()Ljava/lang/String;
 	public fun getText ()Ljava/lang/String;
 	public fun getType ()Lcom/rickbusarow/statik/utils/lazy/LazyDeferred;
-	public synthetic fun getVisibility ()Lcom/rickbusarow/statik/element/StatikVisibility;
-	public fun getVisibility ()Lcom/rickbusarow/statik/element/kotlin/StatikKotlinVisibility;
 	public fun hashCode ()I
-	public fun isApi ()Z
-	public fun lazySet (Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;Lkotlin/jvm/functions/Function1;)Lcom/rickbusarow/statik/utils/lazy/LazySet;
 	public fun toString ()Ljava/lang/String;
 }
 
