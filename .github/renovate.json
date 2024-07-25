@@ -8,21 +8,21 @@
   "rebaseLabel": "rebase",
   "packageRules": [
     {
-      "groupName": "Kotlin and compiler plugins",
       "matchPackageNames": [
         "org.jetbrains.kotlin:**",
         "com.google.devtools.ksp:**",
         "com.square.anvil:**",
         "dev.drewhamilton.poko:**"
-      ]
+      ],
+      "groupName": "Kotlin and compiler plugins"
     },
     {
-      "groupName": "KtLint libs",
       "matchPackageNames": [
         "com.pinterest.ktlint:**",
         "com.rickbusarow.ktlint:**",
         "com.rickbusarow.ktrules:**"
-      ]
+      ],
+      "groupName": "KtLint libs"
     },
     {
       "matchPackageNames": [
