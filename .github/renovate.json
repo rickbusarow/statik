@@ -9,41 +9,41 @@
   "packageRules": [
     {
       "groupName": "Kotlin and compiler plugins",
-      "matchPackagePrefixes": [
-        "org.jetbrains.kotlin:",
-        "com.google.devtools.ksp:",
-        "com.square.anvil:",
-        "dev.drewhamilton.poko:"
+      "matchPackageNames": [
+        "org.jetbrains.kotlin:**",
+        "com.google.devtools.ksp:**",
+        "com.square.anvil:**",
+        "dev.drewhamilton.poko:**"
       ]
     },
     {
       "groupName": "KtLint libs",
-      "matchPackagePrefixes": [
-        "com.pinterest.ktlint:",
-        "com.rickbusarow.ktlint:",
-        "com.rickbusarow.ktrules:"
+      "matchPackageNames": [
+        "com.pinterest.ktlint:**",
+        "com.rickbusarow.ktlint:**",
+        "com.rickbusarow.ktrules:**"
       ]
     },
     {
-      "matchPackageNames": ["com.rickbusarow.module-check"],
+      "matchPackageNames": [
+        "com.rickbusarow.module-check",
+        "com.rickbusarow.dispatch:**",
+        "com.rickbusarow.doks:**",
+        "com.rickbusarow.gradle-dependency-sync:**",
+        "com.rickbusarow.hermit:**",
+        "com.rickbusarow.kase:**",
+        "com.rickbusarow.kgx:**",
+        "com.rickbusarow.ktlint:**",
+        "com.rickbusarow.ktrules:**",
+        "com.rickbusarow.mahout:**",
+        "com.rickbusarow.modulecheck:**"
+      ],
       "automergeStrategy": "rebase",
       "matchRepositories": [
         "repo.maven.apache.org/maven2",
         "plugins.gradle.org/m2"
       ],
       "rebaseWhen": "auto",
-      "matchPackagePrefixes": [
-        "com.rickbusarow.dispatch:",
-        "com.rickbusarow.doks:",
-        "com.rickbusarow.gradle-dependency-sync:",
-        "com.rickbusarow.hermit:",
-        "com.rickbusarow.kase:",
-        "com.rickbusarow.kgx:",
-        "com.rickbusarow.ktlint:",
-        "com.rickbusarow.ktrules:",
-        "com.rickbusarow.mahout:",
-        "com.rickbusarow.modulecheck:"
-      ],
       "automerge": true,
       "automergeType": "pr"
     }
