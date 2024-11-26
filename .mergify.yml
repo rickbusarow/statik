@@ -53,7 +53,6 @@ shared:
   success-ci: &success_ci
     - check-success=all-checks
 
-
 pull_request_rules:
   - name: Remove automerge label once merged
     conditions:
@@ -103,7 +102,8 @@ pull_request_rules:
       label:
         remove:
           - requeue
-  - name: Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR
+  - name:
+      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR
       with a 'requeue' label
     conditions: []
     actions:
