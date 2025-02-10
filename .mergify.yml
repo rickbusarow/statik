@@ -1,5 +1,5 @@
 shared:
-  author-bot: &author_bot
+  author-bot:
     - or:
         - author=rb-org-bot[bot]
         - author=dependabot[bot]
@@ -12,7 +12,7 @@ shared:
     - label=approved
   label-automerge: &label_automerge
     - label=automerge
-  label-dnm: &label_dnm
+  label-dnm:
     - label=do-not-merge
   not-label-dnm: &not_label_dnm
     - label!=do-not-merge
@@ -26,22 +26,36 @@ shared:
   success-ci: &success_ci
     - check-success=all-checks
 
-pull_request_rules:
+queue_rules:
+  - name: duplicated Queue PRs for rebase-merge when CI passes and approved from Re-queue any PR
+      with a 'requeue' label
+    queue_conditions:
+      - and:
+          - label=automerge
+      - and:
+          - base=main
+      - and:
+          - label!=do-not-merge
+      - label=requeue
+    merge_conditions: []
+    merge_method: fast-forward
+    update_method: rebase
+    autosquash: true
+    merge_bot_account: *name_merge_bot
+    update_bot_account: *name_merge_bot
   - name: Queue PRs for rebase-merge when CI passes and approved
-    # GitHub branch protection rules are also applied automatically
-    conditions:
+    queue_conditions:
       - and: *label_automerge
       - and: *base_main
       - and: *not_label_dnm
-    actions:
-      queue:
-        # maybe change to 'rebase' if this causes problems
-        merge_method: fast-forward
-        update_method: rebase # this is also the default when 'merge_method' is 'fast-forward'
-        autosquash: true
-        merge_bot_account: *name_merge_bot
-        update_bot_account: *name_merge_bot
+    merge_conditions: []
+    merge_method: fast-forward
+    update_method: rebase
+    autosquash: true
+    merge_bot_account: *name_merge_bot
+    update_bot_account: *name_merge_bot
 
+pull_request_rules:
   - name: Remove automerge label once merged
     conditions:
       - merged
@@ -87,12 +101,11 @@ pull_request_rules:
     conditions:
       - label=requeue
     actions:
-      queue:
-        # maybe change to 'rebase' if this causes problems
-        merge_method: fast-forward
-        update_method: rebase # this is also the default when 'merge_method' is 'fast-forward'
-        autosquash: true
-        merge_bot_account: *name_merge_bot
       label:
         remove:
           - requeue
+  - name: Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR with a 'requeue'
+      label
+    conditions: []
+    actions:
+      queue:
