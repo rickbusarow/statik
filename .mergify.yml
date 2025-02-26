@@ -1,5 +1,5 @@
 shared:
-  author-bot:
+  author-bot: &author_bot
     - or:
         - author=rb-org-bot[bot]
         - author=dependabot[bot]
@@ -12,7 +12,7 @@ shared:
     - label=approved
   label-automerge: &label_automerge
     - label=automerge
-  label-dnm:
+  label-dnm: &label_dnm
     - label=do-not-merge
   not-label-dnm: &not_label_dnm
     - label!=do-not-merge
@@ -28,22 +28,17 @@ shared:
 
 queue_rules:
   - name:
-      duplicated Queue PRs for rebase-merge when CI passes and approved from Re-queue any PR
-      with a 'requeue' label
+      duplicated Queue PRs for rebase-merge when CI passes and approved from Re-queue
+      any PR with a 'requeue' label
     queue_conditions:
-      - and:
-          - label=automerge
-      - and:
-          - base=main
-      - and:
-          - label!=do-not-merge
       - label=requeue
+      - and: *label_automerge
+      - and: *base_main
+      - and: *not_label_dnm
     merge_conditions: []
     merge_method: fast-forward
     update_method: rebase
     autosquash: true
-    merge_bot_account: *name_merge_bot
-    update_bot_account: *name_merge_bot
   - name: Queue PRs for rebase-merge when CI passes and approved
     queue_conditions:
       - and: *label_automerge
@@ -75,14 +70,23 @@ pull_request_rules:
         type: APPROVE
         message: Automatically approving RBusarow pull request
 
+  - name: Auto-approve bot PRs
+    conditions:
+      - and: *success_ci
+      - or: *author_bot
+    actions:
+      review:
+        type: APPROVE
+        message: Automatically approving bot pull request
+
   - name: Auto-approve any PR with an 'approved' label
     conditions:
       - and: *success_ci
       - and: *label_approved
     actions:
-      review:
-        type: APPROVE
-        message: Automatically approving due to 'approved' label
+      rebase:
+        autosquash: true
+        bot_account: *name_merge_bot
       label:
         remove:
           - *name_approved
@@ -106,8 +110,8 @@ pull_request_rules:
         remove:
           - requeue
   - name:
-      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR with a 'requeue'
-      label
+      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR
+      with a 'requeue' label
     conditions: []
     actions:
       queue:
