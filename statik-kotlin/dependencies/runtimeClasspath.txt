@@ -5,10 +5,10 @@ dev.drewhamilton.poko:poko-annotations:0.15.3
 net.swiftzer.semver:semver-jvm:2.0.0
 net.swiftzer.semver:semver:2.0.0
 org.jetbrains.intellij.deps:trove4j:1.0.20200330
-org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.24
-org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.24
-org.jetbrains.kotlin:kotlin-reflect:1.9.24
-org.jetbrains.kotlin:kotlin-script-runtime:1.9.24
+org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.25
+org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.25
+org.jetbrains.kotlin:kotlin-reflect:1.9.25
+org.jetbrains.kotlin:kotlin-script-runtime:1.9.25
 org.jetbrains.kotlin:kotlin-stdlib-common:1.9.25
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0
