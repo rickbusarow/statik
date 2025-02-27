@@ -1,6 +1,6 @@
 [versions]
 
-kotlin = "1.9.24"
+kotlin = "1.9.25"
 google-ksp = "1.9.24-1.0.20"
 poko = "0.16.0"
 
