@@ -21,14 +21,14 @@ jobs:
           echo "ORG_GRADLE_PROJECT_version=${{ github.ref_name }}-SNAPSHOT" | sed 's/\//-/g' >> $GITHUB_ENV
 
       - name: Check
-        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
+        uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
         with:
           task: check
           write-cache-key: main-build-artifacts
           restore-cache-key: main-build-artifacts
 
       - name: Publish Snapshots
-        uses: rickbusarow/actions/gradle-task@bf0940965387f10bcb8b6699a79499d18167dfbe # v1
+        uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
         with:
           task: publish
         env:
