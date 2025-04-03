@@ -12,7 +12,7 @@ shared:
     - label=approved
   label-automerge: &label_automerge
     - label=automerge
-  label-dnm: &label_dnm
+  label-dnm:
     - label=do-not-merge
   not-label-dnm: &not_label_dnm
     - label!=do-not-merge
@@ -110,8 +110,15 @@ pull_request_rules:
         remove:
           - requeue
   - name:
-      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR
-      with a 'requeue' label
+      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR with
+      a 'requeue' label
     conditions: []
     actions:
       queue:
+priority_rules:
+  - name:
+      priority for queue `duplicated Queue PRs for rebase-merge when CI passes and
+      approved from Re-queue any PR with a 'requeue' label`
+    conditions:
+      - label=requeue
+    priority: 2250
