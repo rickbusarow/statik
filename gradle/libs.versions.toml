@@ -2,7 +2,7 @@
 
 kotlin = "1.9.25"
 google-ksp = "1.9.25-1.0.20"
-poko = "0.18.5"
+poko = "0.18.6"
 
 benManes-versions = "0.51.0"
 buildParameters = "1.4.4"
