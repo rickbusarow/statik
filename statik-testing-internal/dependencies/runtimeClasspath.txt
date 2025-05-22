@@ -4,8 +4,8 @@ app.cash.turbine:turbine:1.2.0
 com.github.curious-odd-man:rgxgen:1.4
 com.rickbusarow.dispatch:dispatch-core:1.0.0-beta10
 com.rickbusarow.kase:kase:0.12.0
-dev.drewhamilton.poko:poko-annotations-jvm:0.15.3
-dev.drewhamilton.poko:poko-annotations:0.15.3
+dev.drewhamilton.poko:poko-annotations-jvm:0.18.7
+dev.drewhamilton.poko:poko-annotations:0.18.7
 io.github.classgraph:classgraph:4.8.179
 io.github.java-diff-utils:java-diff-utils:4.12
 io.kotest:kotest-assertions-api-jvm:5.9.1
@@ -25,10 +25,10 @@ org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.25
 org.jetbrains.kotlin:kotlin-daemon-embeddable:1.9.25
 org.jetbrains.kotlin:kotlin-reflect:1.9.25
 org.jetbrains.kotlin:kotlin-script-runtime:1.9.25
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.21
+org.jetbrains.kotlin:kotlin-stdlib-common:2.1.21
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0
-org.jetbrains.kotlin:kotlin-stdlib:2.0.21
+org.jetbrains.kotlin:kotlin-stdlib:2.1.21
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.9.0
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0
 org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0
