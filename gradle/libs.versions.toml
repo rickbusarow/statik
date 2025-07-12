@@ -1,59 +1,31 @@
 [versions]
 
-kotlin = "1.9.25"
-google-ksp = "1.9.25-1.0.20"
+kotlin = "2.2.0"
 poko = "0.18.7"
 
-benManes-versions = "0.51.0"
-buildParameters = "1.4.4"
-buildconfig = "5.6.5"
+buildconfig = "5.6.7"
 cashapp-turbine = "1.2.0"
-classgraph = "4.8.179"
-dependencyAnalysis = "2.17.0"
-detekt = "1.23.8"
-diffplug-spotless = "7.0.3"
-dokka = "2.0.0"
-dokkatoo = "2.4.0"
-dropbox-dependencyGuard = "0.5.0"
-ec4j = "1.1.1"
-github-release = "2.5.2"
-integration-test = "1.4.5"
+classgraph = "4.8.174"
+dependencyAnalysis = "2.10.1"
 jUnit-platform = "1.12.0"
 jUnit4 = "4.13.2"
-jUnit5 = "5.12.0"
-johnrengelman-shadow = "8.1.1"
+jUnit5 = "5.13.3"
 kotest = "5.9.1"
-kotlinx-binaryCompatibility = "0.17.0"
 kotlinx-coroutines = "1.8.1"
-ktlint-lib = "0.50.0"
-picnic = "0.7.0"
-prettier = "2.8.4"
-prettier-plugin-sh = "0.12.8"
 rickBusarow-dispatch = "1.0.0-beta10"
 rickBusarow-doks = "0.2.0"
-rickBusarow-kase = "0.12.0"
-rickBusarow-kgx = "0.1.12"
+rickBusarow-kase = "0.11.1"
 rickBusarow-ktlint = "0.2.2"
 rickBusarow-ktrules = "1.5.0"
 rickBusarow-mahout = "0.1.0-SNAPSHOT"
-rickBusarow-moduleCheck = "0.12.5"
 rickBusarow-statik = "0.1.0"
 semVer = "2.0.0"
-square-kotlinPoet = "2.2.0"
-square-moshi = "1.15.2"
-square-okio = "3.11.0"
-vanniktech-publish = "0.28.0"
 
 [plugins]
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
-dokkatoo = { id = "dev.adamko.dokkatoo", version.ref = "dokkatoo" }
-dokkatoo-html = { id = "dev.adamko.dokkatoo-html", version.ref = "dokkatoo" }
 doks = { id = "com.rickbusarow.doks", version.ref = "rickBusarow-doks" }
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ktlint = { id = "com.rickbusarow.ktlint", version.ref = "rickBusarow-ktlint" }
-moduleCheck = { id = "com.rickbusarow.module-check", version.ref = "rickBusarow-moduleCheck" }
 poko = { id = "dev.drewhamilton.poko", version.ref = "poko" }
 mahout-root = { id = "com.rickbusarow.mahout.root", version.ref = "rickBusarow-mahout" }
 mahout-kotlin-jvm-module = { id = "com.rickbusarow.mahout.kotlin-jvm-module", version.ref = "rickBusarow-mahout" }
@@ -64,24 +36,6 @@ mahout-java-gradle-plugin = { id = "com.rickbusarow.mahout.java-gradle-plugin", 
 cashapp-turbine = { module = "app.cash.turbine:turbine", version.ref = "cashapp-turbine" }
 
 classgraph = { module = "io.github.classgraph:classgraph", version.ref = "classgraph" }
-
-detekt-api = { module = "io.gitlab.arturbosch.detekt:detekt-api", version.ref = "detekt" }
-detekt-cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
-detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-detekt-rules-libraries = { module = "io.gitlab.arturbosch.detekt:detekt-rules-libraries", version.ref = "detekt" }
-detekt-rules-ruleauthors = { module = "io.gitlab.arturbosch.detekt:detekt-rules-ruleauthors", version.ref = "detekt" }
-detekt-test = { module = "io.gitlab.arturbosch.detekt:detekt-test", version.ref = "detekt" }
-detekt-test-utils = { module = "io.gitlab.arturbosch.detekt:detekt-test-utils", version.ref = "detekt" }
-
-diffplug-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "diffplug-spotless" }
-
-dokka-core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka" }
-
-dropbox-dependencyGuard = { module = "com.dropbox.dependency-guard:dependency-guard", version.ref = "dropbox-dependencyGuard" }
-
-ec4j-core = { module = "org.ec4j.core:ec4j-core", version.ref = "ec4j" }
-
-google-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "google-ksp" }
 
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jUnit5" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jUnit5" }
@@ -113,9 +67,6 @@ kotlin-stdlib-jdk7 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", versi
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
-kotlinx-binaryCompatibility = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "kotlinx-binaryCompatibility" }
-
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-coreCommon = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-debug = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-debug", version.ref = "kotlinx-coroutines" }
@@ -140,24 +91,12 @@ rickBusarow-kase = { module = "com.rickbusarow.kase:kase", version.ref = "rickBu
 rickBusarow-kase-gradle = { module = "com.rickbusarow.kase:kase-gradle", version.ref = "rickBusarow-kase" }
 rickBusarow-kase-gradle-dsl = { module = "com.rickbusarow.kase:kase-gradle-dsl", version.ref = "rickBusarow-kase" }
 
-rickBusarow-kgx = { module = "com.rickbusarow.kgx:kotlin-gradle-extensions", version.ref = "rickBusarow-kgx" }
-rickBusarow-kgx-names = { module = "com.rickbusarow.kgx:names", version.ref = "rickBusarow-kgx" }
-
 rickBusarow-ktlint = { module = "com.rickbusarow.ktlint:ktlint-gradle-plugin", version.ref = "rickBusarow-ktlint" }
 
 rickBusarow-ktrules = { module = "com.rickbusarow.ktrules:ktrules", version.ref = "rickBusarow-ktrules" }
 
 rickBusarow-mahout-gradle-plugin = { module = "com.rickbusarow.mahout:mahout-gradle-plugin", version.ref = "rickBusarow-mahout" }
+
 #rickBusarow-statik-api = { module = "com.rickbusarow.statik:statik-api", version.ref = "rickBusarow-statik" }
 
 semVer = { module = "net.swiftzer.semver:semver", version.ref = "semVer" }
-
-square-kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "square-kotlinPoet" }
-
-square-moshi = { module = "com.squareup.moshi:moshi", version.ref = "square-moshi" }
-square-moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "square-moshi" }
-
-square-okio = { module = "com.squareup.okio:okio", version.ref = "square-okio" }
-square-okio-bom = { module = "com.squareup.okio:okio-bom", version.ref = "square-okio" }
-square-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem-jvm", version.ref = "square-okio" }
-square-okio-jvm = { module = "com.squareup.okio:okio-jvm", version.ref = "square-okio" }

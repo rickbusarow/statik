@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Rick Busarow
+ * Copyright (C) 2025 Rick Busarow
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,12 +20,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
   dependencies {
     classpath(libs.kotlin.gradle.plugin)
-    classpath(libs.rickBusarow.mahout.gradle.plugin)
   }
 }
 
 plugins {
   alias(libs.plugins.doks)
+  alias(libs.plugins.poko) apply false
+  alias(libs.plugins.mahout.root)
+
+  // Avoid "the plugin is already in the classpath with an unknown version" issues
+  // when consuming Mahout from a snapshot build.
+  alias(libs.plugins.mahout.kotlin.jvm.module) apply false
 }
 
 apply(plugin = "com.rickbusarow.mahout.root")
@@ -48,36 +53,4 @@ doks {
 subprojects.map {
   it.tasks.withType(KotlinCompile::class.java)
     .mustRunAfter(tasks.withType(DoksTask::class.java))
-}
-
-val foo by tasks.registering {
-  doLast {
-    rootDir.walkTopDown()
-      .filter { it.path.contains("src/test/kotlin") }
-      .filter { it.isFile }
-      .mapNotNull { file ->
-
-        val txt = file.readText()
-
-        val name = """(?<=class )\w+""".toRegex()
-          .find(txt)?.value
-          ?: return@mapNotNull null
-
-        file to name
-      }
-      .groupBy { it.second }
-      .map { (key, value) ->
-        key to value.map { it.first }.sorted()
-      }
-      .filter { it.second.size > 1 }
-      .sortedBy { it.first }
-      .forEach { (name, files) ->
-        println(
-          """
-          | -- $name
-          |${files .joinToString("\n") }
-          """.trimMargin()
-        )
-      }
-  }
 }
