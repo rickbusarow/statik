@@ -1,7 +1,7 @@
 :statik-api
 com.rickbusarow.dispatch:dispatch-core:1.0.0-beta10
-dev.drewhamilton.poko:poko-annotations-jvm:0.18.7
-dev.drewhamilton.poko:poko-annotations:0.18.7
+dev.drewhamilton.poko:poko-annotations-jvm:0.19.1
+dev.drewhamilton.poko:poko-annotations:0.19.1
 net.swiftzer.semver:semver-jvm:2.0.0
 net.swiftzer.semver:semver:2.0.0
 org.jetbrains.kotlin:kotlin-compiler-embeddable:2.2.0
