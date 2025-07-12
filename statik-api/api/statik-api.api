@@ -1230,6 +1230,7 @@ public final class com/rickbusarow/statik/name/TypeParameter : com/rickbusarow/s
 public final class com/rickbusarow/statik/name/TypeParameter$Variance : java/lang/Enum {
 	public static final field IN Lcom/rickbusarow/statik/name/TypeParameter$Variance;
 	public static final field OUT Lcom/rickbusarow/statik/name/TypeParameter$Variance;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/rickbusarow/statik/name/TypeParameter$Variance;
 	public static fun values ()[Lcom/rickbusarow/statik/name/TypeParameter$Variance;
 }
@@ -1383,6 +1384,7 @@ public final class com/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority
 	public static final field HIGH Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 	public static final field LOW Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 	public static final field MEDIUM Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 	public static fun values ()[Lcom/rickbusarow/statik/utils/lazy/LazySet$DataSource$Priority;
 }
