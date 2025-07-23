@@ -5,7 +5,7 @@ poko = "0.19.2"
 
 buildconfig = "5.6.7"
 cashapp-turbine = "1.2.0"
-classgraph = "4.8.174"
+classgraph = "4.8.181"
 dependencyAnalysis = "2.19.0"
 jUnit-platform = "1.13.4"
 jUnit4 = "4.13.2"
