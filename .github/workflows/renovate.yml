@@ -1,19 +1,19 @@
 name: Renovate
 
 on:
-  schedule:
-    # every 4 hours
-    - cron: "0 */4 * * *"
   workflow_dispatch:
   issues:
-  label:
+    types:
+      - edited
   pull_request:
     types:
-      # run when the little "click here to rebase" box is checked.
-      - synchronize
-  push:
+      - edited
     branches:
-      - main
+      - github-renovate/*
+
+concurrency:
+  group: renovate
+  cancel-in-progress: true
 
 jobs:
   renovate:
