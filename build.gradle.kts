@@ -33,8 +33,6 @@ plugins {
   alias(libs.plugins.mahout.kotlin.jvm.module) apply false
 }
 
-apply(plugin = "com.rickbusarow.mahout.root")
-
 doks {
   dokSet {
     docs("README.md", "CHANGELOG.md")
