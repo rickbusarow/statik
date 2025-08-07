@@ -2,9 +2,6 @@
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.rickbusarow.statik/statik-api?label=snapshots&server=https%3A%2F%2Foss.sonatype.org&style=flat-square)](https://oss.sonatype.org/#nexus-search;quick~com.rickbusarow.statik)
 [![License](https://img.shields.io/badge/license-apache2.0-blue?style=flat-square.svg)](https://opensource.org/licenses/Apache-2.0)
 
-> [!IMPORTANT]
-> Moving soonish to https://github.com/square/statik.
-
 Statik is a high-level [Abstract Syntax Tree] or [Abstract Semantic Graph] with three goals:
 
 1. Provide high-level information as members directly in node elements, so that most parsing can be
@@ -57,5 +54,7 @@ limitations under the License.
 ```
 
 [Abstract Syntax Tree]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
+
 [Abstract Semantic Graph]: https://en.wikipedia.org/wiki/Abstract_semantic_graph
+
 [Feature Variants]: https://docs.gradle.org/current/userguide/feature_variants.html
