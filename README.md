@@ -54,7 +54,5 @@ limitations under the License.
 ```
 
 [Abstract Syntax Tree]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
-
 [Abstract Semantic Graph]: https://en.wikipedia.org/wiki/Abstract_semantic_graph
-
 [Feature Variants]: https://docs.gradle.org/current/userguide/feature_variants.html
