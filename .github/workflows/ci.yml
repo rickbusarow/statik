@@ -17,7 +17,7 @@ jobs:
   binary-compatibility:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -36,7 +36,7 @@ jobs:
   ktlint:
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -55,7 +55,7 @@ jobs:
   spotless:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -74,7 +74,7 @@ jobs:
   dependency-guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -93,7 +93,7 @@ jobs:
   curator:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -112,7 +112,7 @@ jobs:
   doks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@0f859bf9e69e887678d5bbfbee594437cb440ffe # v2
@@ -131,7 +131,7 @@ jobs:
   check-version-is-snapshot:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: check version is snapshot
         uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
@@ -141,7 +141,7 @@ jobs:
   detekt:
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: detektAll
         uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
@@ -164,7 +164,7 @@ jobs:
   unit-tests-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: all tests
         uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
@@ -199,7 +199,7 @@ jobs:
   unit-tests-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: all tests
         uses: rickbusarow/actions/gradle-task@c602f8da97f00279c6e77d3f25cbedcbf24ef936 # v1
