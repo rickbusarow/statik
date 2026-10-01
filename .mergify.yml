@@ -27,9 +27,8 @@ shared:
     - check-success=all-checks
 
 queue_rules:
-  - name:
-      duplicated Queue PRs for rebase-merge when CI passes and approved from Re-queue
-      any PR with a 'requeue' label
+  - name: duplicated Queue PRs for rebase-merge when CI passes and approved from 
+      Re-queue any PR with a 'requeue' label
     queue_conditions:
       - label=requeue
       - and: *label_automerge
@@ -38,7 +37,6 @@ queue_rules:
     merge_conditions: []
     merge_method: fast-forward
     update_method: rebase
-    autosquash: true
   - name: Queue PRs for rebase-merge when CI passes and approved
     queue_conditions:
       - and: *label_automerge
@@ -47,7 +45,6 @@ queue_rules:
     merge_conditions: []
     merge_method: fast-forward
     update_method: rebase
-    autosquash: true
     merge_bot_account: *name_merge_bot
     update_bot_account: *name_merge_bot
 
@@ -96,7 +93,6 @@ pull_request_rules:
       - and: *label_rebase
     actions:
       rebase:
-        autosquash: true
         bot_account: *name_merge_bot
       label:
         remove:
@@ -109,16 +105,14 @@ pull_request_rules:
       label:
         remove:
           - requeue
-  - name:
-      Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR with
-      a 'requeue' label
+  - name: Queue PRs for rebase-merge when CI passes and approved + Re-queue any PR 
+      with a 'requeue' label
     conditions: []
     actions:
       queue:
 priority_rules:
-  - name:
-      priority for queue `duplicated Queue PRs for rebase-merge when CI passes and
-      approved from Re-queue any PR with a 'requeue' label`
+  - name: priority for queue `duplicated Queue PRs for rebase-merge when CI passes 
+      and approved from Re-queue any PR with a 'requeue' label`
     conditions:
       - label=requeue
     priority: 2250
